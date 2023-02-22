@@ -9,7 +9,31 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
+
+	local background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
+
+	local object = {}
+
+ 	object[1] = display.newRect(display.contentCenterX, display.contentCenterY, 500, 500)
+ 	object[1]:setFillColor(1, 0, 0)
+
+ 	object[2] = display.newRect(display.contentCenterX, display.contentCenterY, 300, 300)
+ 	object[2]:setFillColor(1, 0.5, 0)
+
+ 	object[3] = display.newRect(display.contentCenterX, display.contentCenterY, 100, 100)
+ 	object[3]:setFillColor(1, 1, 0)
+
+	local objectGroup = display.newGroup()
+
+ 	objectGroup:insert(object[1])
+ 	objectGroup:insert(object[2])
+ 	objectGroup:insert(object[3])
+
+ 	sceneGroup:insert(background)
+ 	sceneGroup:insert(objectGroup)
+
+ 	objectGroup.x = objectGroup.x + 100
+ 	objectGroup.y = objectGroup.y - 100
 
 end
 
