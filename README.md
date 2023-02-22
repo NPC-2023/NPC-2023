@@ -1,6 +1,3 @@
 # NPC_-_2023
 
-// jiruen commit test
-dfasdfsa
-sdfsdf
-ssss
+// jiruen mini game_1
