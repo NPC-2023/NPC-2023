@@ -10,7 +10,7 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 	
-	
+	sdfsadfsafsda
 end
 
 function scene:show( event )
@@ -37,7 +37,9 @@ function scene:hide( event )
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		-- Called when the scene is now off scree
+		-- Called when the scene is now off screen
+	end
+end
 
 function scene:destroy( event )
 	local sceneGroup = self.view
