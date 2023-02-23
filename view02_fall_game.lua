@@ -7,7 +7,7 @@
 local composer = require( "composer" )
 local physics = require("physics")
 local scene = composer.newScene()
---local explosionSound = audio.loadSound( "Content/PNG/script/A happy morning.mp3" )
+--local explosionSound = audio.loadSound( "music/Trust.mp3" )
 audio.play( explosionSound )
 
 function scene:create( event )
@@ -20,33 +20,34 @@ function scene:create( event )
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0
 
-	local script = display.newText("How to play:\n위에서 내려오는 음식을 받으세요\n쓰레기를 받게 될 시에는 점수가 깎입니다. \n10점을 달성할 시 게임 클리어 입니다.", section.x+30, section.y-100, native.systemFontBold)
-	script.size = 45
+	local script = display.newText("게임방법\n\n위에서 내려오는 참치캔을 받으세요! 쓰레기를 받게 될 시에는 점수가 깎입니다. \n10점을 달성할 시 게임 클리어 입니다.", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 30
 	script:setFillColor(1)
+	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
 	script.alpha=0
 
 	local background = display.newImageRect("image/background.png", display.contentWidth, display.contentHeight)
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
 
 	local score = 0
-	local showScore = display.newText(score, display.contentWidth*0.81, display.contentHeight*0.11)
+	local showScore = display.newText(score, display.contentWidth*0.826, display.contentHeight*0.10)
 	showScore:setFillColor(0)
-	showScore.size = 50
+	showScore.size = 30
 
-	local scorebackground = display.newImageRect("image/dice (1).png", 300, 150)
+	local scorebackground = display.newImageRect("image/score.png", 100, 100)
 	scorebackground.x, scorebackground.y = display.contentWidth*0.9-100, display.contentHeight*0.1
 
-	local floor = display.newImage("image/dice (2).png")
+	local floor = display.newImage("image/invisible.png")
 	floor.x, floor.y = display.contentWidth/2, display.contentHeight*0.95
 	floor.name = 'floor'
 	physics.addBody(floor, 'static')
 
-	local bear = display.newImageRect("image/bunny.png", 300, 600)
+	local bear = display.newImageRect("image/cat1.png", 150, 150)
 	bear.x, bear.y = display.contentWidth*0.4, display.contentHeight*0.8
 	physics.addBody(bear, 'static')
 	bear.name = 'bear'
 	
-	local objects = {"(1)", "(2)", "(3)", "(4)", "(5)", "(6)"}
+	local objects = {"1", "2", "3", "4", "5", "6", "7"}
 
 	local object = { }	
 	local i=1
@@ -55,10 +56,10 @@ function scene:create( event )
 	local function spawn()
 		local objIdx = math.random(#objects)
 		local objName = objects[objIdx]
-		object[i]= display.newImageRect(objectGroup,"image/dice " .. objName .. ".png", 100, 100)
+		object[i]= display.newImageRect(objectGroup,"image/can" .. objName .. ".png", 100, 100)
 		object[i].x = display.contentWidth*0.5 + math.random(-490, 490)
 		object[i].y = 0
-		if objIdx <5 then
+		if objIdx <6 then
 			object[i].type="food"
 		else
 			object[i].type="trash"
