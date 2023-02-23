@@ -123,6 +123,33 @@ function scene:create( event )
 	h1.x,h1.y = 640,360
 	sceneGroup:insert(h1)
 
+
+	-----음악
+
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImage("image/설정/설정.png")
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight - 1800
+    sceneGroup:insert(volumeButton)
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+    local home = audio.loadStream( "music/Trust.mp3" )
+    audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
+    audio.play(home)
+
+
+    -------------
+
+
 	-- 클릭 시 해머가 기울어짐
 	function move(event)
 		if (event.phase == "began") then
