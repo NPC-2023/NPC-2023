@@ -1,4 +1,4 @@
---beargame 통과하는 게임 종료된 화면
+--fallgame 통과하는 게임 종료된 화면
 
 local composer = require( "composer" )
 local scene = composer.newScene()
@@ -6,7 +6,7 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
-	local background = display.newImageRect("image/background.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/fall/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -32,12 +32,12 @@ function scene:create( event )
 	end
 
 	--close 버튼
-	local clear_close = display.newImageRect("image/닫기.png", 150, 150)
+	local clear_close = display.newImageRect("image/fall/닫기.png", 150, 150)
 	clear_close.x, clear_close.y = 950, 400
 	clear_close.alpha = 0
 	
 
-	local fail_close = display.newImageRect("image/닫기.png", 150, 150)
+	local fail_close = display.newImageRect("image/fall/닫기.png", 150, 150)
 	fail_close.x, fail_close.y = 950, 400
 	fail_close.alpha = 0
 	
@@ -49,13 +49,13 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap =display.newImageRect("image/클리어창.png",display.contentWidth/5,display.contentHeight/5) --성공할 경우
+	local backtomap =display.newImageRect("image/fall/클리어창.png",display.contentWidth/5,display.contentHeight/5) --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
 	
 
-	local backgame =display.newImage("image/fail.png") --실패할 경우
+	local backgame =display.newImage("image/fall/fail.png") --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
 	sceneGroup:insert(backgame)
@@ -99,7 +99,7 @@ function scene:hide( event )
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		composer.removeScene("view07_chick_game_over")
+		composer.removeScene("view02_fall_game_over")
 	end
 end
 

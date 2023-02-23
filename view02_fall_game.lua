@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- View01_bear.lua
+-- view02_fall_game.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ audio.play( explosionSound )
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local gametitle = display.newImageRect("image/background.png", display.contentWidth, display.contentHeight)
+	local gametitle = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
@@ -26,7 +26,7 @@ function scene:create( event )
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
 	script.alpha=0
 
-	local background = display.newImageRect("image/background.png", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
 
 	local score = 0
@@ -34,18 +34,18 @@ function scene:create( event )
 	showScore:setFillColor(0)
 	showScore.size = 30
 
-	local scorebackground = display.newImageRect("image/score.png", 100, 100)
+	local scorebackground = display.newImageRect("image/fall/score.png", 100, 100)
 	scorebackground.x, scorebackground.y = display.contentWidth*0.9-100, display.contentHeight*0.1
 
-	local floor = display.newImage("image/invisible.png")
+	local floor = display.newImage("image/fall/invisible.png")
 	floor.x, floor.y = display.contentWidth/2, display.contentHeight*0.95
 	floor.name = 'floor'
 	physics.addBody(floor, 'static')
 
-	local bear = display.newImageRect("image/cat1.png", 150, 150)
-	bear.x, bear.y = display.contentWidth*0.4, display.contentHeight*0.8
-	physics.addBody(bear, 'static')
-	bear.name = 'bear'
+	local cat = display.newImageRect("image/fall/cat1.png", 150, 150)
+	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.8
+	physics.addBody(cat, 'static')
+	cat.name = 'cat'
 	
 	local objects = {"1", "2", "3", "4", "5", "6", "7"}
 
@@ -56,7 +56,7 @@ function scene:create( event )
 	local function spawn()
 		local objIdx = math.random(#objects)
 		local objName = objects[objIdx]
-		object[i]= display.newImageRect(objectGroup,"image/can" .. objName .. ".png", 100, 100)
+		object[i]= display.newImageRect(objectGroup,"image/fall/can" .. objName .. ".png", 80, 80)
 		object[i].x = display.contentWidth*0.5 + math.random(-490, 490)
 		object[i].y = 0
 		if objIdx <6 then
@@ -71,11 +71,11 @@ function scene:create( event )
 
 	local function bearmove(event)
 		if(event.x < display.contentWidth*0.1) then
-			bear.x = display.contentWidth*0.1
+			cat.x = display.contentWidth*0.1
 		elseif event.x > display.contentWidth*0.9 then
-			bear.x = display.contentWidth*0.9
+			cat.x = display.contentWidth*0.9
 		else
-			bear.x = event.x
+			cat.x = event.x
 		end
 	end
 
@@ -98,7 +98,7 @@ function scene:create( event )
 		display.remove(floor)
 		Runtime:removeEventListener("touch", bearmove)
 		timer.cancel( timer1 )
-		display.remove(bear)
+		display.remove(cat)
 	end
 
 	local function onCollision(e)
@@ -137,7 +137,7 @@ function scene:create( event )
 	end
 
 	gametitle:addEventListener("tap", titleremove)
-	bear:addEventListener("collision", onCollision)
+	cat:addEventListener("collision", onCollision)
 	floor:addEventListener("collision", onCollision2)
 	
 
@@ -146,7 +146,7 @@ function scene:create( event )
 	sceneGroup:insert(showScore)
 	
 	sceneGroup:insert(floor)
-	sceneGroup:insert(bear)
+	sceneGroup:insert(cat)
 	sceneGroup:insert(section)
 	sceneGroup:insert(script)
 end
