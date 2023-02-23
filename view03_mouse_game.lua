@@ -5,7 +5,7 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 	
-	local background = display.newImageRect("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 배경(빨강마을).png",display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/mouse/미니게임_두더지게임 배경(빨강마을).png",display.contentWidth, display.contentHeight)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -59,54 +59,54 @@ function scene:create( event )
 
 	-- 두더지, 맞은 두더지, 구멍 객체
 	for i=1,3 do
-		dudu[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 지우개두더지(빨강마을).png")
+		dudu[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지(빨강마을).png")
 		dudu[i].x,dudu[i].y = position_dudu_x[i],position_dudu_y[1]
 		dudu[i].anchorX, dudu[i].anchorY = 0,0
 		sceneGroup:insert(dudu[i])
 
-		dudu_hit[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
+		dudu_hit[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
 		dudu_hit[i].x, dudu_hit[i].y = position_dudu_hit_x[i],position_dudu_hit_y[1]
 		dudu_hit[i].anchorX,dudu_hit[i].anchorY = 0,0
 		dudu_hit[i].alpha = 0
 		sceneGroup:insert(dudu_hit[i])
 
-		holl[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 땅굴(빨강마을).png")
+		holl[i] = display.newImage("image/mouse/미니게임_두더지게임 땅굴(빨강마을).png")
 		holl[i].x, holl[i].y = holl_x[i],holl_y[1]
 		holl[i].anchorX, holl[i].anchorY = 0,0
 		sceneGroup:insert(holl[i])
 	end
 
 	for i=1,3 do
-		dudu1[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 지우개두더지(빨강마을).png")
+		dudu1[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지(빨강마을).png")
 		dudu1[i].x,dudu1[i].y = position_dudu_x[i],position_dudu_y[2]
 		dudu1[i].anchorX, dudu1[i].anchorY = 0,0
 		sceneGroup:insert(dudu1[i])
 
-		dudu_hit1[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
+		dudu_hit1[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
 		dudu_hit1[i].x, dudu_hit1[i].y = position_dudu_hit_x[i],position_dudu_hit_y[2]
 		dudu_hit1[i].anchorX,dudu_hit1[i].anchorY = 0,0
 		dudu_hit1[i].alpha = 0
 		sceneGroup:insert(dudu_hit1[i])
 
-		holl1[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 땅굴(빨강마을).png")
+		holl1[i] = display.newImage("image/mouse/미니게임_두더지게임 땅굴(빨강마을).png")
 		holl1[i].x, holl1[i].y = holl_x[i],holl_y[2]
 		holl1[i].anchorX, holl1[i].anchorY = 0,0
 		sceneGroup:insert(holl1[i])
 	end
 
 	for i=1,3 do
-		dudu2[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 지우개두더지(빨강마을).png")
+		dudu2[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지(빨강마을).png")
 		dudu2[i].x,dudu2[i].y = position_dudu_x[i],position_dudu_y[3]
 		dudu2[i].anchorX, dudu2[i].anchorY = 0,0
 		sceneGroup:insert(dudu2[i])
 
-		dudu_hit2[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
+		dudu_hit2[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
 		dudu_hit2[i].x, dudu_hit2[i].y = position_dudu_hit_x[i],position_dudu_hit_y[3]
 		dudu_hit2[i].anchorX,dudu_hit2[i].anchorY = 0,0
 		dudu_hit2[i].alpha = 0
 		sceneGroup:insert(dudu_hit2[i])
 
-		holl2[i] = display.newImage("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 땅굴(빨강마을).png")
+		holl2[i] = display.newImage("image/mouse/미니게임_두더지게임 땅굴(빨강마을).png")
 		holl2[i].x, holl2[i].y = holl_x[i],holl_y[3]
 		holl2[i].anchorX, holl2[i].anchorY = 0,0
 		sceneGroup:insert(holl2[i])
@@ -118,7 +118,7 @@ function scene:create( event )
 	sceneGroup:insert(holl_bg)]]
 
 	-- 해머 객체
-	local h1 = display.newImageRect("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 뿅망치(빨강마을).png",display.contentWidth/7.86112021, display.contentHeight/3.74389018)
+	local h1 = display.newImageRect("image/mouse/미니게임_두더지게임 뿅망치(빨강마을).png",display.contentWidth/7.86112021, display.contentHeight/3.74389018)
 	h1.anchorX,h1.anchorY=0.3,0.3
 	h1.x,h1.y = 640,360
 	sceneGroup:insert(h1)
@@ -143,12 +143,12 @@ function scene:create( event )
 	h1:addEventListener("touch",move)
 
 	--시간과 점수
-	local time = display.newImageRect("이미지/미니게임/미니게임_시간타이머.png", display.contentWidth/7.91, display.contentHeight/3.78)
+	local time = display.newImageRect("image/mouse/미니게임_시간타이머.png", display.contentWidth/7.91, display.contentHeight/3.78)
 	time.anchorX, time.anchorY =0,0
 	time.x,time.y = display.contentWidth/1.180, display.contentHeight/21.53
 	sceneGroup:insert(time)
 
-	local score = display.newImageRect("이미지/미니게임/미니게임_코인창.png", display.contentWidth/9.3, display.contentHeight/4.26)
+	local score = display.newImageRect("image/mouse/미니게임_코인창.png", display.contentWidth/9.3, display.contentHeight/4.26)
 	score.anchorX, score.anchorY =0,0
 	score.x,score.y = display.contentWidth/33.166, display.contentHeight/13.2482826
 	sceneGroup:insert(score)
@@ -353,8 +353,8 @@ function scene:create( event )
 				dudu_hit2[i] =nil
 			end
 
-			composer.removeScene("view05Dudu")
-			composer.gotoScene("view06Dudu")
+			composer.removeScene("view03_mouse_game")
+			composer.gotoScene("view03_mouse_game_over")
 		end
 	end
 	 

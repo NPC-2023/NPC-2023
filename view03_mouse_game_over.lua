@@ -8,7 +8,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 	
 	-- 배경객체
-	local background = display.newImageRect("이미지/미니게임/미니게임_빨강마을/미니게임_두더지게임 배경(빨강마을).png",display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/mouse/미니게임_두더지게임 배경(빨강마을).png",display.contentWidth, display.contentHeight)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -24,13 +24,13 @@ function scene:create( event )
 
 	local function gomap(event)
 		if event.phase == "began" then
-				composer.removeScene("view06Dudu")
-				composer.gotoScene( "view01Map" )
+				composer.removeScene("view03_mouse_game_over")
+				composer.gotoScene( "view01" )
 		end
 	end
 
 -- 점수판
-	local board =display.newImageRect("이미지/미니게임/미니게임_게임완료창.png",display.contentWidth/3.6294896, display.contentHeight/2.83122739)
+	local board =display.newImageRect("image/mouse/미니게임_게임완료창.png",display.contentWidth/3.6294896, display.contentHeight/2.83122739)
 	board.x , board.y = display.contentWidth/2, display.contentHeight/2
 	board.alpha = 0.5
 	transition.to(board,{alpha=1,time=1000})
@@ -47,7 +47,7 @@ function scene:create( event )
 	loadedSettings.money = loadedSettings.money + score3
 	loadsave.saveTable(loadedSettings, "settings.json")
 
-	local backtomap =display.newImageRect("이미지/미니게임/미니게임_지도로 돌아가기 버튼.png",display.contentWidth/6.112,display.contentHeight/17.3050)
+	local backtomap =display.newImageRect("image/mouse/미니게임_지도로 돌아가기 버튼.png",display.contentWidth/6.112,display.contentHeight/17.3050)
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/1.65466
 	sceneGroup:insert(backtomap)
 	backtomap:addEventListener("touch",gomap)
