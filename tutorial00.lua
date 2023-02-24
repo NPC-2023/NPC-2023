@@ -58,9 +58,9 @@ function scene:create( event )
     end
     volumeButton:addEventListener("tap",setVolume)
 
-    local tutorialMusic = audio.loadStream( "music/Trust.mp3" )
+    --[[local tutorialMusic = audio.loadStream( "music/Trust.mp3" )
     audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
-    audio.play(tutorialMusic)
+    audio.play(tutorialMusic)]]
 
 
     -------------

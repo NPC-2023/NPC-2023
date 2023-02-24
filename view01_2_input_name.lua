@@ -175,9 +175,9 @@ function scene:create( event )
 				composer.gotoScene( "tutorial00",options)
 				audio.pause( startMusic )
 
-				--[[local tutorialMusic = audio.loadStream( "music/Trust.mp3" )
+				local tutorialMusic = audio.loadStream( "music/Trust.mp3" )
        			audio.setVolume( loadedEndings.logValue )
-				audio.play(tutorialMusic)]]
+				audio.play(tutorialMusic)
 			end
 	end
 	titleButton:addEventListener("tap",startNew)
