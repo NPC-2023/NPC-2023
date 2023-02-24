@@ -1,26 +1,19 @@
------------------------------------------------------------------------------------------
---
--- view1.lua
---
------------------------------------------------------------------------------------------
+--이름 또는 색상을 선택하지 않았을 시 뜨는 에러 팝업창
+
 local loadsave = require( "loadsave" )
 local composer = require( "composer" )
-local physics = require("physics")
 local scene = composer.newScene()
 local json = require( "json" ) 
-
-
---게임 시작 화면
 
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newImageRect("image/게임시작/background.png", display.contentWidth, display.contentHeight)
-	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	print("title2_1")
+	local background = display.newImageRect("image/게임시작/background.png",display.contentWidth, display.contentHeight)
+	background.x,background.y = display.contentWidth/2,display.contentHeight/2
+	sceneGroup:insert(background)
 
-
-
-
+	
 	--샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
@@ -31,30 +24,40 @@ function scene:create( event )
         composer.showOverlay( "volumeControl", options )
     end
     volumeButton:addEventListener("tap",setVolume)
+    
+
+    local newgame = display.newImage("image/게임시작/새게임.png")
+    newgame.x,newgame.y = display.contentWidth * 0.42, display.contentHeight * 0.9
+    sceneGroup:insert(newgame)
 
 
+	local titlePopup = display.newImage("image/게임시작/이름설정팝업.png")
+	titlePopup.x,titlePopup.y = display.contentWidth/2,display.contentHeight * 0.8
+	titlePopup.alpha = 0
+	sceneGroup:insert(titlePopup)
 
-	-- 엔딩 제이쓴 파일 생성
-    local path = system.pathForFile( "ending.json", system.DocumentsDirectory)
- 
-    local file, errorString = io.open( path, "r" )
-    if not file then
-        print("make an ending file")
-        --엔딩관련 데이터 파일 생성
-        local ending = {
-            bgMusic = "Content/PNG/script/지도.mp3",
-            logValue = "0.5",
-            slider = 50
-        }
-        loadsave.saveTable( ending, "ending.json" )
-    end
+	local titleButton = display.newImage("image/게임시작/이름결정.png")
+	titleButton.x,titleButton.y = display.contentWidth/2,display.contentHeight * 0.65
+	titleButton.alpha = 0
+	sceneGroup:insert(titleButton)
 
 
+	local function gohome(event)
+		if event.phase == "began" then
+				composer.removeScene("view01_3_error")
+				exit.alpha=0
+				composer.gotoScene("view01_2_input_name")
+				
+		end
+	end	
 
-	loadedEnding = loadsave.loadTable( "ending.json" )
-
-
-
+	newError = display.newImage("image/게임시작/이름입력.png")
+	sceneGroup:insert(newError)
+	newError.x, newError.y = display.contentWidth/2,display.contentHeight/2
+	exit = display.newImage("image/설정/닫기.png")
+	sceneGroup:insert(exit)
+	exit.x, exit.y = display.contentWidth*0.645, display.contentHeight*0.375
+	exit:addEventListener("touch",gohome)
 	
 
 end

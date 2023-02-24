@@ -13,11 +13,11 @@ function scene:create( event )
     local options = {
         isModal = true
     }
-    --local widget = require ("widget")
+    local widget = require ("widget")
 
     --로드
     local loadedEnding = loadsave.loadTable( "ending.json" )
-    --music = loadedEnding.bgMusic
+    music = loadedEnding.bgMusic
 
     -- 배경 어둡게
     local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
@@ -31,7 +31,7 @@ function scene:create( event )
     
     -- Audio setup
     audio.reserveChannels(1)
-    --local backgroundSound = audio.loadStream(music)
+    local backgroundSound = audio.loadStream(music)
 
     local bgImage = display.newImageRect("image/volume/창.png", 600, 600)
     bgImage.x = display.contentWidth / 2; 
@@ -57,8 +57,8 @@ function scene:create( event )
             logValue = 0.0
         end
         settings["bgvolume"] = logValue
-        --loadedEnding.logValue = logValue
-        --loadsave.saveTable(loadedEnding,"ending.json")
+        loadedEnding.logValue = logValue
+        loadsave.saveTable(loadedEnding,"ending.json")
         audio.setVolume( settings["bgvolume"]  )
     end
 
@@ -93,7 +93,7 @@ function scene:create( event )
         handleHeight = 41,
         top = 380,    x = display.contentCenterX*0.78 + 190,      
         width=380,  y=display.contentCenterY*1.04,      
-        --value=loadedEnding.slider,
+        value=loadedEnding.slider,
         listener = bgSliderListener
     }
     sceneGroup:insert( bgSlider )

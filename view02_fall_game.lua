@@ -13,6 +13,8 @@ audio.play( explosionSound )
 function scene:create( event )
 	local sceneGroup = self.view
 
+	loadedEndings = loadsave.loadTable( "endings.json" )
+	
 	local gametitle = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 

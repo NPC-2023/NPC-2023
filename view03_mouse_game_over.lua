@@ -7,7 +7,9 @@ local loadsave = require( "loadsave" )
 function scene:create( event )
 	local sceneGroup = self.view
 	
-	-- 배경객체
+	loadedEndings = loadsave.loadTable( "endings.json" )
+
+-- 배경객체
 	local background = display.newImageRect("image/mouse/미니게임_두더지게임 배경(빨강마을).png",display.contentWidth, display.contentHeight)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)

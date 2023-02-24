@@ -5,6 +5,9 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 	
+	loadedEndings = loadsave.loadTable( "endings.json" )
+
+	
 	local background = display.newImageRect("image/mouse/background.png",display.contentWidth, display.contentHeight)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
