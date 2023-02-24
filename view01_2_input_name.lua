@@ -156,15 +156,8 @@ function scene:create( event )
   
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
-				local itme = {
-
-						
-					
-					}
-
-			
+				
 				local serializedJSON = json.encode(itme)
-				local itmes = json.decode(serializedJSON)
 				--loadsave.saveTable(custumeBuy, "items.json")
 
 
