@@ -35,6 +35,9 @@ function scene:create( event )
  	objectGroup.x = objectGroup.x + 100
  	objectGroup.y = objectGroup.y - 100
 
+
+
+
 end
 
 function scene:show( event )

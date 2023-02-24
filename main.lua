@@ -12,6 +12,8 @@ local composer = require "composer"
 local physics = require "physics"
 physics.start()
 -- event listeners for tab buttons:
+
+
 local function onFirstView( event )
 	composer.gotoScene( "view03_mouse_game" )
 end

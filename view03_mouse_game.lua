@@ -133,7 +133,7 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     local volumeButton = display.newImage("image/설정/설정.png")
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight - 1800
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.5
     sceneGroup:insert(volumeButton)
 
     --샘플볼륨함수--
@@ -143,7 +143,7 @@ function scene:create( event )
     volumeButton:addEventListener("tap",setVolume)
 
     local home = audio.loadStream( "music/Trust.mp3" )
-    audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
+    --audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
     audio.play(home)
 
 
