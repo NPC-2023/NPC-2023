@@ -58,7 +58,7 @@ function scene:create( event )
 	reset.size = 50
 	reset:setFillColor(1)
 
-	local buy = display.newText("buy All !", display.contentWidth*0.5, display.contentHeight*0.65, "font/DOSGothic.ttf", 50)
+	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.65, "font/DOSGothic.ttf", 50)
 	buy:setFillColor(1)
 
 	local function resetTotalListener( event )
@@ -68,7 +68,6 @@ function scene:create( event )
 
 	local text = ""
 	local function buyListener( event )
-
 		if(total == errand) then
 			text = display.newText("성공 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 			text:setFillColor(0)
@@ -77,7 +76,7 @@ function scene:create( event )
 			text:setFillColor(0)
 		end
 		timer.performWithDelay( 1500, function() 
-			text.inVisible = false
+			text.alpha = 0
 		end )	
 	end
 	

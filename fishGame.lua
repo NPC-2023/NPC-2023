@@ -59,8 +59,13 @@ function scene:create( event )
 	end
 
 	local fish1_cnt, fish2_cnt, fish3_cnt, fish4_cnt = 0, 0, 0, 0
+
 	local total_cnt = 0
+
+	local lightsplash = audio.loadSound( "soundEffect/splash1.wav" )
+
 	local function tapEventListener( event )
+			audio.play( lightsplash )
  			ranX = math.random(10, 30) / 100
  			ranY = math.random(5, 15) / 100
  			local tag = 0
@@ -106,6 +111,8 @@ function scene:create( event )
 			--물고기 클릭시 고양이 위치가 같이 움직임
 			cat.x = event.target.x
 			if(tag ~= 0) then
+					local strongsplash = audio.loadSound( "soundEffect/splash2.wav" )
+					audio.play(strongsplash)
 					splash.x, splash.y = event.target.x, event.target.y	
 					splash.alpha = 1
 					fish[tag].alpha = 1
