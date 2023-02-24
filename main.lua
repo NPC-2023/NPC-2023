@@ -19,76 +19,54 @@
 --onFirstView()	-- invoke first tab button's onPress event manually
 
 --붕어빵 만들기--
+
 local background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
 
-	local object = {}
-	--틀
- 	object[1] = display.newRect(display.contentCenterX, display.contentCenterY, 300, 300)
- 	object[1]:setFillColor(1, 0, 0)
+	local student = {}
+ 	student[1] = display.newRect(display.contentCenterX-300, display.contentCenterY, 200, 200)
+ 	student[1]:setFillColor(1, 0, 0)
 
- 	--반죽1
- 	object[2] = display.newRect(display.contentCenterX, display.contentCenterY, 200, 200)
- 	object[2]:setFillColor(1, 0.5, 0)
+ 	student[2] = display.newRect(display.contentCenterX, display.contentCenterY, 200, 200)
+ 	student[2]:setFillColor(1, 0.5, 0)
 
- 	--팥
- 	object[3] = display.newRect(display.contentCenterX, display.contentCenterY, 100, 100)
- 	object[3]:setFillColor(1, 1, 0)
+ 	student[3] = display.newRect(display.contentCenterX+300, display.contentCenterY, 200, 200)
+ 	student[3]:setFillColor(1, 1, 0)
 
- 	--반죽2
- 	object[4] = display.newRect(display.contentCenterX, display.contentCenterY, 50, 50)
- 	object[4]:setFillColor(1, 0.5, 1)
+ 	
+ 	local stuff = {}
+  	stuff[1] = display.newRect(display.contentCenterX, display.contentCenterY+200, 100, 100)
+ 	stuff[1]:setFillColor(1, 0, 0)
 
- 	--틀
- 	object[5] = display.newRect(display.contentCenterX, display.contentCenterY, 20, 20)
- 	object[5]:setFillColor(0, 1, 1)
+ 	stuff[2] = display.newRect(display.contentCenterX, display.contentCenterY+200, 100, 100)
+ 	stuff[2]:setFillColor(1, 0.5, 0)
 
- 	--완성된 붕어빵
- 	object[6] = display.newRect(display.contentCenterX, display.contentCenterY, 20, 10)
- 	object[6]:setFillColor(1, 0.5, 0.5)
+ 	stuff[3] = display.newRect(display.contentCenterX, display.contentCenterY+200, 100, 100)
+ 	stuff[3]:setFillColor(1, 1, 0)
 
- 	--반죽 봉투
- 	object[7] = display.newRect(display.contentCenterX + 400, display.contentCenterY-100, 100, 80)
- 	object[7]:setFillColor(1, 0.5, 0)
+ 	local score = display.newText(0, display.contentCenterX-500, display.contentCenterY-300)
+ 	score.size = 100
+ 	score:setFillColor(0)
+ 	score.alpha = 0.5
 
- 	--팥 봉투
- 	object[8] = display.newRect(display.contentCenterX + 400, display.contentCenterY+100, 100, 80)
- 	object[8]:setFillColor(1, 1, 0)
-
-
-	local objectGroup = display.newGroup()
-
- 	objectGroup:insert(object[1])
- 	objectGroup:insert(object[2])
- 	objectGroup:insert(object[3])
- 	objectGroup:insert(object[4])
-	objectGroup:insert(object[5])
-	objectGroup:insert(object[6])
-	objectGroup:insert(object[7])
-	objectGroup:insert(object[8])
-
-	object[2].alpha = 0
-	object[3].alpha = 0
-	object[4].alpha = 0
-	object[5].alpha = 0
-	object[6].alpha = 0
-
-	local turn = 1
-
-	local count = display.newText(0, display.contentWidth*0.1, display.contentHeight*0.15)
+ 	local count = display.newText(3, display.contentCenterX+500, display.contentCenterY-300)
  	count.size = 100
  	count:setFillColor(0)
  	count.alpha = 0.5
- 
-	local function drag( event )
+
+ 	for i = 1, 10, 1 do
+	 	for i = 1, 3, 1 do
+	 		stuff[i].alpha = 0 
+	 	end
+	 	stuff[math.random(3)].alpha = 1
+	 end
+
+ 	local function drag( event )
  		if( event.phase == "began" ) then
  			display.getCurrentStage():setFocus( event.target )
  			event.target.isFocus = true
  			-- 드래그 시작할 때
- 			event.target.initX = event.target.x
- 			event.target.initY = event.target.y
 
  		elseif( event.phase == "moved" ) then
-
  			if ( event.target.isFocus ) then
  				-- 드래그 중일 때
  				event.target.x = event.xStart + event.xDelta
@@ -99,61 +77,57 @@ local background = display.newRect(display.contentCenterX, display.contentCenter
  			if ( event.target.isFocus ) then
  				display.getCurrentStage():setFocus( nil )
  				event.target.isFocus = false
+
  				-- 드래그 끝났을 때
- 				if ( event.target.x > object[1].x - 50 and event.target.x < object[1].x + 50
- 					and event.target.y > object[1].y - 50 and event.target.y < object[1].y + 50) then
+ 				--stuff[1]
+	 			if ( event.target == stuff[1]) then
+	 				if ( event.target.x > student[1].x - 50 and event.target.x < student[1].x + 50
+	 					and event.target.y > student[1].y - 50 and event.target.y < student[1].y + 50) then
+	 						print("성공")
+	 						score.text = score.text + 1
+	 				elseif ( (event.target.x > student[2].x - 50 and event.target.x < student[2].x + 50
+	 					and event.target.y > student[2].y - 50 and event.target.y < student[2].y + 50)
+	 					or(event.target.x > student[3].x - 50 and event.target.x < student[3].x + 50
+	 					and event.target.y > student[3].y - 50 and event.target.y < student[3].y + 50) ) then
+	 						print("실패")
+	 						count.text = count.text - 1
+	 				end
 
- 					if ( event.target == object[7]) then
- 						if( turn == 1) then
- 							object[2].alpha = 1
- 							turn = turn + 1
- 						elseif (turn == 3) then
- 							object[4].alpha = 1
- 							turn = turn + 1
- 						end
-					elseif (event.target == object[8]) then
-						if( turn == 2) then
-							object[3].alpha = 1
-							turn = turn + 1
-						end
- 					end
- 				end
- 				event.target.x = event.target.initX
- 				event.target.y = event.target.initY
- 			else
- 				display.getCurrentStage():setFocus( nil )
- 				event.target.isFocus = false
- 			end
+	 			--stuff[2]
+	 			elseif ( event.target == stuff[2]) then
+	 				if ( event.target.x > student[2].x - 50 and event.target.x < student[2].x + 50
+	 					and event.target.y > student[2].y - 50 and event.target.y < student[2].y + 50) then
+	 						print("성공")
+	 						score.text = score.text + 1
+	 				elseif ( (event.target.x > student[1].x - 50 and event.target.x < student[1].x + 50
+	 					and event.target.y > student[1].y - 50 and event.target.y < student[1].y + 50)
+	 					or(event.target.x > student[3].x - 50 and event.target.x < student[3].x + 50
+	 					and event.target.y > student[3].y - 50 and event.target.y < student[3].y + 50) ) then
+	 						print("실패")
+	 						count.text = count.text - 1
+	 				end
+
+	 			--stuff[3]
+	 			elseif ( event.target == stuff[3]) then
+	 				if ( event.target.x > student[3].x - 50 and event.target.x < student[3].x + 50
+	 					and event.target.y > student[3].y - 50 and event.target.y < student[3].y + 50) then
+	 						print("성공")
+	 						score.text = score.text + 1
+	 				elseif ( (event.target.x > student[1].x - 50 and event.target.x < student[1].x + 50
+	 					and event.target.y > student[1].y - 50 and event.target.y < student[1].y + 50)
+	 					or(event.target.x > student[2].x - 50 and event.target.x < student[2].x + 50
+	 					and event.target.y > student[2].y - 50 and event.target.y < student[2].y + 50) ) then
+	 						print("실패")
+	 						count.text = count.text - 1
+	 				end
+	 			end
+	 		end
  		end
  	end
 
- 	object[7]:addEventListener("touch", drag)
- 	object[8]:addEventListener("touch", drag)
-
- 	local function touchEventListener( event )
- 		if( event.phase == "began" ) then
- 			if( turn == 4) then
-				object[5].alpha = 1
-				turn = turn + 1
- 			elseif( turn == 5 ) then
- 				object[6].alpha = 1
- 				turn = turn + 1
- 			elseif( turn == 6 ) then
- 				turn = 1
- 				object[6].alpha = 0
- 				object[5].alpha = 0
- 				object[4].alpha = 0
- 				object[3].alpha = 0
- 				object[2].alpha = 0
- 				count.text = count.text + 1
- 			end
- 		end
+ 	for i = 1, 3 do
+ 		stuff[i]:addEventListener("touch", drag)
  	end
- 
- 	object[1]:addEventListener("touch", touchEventListener)
-
-
-
-
 
 	
+
