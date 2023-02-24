@@ -146,7 +146,7 @@ function scene:create( event )
     volumeButton:addEventListener("tap",setVolume)
 
     local home = audio.loadStream( "music/Trust.mp3" )
-    --audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
+    audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
     audio.play(home)
 
 

@@ -24,19 +24,6 @@ function scene:create( event )
     sceneGroup:insert(newgame)
 
 
-	--샘플 볼륨 이미지
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
-    sceneGroup:insert(volumeButton)
-
- 	--샘플볼륨함수--
-    local function setVolume(event)
-        composer.showOverlay( "volumeControl", options1 )
-    end
-    volumeButton:addEventListener("tap",setVolume)
-
-
-
 	-- 엔딩 제이쓴 파일 생성
     local path = system.pathForFile( "ending.json", system.DocumentsDirectory)
  
@@ -57,8 +44,9 @@ function scene:create( event )
 	loadedEnding = loadsave.loadTable( "ending.json" )
 
 
-	--마우스 가져다대면 커짐
-	local i = 0
+
+    --마우스 가져다대면 커짐
+    local i = 0
     local function bigbig (event)
         if ((event.target.x-event.x)^2 < 13000) and ((event.target.y-event.y)^2<1700) then
             -- i값을 지정해 놓는 이유는 범위 안에서는 크기가 더 늘어나거나 줄어들지 않고, 소리가 연이어 나오지 않음.
@@ -83,6 +71,26 @@ function scene:create( event )
             end
         end
     end
+
+
+
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton:addEventListener("mouse",bigbig)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
+    sceneGroup:insert(volumeButton)
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options1 )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+    local home = audio.loadStream( "music/Trust.mp3" )
+    audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
+    audio.play(home)
+
+
 
     
 -- newgame 객체 생성 및 openpopup 리스너 추가

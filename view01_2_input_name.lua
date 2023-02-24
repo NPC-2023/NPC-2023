@@ -34,7 +34,7 @@ function scene:create( event )
         composer.showOverlay( "volumeControl", options )
     end
     volumeButton:addEventListener("tap",setVolume)
-
+    
 
 
 
