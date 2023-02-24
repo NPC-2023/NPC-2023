@@ -187,7 +187,7 @@ function scene:create( event )
 	   	print("어쩔~")
 	   		for i=1,6 do
 		   		local obj = object[i] 
-		   		timer.performWithDelay(500, function() display.remove(obj) end)
+		   		obj.alpha = 0
 	   		end
 	   		generate2()
 		end
