@@ -4,8 +4,21 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newImageRect("image/background.png", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/mainbd_back.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+
+ 	local gametitle = display.newText("물고기 사냥", display.contentWidth, display.contentHeight, "font/DOSGothic.ttf", 80)
+	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	section:setFillColor(0.35, 0.35, 0.35, 0.35)
+	section.alpha=0
+
+	local script = display.newText("게임방법\n\n도망다니는 물고기를 모두 잡으세요!", section.x+30, section.y-100, "font/DOSGothic.ttf", 80)
+	script.size = 30
+	script:setFillColor(1)
+	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+	script.alpha=0
 
  	local fish = {}
 
@@ -32,15 +45,18 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	objectGroup:insert(fish[1])
-	objectGroup:insert(fish[2])
-	objectGroup:insert(fish[3])
-	objectGroup:insert(fish[4])
-	objectGroup:insert(cat)
-	objectGroup:insert(splash)
+	local function scriptremove(event)
+		timer1=timer.performWithDelay(500, 0)
+		section.alpha=0
+		script.alpha=0
+	end	
 
-	sceneGroup:insert(background)
-	sceneGroup:insert(objectGroup)
+	local function titleremove(event)
+		gametitle.alpha=0
+		section.alpha=1
+		script.alpha=1
+		section:addEventListener("tap", scriptremove)
+	end
 
 	local fish1_cnt, fish2_cnt, fish3_cnt, fish4_cnt = 0, 0, 0, 0
 	local total_cnt = 0
@@ -50,6 +66,7 @@ function scene:create( event )
  			local tag = 0
  			-- 랜덤으로 배경 기준 고정위치에서 계속 변환
  			if(event.target.name == 'fish1') then
+ 				cat.xScale = 1
 				event.target.x = display.contentWidth*(0.5+ranX)
 				event.target.y = display.contentHeight*(0.8+ranY)
 				cat.y = display.contentHeight*0.7
@@ -59,6 +76,7 @@ function scene:create( event )
 					tag = 1			
 				end
 			elseif(event.target.name == 'fish2') then
+				cat.xScale = -1
 				event.target.x = display.contentWidth*(0.2+ranX)
 				event.target.y = display.contentHeight*(0.8+ranY)
 				cat.y = display.contentHeight*0.7
@@ -67,6 +85,7 @@ function scene:create( event )
 					tag = 2
 				end
 			elseif(event.target.name == 'fish4') then
+				cat.xScale = 1
 				event.target.x = display.contentWidth*(0.2+ranX)
 				event.target.y = display.contentHeight*(0.8+ranY)
 				cat.y = display.contentHeight*0.7
@@ -75,6 +94,7 @@ function scene:create( event )
 					tag = 4
 				end
 			else
+				cat.xScale = -1
 				event.target.x = display.contentWidth*(0.8+(ranX/4.5))
 				event.target.y = display.contentHeight*(0.4+(ranY/3))
 				cat.y = display.contentHeight*0.25
@@ -95,16 +115,33 @@ function scene:create( event )
 						event.target.x = display.contentWidth*(tag * 0.1)
 						event.target.y = display.contentHeight*0.1 
 						splash.alpha = 0
-						total_cnt = total_cnt + 1
+						total_cnt = total_cnt + 1	
+						--물고기 다 잡은 경우										
+						if(total_cnt == 4) then
+							local text = display.newText("성공이다냥 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
+							text:setFillColor(0)
+							timer.performWithDelay( 1000, function() 
+								composer.removeScene("fishGame")
+								composer.gotoScene("map")
+							end )
+						end	
 					end )				
 			end
-	end
+	end	
 
-	if(total_cnt == 4) then
-		local text = display.newText("성공이다냥 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
-		text:setFillColor(0)
-	end		
+	objectGroup:insert(fish[1])
+	objectGroup:insert(fish[2])
+	objectGroup:insert(fish[3])
+	objectGroup:insert(fish[4])
+	objectGroup:insert(cat)
+	objectGroup:insert(splash)
+	objectGroup:insert(section)
+	objectGroup:insert(script)
 
+	sceneGroup:insert(background)
+	sceneGroup:insert(objectGroup)
+
+	gametitle:addEventListener("tap", titleremove)
 	fish[1]:addEventListener("tap", tapEventListener)		
 	fish[2]:addEventListener("tap", tapEventListener)	
 	fish[3]:addEventListener("tap", tapEventListener)	  

@@ -13,11 +13,7 @@ local physics = require "physics"
 physics.start()
 -- event listeners for tab buttons:
 local function onFirstView( event )
-<<<<<<< Updated upstream
-	composer.gotoScene( "view01" )
-=======
 	composer.gotoScene( "fishGame" )
->>>>>>> Stashed changes
 end
 
 onFirstView()	-- invoke first tab button's onPress event manually
