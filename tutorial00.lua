@@ -39,7 +39,7 @@ function scene:create( event )
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.8, 0.8, 0.8, 0.8)
 
-	local speakerImg = display.newRect(section.x, section.y - 700, 900, 900)
+	--local speakerImg = display.newRect(section.x, section.y - 700, 900, 900)
 
 	
 
@@ -58,9 +58,9 @@ function scene:create( event )
     end
     volumeButton:addEventListener("tap",setVolume)
 
-    local home = audio.loadStream( "music/Trust.mp3" )
+    local tutorialMusic = audio.loadStream( "music/Trust.mp3" )
     audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
-    audio.play(home)
+    audio.play(tutorialMusic)
 
 
     -------------

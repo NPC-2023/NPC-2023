@@ -34,7 +34,7 @@ function scene:create( event )
         composer.showOverlay( "volumeControl", options )
     end
     volumeButton:addEventListener("tap",setVolume)
-    
+
 
 
 
@@ -173,7 +173,8 @@ function scene:create( event )
 
 				composer.removeScene("view01_2_input_name")
 				composer.gotoScene( "tutorial00",options)
-				--audio.pause( titleMusic )
+				audio.pause( startMusic )
+
 				--[[local tutorialMusic = audio.loadStream( "music/Trust.mp3" )
        			audio.setVolume( loadedEndings.logValue )
 				audio.play(tutorialMusic)]]
