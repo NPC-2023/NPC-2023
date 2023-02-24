@@ -15,7 +15,7 @@ physics.start()
 
 
 local function onFirstView( event )
-	composer.gotoScene( "view03_mouse_game" )
+	composer.gotoScene( "view01" )
 end
 
 onFirstView()	-- invoke first tab button's onPress event manually

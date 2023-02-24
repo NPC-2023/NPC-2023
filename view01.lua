@@ -3,40 +3,59 @@
 -- view1.lua
 --
 -----------------------------------------------------------------------------------------
-
+local loadsave = require( "loadsave" )
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
+local json = require( "json" ) 
+
+
+--게임 시작 화면
 
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
-
-	local object = {}
-
- 	object[1] = display.newRect(display.contentCenterX, display.contentCenterY, 500, 500)
- 	object[1]:setFillColor(1, 0, 0)
-
- 	object[2] = display.newRect(display.contentCenterX, display.contentCenterY, 300, 300)
- 	object[2]:setFillColor(1, 0.5, 0)
-
- 	object[3] = display.newRect(display.contentCenterX, display.contentCenterY, 100, 100)
- 	object[3]:setFillColor(1, 1, 0)
-
-	local objectGroup = display.newGroup()
-
- 	objectGroup:insert(object[1])
- 	objectGroup:insert(object[2])
- 	objectGroup:insert(object[3])
-
- 	sceneGroup:insert(background)
- 	sceneGroup:insert(objectGroup)
-
- 	objectGroup.x = objectGroup.x + 100
- 	objectGroup.y = objectGroup.y - 100
+	local background = display.newImageRect("image/게임시작/background.png", display.contentWidth, display.contentHeight)
+	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
 
 
+
+	--샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
+    sceneGroup:insert(volumeButton)
+
+ 	--샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+
+
+	-- 엔딩 제이쓴 파일 생성
+    local path = system.pathForFile( "ending.json", system.DocumentsDirectory)
+ 
+    local file, errorString = io.open( path, "r" )
+    if not file then
+        print("make an ending file")
+        --엔딩관련 데이터 파일 생성
+        local ending = {
+            bgMusic = "Content/PNG/script/지도.mp3",
+            logValue = "0.5",
+            slider = 50
+        }
+        loadsave.saveTable( ending, "ending.json" )
+    end
+
+
+
+	loadedEnding = loadsave.loadTable( "ending.json" )
+
+
+
+	
 
 end
 

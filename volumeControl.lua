@@ -1,11 +1,19 @@
 local loadsave = require( "loadsave" )
 local composer = require( "composer" )
 local scene = composer.newScene()
-local json = require( "json" ) 
+local json = require( "json" )  
 
 function scene:create( event )
     local sceneGroup = self.view
-    local widget = require ("widget")
+    -- 객체 생성
+    print("title")
+
+
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+    --local widget = require ("widget")
 
     --로드
     local loadedEnding = loadsave.loadTable( "ending.json" )
