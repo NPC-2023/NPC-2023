@@ -5,7 +5,7 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 	
-	local background = display.newImageRect("image/mouse/미니게임_두더지게임 배경(빨강마을).png",display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/mouse/background.png",display.contentWidth, display.contentHeight)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -32,9 +32,9 @@ function scene:create( event )
 		display.contentWidth/1.4406
 	}
 	local position_dudu_y ={
-		display.contentHeight/2.78565901,
-		display.contentHeight/1.62738834,
-		display.contentHeight/1.12738834
+		display.contentHeight/2.78565901-80,
+		display.contentHeight/1.62738834-80,
+		display.contentHeight/1.12738834-80
 	}
 	local position_dudu_hit_x ={
 		display.contentWidth/5.27,
@@ -42,9 +42,9 @@ function scene:create( event )
 		display.contentWidth/1.4406
 	}
 	local position_dudu_hit_y ={
-		display.contentHeight/9.8675194,
-		display.contentHeight/2.78565901,
-		display.contentHeight/1.62738834
+		display.contentHeight/9.8675194-80,
+		display.contentHeight/2.78565901-80,
+		display.contentHeight/1.62738834-80
 	}
 	local holl_x ={
 		display.contentWidth/6.44771308,
@@ -52,61 +52,61 @@ function scene:create( event )
 		display.contentWidth/1.51925177
 	}
 	local holl_y={
-		display.contentHeight/2.9476787,
-		display.contentHeight/1.68122169,
-		display.contentHeight/1.17597099
+		display.contentHeight/2.9476787-80,
+		display.contentHeight/1.68122169-80,
+		display.contentHeight/1.17597099-80
 	}
 
 	-- 두더지, 맞은 두더지, 구멍 객체
 	for i=1,3 do
-		dudu[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지(빨강마을).png")
+		dudu[i] = display.newImageRect("image/mouse/맞기전.png", 130, 130)
 		dudu[i].x,dudu[i].y = position_dudu_x[i],position_dudu_y[1]
 		dudu[i].anchorX, dudu[i].anchorY = 0,0
 		sceneGroup:insert(dudu[i])
 
-		dudu_hit[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
+		dudu_hit[i] = display.newImageRect("image/mouse/맞은후.png", 130, 130)
 		dudu_hit[i].x, dudu_hit[i].y = position_dudu_hit_x[i],position_dudu_hit_y[1]
 		dudu_hit[i].anchorX,dudu_hit[i].anchorY = 0,0
 		dudu_hit[i].alpha = 0
 		sceneGroup:insert(dudu_hit[i])
 
-		holl[i] = display.newImage("image/mouse/미니게임_두더지게임 땅굴(빨강마을).png")
+		holl[i] = display.newImageRect("image/mouse/캔.png", 200, 200)
 		holl[i].x, holl[i].y = holl_x[i],holl_y[1]
 		holl[i].anchorX, holl[i].anchorY = 0,0
 		sceneGroup:insert(holl[i])
 	end
 
 	for i=1,3 do
-		dudu1[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지(빨강마을).png")
+		dudu1[i] = display.newImageRect("image/mouse/맞기전.png", 130, 130)
 		dudu1[i].x,dudu1[i].y = position_dudu_x[i],position_dudu_y[2]
 		dudu1[i].anchorX, dudu1[i].anchorY = 0,0
 		sceneGroup:insert(dudu1[i])
 
-		dudu_hit1[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
+		dudu_hit1[i] = display.newImageRect("image/mouse/맞은후.png", 130, 130)
 		dudu_hit1[i].x, dudu_hit1[i].y = position_dudu_hit_x[i],position_dudu_hit_y[2]
 		dudu_hit1[i].anchorX,dudu_hit1[i].anchorY = 0,0
 		dudu_hit1[i].alpha = 0
 		sceneGroup:insert(dudu_hit1[i])
 
-		holl1[i] = display.newImage("image/mouse/미니게임_두더지게임 땅굴(빨강마을).png")
+		holl1[i] = display.newImageRect("image/mouse/캔.png", 200, 200)
 		holl1[i].x, holl1[i].y = holl_x[i],holl_y[2]
 		holl1[i].anchorX, holl1[i].anchorY = 0,0
 		sceneGroup:insert(holl1[i])
 	end
 
 	for i=1,3 do
-		dudu2[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지(빨강마을).png")
+		dudu2[i] = display.newImageRect("image/mouse/맞기전.png", 130, 130)
 		dudu2[i].x,dudu2[i].y = position_dudu_x[i],position_dudu_y[3]
 		dudu2[i].anchorX, dudu2[i].anchorY = 0,0
 		sceneGroup:insert(dudu2[i])
 
-		dudu_hit2[i] = display.newImage("image/mouse/미니게임_두더지게임 지우개두더지_맞은후(빨강마을).png")
+		dudu_hit2[i] = display.newImageRect("image/mouse/맞은후.png", 130, 130)
 		dudu_hit2[i].x, dudu_hit2[i].y = position_dudu_hit_x[i],position_dudu_hit_y[3]
 		dudu_hit2[i].anchorX,dudu_hit2[i].anchorY = 0,0
 		dudu_hit2[i].alpha = 0
 		sceneGroup:insert(dudu_hit2[i])
 
-		holl2[i] = display.newImage("image/mouse/미니게임_두더지게임 땅굴(빨강마을).png")
+		holl2[i] = display.newImageRect("image/mouse/캔.png", 200, 200)
 		holl2[i].x, holl2[i].y = holl_x[i],holl_y[3]
 		holl2[i].anchorX, holl2[i].anchorY = 0,0
 		sceneGroup:insert(holl2[i])
@@ -118,7 +118,7 @@ function scene:create( event )
 	sceneGroup:insert(holl_bg)]]
 
 	-- 해머 객체
-	local h1 = display.newImageRect("image/mouse/미니게임_두더지게임 뿅망치(빨강마을).png",display.contentWidth/7.86112021, display.contentHeight/3.74389018)
+	local h1 = display.newImageRect("image/mouse/고양이 발.png",150, 150)
 	h1.anchorX,h1.anchorY=0.3,0.3
 	h1.x,h1.y = 640,360
 	sceneGroup:insert(h1)
@@ -132,8 +132,8 @@ function scene:create( event )
     }
 
     --샘플 볼륨 이미지
-    local volumeButton = display.newImage("image/설정/설정.png")
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.5
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.4
     sceneGroup:insert(volumeButton)
 
     --샘플볼륨함수--
@@ -170,19 +170,19 @@ function scene:create( event )
 	h1:addEventListener("touch",move)
 
 	--시간과 점수
-	local time = display.newImageRect("image/mouse/미니게임_시간타이머.png", display.contentWidth/7.91, display.contentHeight/3.78)
+	local time = display.newImageRect("image/mouse/미니게임_시간타이머.png", 180, 180)
 	time.anchorX, time.anchorY =0,0
-	time.x,time.y = display.contentWidth/1.180, display.contentHeight/21.53
+	time.x,time.y = display.contentWidth*0.83, display.contentHeight*0.02
 	sceneGroup:insert(time)
 
-	local score = display.newImageRect("image/mouse/미니게임_코인창.png", display.contentWidth/9.3, display.contentHeight/4.26)
+	local score = display.newImageRect("image/mouse/score.png", 150, 150)
 	score.anchorX, score.anchorY =0,0
-	score.x,score.y = display.contentWidth/33.166, display.contentHeight/13.2482826
+	score.x,score.y = display.contentWidth/34, display.contentHeight/13.2482826
 	sceneGroup:insert(score)
 
-	local showScore = display.newText(score1,display.contentWidth/12,display.contentHeight/5.555,"font/잘풀리는오늘 Medium.ttf") 
+	local showScore = display.newText(score1,display.contentWidth/11,display.contentHeight/5.555,"font/잘풀리는오늘 Medium.ttf") 
 	showScore:setFillColor(1,0,0) 
-	showScore.size = 80
+	showScore.size = 60
 	sceneGroup:insert(showScore)
 
 	-- 1번째 ~ 3번째 (1,2,3 위치 랜덤으로 등장/같은 함수 쓰면 중첩돼서 함수 따로 써야됨)
@@ -191,7 +191,7 @@ function scene:create( event )
 		-- 두더지 들어가는 모션
 		local i
 		function popout(event)
-			transition.to(dudu[i],{time=300,y=display.contentHeight/2.78565901,tag="down",onComplete=function() interval() end})
+			transition.to(dudu[i],{time=300,y=display.contentHeight/2.78565901-80,tag="down",onComplete=function() interval() end})
 		end
 
 		-- 두더지 때렸을 때
@@ -210,8 +210,8 @@ function scene:create( event )
 				dudu_hit[i].x, dudu_hit[i].y = position_dudu_hit_x[i],position_dudu_hit_y[1]
 				dudu_hit[i].alpha=1
 				dudu[i].alpha=0
-				transition.to(dudu_hit[i],{time=300,y=display.contentHeight/2.78565901,onComplete=function() dudu[i].alpha=1 dudu_hit[i].alpha=0 interval() end})
-				transition.to(dudu[i],{time=300,y=display.contentHeight/2.78565901})
+				transition.to(dudu_hit[i],{time=300,y=display.contentHeight/2.78565901-80,onComplete=function() dudu[i].alpha=1 dudu_hit[i].alpha=0 interval() end})
+				transition.to(dudu[i],{time=300,y=display.contentHeight/2.78565901-80})
 			end
 		end
 
@@ -222,7 +222,7 @@ function scene:create( event )
 
 		-- 두더지 나오는 모션
 		function popup(event)
-			transition.to(dudu[i],{time=300,y=display.contentHeight/9.8675194,onComplete=function() pop() dudu[i]:addEventListener("touch",hit_dudu) end})
+			transition.to(dudu[i],{time=300,y=display.contentHeight/9.8675194-80,onComplete=function() pop() dudu[i]:addEventListener("touch",hit_dudu) end})
 		end
 
 		-- 두더지 대기
@@ -243,7 +243,7 @@ function scene:create( event )
 		-- 두더지 들어가는 모션
 		local i 
 		function popout1(event)
-			transition.to(dudu1[i],{time=300,y=display.contentHeight/1.62738834,tag="down1",onComplete=function() interval1() end})
+			transition.to(dudu1[i],{time=300,y=display.contentHeight/1.62738834-80,tag="down1",onComplete=function() interval1() end})
 		end
 
 		-- 두더지 때렸을 때
@@ -264,8 +264,8 @@ function scene:create( event )
 				dudu_hit1[i].x, dudu_hit1[i].y = position_dudu_hit_x[i],position_dudu_hit_y[2]
 				dudu_hit1[i].alpha=1
 				dudu1[i].alpha=0
-				transition.to(dudu_hit1[i],{time=300,y=display.contentHeight/1.62738834,onComplete=function() dudu1[i].alpha=1 dudu_hit1[i].alpha=0 interval1() end})
-				transition.to(dudu1[i],{time=300,y=display.contentHeight/1.62738834})
+				transition.to(dudu_hit1[i],{time=300,y=display.contentHeight/1.62738834-80,onComplete=function() dudu1[i].alpha=1 dudu_hit1[i].alpha=0 interval1() end})
+				transition.to(dudu1[i],{time=300,y=display.contentHeight/1.62738834-80})
 			end
 		end
 
@@ -276,7 +276,7 @@ function scene:create( event )
 
 		-- 두더지 나오는 모션
 		function popup1(event)
-			transition.to(dudu1[i],{time=300,y=display.contentHeight/2.78565901,onComplete=function() pop1() dudu1[i]:addEventListener("touch",hit_dudu1) end})
+			transition.to(dudu1[i],{time=300,y=display.contentHeight/2.78565901-80,onComplete=function() pop1() dudu1[i]:addEventListener("touch",hit_dudu1) end})
 		end
 
 		-- 두더지 대기
@@ -298,7 +298,7 @@ function scene:create( event )
 		-- 두더지 들어가는 모션
 		local i 
 		function popout2(event)
-			transition.to(dudu2[i],{time=300,y=display.contentHeight/1.12738834,tag="down2",onComplete=function() interval2() end})
+			transition.to(dudu2[i],{time=300,y=display.contentHeight/1.12738834-80,tag="down2",onComplete=function() interval2() end})
 		end
 
 		-- 두더지 때렸을 때
@@ -318,8 +318,8 @@ function scene:create( event )
 				dudu_hit2[i].x, dudu_hit2[i].y = position_dudu_hit_x[i],position_dudu_hit_y[3]
 				dudu_hit2[i].alpha=1
 				dudu2[i].alpha=0
-				transition.to(dudu_hit2[i],{time=300,y=display.contentHeight/1.12738834,onComplete=function() dudu2[i].alpha=1 dudu_hit2[i].alpha=0 interval2() end})
-				transition.to(dudu2[i],{time=300,y=display.contentHeight/1.12738834})
+				transition.to(dudu_hit2[i],{time=300,y=display.contentHeight/1.12738834-80,onComplete=function() dudu2[i].alpha=1 dudu_hit2[i].alpha=0 interval2() end})
+				transition.to(dudu2[i],{time=300,y=display.contentHeight/1.12738834-80})
 			end
 		end
 
@@ -330,7 +330,7 @@ function scene:create( event )
 
 		-- 두더지 나오는 모션
 		function popup2(event)
-			transition.to(dudu2[i],{time=300,y=display.contentHeight/1.62738834,onComplete=function() pop2() dudu2[i]:addEventListener("touch",hit_dudu2) end})
+			transition.to(dudu2[i],{time=300,y=display.contentHeight/1.62738834-80,onComplete=function() pop2() dudu2[i]:addEventListener("touch",hit_dudu2) end})
 		end
 
 		-- 두더지 대기
@@ -347,9 +347,9 @@ function scene:create( event )
 
 	-- 제한 시간
 	local limit = 15
-	local showLimit = display.newText(limit,display.contentWidth/1.1,display.contentHeight/5.555,"font/잘풀리는오늘 Medium.ttf")
+	local showLimit = display.newText(limit,display.contentWidth/1.1,display.contentHeight/5.8,"font/잘풀리는오늘 Medium.ttf")
 	showLimit:setFillColor(1,0,0)
-	showLimit.size =80
+	showLimit.size =60
 	sceneGroup:insert(showLimit)
 
 	local function timeAttack( event )
