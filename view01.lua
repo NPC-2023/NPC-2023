@@ -9,8 +9,6 @@ local scene = composer.newScene()
 
 function scene:create( event )
 
---붕어빵 만들기--
-
 local background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
 
 	local student = {}
