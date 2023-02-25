@@ -25,23 +25,26 @@ function scene:create( event )
 
 
 	-- 엔딩 제이쓴 파일 생성
-    local path = system.pathForFile( "ending.json", system.DocumentsDirectory)
+    local path = system.pathForFile( "endings.json", system.DocumentsDirectory)
  
     local file, errorString = io.open( path, "r" )
     if not file then
         print("make an ending file")
         --엔딩관련 데이터 파일 생성
-        local ending = {
+        local endings = {
+            end_num = 0,
             bgMusic = "music/Trust.mp3",
             logValue = "0.5",
-            slider = 50
+            slider = 50,
+            logValue_effect = "0.5",
+            slider_effect = 50
         }
-        loadsave.saveTable( ending, "ending.json" )
+        loadsave.saveTable( endings, "endings.json" )
     end
 
 
 
-	loadedEnding = loadsave.loadTable( "ending.json" )
+    loadedEndings = loadsave.loadTable( "endings.json" )
 
 
 

@@ -33,12 +33,12 @@ local function onFirstView( event )
     if not file then
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
-    		--audio.setVolume( 0.5 )
+    		audio.setVolume( 0.5 )
 			composer.gotoScene( "view01_1_start_game" )
     else
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
-    		--audio.setVolume( loadedEndings.logValue )
+    		audio.setVolume( loadedEndings.logValue )
 			composer.gotoScene( "view01_1_start_game" )
     end
 end
