@@ -6,8 +6,8 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
-	local background = display.newImageRect("image/climbing_the_tree/background.jpg", 630*2.2, 473*2.2) ---배경
-	background.x,background.y = display.contentWidth/2,display.contentHeight/2
+	local background = display.newImage("image/climbing_the_tree/배경.png")
+	background.x, background.y=display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(background)
 
 	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
@@ -29,7 +29,7 @@ function scene:create( event )
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
 				composer.removeScene("view03_climbing_the_tree_game_over")
-				composer.gotoScene("view03_climbing_the_tree_game")
+				composer.gotoScene("view03_climbing_the_tree_game_final")
 		end
 	end
 
