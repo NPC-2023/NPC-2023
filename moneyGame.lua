@@ -50,6 +50,8 @@ function scene:create( event )
 	local function tapEventListener( event )
 		total = total + tonumber(event.target.money)
 		totalScript.text = total
+		local soundEffect = audio.loadSound( "soundEffect/coin.wav" )
+		audio.play( soundEffect )
 	end
 
 	local errand = 5000
@@ -68,6 +70,8 @@ function scene:create( event )
 
 	local text = ""
 	local function buyListener( event )
+		local soundEffect = audio.loadSound( "soundEffect/coin.8.ogg" )
+		audio.play( soundEffect )
 		if(total == errand) then
 			text = display.newText("성공 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 			text:setFillColor(0)

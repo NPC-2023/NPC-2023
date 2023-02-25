@@ -37,7 +37,7 @@ function scene:create( event )
 		fish[i].alpha = 0.7
 	end
 
-	local cat = display.newImageRect("image/cat.png", 200, 200)
+	local cat = display.newImageRect("image/fishingCat.png", 200, 200)
  	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.7
 
  	local splash = display.newImageRect("image/splash.png", 120, 120)
