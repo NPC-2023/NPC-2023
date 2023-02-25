@@ -48,7 +48,7 @@ function scene:create( event )
     -- 볼륨리스너  
     local function bgSliderListener( event )
         local sliderValue = event.value
-        --loadedEnding.slider = sliderValue
+        loadedEnding.slider = sliderValue
         local logValue
         if sliderValue == nil then sliderValue = 0 end
         if (sliderValue > 0) then

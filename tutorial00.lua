@@ -45,11 +45,14 @@ function scene:create( event )
 
 	-----음악
 
-    
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
 
     --샘플 볼륨 이미지
-    local volumeButton = display.newImage("image/설정/설정.png")
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight - 1800
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.4
     sceneGroup:insert(volumeButton)
 
     --샘플볼륨함수--
@@ -58,13 +61,18 @@ function scene:create( event )
     end
     volumeButton:addEventListener("tap",setVolume)
 
-    --[[local tutorialMusic = audio.loadStream( "music/Trust.mp3" )
-    audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
-    audio.play(tutorialMusic)]]
+    --local home = audio.loadStream( "music/Trust.mp3" )
+    --audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
+    --audio.play(home)
 
 
     -------------
 
+    sceneGroup:insert(background)
+	sceneGroup:insert(section)
+	
+
+	sceneGroup:insert(volumeButton)
 end
 
 function scene:show( event )

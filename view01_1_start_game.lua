@@ -86,10 +86,10 @@ function scene:create( event )
         composer.showOverlay( "volumeControl", options1 )
     end
     volumeButton:addEventListener("tap",setVolume)
-    audio.pause( titleMusic )
+    --[[audio.pause( titleMusic )
     local home = audio.loadStream( "music/Trust.mp3" )
     audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
-    audio.play(home)
+    audio.play(home)]]
 
 
 

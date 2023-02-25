@@ -169,15 +169,16 @@ function scene:create( event )
 				titleButton.alpha = 0
 				titlePopup.alpha = 0
 				exit1.alpha = 0
-				showText = 0
+				showText.alpha = 0
 
 				composer.removeScene("view01_2_input_name")
-				composer.gotoScene( "tutorial00",options)
-				audio.pause( startMusic )
+				--composer.gotoScene( "tutorial00",options)
+				audio.pause( titleMusic )
 
 				local tutorialMusic = audio.loadStream( "music/Trust.mp3" )
-       			audio.setVolume( loadedEndings.logValue )
-				audio.play(tutorialMusic)
+	    		audio.play(tutorialMusic)
+	    		--audio.setVolume( loadedEndings.logValue )
+				composer.gotoScene( "tutorial00" ,options)
 			end
 	end
 	titleButton:addEventListener("tap",startNew)
