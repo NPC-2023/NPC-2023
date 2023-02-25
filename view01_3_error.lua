@@ -43,7 +43,7 @@ function scene:create( event )
 
 
 	local function gohome(event)
-		if event.phase == "began" then
+		if event.phase == "ended" then
 				composer.removeScene("view01_3_error")
 				exit.alpha=0
 				composer.gotoScene("view01_2_input_name")
@@ -54,9 +54,11 @@ function scene:create( event )
 	newError = display.newImage("image/게임시작/이름입력.png")
 	sceneGroup:insert(newError)
 	newError.x, newError.y = display.contentWidth/2,display.contentHeight/2
-	exit = display.newImage("image/설정/닫기.png")
+	
+
+	exit = display.newImageRect("image/설정/닫기.png", 100, 100)
 	sceneGroup:insert(exit)
-	exit.x, exit.y = display.contentWidth*0.645, display.contentHeight*0.375
+	exit.x, exit.y = display.contentWidth*0.68, display.contentHeight*0.28
 	exit:addEventListener("touch",gohome)
 	
 

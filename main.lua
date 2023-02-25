@@ -39,6 +39,7 @@ local function onFirstView( event )
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( loadedEndings.logValue )
+    		--audio.setVolume( 0.5 )
 			composer.gotoScene( "view01_1_start_game" )
     end
 end
