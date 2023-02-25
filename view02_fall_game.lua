@@ -7,6 +7,7 @@
 local composer = require( "composer" )
 local physics = require("physics")
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
 --local explosionSound = audio.loadSound( "music/Trust.mp3" )
 audio.play( explosionSound )
 
@@ -76,7 +77,7 @@ function scene:create( event )
     volumeButton:addEventListener("tap",setVolume)
 
     local home = audio.loadStream( "music/Trust.mp3" )
-    audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
     audio.play(home)
 
 

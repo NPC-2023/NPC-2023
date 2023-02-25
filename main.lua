@@ -29,18 +29,18 @@ local function onFirstView( event )
     -- Open the file handle
     local file, errorString = io.open( path, "r" )
     
-    composer.gotoScene("view05_main_map")
+    composer.gotoScene("view02_fall_game")
     if not file then
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( 0.5 )
-			composer.gotoScene( "view05_main_map" )
+			composer.gotoScene( "view02_fall_game" )
     else
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
-			composer.gotoScene( "view05_main_map" )
+			composer.gotoScene( "view02_fall_game" )
     end
 end
 
