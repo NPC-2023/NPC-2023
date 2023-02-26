@@ -8,8 +8,7 @@ local composer = require( "composer" )
 local physics = require("physics")
 local scene = composer.newScene()
 local loadsave = require( "loadsave" )
---local explosionSound = audio.loadSound( "music/Trust.mp3" )
-audio.play( explosionSound )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -66,9 +65,9 @@ function scene:create( event )
     }
 
     --샘플 볼륨 이미지
-    local volumeButton = display.newImage("image/설정/설정.png")
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight - 1800
-    sceneGroup:insert(volumeButton)
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.5
+    --sceneGroup:insert(volumeButton)
 
     --샘플볼륨함수--
     local function setVolume(event)
@@ -176,7 +175,7 @@ function scene:create( event )
 	sceneGroup:insert(background)
 	sceneGroup:insert(scorebackground)
 	sceneGroup:insert(showScore)
-	
+	sceneGroup:insert(volumeButton)
 	sceneGroup:insert(floor)
 	sceneGroup:insert(cat)
 	sceneGroup:insert(section)
