@@ -80,25 +80,25 @@ function scene:create( event )
 		if event.phase == "began" then
 			color = event.target.name
 
-			if color == "6" then
+			if color == "1" then
 				local click01 = audio.play(click1)
 				local home = audio.loadStream( "music/Trust.mp3" )
 				audio.setVolume( loadedEndings.logValue )
 				audio.play(home)
 				loadedEndings.bgMusic = "music/Trust.mp3"
         		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view01Map")
-				composer.gotoScene( "view00Room" )
+				composer.removeScene("view05_main_map")
+				composer.gotoScene( "view02_fall_game" )
 
-			elseif color == "7" then
+			elseif color == "2" then
 				local click01 = audio.play(click1)
 				local storeMusic = audio.loadStream( "music/Trust.mp3" )
 				audio.setVolume( loadedEndings.logValue )
 				audio.play(storeMusic);
 				loadedEndings.bgMusic = "music/Trust.mp3"
         		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view1Map")
-				composer.gotoScene( "view04Store" )
+				composer.removeScene("view05_main_map")
+				composer.gotoScene( "view03_mouse_game" )
 
 			elseif color == "8" then
 				local click01 = audio.play(click1)

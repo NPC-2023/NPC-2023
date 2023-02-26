@@ -2,10 +2,14 @@
 
 local composer = require( "composer" )
 local scene = composer.newScene()
---local loadsave = require( "loadsave" )
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+	loadedEndings = loadsave.loadTable( "endings.json" )
+
+	
 	local background = display.newImageRect("image/fall/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
@@ -45,7 +49,7 @@ function scene:create( event )
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
 				composer.removeScene("view02_fall_game_over")
-				composer.gotoScene( "view01" )
+				composer.gotoScene( "view05_main_map" )
 		end
 	end
 

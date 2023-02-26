@@ -12,49 +12,60 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-
+	physics.start()
 	loadedEndings = loadsave.loadTable( "endings.json" )
 	
 	local gametitle = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+	sceneGroup:insert(gametitle)
+
+	
+	local background = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
+	background.x, background.y=display.contentWidth/2, display.contentHeight/2
+	sceneGroup:insert(background)
+
+
+
+	local floor = display.newImage("image/fall/invisible.png")
+	floor.x, floor.y = display.contentWidth/2, display.contentHeight*0.95
+	floor.name = 'floor'
+	physics.addBody(floor, 'static')
+	sceneGroup:insert(floor)
+
+
+	local scorebackground = display.newImageRect("image/fall/score.png", 100, 100)
+	scorebackground.x, scorebackground.y = display.contentWidth*0.9-100, display.contentHeight*0.1
+	sceneGroup:insert(scorebackground)
+	
+
+
+	local score = 0
+	local showScore = display.newText(score, display.contentWidth*0.826, display.contentHeight*0.10)
+	showScore:setFillColor(0)
+	showScore.size = 30
+	sceneGroup:insert(showScore)
+	
+
+
+	local cat = display.newImageRect("image/fall/cat1.png", 150, 150)
+	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.8
+	physics.addBody(cat, 'static')
+	cat.name = 'cat'
+	sceneGroup:insert(cat)
+	
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0
+	sceneGroup:insert(section)
+
 
 	local script = display.newText("게임방법\n\n위에서 내려오는 참치캔을 받으세요! 쓰레기를 받게 될 시에는 점수가 깎입니다. \n10점을 달성할 시 게임 클리어 입니다.", section.x+30, section.y-100, native.systemFontBold)
 	script.size = 30
 	script:setFillColor(1)
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
 	script.alpha=0
-
-	local background = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
-	background.x, background.y=display.contentWidth/2, display.contentHeight/2
-
-	local score = 0
-	local showScore = display.newText(score, display.contentWidth*0.826, display.contentHeight*0.10)
-	showScore:setFillColor(0)
-	showScore.size = 30
-
-	local scorebackground = display.newImageRect("image/fall/score.png", 100, 100)
-	scorebackground.x, scorebackground.y = display.contentWidth*0.9-100, display.contentHeight*0.1
-
-	local floor = display.newImage("image/fall/invisible.png")
-	floor.x, floor.y = display.contentWidth/2, display.contentHeight*0.95
-	floor.name = 'floor'
-	physics.addBody(floor, 'static')
-
-	local cat = display.newImageRect("image/fall/cat1.png", 150, 150)
-	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.8
-	physics.addBody(cat, 'static')
-	cat.name = 'cat'
-	
-	local objects = {"1", "2", "3", "4", "5", "6", "7"}
-
-	local object = { }	
-	local i=1
-	local objectGroup = display.newGroup()
-
+	sceneGroup:insert(script)
 
 
 	-----음악
@@ -67,7 +78,9 @@ function scene:create( event )
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.5
-    --sceneGroup:insert(volumeButton)
+    sceneGroup:insert(volumeButton)
+
+
 
     --샘플볼륨함수--
     local function setVolume(event)
@@ -84,13 +97,23 @@ function scene:create( event )
 
 
 
+
+
+	local objects = {"1", "2", "3", "4", "5"}
+
+	local object = { }	
+	local i=1
+	local objectGroup = display.newGroup()
+
+
 	local function spawn()
 		local objIdx = math.random(#objects)
 		local objName = objects[objIdx]
 		object[i]= display.newImageRect(objectGroup,"image/fall/can" .. objName .. ".png", 80, 80)
 		object[i].x = display.contentWidth*0.5 + math.random(-490, 490)
 		object[i].y = 0
-		if objIdx <6 then
+		sceneGroup:insert(object[i])
+		if objIdx <4 then
 			object[i].type="food"
 		else
 			object[i].type="trash"
@@ -172,14 +195,7 @@ function scene:create( event )
 	floor:addEventListener("collision", onCollision2)
 	
 
-	sceneGroup:insert(background)
-	sceneGroup:insert(scorebackground)
-	sceneGroup:insert(showScore)
-	sceneGroup:insert(volumeButton)
-	sceneGroup:insert(floor)
-	sceneGroup:insert(cat)
-	sceneGroup:insert(section)
-	sceneGroup:insert(script)
+
 end
 
 function scene:show( event )

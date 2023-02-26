@@ -1,6 +1,9 @@
 -- 두더지게임
 local composer = require( "composer" )
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
+local json = require( "json" )
+
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -24,7 +27,7 @@ function scene:create( event )
 	local holl2 = {}
 
 	local score_num = 0
-	local score1 = 5
+	local score1 = 0
 	local score_num = 0
 
 
@@ -146,7 +149,7 @@ function scene:create( event )
     volumeButton:addEventListener("tap",setVolume)
 
     local home = audio.loadStream( "music/Trust.mp3" )
-    audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
     audio.play(home)
 
 
@@ -201,13 +204,15 @@ function scene:create( event )
 		function hit_dudu(event)
 			if event.phase == "ended" then
 				score_num = score_num + 1
-				if score_num == 6 then
+				--[[if score_num == 6 then
 					score1 = 10
 					showScore.text = score1
 				elseif score_num == 15 then
 					score1 = 15
 					showScore.text = score1
-				end
+				end]]
+				score1 = score_num
+				showScore.text = score1
 				transition.cancel("pop")
 				dudu[i]:removeEventListener("touch",hit_dudu)
 				dudu_hit[i].x, dudu_hit[i].y = position_dudu_hit_x[i],position_dudu_hit_y[1]
@@ -253,13 +258,15 @@ function scene:create( event )
 		function hit_dudu1(event)
 			if event.phase == "ended" then
 				score_num = score_num + 1
-				if score_num == 6 then
+				--[[if score_num == 6 then
 					score1 = 10
 					showScore.text = score1
 				elseif score_num == 15 then
 					score1 = 15
 					showScore.text = score1
-				end
+				end]]
+				score1 = score_num
+				showScore.text = score1
 
 				transition.cancel("pop1")
 				dudu1[i]:removeEventListener("touch",hit_dudu1)
@@ -308,13 +315,15 @@ function scene:create( event )
 		function hit_dudu2(event)
 			if event.phase == "ended" then
 				score_num = score_num + 1
-				if score_num == 6 then
+				--[[if score_num == 6 then
 					score1 = 10
 					showScore.text = score1
 				elseif score_num == 15 then
 					score1 = 15
 					showScore.text = score1
-				end
+				end]]
+				score1 = score_num
+				showScore.text = score1
 				transition.cancel("pop2")
 				dudu2[i]:removeEventListener("touch",hit_dudu2)
 
