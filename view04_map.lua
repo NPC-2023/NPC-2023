@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- view02_lost_stuId_game.lua
+-- view04.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -46,44 +46,116 @@ function scene:create( event )
  	building[4].x, building[4].y = display.contentWidth*0.25, display.contentHeight*0.35
  	building[4].name = "대학원"
 
+ 	building[5] = display.newImageRect(buildingGroup, "image/map/ㄱ 본관.png", 512/2.5, 512/2.5)
+ 	building[5].x, building[5].y = display.contentWidth*0.35, display.contentHeight*0.52
+ 	building[5].name = "본관"
+
+ 	building[6] = display.newImageRect(buildingGroup, "image/map/ㄱ정문.png", 512/3, 512/3)
+ 	building[6].x, building[6].y = display.contentWidth*0.3, display.contentHeight*0.85
+ 	building[6].name = "정문"
+
+ 	building[7] = display.newImageRect(buildingGroup, "image/map/ㄱ백주년.png", 512/3, 512/3)
+ 	building[7].x, building[7].y = display.contentWidth*0.09, display.contentHeight*0.87
+ 	building[7].name = "백주년"
+
+ 	-- building[8] = display.newImageRect(buildingGroup, "image/map/ㄱ학생관.png", 512/3, 512/3)
+ 	-- building[8].x, building[8].y = display.contentWidth*0.09, display.contentHeight*0.87
+ 	-- building[8].name = "학생관"
+
+ 	local targetName
+
  	local function gotoChallenge(event)
- 		if(buildingGroup[1].name == "인문관")then
+ 		print("targetName", targetName)
+ 		
+ 		if(targetName == "인문관")then
  			print("인문관")
+ 			composer.removeScene("view04_map")
+ 			composer.gotoScene("view03_climbing_the_tree_game_final")
+ 			return true
+ 		elseif(targetName == "음악관") then
+ 			composer.removeScene("view04_map")
+ 			composer.gotoScene("view01")
+ 			return true
+ 		elseif(targetName == "대학원")then
+ 			composer.removeScene("view04_map")
+ 			composer.gotoScene("view03_climbing_the_tree_game_final")
+ 			return true
+ 		elseif(targetName.name == "본관")then
+ 			composer.removeScene("view04_map")
+ 			composer.gotoScene("view03_climbing_the_tree_game_final")
+ 			return true
+ 		elseif(buildingGroup[i].name == "정문")then
+ 			composer.removeScene("view04_map")
+ 			composer.gotoScene("view03_climbing_the_tree_game_final")
+ 			return true
+ 		elseif(buildingGroup[i].name == "백주년")then
  			composer.removeScene("view04_map")
  			composer.gotoScene("view03_climbing_the_tree_game_final")
  			return true
  		end
  	end
 
- 	local function gotoChallengePreCheck (event)
- 		print("touch")
- 		-- print(building[1].name)
- 		-- print(event.name)
+ 	local gotoScript
+ 	local gotoContentScript
+ 	local gotoButton
+ 	local gotoCancelButton
+ 	local gotoButtonText
+
+ 	local listenerActive = 0
 
 
-		local hintScript = display.newImageRect("image/map/메뉴바.png", 1024/1.5, 1024/1.5)
-		hintScript.x, hintScript.y = display.contentWidth/2, display.contentHeight/2
-		sceneGroup:insert(hintScript)
+ 	
+ 	local function gotoCancel (event)
+ 		display.remove(gotoScript)
+ 		display.remove(gotoContentScript)
+ 		display.remove(gotoButton)
+ 		display.remove(gotoCancelButton)
+ 		display.remove(gotoButtonText)
 
-		local hintContentScript = display.newText("으로 이동하시겠습니까?", section.x+30, section.y-100, native.systemFontBold)
-		hintContentScript.size = 30
-		hintContentScript:setFillColor(0, 0, 0)
-		hintContentScript.x, hintContentScript.y = display.contentWidth/2, display.contentHeight*0.4
-		sceneGroup:insert(hintContentScript)
-
-		local hintClose = display.newImageRect("image/map/확인,힌트 버튼.png", 768/4, 768/4)
-		hintClose.x, hintClose.y = display.contentWidth/2, display.contentHeight*0.6
-		sceneGroup:insert(hintClose)
-
-		local hintCloseText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.59, native.systemFont, 30 )
-		hintCloseText:setFillColor( 1, 1, 1 )	-- black
-		sceneGroup:insert(hintCloseText)
-
-		hintClose:addEventListener("tap", gotoChallenge)
+ 		-- if(listenerActive == 0 ) then
+ 		-- for i = 1, 7 do
+ 		-- 	building[i]:addEventListener("tap", gotoChallengePreCheck)
+ 		-- end
 
  	end
 
- 
+ 	local function gotoChallengePreCheck (event)
+
+
+ 		print("touch")
+ 		print(event.target.name)
+
+ 		targetName = event.target.name
+ 		print("targetName", targetName)
+
+		gotoScript = display.newImageRect("image/map/메뉴바.png", 1024/1.5, 1024/1.5)
+		gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight/2
+		sceneGroup:insert(gotoScript)
+
+		gotoContentScript = display.newText(""..event.target.name .."으로 이동하시겠습니까?", section.x+30, section.y-100, native.systemFontBold)
+		gotoContentScript.size = 30
+		gotoContentScript:setFillColor(0, 0, 0)
+		gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4
+		sceneGroup:insert(gotoContentScript)
+
+		gotoButton = display.newImageRect("image/map/확인,힌트 버튼.png", 768/4, 768/4)
+		gotoButton.x, gotoButton.y = display.contentWidth/2, display.contentHeight*0.6
+		sceneGroup:insert(gotoButton)
+
+		gotoCancelButton = display.newImageRect("image/map/취소버튼.png", 768/6, 768/6)
+		gotoCancelButton.x, gotoCancelButton.y = display.contentWidth*0.7, display.contentHeight*0.3
+		sceneGroup:insert(gotoCancelButton)
+
+		gotoButtonText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.59, native.systemFont, 30 )
+		gotoButtonText:setFillColor( 1, 1, 1 )	-- black
+		sceneGroup:insert(gotoButtonText)
+
+		-- display.getCurrentStage():setFocus( gotoCancelButton )
+
+		gotoCancelButton:addEventListener("tap", gotoCancel)
+		gotoButton:addEventListener("tap", gotoChallenge)
+
+ 	end
 
 
 	local function scriptremove(event)
@@ -91,7 +163,10 @@ function scene:create( event )
 		section.alpha=0
 		script.alpha=0
 
-		building[1]:addEventListener("tap", gotoChallengePreCheck)
+		for i = 1, 7 do 
+			building[i]:addEventListener("tap", gotoChallengePreCheck)
+		end
+
 	end	
 
 	local function titleremove(event)
@@ -114,7 +189,7 @@ function scene:create( event )
 
 
 	sceneGroup:insert(background)
-	-- sceneGroup:insert(buildingGroup)
+	sceneGroup:insert(buildingGroup)
 
 	sceneGroup:insert(section)
 	sceneGroup:insert(script)
