@@ -14,6 +14,7 @@ function scene:create( event )
     local sceneGroup = self.view
     local loadedSettings = loadsave.loadTable( "settings.json" )
     local loadedEndings = loadsave.loadTable( "endings.json" )
+    local widget = require ("widget")
     -- 객체 생성
     print("건물 선택 창 / Modal창")
 
@@ -29,13 +30,11 @@ function scene:create( event )
 
 
 
-    -- 배경 어둡게
-    local black = display.newRect(display.contentWidth/2, display.contentHeight/2,display.contentWidth,display.contentHeight)
-    black.alpha = 0
+  -- 배경 어둡게
+    local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
+    black.alpha = 0.5
     black:setFillColor(0)
-    transition.to(black,{alpha=0.5,time=1000})
     sceneGroup:insert(black)
-
     
 
     local gotoScript = display.newImageRect("image/설정/창.png", 1024/1.5, 1024/1.5)
