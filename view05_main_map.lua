@@ -40,48 +40,45 @@ function scene:create( event )
 	sceneGroup:insert(background)
 
 
+	-- 건물 배치 코드
+	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관"}
+	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관"}
+	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53}
+	local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54}
+	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 }
 
 	local buildingGroup = display.newGroup()
 	local building = {}
 
-	building[1] = display.newImageRect(buildingGroup, "image/map/인문관.png", 512/2.3, 512/2.3)
- 	building[1].x, building[1].y = display.contentWidth*0.42, display.contentHeight*0.22
- 	building[1].name = "인문관"
-
- 	building[2] = display.newImageRect(buildingGroup, "image/map/음악관.png", 512/2.5, 512/2.5)
- 	building[2].x, building[2].y = display.contentWidth*0.75, display.contentHeight*0.22
- 	building[2].name = "음악관"
-
- 	building[3] = display.newImageRect(buildingGroup, "image/map/예지관.png", 512/2.5, 512/2.5)
- 	building[3].x, building[3].y = display.contentWidth*0.84, display.contentHeight*0.44
- 	building[3].name = "음악관"
-
- 	building[4] = display.newImageRect(buildingGroup, "image/map/대학원.png", 512/2.5, 512/2.5)
- 	building[4].x, building[4].y = display.contentWidth*0.25, display.contentHeight*0.35
- 	building[4].name = "대학원"
-
- 	building[5] = display.newImageRect(buildingGroup, "image/map/본관.png", 512/2.5, 512/2.5)
- 	building[5].x, building[5].y = display.contentWidth*0.35, display.contentHeight*0.52
- 	building[5].name = "본관"
-
- 	building[6] = display.newImageRect(buildingGroup, "image/map/정문.png", 512/3, 512/3)
- 	building[6].x, building[6].y = display.contentWidth*0.3, display.contentHeight*0.85
- 	building[6].name = "정문"
-
- 	building[7] = display.newImageRect(buildingGroup, "image/map/백주년.png", 512/3, 512/3)
- 	building[7].x, building[7].y = display.contentWidth*0.09, display.contentHeight*0.87
- 	building[7].name = "백주년"
-
- 	-- building[8] = display.newImageRect(buildingGroup, "image/map/ㄱ학생관.png", 512/3, 512/3)
- 	-- building[8].x, building[8].y = display.contentWidth*0.09, display.contentHeight*0.87
- 	-- building[8].name = "학생관"
-
- 	--sceneGroup:insert(building)
+	for i = 1, 8 do 
+		local size = building_size[i]
+		building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] ..".png", 512/size, 512/size)
+ 		building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
+ 		building[i].name = buildingNames[i]
+	end
 
 
-
-
+	--sceneGroup:insert(background)
+	sceneGroup:insert(buildingGroup)
 	
+	local target
+	
+
+
+	local function gotoCheckMsg( event )
+		print("클릭함")
+		target = event.target.name
+		print(target)
+		local options = {
+        	isModal = true,
+        	params = {
+        	targetName = target
+    		}
+    	}
+    	print(options.params.targetName)
+		composer.showOverlay("showGotoCheckMsg", options)
+	end
+
 	
 
 
@@ -111,15 +108,22 @@ function scene:create( event )
 		end
 	end
 
-	local color = 0
+	local name = 0
 
 	
 -- 리스너 함수 생성
 	local function touch_ui (event)
 		if event.phase == "began" then
-			color = event.target.name
-
-			if color == "1" then
+			name = event.target.name
+			local options = {
+        	isModal = true,
+        	--params = {
+        	--targetName = name
+    		--}
+	    	}
+	    	print(options.params.targetName)
+			composer.showOverlay("showGotoCheckMsg", options)
+			if name == "1" then
 				local click01 = audio.play(click1)
 				local home = audio.loadStream( "music/Trust.mp3" )
 				audio.setVolume( loadedEndings.logValue )
@@ -129,7 +133,7 @@ function scene:create( event )
 				composer.removeScene("view05_main_map")
 				composer.gotoScene( "view02_fall_game" )
 
-			elseif color == "2" then
+			elseif name == "2" then
 				local click01 = audio.play(click1)
 				local storeMusic = audio.loadStream( "music/Trust.mp3" )
 				audio.setVolume( loadedEndings.logValue )
@@ -139,30 +143,75 @@ function scene:create( event )
 				composer.removeScene("view05_main_map")
 				composer.gotoScene( "view03_mouse_game" )
 
-			elseif color == "8" then
+			elseif name == "3" then
 				local click01 = audio.play(click1)
 				local storeMusic = audio.loadStream( "music/Trust.mp3" )
 				audio.setVolume( loadedEndings.logValue )
 				audio.play(storeMusic);
 				loadedEndings.bgMusic = "music/Trust.mp3"
         		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view1Map")
-				composer.gotoScene( "view04Deco" )
+				composer.removeScene("view05_main_map")
+				composer.gotoScene( "view03_mouse_game" )
 
-			else
+			elseif name == "4" then
 				local click01 = audio.play(click1)
-				composer.setVariable("color", color)
-				composer.removeScene("view1Map")
-				composer.gotoScene("view02Map")
+				local storeMusic = audio.loadStream( "music/Trust.mp3" )
+				audio.setVolume( loadedEndings.logValue )
+				audio.play(storeMusic);
+				loadedEndings.bgMusic = "music/Trust.mp3"
+        		loadsave.saveTable(loadedEndings,"endings.json")
+				composer.removeScene("view05_main_map")
+				composer.gotoScene( "view03_mouse_game" )
+
+			elseif name == "5" then
+				local click01 = audio.play(click1)
+				local storeMusic = audio.loadStream( "music/Trust.mp3" )
+				audio.setVolume( loadedEndings.logValue )
+				audio.play(storeMusic);
+				loadedEndings.bgMusic = "music/Trust.mp3"
+        		loadsave.saveTable(loadedEndings,"endings.json")
+				composer.removeScene("view05_main_map")
+				composer.gotoScene( "view03_mouse_game" )
+
+			elseif name == "6" then
+				local click01 = audio.play(click1)
+				local storeMusic = audio.loadStream( "music/Trust.mp3" )
+				audio.setVolume( loadedEndings.logValue )
+				audio.play(storeMusic);
+				loadedEndings.bgMusic = "music/Trust.mp3"
+        		loadsave.saveTable(loadedEndings,"endings.json")
+				composer.removeScene("view05_main_map")
+				composer.gotoScene( "view03_mouse_game" )
+
+			elseif name == "7" then
+				local click01 = audio.play(click1)
+				local storeMusic = audio.loadStream( "music/Trust.mp3" )
+				audio.setVolume( loadedEndings.logValue )
+				audio.play(storeMusic);
+				loadedEndings.bgMusic = "music/Trust.mp3"
+        		loadsave.saveTable(loadedEndings,"endings.json")
+				composer.removeScene("view05_main_map")
+				composer.gotoScene( "view03_mouse_game" )
+
+			elseif name == "8" then
+				local click01 = audio.play(click1)
+				local storeMusic = audio.loadStream( "music/Trust.mp3" )
+				audio.setVolume( loadedEndings.logValue )
+				audio.play(storeMusic);
+				loadedEndings.bgMusic = "music/Trust.mp3"
+        		loadsave.saveTable(loadedEndings,"endings.json")
+				composer.removeScene("view05_main_map")
+				composer.gotoScene( "view03_mouse_game" )
 
 			end
 		end
 	end
 
 -- 리스너 추가
-	for i=1, 7 do
+	for i=1, 8 do
 		building[i]:addEventListener("mouse",bigbig)
 		building[i]:addEventListener("touch",touch_ui)
+		--building[i]:addEventListener("tap", gotoCheckMsg)
 	end
 
 
