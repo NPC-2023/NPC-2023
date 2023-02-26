@@ -105,7 +105,7 @@ function scene:create( event )
         end
     end
 
-    gotoButton:addEventListener("tap", gotoChallenge)
+    gotoButton:addEventListener("touch", gotoChallenge)
 
 
 
