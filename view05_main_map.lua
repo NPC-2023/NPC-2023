@@ -65,19 +65,19 @@ function scene:create( event )
 	
 
 
-	local function gotoCheckMsg( event )
+	--[[local function gotoCheckMsg( event )
 		print("클릭함")
 		target = event.target.name
 		print(target)
 		local options = {
         	isModal = true,
         	params = {
-        	targetName = target
+        	targetName = buildingNames[target]
     		}
     	}
     	print(options.params.targetName)
 		composer.showOverlay("showGotoCheckMsg", options)
-	end
+	end]]
 
 	
 
@@ -119,11 +119,16 @@ function scene:create( event )
 	local function touch_ui (event)
 		if event.phase == "began" then
 			name = event.target.name
-	    	print(options.params.targetName)
-			composer.showOverlay("view06_main_map1", options)
-			if name == "9" then
+	    	--print(options.params.targetName)
+	    	print(name)
+
+			if name == "" then
 				---상점 코드
 
+			else
+				composer.setVariable("name", name)
+				composer.removeScene("view05_main_map")
+				composer.gotoScene("view06_main_map1")
 			end
 		end
 	end

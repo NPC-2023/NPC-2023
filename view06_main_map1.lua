@@ -22,28 +22,33 @@ function scene:create( event )
     -- local options = {
     --     isModal = true
     -- }
-    local target = event.params.targetName
-    print(target)
+
+    name = composer.getVariable("name")
+
+    print(name)
 
 
 
     -- 배경 어둡게
     local black = display.newRect(display.contentWidth/2, display.contentHeight/2,display.contentWidth,display.contentHeight)
-    black.alpha = 0.5
+    black.alpha = 0
     black:setFillColor(0)
+    transition.to(black,{alpha=0.5,time=1000})
     sceneGroup:insert(black)
 
-    local gotoScript = display.newImageRect("image/map/메뉴바.png", 1024/1.5, 1024/1.5)
+    
+
+    local gotoScript = display.newImageRect("image/설정/창.png", 1024/1.5, 1024/1.5)
     gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight/2
     sceneGroup:insert(gotoScript)
 
-    local gotoContentScript = display.newText("".. target .."으로 이동하시겠습니까?", display.contentWidth/2, display.contentHeight/2, native.systemFontBold)
+    local gotoContentScript = display.newText(name.."으로 이동하시겠습니까?", display.contentWidth/2, display.contentHeight/2, native.systemFontBold)
     gotoContentScript.size = 30
     gotoContentScript:setFillColor(0, 0, 0)
     gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4
     sceneGroup:insert(gotoContentScript)
 
-    local gotoButton = display.newImageRect("image/map/확인,힌트 버튼.png", 768/4, 768/4)
+    local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", 768/4, 768/4)
     gotoButton.x, gotoButton.y = display.contentWidth/2, display.contentHeight*0.6
     sceneGroup:insert(gotoButton)
 
@@ -56,54 +61,103 @@ function scene:create( event )
 
     -- 확인 버튼을 눌렀을 때 해당 건물의 게임 파일로 이동
     local function gotoChallenge(event)
-        
-        if(target == "인문관")then
-            print("인문관")
-            composer.hideOverlay("showGotoCheckMsg")
-            composer.gotoScene("view03_climbing_the_tree_game_final")
-            return true
-        elseif(target == "음악관") then
-            composer.hideOverlay("showGotoCheckMsg")
-            composer.gotoScene("view01")
-            return true
-        elseif(target == "대학원")then
-            composer.hideOverlay("showGotoCheckMsg")
-            composer.gotoScene("view03_climbing_the_tree_game_final")
-            return true
-        elseif(target == "본관")then
-            composer.hideOverlay("showGotoCheckMsg")
-            composer.gotoScene("view03_climbing_the_tree_game_final")
-            return true
-        elseif(target == "정문")then
-            composer.hideOverlay("showGotoCheckMsg")
-            composer.gotoScene("view03_climbing_the_tree_game_final")
-            return true
-        elseif(target == "백주년")then
-            composer.hideOverlay("showGotoCheckMsg")
-            composer.gotoScene("view03_climbing_the_tree_game_final")
-            return true
-        elseif(target == "학생관")then
-            composer.hideOverlay("showGotoCheckMsg")
-            composer.gotoScene("view01")
-            return true
+        if event.phase == "began" then
+            if(name == "인문관")then
+                print("인문관")
+                composer.hideOverlay("view06_main_map1")
+                composer.gotoScene("view02_fall_game")
+                return true
+            elseif(name == "음악관") then
+                print("음악관")
+                composer.hideOverlay("view06_main_map1")
+                composer.gotoScene("view02_fall_game")
+                return true
+            elseif(name == "예지관")then
+                print("예지관")
+                composer.hideOverlay("view06_main_map1")
+                composer.gotoScene("view02_fall_game")
+                return true
+            elseif(name == "대학원")then
+                print("대학원")
+                composer.hideOverlay("view06_main_map1")
+                composer.gotoScene("view03_mouse_game")
+                return true
+            elseif(name == "본관")then
+                print("본관")
+                composer.hideOverlay("view06_main_map1")
+                composer.gotoScene("view03_mouse_game")
+                return true
+            elseif(name == "정문")then
+                print("정문")
+                composer.hideOverlay("view06_main_map1")
+                composer.gotoScene("view03_mouse_game")
+                return true
+            elseif(name == "백주년")then
+                print("백주년")
+                composer.hideOverlay("view06_main_map1")
+                composer.gotoScene("view03_mouse_game")
+                return true
+            elseif(name == "학생관")then
+                print("학생관")
+                composer.hideOverlay("view06_main_map1")
+                composer.gotoScene("view03_mouse_game")
+                return true
+            end
         end
     end
 
     gotoButton:addEventListener("tap", gotoChallenge)
+
+
 
     -- exit 버튼 눌렀을 때 volumeControl.lua파일에서 벗어나기
     local function goback(event)
         -- if event.phase == "began" then
         --     composer.hideOverlay("showGotoCheckMsg")
         -- end
-        composer.hideOverlay("view06_main_map1")
+        --composer.hideOverlay("view06_main_map1")
+        if event.phase == "began" then
+            composer.removeScene("view06_main_map1")
+            composer.gotoScene("view05_main_map")
+        end
     end
+
+
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
     local exit = display.newImageRect("image/설정/닫기.png", 768/6, 768/6)
-    sceneGroup:insert(exit)
+
     exit.x, exit.y = display.contentWidth*0.7, display.contentHeight*0.3
-    exit:addEventListener("tap",goback)
+    exit:addEventListener("touch",goback)
+    sceneGroup:insert(exit)
+
+--[[
+    --샘플 볼륨 이미지
+    -----음악
+
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.4
+    
+    sceneGroup:insert(volumeButton)
+
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)]]
+
+    --[[local home = audio.loadStream( "음악/음악샘플.mp3" )
+    audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
+    audio.play(home)
+    ]]
+
 end
 
 function scene:show( event )
