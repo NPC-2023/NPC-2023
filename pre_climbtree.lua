@@ -12,27 +12,27 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/place1.jpg", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/npc/place1.jpg", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc2.png", 300, 400)
+ 	local npc = display.newImageRect("image/npc/npc2.png", 300, 400)
 	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.6
 	npc.xScale = -1
 
-	local cat = display.newImageRect("image/cat_back.png", 200, 200)
+	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
 	cat.x, cat.y = display.contentWidth*0.6, display.contentHeight*0.8
 
-	local speechbubble = display.newImageRect("image/speechbubble.png", 250, 150)
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
 	speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
 	speechbubble.alpha = 0
 
-	local speechbubble_exmark = display.newImageRect("image/speechbubble_exmark.png", 150, 150)
+	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
 	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, display.contentHeight*0.35
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
 
-	local map = display.newImageRect("image/map_goback.png", 150, 150)
+	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
 	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
@@ -76,7 +76,7 @@ function scene:create( event )
 		objectGroup:insert(script) 				
 
 		--수락(말풍선)누르면 고양이가 말함
-		local speechbubble2 = display.newImageRect("image/speechbubble.png", 200, 75)
+		local speechbubble2 = display.newImageRect("image/npc/speechbubble.png", 200, 75)
 		speechbubble2.x, speechbubble2.y = cat.x, cat.y-100
 		local speech2 = display.newText("알았다냥!\n", 
 			speechbubble2.x, speechbubble2.y, "font/DOSGothic.ttf")
@@ -101,7 +101,7 @@ function scene:create( event )
 		speechbubble_exmark.alpha = 0
 		speech.alpha = 0
 		accept.alpha = 0
-		local speechbubble = display.newImageRect("image/speechbubble.png", 250, 150)
+		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
 		speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
 		local speech2 = display.newText("고마워! 이걸로 과제 할 수 있겠어! ", 
 			speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
