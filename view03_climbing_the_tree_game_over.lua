@@ -48,7 +48,7 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 				composer.removeScene("view03_climbing_the_tree_game_over")
 				-- composer.gotoScene( "view01" )
-				composer.gotoScene( "pre_climbtree" )
+				composer.gotoScene( "pre_climbingTree" )
 		end
 	end
 
