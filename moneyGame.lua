@@ -15,12 +15,12 @@ function scene:create( event )
 
  	local object = {}
 
-	object[1] = display.newImageRect("image/snack1.jpeg", 100, 100)
- 	object[2] = display.newImageRect("image/snack2.jpeg", 100, 100)
+	object[1] = display.newImageRect("image/snack1.png", 100, 100)
+ 	object[2] = display.newImageRect("image/snack2.png", 100, 100)
  	object[3] = display.newImageRect("image/bread1.png", 100, 100)
- 	object[4] = display.newImageRect("image/bread2.jpeg", 100, 100)
+ 	object[4] = display.newImageRect("image/bread2.png", 100, 100)
  	object[5] = display.newImageRect("image/drink1.png", 100, 100)
- 	object[6] = display.newImageRect("image/drink2.jpg", 100, 100)
+ 	object[6] = display.newImageRect("image/drink2.png", 100, 100)
 
 	local objectGroup = display.newGroup()
 
@@ -54,7 +54,7 @@ function scene:create( event )
 		audio.play( soundEffect )
 	end
 
-	local errand = 5000
+	local errand = composer.getVariable("money")
 
 	local reset = display.newText("reset", display.contentWidth*0.2, display.contentHeight*0.1, "font/DOSGothic.ttf")
 	reset.size = 50
@@ -72,13 +72,23 @@ function scene:create( event )
 	local function buyListener( event )
 		local soundEffect = audio.loadSound( "soundEffect/coin.8.ogg" )
 		audio.play( soundEffect )
+
 		if(total == errand) then
 			text = display.newText("성공 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 			text:setFillColor(0)
+			buy.alpha = 0
+			objectGroup:insert(text)
+			--다시 퀘스트 수락 화면으로 돌아옴
+			timer.performWithDelay( 1000, function() 
+				composer.setVariable("success", "success")
+				composer.removeScene("moneyGame")
+				composer.gotoScene("pre_moneyGame")
+			end)
 		else
 			text = display.newText("실패다냥", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 			text:setFillColor(0)
 		end
+		
 		timer.performWithDelay( 1500, function() 
 			text.alpha = 0
 		end )	
@@ -93,6 +103,7 @@ function scene:create( event )
 
 	objectGroup:insert(totalScript)
 	objectGroup:insert(reset)
+	objectGroup:insert(buy)
 
 	sceneGroup:insert(background)
  	sceneGroup:insert(objectGroup)
