@@ -110,98 +110,19 @@ function scene:create( event )
 
 	local name = 0
 
-	
+	local options = {
+        	isModal = true,
+        	params = { targetName = name }
+	    	}	
+
 -- 리스너 함수 생성
 	local function touch_ui (event)
 		if event.phase == "began" then
 			name = event.target.name
-			local options = {
-        	isModal = true,
-        	--params = {
-        	--targetName = name
-    		--}
-	    	}
 	    	print(options.params.targetName)
-			composer.showOverlay("showGotoCheckMsg", options)
-			if name == "1" then
-				local click01 = audio.play(click1)
-				local home = audio.loadStream( "music/Trust.mp3" )
-				audio.setVolume( loadedEndings.logValue )
-				audio.play(home)
-				loadedEndings.bgMusic = "music/Trust.mp3"
-        		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view05_main_map")
-				composer.gotoScene( "view02_fall_game" )
-
-			elseif name == "2" then
-				local click01 = audio.play(click1)
-				local storeMusic = audio.loadStream( "music/Trust.mp3" )
-				audio.setVolume( loadedEndings.logValue )
-				audio.play(storeMusic);
-				loadedEndings.bgMusic = "music/Trust.mp3"
-        		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view05_main_map")
-				composer.gotoScene( "view03_mouse_game" )
-
-			elseif name == "3" then
-				local click01 = audio.play(click1)
-				local storeMusic = audio.loadStream( "music/Trust.mp3" )
-				audio.setVolume( loadedEndings.logValue )
-				audio.play(storeMusic);
-				loadedEndings.bgMusic = "music/Trust.mp3"
-        		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view05_main_map")
-				composer.gotoScene( "view03_mouse_game" )
-
-			elseif name == "4" then
-				local click01 = audio.play(click1)
-				local storeMusic = audio.loadStream( "music/Trust.mp3" )
-				audio.setVolume( loadedEndings.logValue )
-				audio.play(storeMusic);
-				loadedEndings.bgMusic = "music/Trust.mp3"
-        		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view05_main_map")
-				composer.gotoScene( "view03_mouse_game" )
-
-			elseif name == "5" then
-				local click01 = audio.play(click1)
-				local storeMusic = audio.loadStream( "music/Trust.mp3" )
-				audio.setVolume( loadedEndings.logValue )
-				audio.play(storeMusic);
-				loadedEndings.bgMusic = "music/Trust.mp3"
-        		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view05_main_map")
-				composer.gotoScene( "view03_mouse_game" )
-
-			elseif name == "6" then
-				local click01 = audio.play(click1)
-				local storeMusic = audio.loadStream( "music/Trust.mp3" )
-				audio.setVolume( loadedEndings.logValue )
-				audio.play(storeMusic);
-				loadedEndings.bgMusic = "music/Trust.mp3"
-        		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view05_main_map")
-				composer.gotoScene( "view03_mouse_game" )
-
-			elseif name == "7" then
-				local click01 = audio.play(click1)
-				local storeMusic = audio.loadStream( "music/Trust.mp3" )
-				audio.setVolume( loadedEndings.logValue )
-				audio.play(storeMusic);
-				loadedEndings.bgMusic = "music/Trust.mp3"
-        		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view05_main_map")
-				composer.gotoScene( "view03_mouse_game" )
-
-			elseif name == "8" then
-				local click01 = audio.play(click1)
-				local storeMusic = audio.loadStream( "music/Trust.mp3" )
-				audio.setVolume( loadedEndings.logValue )
-				audio.play(storeMusic);
-				loadedEndings.bgMusic = "music/Trust.mp3"
-        		loadsave.saveTable(loadedEndings,"endings.json")
-				composer.removeScene("view05_main_map")
-				composer.gotoScene( "view03_mouse_game" )
+			composer.showOverlay("view06_main_map1", options)
+			if name == "9" then
+				---상점 코드
 
 			end
 		end
