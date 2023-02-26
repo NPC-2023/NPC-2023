@@ -16,30 +16,69 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
     local loadedEndings = loadsave.loadTable( "endings.json" )
 
+	local gametitle = display.newImageRect("image/map/background.png", display.contentWidth, display.contentHeight)
+	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+	sceneGroup:insert(gametitle)
 
-	local background = display.newImageRect("image/지도/background.png", display.contentWidth, display.contentHeight)
+
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	section:setFillColor(0.35, 0.35, 0.35, 0.35)
+	section.alpha=0
+	sceneGroup:insert(section)
+
+
+	local script = display.newText("학교 지도야!\n건물을 클릭해보자!", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 30
+	script:setFillColor(1)
+	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+	script.alpha=0
+	sceneGroup:insert(script)
+
+
+	local background = display.newImageRect("image/map/background.png", display.contentWidth, display.contentHeight)
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(background)
-	
-	local foundation1 = display.newImageRect("image/게임시작/새게임.png", 200, 80)
-    foundation1.x,foundation1.y = display.contentWidth * 0.1, display.contentHeight * 0.8
-    foundation1.name = "1"
-    sceneGroup:insert(foundation1)
 
-    local foundation2 = display.newImageRect("image/게임시작/새게임.png", 200, 80)
-    foundation2.x,foundation2.y = display.contentWidth * 0.3, display.contentHeight * 0.8
-    foundation2.name = "2"
-    sceneGroup:insert(foundation2)
 
-    local foundation3 = display.newImageRect("image/게임시작/새게임.png", 200, 80)
-    foundation3.x,foundation3.y = display.contentWidth * 0.5, display.contentHeight * 0.8
-    foundation3.name = "3"
-    sceneGroup:insert(foundation3)
 
-    local foundation4 = display.newImageRect("image/게임시작/새게임.png", 200, 80)
-    foundation4.x,foundation4.y = display.contentWidth * 0.7, display.contentHeight * 0.8
-    foundation4.name = "4"
-    sceneGroup:insert(foundation4)
+	local buildingGroup = display.newGroup()
+	local building = {}
+
+	building[1] = display.newImageRect(buildingGroup, "image/map/인문관.png", 512/2.3, 512/2.3)
+ 	building[1].x, building[1].y = display.contentWidth*0.42, display.contentHeight*0.22
+ 	building[1].name = "인문관"
+
+ 	building[2] = display.newImageRect(buildingGroup, "image/map/음악관.png", 512/2.5, 512/2.5)
+ 	building[2].x, building[2].y = display.contentWidth*0.75, display.contentHeight*0.22
+ 	building[2].name = "음악관"
+
+ 	building[3] = display.newImageRect(buildingGroup, "image/map/예지관.png", 512/2.5, 512/2.5)
+ 	building[3].x, building[3].y = display.contentWidth*0.84, display.contentHeight*0.44
+ 	building[3].name = "음악관"
+
+ 	building[4] = display.newImageRect(buildingGroup, "image/map/대학원.png", 512/2.5, 512/2.5)
+ 	building[4].x, building[4].y = display.contentWidth*0.25, display.contentHeight*0.35
+ 	building[4].name = "대학원"
+
+ 	building[5] = display.newImageRect(buildingGroup, "image/map/본관.png", 512/2.5, 512/2.5)
+ 	building[5].x, building[5].y = display.contentWidth*0.35, display.contentHeight*0.52
+ 	building[5].name = "본관"
+
+ 	building[6] = display.newImageRect(buildingGroup, "image/map/정문.png", 512/3, 512/3)
+ 	building[6].x, building[6].y = display.contentWidth*0.3, display.contentHeight*0.85
+ 	building[6].name = "정문"
+
+ 	building[7] = display.newImageRect(buildingGroup, "image/map/백주년.png", 512/3, 512/3)
+ 	building[7].x, building[7].y = display.contentWidth*0.09, display.contentHeight*0.87
+ 	building[7].name = "백주년"
+
+ 	-- building[8] = display.newImageRect(buildingGroup, "image/map/ㄱ학생관.png", 512/3, 512/3)
+ 	-- building[8].x, building[8].y = display.contentWidth*0.09, display.contentHeight*0.87
+ 	-- building[8].name = "학생관"
+
+ 	--sceneGroup:insert(building)
+
+
 
 
 	
@@ -121,15 +160,10 @@ function scene:create( event )
 	end
 
 -- 리스너 추가
-	foundation1:addEventListener("mouse",bigbig)
-	foundation2:addEventListener("mouse",bigbig)
-	foundation3:addEventListener("mouse",bigbig)
-	foundation4:addEventListener("mouse",bigbig)
-
-	foundation1:addEventListener("touch",touch_ui)
-	foundation2:addEventListener("touch",touch_ui)
-	foundation3:addEventListener("touch",touch_ui)
-	foundation4:addEventListener("touch",touch_ui)
+	for i=1, 7 do
+		building[i]:addEventListener("mouse",bigbig)
+		building[i]:addEventListener("touch",touch_ui)
+	end
 
 
 
@@ -138,11 +172,6 @@ function scene:create( event )
 
 
 
-
-	-- showoverlay 함수 사용 option
-    local options = {
-        isModal = true
-    }
     
 	--샘플 볼륨 이미지
     -----음악
