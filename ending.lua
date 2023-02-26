@@ -1,16 +1,30 @@
 -----------------------------------------------------------------------------------------
 --
--- view1.lua
+-- ending.lua
 --
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
 local scene = composer.newScene()
 
+
 function scene:create( event )
+	local sceneGroup = self.view
+	
+ 	local endingText = display.newText("엔딩", display.contentWidth/2, display.contentHeight*0.4)
+ 	endingText.size = 200
 
+ 	local replay = display.newText("다시 하기", display.contentWidth/2, display.contentHeight*0.7)
+	replay.size = 100
 
+ 	function replay:tap( event )
+ 		composer.gotoScene('view02_boong_make')
+ 	end
 
+ 	replay:addEventListener("tap", replay)
+
+	sceneGroup:insert(endingText)
+	sceneGroup:insert(replay)
 end
 
 function scene:show( event )
@@ -24,6 +38,7 @@ function scene:show( event )
 		-- 
 		-- INSERT code here to make the scene come alive
 		-- e.g. start timers, begin animation, play audio, etc.
+
 	end	
 end
 
@@ -38,6 +53,7 @@ function scene:hide( event )
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
+
 	end
 end
 
