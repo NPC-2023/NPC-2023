@@ -145,6 +145,7 @@ function scene:create( event )
 
 		if j == 7 then
 			composer.removeScene("tutorial00")
+			audio.pause(tutorialMusic)
 			composer.gotoScene("view05_main_map")
 		end
 	end

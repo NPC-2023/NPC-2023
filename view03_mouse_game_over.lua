@@ -39,6 +39,7 @@ function scene:create( event )
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
+				audio.pause(home)
 				composer.removeScene("view03_mouse_game_over")
 				composer.gotoScene("view03_mouse_game")
 		end
@@ -57,6 +58,7 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
+				audio.pause(home)
 				composer.removeScene("view03_mouse_game_over")
 				composer.gotoScene( "view05_main_map" )
 		end
@@ -98,8 +100,9 @@ function scene:create( event )
 
 	local function gomap(event)
 		if event.phase == "began" then
+				audio.pause(home)
 				composer.removeScene("view03_mouse_game_over")
-				composer.gotoScene( "view01" )
+				composer.gotoScene( "view05_main_map" )
 		end
 	end
 
