@@ -9,17 +9,20 @@ function scene:create( event )
 	local sceneGroup = self.view
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
-	
+
 	local background = display.newImageRect("image/fall/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
+
+
+	-- 배경 어둡게
+	
 	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
 	
 	background1:setFillColor(0)
-	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
+	transition.to(background1,{alpha=0.5,time=1000})
 	sceneGroup:insert(background1)
-
 	--[[local board =display.newImageRect("이미지/미니게임/미니게임_게임완료창.png",display.contentWidth/3.6294896, display.contentHeight/2.83122739)
 	board.x , board.y = display.contentWidth/2, display.contentHeight/2
 	board.alpha = 0.5
