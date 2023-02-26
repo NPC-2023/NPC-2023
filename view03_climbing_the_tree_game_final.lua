@@ -28,7 +28,7 @@ function scene:create( event )
 
 
 	-- 힌트 버튼
-	local hint = display.newImageRect("image/lost_stuId/확인,힌트 버튼.png", 768/3, 768/3)
+	local hint = display.newImageRect("image/climbing_the_tree/확인,힌트 버튼.png", 768/3, 768/3)
 	hint.x, hint.y = display.contentWidth*0.1, display.contentHeight*0.1
 
 	-- 힌트 글자
