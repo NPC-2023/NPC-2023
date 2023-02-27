@@ -24,11 +24,9 @@ function scene:create( event )
 	npc.xScale = -1
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 300, 300)
-<<<<<<< Updated upstream
 	cat.x, cat.y = display.contentWidth*0.45, display.contentHeight*0.8
-=======
-	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.8
->>>>>>> Stashed changes
+
+
 
 	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 200)
 	speechbubble.x, speechbubble.y = npc.x, npc.y-130
