@@ -11,6 +11,22 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	--이미지 설정
+	local gametitle = display.newImage("H_image/title.png")
+	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+	local title = display.newText("바위가위보로 \n계단 올라가기", gametitle.x, gametitle.y+130, native.systemFontBold)
+	title.size = 50
+	title:setFillColor(0)
+
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.7)
+	section:setFillColor(0.5, 0.5, 0.5, 0.5)
+	section.alpha=0
+
+	local script = display.newText("게임방법\n\n학생과 바위가위보게임을 하며 계단을 올라가보세요! 14칸을 먼저 올라가는 사람이 이깁니다.\n\n 점수\n 바위 : 1칸\n 가위 : 2칸\n 보 : 5칸", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 30
+	script:setFillColor(1)
+	script.x, script.y = display.contentWidth/2, display.contentHeight*0.7
+	script.alpha=0
 
 	local background = display.newImageRect("H_image/view03_background.jpg", display.contentWidth, display.contentHeight)
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
@@ -30,20 +46,23 @@ function scene:create( event )
  	local rock = display.newImage("H_image/rock.png")
  	rock.x, rock.y = display.contentWidth*0.3, display.contentHeight*0.9
 
- 	local AIpaper = display.newImage("H_image/paper.png")
- 	AIpaper.x, AIpaper.y = display.contentWidth*0.75, display.contentHeight*0.55
+ 	local AIpaper = display.newImage("H_image/AIpaper.png")
+ 	AIpaper.x, AIpaper.y = display.contentWidth*0.7, display.contentHeight*0.45
 
- 	local AIscissors = display.newImage("H_image/scissors.png")
- 	AIscissors.x, AIscissors.y = display.contentWidth*0.75, display.contentHeight*0.55
+ 	local AIscissors = display.newImage("H_image/AIscissors.png")
+ 	AIscissors.x, AIscissors.y = display.contentWidth*0.7, display.contentHeight*0.45
 
- 	local AIrock = display.newImage("H_image/rock.png")
- 	AIrock.x, AIrock.y = display.contentWidth*0.75, display.contentHeight*0.55
+ 	local AIrock = display.newImage("H_image/AIrock.png")
+ 	AIrock.x, AIrock.y = display.contentWidth*0.7, display.contentHeight*0.45
 
  	cat:scale(0.15,0.15)
  	student:scale(0.7,0.7)
- 	rock:scale(1.5,1.5)
- 	scissors:scale(1.5,1.5)
- 	paper:scale(1.5,1.5)
+ 	rock:scale(0.3,0.3)
+ 	scissors:scale(0.3,0.3)
+ 	paper:scale(0.3,0.3)
+ 	AIrock:scale(0.3,0.3)
+ 	AIscissors:scale(0.3,0.3)
+ 	AIpaper:scale(0.3,0.3)
 
  	sceneGroup:insert(background)
  	sceneGroup:insert(cat)
@@ -61,7 +80,9 @@ function scene:create( event )
  	winText.alpha = 0.8
 
  	sceneGroup:insert(winText)
-
+ 	winText:toFront()
+ 	section:toFront()
+ 	script:toFront()
 
  	local PlayerScore = 0
 	local AIScore= 0
@@ -75,10 +96,19 @@ function scene:create( event )
  	AIscissors.alpha = 0
  	AIpaper.alpha = 0
 
- 	local function sleep(sec)
-	    local t = os.clock()
-	    while os.clock() - t <= sec do
-	    end
+
+	local function scriptremove(event)
+		timer1=timer.performWithDelay(500, spawn, 0)
+		section.alpha=0
+		script.alpha=0
+	end	
+
+	local function titleremove(event)
+		gametitle.alpha=0
+		title.alpha=0
+		section.alpha=1
+		script.alpha=1
+		section:addEventListener("tap", scriptremove)
 	end
 
 	local function tap( event )
@@ -91,20 +121,19 @@ function scene:create( event )
  		AIscissors.alpha = 0
  		AIpaper.alpha = 0
 
+ 		--게임 성공 판별 기준 student_yStart - 140을 넘어가면 ending으로 이동------------------------------------------------------------------------
  		local function who_win( )
-	 		if student.y <= student_yStart - 100 then
+	 		if student.y <= student_yStart - 140 then
 	 			winText.text = '게임에 졌습니다.'
 		 		print("게임에 졌습니다.")
-		 		sleep(5)
-		 		composer.gotoScene("ending")
-		 	elseif cat.y <= cat_yStart - 100 then
+		 		composer.gotoScene("view03_ending")
+		 	elseif cat.y <= cat_yStart - 140 then
 		 		winText.text = '게임에 이겼습니다.'
 		 		print("게임에 이겼습니다.")
 		 		AIrock.alpha = 0
  				AIscissors.alpha = 0
  				AIpaper.alpha = 0
- 				sleep(5)
-		 		composer.gotoScene("ending")
+		 		composer.gotoScene("view03_ending")
 		 	end
 	 	end
 
@@ -182,6 +211,7 @@ function scene:create( event )
 	rock:addEventListener("tap", tap)
  	scissors:addEventListener("tap", tap)
  	paper:addEventListener("tap", tap)
+ 	gametitle:addEventListener("tap", titleremove)
 end
 
 
@@ -208,6 +238,9 @@ function scene:hide( event )
 		--
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
+		
+		composer.removeScene('view03_hidden') -- 추가
+
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
 	end

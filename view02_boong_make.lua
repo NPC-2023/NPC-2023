@@ -10,8 +10,26 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
+	--게임 방법
+	local gametitle = display.newImage("H_image/title.png")
+	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+	local title = display.newText("붕어빵 만들기", gametitle.x, gametitle.y+130, native.systemFontBold)
+	title.size = 50
+	title:setFillColor(0)
+
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	section:setFillColor(0.35, 0.35, 0.35, 0.35)
+	section.alpha=0
+
+	local script = display.newText("게임방법\n\n40초 안에 붕어빵 8개를 만드세요! \n 반죽과 팥앙금을 순서대로 놓고 터치하세요! \n 붕어빵 8개를 완성하면 게임 클리어 입니다.", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 30
+	script:setFillColor(1)
+	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+	script.alpha=0
+
 	--붕어빵 만들기--
-	local background = display.newImageRect("H_image/view02_background.png", display.contentWidth, display.contentHeight)
+	local background = display.newImage("H_image/view02_background.png")
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
 	local object = {}
@@ -56,6 +74,8 @@ function scene:create( event )
 	sceneGroup:insert(kettle)
 	sceneGroup:insert(beans)
 	sceneGroup:insert(beans)
+	sceneGroup:insert(section)
+	sceneGroup:insert(script)
 
 	print(object)
 
@@ -77,11 +97,26 @@ function scene:create( event )
 
 	kettle:toFront()
  	beans:toFront()
-
+ 	section:toFront()
+ 	script:toFront()
 
 	local turn1 = 1
 	local turn2 = 1
 	local turn3 = 1
+
+	local function scriptremove(event)
+		timer1=timer.performWithDelay(500, spawn, 0)
+		section.alpha=0
+		script.alpha=0
+	end	
+
+	local function titleremove(event)
+		gametitle.alpha=0
+		title.alpha=0
+		section.alpha=1
+		script.alpha=1
+		section:addEventListener("tap", scriptremove)
+	end
 
 
 	local score = display.newText(0, display.contentWidth*0.1, display.contentHeight*0.15)
@@ -210,11 +245,11 @@ function scene:create( event )
  					object[i].alpha = 0
 				end
  				score.text = score.text + 1
+ 	--게임 성공 판별 기준 score.text == '8'이되면 ending으로 이동------------------------------------------------------------------------
  				if( score.text == '8') then
 			 		time.alpha = 0
 			 		score.text = '성공'
-			 		sleep(5)
-			 		composer.gotoScene("ending")
+			 		composer.gotoScene("view02_ending")
 			 	end
  			end
  		end
@@ -234,11 +269,11 @@ function scene:create( event )
  					object[i].alpha = 0
 				end
  				score.text = score.text + 1
+ 	--게임 성공 판별 기준 score.text == '8'이되면 ending으로 이동------------------------------------------------------------------------
  				if( score.text == '8') then
 			 		time.alpha = 0
 			 		score.text = '성공'
-			 		sleep(5)
-			 		composer.gotoScene("ending")
+			 		composer.gotoScene("view02_ending")
 			 	end
  			end
  		end
@@ -258,11 +293,11 @@ function scene:create( event )
  					object[i].alpha = 0
 				end
  				score.text = score.text + 1
+ 	--게임 성공 판별 기준 score.text == '8'이되면 ending으로 이동------------------------------------------------------------------------
  				if( score.text == '8') then
 			 		time.alpha = 0
 			 		score.text = '성공'
-			 		sleep(5)
-			 		composer.gotoScene("ending")
+			 		composer.gotoScene("view02_ending")
 			 	end
  			end
  		end
@@ -278,8 +313,8 @@ function scene:create( event )
 	 	if( time.text == '-1') then
 	 		time.alpha = 0
 	 		score.text = '실패'
-	 		sleep(5)
-			composer.gotoScene("ending") -- 추가
+	 	--게임 실패 판별 기준 time.text == '-1'이되면 ending으로 이동------------------------------------------------------------------------
+			composer.gotoScene("view02_ending") -- 추가
 		end
 	 end
 
@@ -289,6 +324,7 @@ function scene:create( event )
  	object[1]:addEventListener("touch", touchEventListener1)
  	object[7]:addEventListener("touch", touchEventListener2)
  	object[13]:addEventListener("touch", touchEventListener3)
+ 	gametitle:addEventListener("tap", titleremove)
 
  	--코드 끝
 
