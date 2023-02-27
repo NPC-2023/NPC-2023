@@ -15,12 +15,12 @@ function scene:create( event )
 	physics.start()
 	loadedEndings = loadsave.loadTable( "endings.json" )
 	
-	local gametitle = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
+	local gametitle = display.newImageRect("image/fall/background_final.png", display.contentWidth, display.contentHeight)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(gametitle)
 
 	
-	local background = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/fall/background_final.png", display.contentWidth, display.contentHeight)
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(background)
 
