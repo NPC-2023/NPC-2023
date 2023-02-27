@@ -13,7 +13,7 @@ audio.play( explosionSound )
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local gametitle = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
+	local gametitle = display.newImageRect("image/fall/background_final.png", display.contentWidth, display.contentHeight)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
@@ -26,7 +26,7 @@ function scene:create( event )
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
 	script.alpha=0
 
-	local background = display.newImageRect("image/fall/background.png", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/fall/background_final.png", display.contentWidth, display.contentHeight)
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
 
 	local score = 0
