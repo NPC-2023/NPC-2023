@@ -1,7 +1,9 @@
 
 local composer = require( "composer" )
-
+local physics = require("physics")
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless

@@ -5,7 +5,10 @@
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -98,6 +101,7 @@ function scene:create( event )
  							if(score.text == '5') then
  								score.text = '성공!'
  								time.alpha = 0
+ 								audio.pause(home)
 								composer.removeScene("view07_schoolfood_game")--다현님
 								composer.setVariable("score", 5)---다현님
 								composer.gotoScene( "view09_schoolfood_view2" )---다현님 veiw2가 게임오버창 
@@ -134,6 +138,7 @@ function scene:create( event )
 
  			if( score.text ~= '성공!' ) then
  				score.text = '실패!'
+ 				audio.pause(home)
  				composer.removeScene("view07_schoolfood_game")---다현님코드 
 				composer.setVariable("score", -1)---다현님 코드 
 				composer.gotoScene("view09_schoolfood_view2")---다현님 코드 
