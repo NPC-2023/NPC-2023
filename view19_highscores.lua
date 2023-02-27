@@ -56,18 +56,19 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 메인화면(맵)으로 넘어가기 
 		if event.phase == "began" then
+				composer.setVariable("successFront", success)
 				composer.removeScene("highscores")
 				composer.gotoScene( "view18_npc_frontgate_game" )
 		end
 	end
 
-	local backtomap = display.newImage("image/frontgate/clear.png") --성공할 경우
+	local backtomap = display.newImage("image/frontgate/exit.png") --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
 	
 
-	local backgame = display.newImage("image/frontgate/fail.png") --실패할 경우
+	local backgame = display.newImage("image/frontgate/exit.png") --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
 	sceneGroup:insert(backgame)
