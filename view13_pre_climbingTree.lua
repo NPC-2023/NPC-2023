@@ -87,13 +87,13 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble2.alpha = 0
 			speech2.alpha = 0
-			composer.removeScene("pre_climbingTree")
-			composer.gotoScene("view03_climbing_the_tree_game_final")
+			composer.removeScene("view13_pre_climbingTree")
+			composer.gotoScene("view15_climbing_the_tree_game_final")
 		end)
 	end
 
 	local function goBackToMap(event) 
-		composer.gotoScene("map")
+		composer.gotoScene("view05_main_map")
 	end
 
 	if(composer.getVariable("result") == 1) then

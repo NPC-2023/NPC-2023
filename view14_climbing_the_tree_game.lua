@@ -121,9 +121,9 @@ function scene:create( event )
 				print("실패!")
 				timer.cancelAll()
 				display.remove(objectGroup)
-				composer.removeScene("view03_climbing_the_tree_game")
+				composer.removeScene("view14_climbing_the_tree_game")
  				composer.setVariable("result", 0)
- 				composer.gotoScene("view03_climbing_the_tree_game_over")
+ 				composer.gotoScene("view16_climbing_the_tree_game_over")
 			end
 		end
 	end
@@ -206,9 +206,9 @@ function scene:create( event )
 
 					timer.cancelAll()
 					display.remove(objectGroup)
-					composer.removeScene("view03_climbing_the_tree_game")
+					composer.removeScene("view14_climbing_the_tree_game")
  					composer.setVariable("result", 1)
- 					composer.gotoScene("view03_climbing_the_tree_game_over")
+ 					composer.gotoScene("view16_climbing_the_tree_game_over")
 				end
 			end
  		end

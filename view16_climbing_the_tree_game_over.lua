@@ -32,8 +32,8 @@ function scene:create( event )
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
-				composer.removeScene("view03_climbing_the_tree_game_over")
-				composer.gotoScene("view03_climbing_the_tree_game_final")
+				composer.removeScene("view16_climbing_the_tree_game_over")
+				composer.gotoScene("view15_climbing_the_tree_game_final")
 		end
 	end
 
@@ -50,9 +50,9 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
-				composer.removeScene("view03_climbing_the_tree_game_over")
+				composer.removeScene("view16_climbing_the_tree_game_over")
 				-- composer.gotoScene( "view01" )
-				composer.gotoScene( "pre_climbingTree" )
+				composer.gotoScene( "view13_pre_climbingTree" )
 		end
 	end
 
@@ -108,7 +108,7 @@ function scene:hide( event )
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		composer.removeScene("view03_climbing_the_tree_game_over")
+		composer.removeScene("view16_climbing_the_tree_game_over")
 	end
 end
 
