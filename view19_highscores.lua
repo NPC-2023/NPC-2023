@@ -56,7 +56,7 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 메인화면(맵)으로 넘어가기 
 		if event.phase == "began" then
-				composer.setVariable("success", success)
+				composer.setVariable("successFront", success)
 				composer.removeScene("highscores")
 				composer.gotoScene( "view18_npc_frontgate_game" )
 		end

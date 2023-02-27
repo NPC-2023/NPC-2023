@@ -15,8 +15,6 @@ function scene:create( event )
 	----저장관련 기능------
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
-
-	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 	can_cnt = loadedSettings.can
 	print(can_cnt)
