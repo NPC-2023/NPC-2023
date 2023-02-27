@@ -81,7 +81,7 @@ end
 
 local function createAsteroid()
 
-	local newAsteroid = display.newImageRect( mainGroup, "image/경비원/os4.png", 102, 85 )--외부인 사진 
+	local newAsteroid = display.newImageRect( mainGroup, "image/frontgate/os4.png", 102, 85 )--외부인 사진 
 	table.insert( asteroidsTable, newAsteroid )
 	physics.addBody( newAsteroid, "dynamic", { radius=40, bounce=0.8 } )
 	newAsteroid.myName = "asteroid"
@@ -114,7 +114,7 @@ local function fireLaser()
     -- Play fire sound!
     audio.play( fireSound )
 
-	local newLaser = display.newImageRect( mainGroup, "image/경비원/punch1.png", 100, 106 )--냥이 발바닥 사진 
+	local newLaser = display.newImageRect( mainGroup, "image/frontgate/punch1.png", 100, 106 )--냥이 발바닥 사진 
 	physics.addBody( newLaser, "dynamic", { isSensor=true } )
 	newLaser.isBullet = true
 	newLaser.myName = "laser"
@@ -280,15 +280,15 @@ function scene:create( event )
 	sceneGroup:insert( uiGroup )    -- Insert into the scene's view group
 	
 	-- Load the background
-	local background = display.newImageRect( backGroup, "image/경비원/gate.jpg", 1280, 720 )--배경이미지 
+	local background = display.newImageRect( backGroup, "image/frontgate/gate.jpg", 1280, 720 )--배경이미지 
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 
-	local security = display.newImageRect( backGroup, "image/경비원/security.png", 200, 200)--경비원 이미지 
+	local security = display.newImageRect( backGroup, "image/frontgate/security.png", 200, 200)--경비원 이미지 
 	security.x = display.contentCenterX*1.7
 	security.y = display.contentCenterY*1.2
 	
-	ship = display.newImageRect( mainGroup, "image/경비원/cat1.png", 200, 191)--고양이 이미지 108 99
+	ship = display.newImageRect( mainGroup, "image/frontgate/cat1.png", 200, 191)--고양이 이미지 108 99
 	ship.x = display.contentCenterX
 	ship.y = display.contentHeight - 100
 	physics.addBody( ship, { radius=30, isSensor=true } )

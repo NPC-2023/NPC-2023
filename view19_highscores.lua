@@ -22,7 +22,7 @@ function scene:create( event )
 
     -- Load the previous scores
 
-	local background = display.newImageRect("image/경비원/gate.jpg",1280, 720) --엔딩화면 배경
+	local background = display.newImageRect("image/frontgate/gate.jpg",1280, 720) --엔딩화면 배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -42,12 +42,12 @@ function scene:create( event )
 	end
 
 	--close 버튼
-	local clear_close = display.newImageRect("image/경비원/exit.png", 150, 150)--나가기 버튼 
+	local clear_close = display.newImageRect("image/frontgate/exit.png", 150, 150)--나가기 버튼 
 	clear_close.x, clear_close.y = 500, 500  
 	clear_close.alpha = 0
 	
 
-	local fail_close = display.newImageRect("image/경비원/retry.png", 150, 150)--다시하기 버튼 
+	local fail_close = display.newImageRect("image/frontgate/retry.png", 150, 150)--다시하기 버튼 
 	fail_close.x, fail_close.y = 500, 500 
 	fail_close.alpha = 0
 	
@@ -55,17 +55,17 @@ function scene:create( event )
 	local function gomap(event) -- 게임 pass 후 메인화면(맵)으로 넘어가기 
 		if event.phase == "began" then
 				composer.removeScene("highscores")
-				composer.gotoScene( "view05_main_map" )
+				composer.gotoScene( "view18_npc_frontgate_game" )
 		end
 	end
 
-	local backtomap = display.newImage("image/경비원/clear.png") --성공할 경우
+	local backtomap = display.newImage("image/frontgate/clear.png") --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
 	
 
-	local backgame = display.newImage("image/경비원/fail.png") --실패할 경우
+	local backgame = display.newImage("image/frontgate/fail.png") --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
 	sceneGroup:insert(backgame)

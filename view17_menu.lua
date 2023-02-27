@@ -27,12 +27,12 @@ function scene:create( event )
 	local sceneGroup = self.view
 	-- Code here runs when the scene is first created but has not yet appeared on screen
 
-	local background = display.newImageRect( sceneGroup, "image/경비원/gate.jpg", 1280, 720)
+	local background = display.newImageRect( sceneGroup, "image/frontgate/gate.jpg", 1280, 720)
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 	--sceneGroup:insert(background)
 
-	local title = display.newImageRect( sceneGroup, "image/경비원/title.png", 500, 450 ) --300 300
+	local title = display.newImageRect( sceneGroup, "image/frontgate/title.png", 500, 450 ) --300 300
 	title.x = display.contentCenterX
 	title.y = 500
 	--sceneGroup:insert(title)
@@ -43,7 +43,7 @@ function scene:create( event )
 	--sceneGroup:insert(playButton)
 
 	local function gotoGame()
-		composer.gotoScene( "view18_game", { time=800, effect="crossFade" } )
+		composer.gotoScene( "view18_frontgate_game", { time=800, effect="crossFade" } )
 	end
 
 	title:addEventListener( "touch", gotoGame )

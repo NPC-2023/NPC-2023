@@ -23,28 +23,28 @@ point=0
 -- event listeners for tab buttons:
 local function onFirstView( event )
 
-    -- -- Path for the file to read
-    -- local path = system.pathForFile( "endings.json", system.DocumentsDirectory)
+    -- Path for the file to read
+    local path = system.pathForFile( "endings.json", system.DocumentsDirectory)
 
-    -- -- Open the file handle
-    -- local file, errorString = io.open( path, "r" )
+    -- Open the file handle
+    local file, errorString = io.open( path, "r" )
     
-    -- composer.gotoScene("view17_menu")
-    -- if not file then
-    --     	local titleMusic = audio.loadStream( "music/Trust.mp3" )
-    -- 		audio.play(titleMusic)
-    -- 		audio.setVolume( 0.5 )
-	-- 		composer.gotoScene( "view17_menu" )
-    -- else
-    --     	local titleMusic = audio.loadStream( "music/Trust.mp3" )
-    -- 		audio.play(titleMusic)
-    -- 		audio.setVolume( loadedEndings.logValue )
-    -- 		--audio.setVolume( 0.5 )
-	-- 		composer.gotoScene( "view17_menu" )
-    -- end
+    composer.gotoScene("view01_1_start_game")
+    if not file then
+        	local titleMusic = audio.loadStream( "music/Trust.mp3" )
+    		audio.play(titleMusic)
+    		audio.setVolume( 0.5 )
+			composer.gotoScene( "view01_1_start_game" )
+    else
+        	local titleMusic = audio.loadStream( "music/Trust.mp3" )
+    		audio.play(titleMusic)
+    		audio.setVolume( loadedEndings.logValue )
+    		--audio.setVolume( 0.5 )
+			composer.gotoScene( "view01_1_start_game" )
+    end
 
 
-	composer.gotoScene( "custom" )
+	-- composer.gotoScene( "view06_main_map1" )
 
 	--composer.gotoScene( "pre_fishGame" )
 end
