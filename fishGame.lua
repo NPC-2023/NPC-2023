@@ -4,7 +4,7 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newImageRect("image/mainbd_back.png", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/fishing/mainbd_back.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
  	local gametitle = display.newText("물고기 사냥", display.contentWidth, display.contentHeight, "font/DOSGothic.ttf", 80)
@@ -22,13 +22,13 @@ function scene:create( event )
 
  	local fish = {}
 
- 	fish[1] = display.newImageRect("image/fish1.png", 80, 80)
+ 	fish[1] = display.newImageRect("image/fishing/fish1.png", 80, 80)
 	fish[1].x, fish[1].y = display.contentWidth*0.8, display.contentHeight*0.9
-	fish[2] = display.newImageRect("image/fish2.png", 80, 80)
+	fish[2] = display.newImageRect("image/fishing/fish2.png", 80, 80)
 	fish[2].x, fish[2].y = display.contentWidth*0.3, display.contentHeight*0.9
-	fish[3] = display.newImageRect("image/fish3.png", 50, 50)
+	fish[3] = display.newImageRect("image/fishing/fish3.png", 50, 50)
 	fish[3].x, fish[3].y = display.contentWidth*0.85, display.contentHeight*0.4
-	fish[4] = display.newImageRect("image/fish4.png", 80, 80)
+	fish[4] = display.newImageRect("image/fishing/fish4.png", 80, 80)
 	fish[4].x, fish[4].y = display.contentWidth*0.5, display.contentHeight*0.9
 
 	-- code minimize
@@ -37,10 +37,10 @@ function scene:create( event )
 		fish[i].alpha = 0.7
 	end
 
-	local cat = display.newImageRect("image/fishingCat.png", 200, 200)
+	local cat = display.newImageRect("image/fishing/fishingCat.png", 200, 200)
  	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.7
 
- 	local splash = display.newImageRect("image/splash.png", 120, 120)
+ 	local splash = display.newImageRect("image/fishing/splash.png", 120, 120)
  	splash.alpha = 0
 
 	local objectGroup = display.newGroup()

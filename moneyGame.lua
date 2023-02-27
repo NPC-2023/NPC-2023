@@ -10,24 +10,24 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newImageRect("image/store.jpg", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/cafeteria/store.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
  	local object = {}
 
-	object[1] = display.newImageRect("image/snack1.png", 100, 100)
- 	object[2] = display.newImageRect("image/snack2.png", 100, 100)
- 	object[3] = display.newImageRect("image/bread1.png", 100, 100)
- 	object[4] = display.newImageRect("image/bread2.png", 100, 100)
- 	object[5] = display.newImageRect("image/drink1.png", 100, 100)
- 	object[6] = display.newImageRect("image/drink2.png", 100, 100)
+	object[1] = display.newImageRect("image/cafeteria/snack1.png", 100, 100)
+ 	object[2] = display.newImageRect("image/cafeteria/snack2.png", 100, 100)
+ 	object[3] = display.newImageRect("image/cafeteria/bread1.png", 100, 100)
+ 	object[4] = display.newImageRect("image/cafeteria/bread2.png", 100, 100)
+ 	object[5] = display.newImageRect("image/cafeteria/drink1.png", 100, 100)
+ 	object[6] = display.newImageRect("image/cafeteria/drink2.png", 100, 100)
 
 	local objectGroup = display.newGroup()
 
 	local money = {"1000", "1000", "2000", "2500", "1500", "1000"}
 
 	for i = 1, 6 do
-		object[i].x, object[i].y = display.contentWidth*0.1*(i+1), display.contentHeight*0.4
+		object[i].x, object[i].y = display.contentWidth*0.1*(i+1), display.contentHeight*0.5
 		object[i].money = money[i]
  		objectGroup:insert(object[i])
  	end
@@ -60,7 +60,7 @@ function scene:create( event )
 	reset.size = 50
 	reset:setFillColor(1)
 
-	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.65, "font/DOSGothic.ttf", 50)
+	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.7, "font/DOSGothic.ttf", 50)
 	buy:setFillColor(1)
 
 	local function resetTotalListener( event )
@@ -75,7 +75,7 @@ function scene:create( event )
 
 		if(total == errand) then
 			text = display.newText("성공 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
-			text:setFillColor(0)
+			text:setFillColor(1)
 			buy.alpha = 0
 			objectGroup:insert(text)
 			--다시 퀘스트 수락 화면으로 돌아옴
@@ -86,7 +86,7 @@ function scene:create( event )
 			end)
 		else
 			text = display.newText("실패다냥", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
-			text:setFillColor(0)
+			text:setFillColor(1)
 		end
 		
 		timer.performWithDelay( 1500, function() 

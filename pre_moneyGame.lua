@@ -12,34 +12,34 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/store_entry.png", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/npc/store_entry.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc1.png", 300, 400)
-	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.6
+ 	local npc = display.newImageRect("image/npc/npc1.png", 250, 250)
+	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.72
 	npc.xScale = -1
 
-	local cat = display.newImageRect("image/cat_back.png", 200, 200)
-	cat.x, cat.y = display.contentWidth*0.6, display.contentHeight*0.8
+	local cat = display.newImageRect("image/npc/cat_back.png", 200, 180)
+	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.88
 
-	local speechbubble = display.newImageRect("image/speechbubble.png", 250, 150)
-	speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
+	speechbubble.x, speechbubble.y = npc.x, npc.y-130
 	speechbubble.alpha = 0
 
-	local speechbubble_exmark = display.newImageRect("image/speechbubble_exmark.png", 150, 150)
-	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, display.contentHeight*0.35
+	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 120)
+	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-130
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
 	local money = math.random(1, 10) * 1000 --고양이가 받을 심부름 돈
 
-	local map = display.newImageRect("image/map_goback.png", 150, 150)
+	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
 	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
 
-	local coin = display.newImageRect("image/coin.png", 100, 100)
+	local coin = display.newImageRect("image/npc/coin.png", 100, 100)
 	coin.alpha = 0
 
 	--npc 말풍선 및 수락 텍스트
@@ -54,7 +54,7 @@ function scene:create( event )
 
 		timer.performWithDelay( 1500, function() 
 			coin.alpha = 1
- 			coin.x, coin.y = npc.x-80, npc.y-20
+ 			coin.x, coin.y = npc.x-120, npc.y+10
  			objectGroup:insert(coin)
 			accept.text = "동전을 누르세요\n"
 			accept.size = 20
@@ -85,7 +85,7 @@ function scene:create( event )
 		objectGroup:insert(script_can) 				
 
 		--수락(말풍선)누르면 고양이가 말함
-		local speechbubble2 = display.newImageRect("image/speechbubble.png", 200, 75)
+		local speechbubble2 = display.newImageRect("image/npc/speechbubble.png", 200, 75)
 		speechbubble2.x, speechbubble2.y = cat.x, cat.y-100
 		local speech2 = display.newText("알았다냥!\n", 
 			speechbubble2.x, speechbubble2.y, "font/DOSGothic.ttf")
@@ -101,7 +101,7 @@ function scene:create( event )
 	end
 
 	local function goBackToMap(event) 
-		composer.gotoScene("map")
+		composer.gotoScene("view05_main_map")
 	end
 
 	if(composer.getVariable("success") == "success") then
@@ -111,8 +111,8 @@ function scene:create( event )
 		coin.alpha = 0
 		speech.alpha = 0
 		accept.alpha = 0
-		local speechbubble = display.newImageRect("image/speechbubble.png", 250, 150)
-		speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
+		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
+		speechbubble.x, speechbubble.y = npc.x, npc.y-130
 		local speech2 = display.newText("고마워! 맛있겠다!\n너도 맛있는거 먹을래?", 
 			speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
 		speech2.size = 20
@@ -121,8 +121,8 @@ function scene:create( event )
 		objectGroup:insert(speechbubble)
 		objectGroup:insert(speech2)
 
-		local fish = display.newImageRect("image/fish1.png", 100, 100)
- 		fish.x, fish.y = npc.x-80, npc.y
+		local fish = display.newImageRect("image/npc/can.png", 100, 100)
+ 		fish.x, fish.y = npc.x-120, npc.y+10
 
  		local function fishTapEventListener(event)
  			fish.alpha = 0

@@ -24,7 +24,7 @@ function scene:create( event )
 
  	local objectGroup = display.newGroup()
 
- 	local can = display.newImageRect("image/can.png", 200, 200)
+ 	local can = display.newImageRect("image/custom/can.png", 200, 200)
  	can.x, can.y = display.contentWidth*0.25, display.contentHeight*0.15
 
  	-- local can_cnt_global = composer.getVariable("can_cnt_global")
@@ -34,8 +34,15 @@ function scene:create( event )
  	can_cnt_text.size = 40
  	can_cnt_text:setFillColor(1)
 
+	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
+	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
+
+	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
+	map_text.size = 40
+
  	local expression_name = {"cat_twinkle", "cat_tear", "cat_crank"}
  	local color_name = {"graycat", "pinkcat", "blackcat"}
+ 	local clothes_name = {}
 
  	local panel = {}
  	for i = 1,3 do
@@ -57,6 +64,7 @@ function scene:create( event )
 	 	panel[6+i].x, panel[6+i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.7
 	 	panel[6+i].name = "panel"..(6+i)
 	 	panel[6+i].closed = true
+	 	panel[6+i].item = clothes_name[i]
 	 	objectGroup:insert(panel[6+i])
  	end	
 
@@ -80,7 +88,7 @@ function scene:create( event )
  	paint[3].x, paint[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.5
 
  	
- 	local reset = display.newImageRect("image/cat_paw.png", 150, 150)
+ 	local reset = display.newImageRect("image/custom/cat_paw.png", 150, 150)
  	reset.x, reset.y = display.contentWidth*0.1, display.contentHeight*0.1
 
  	local resetText = display.newText("RESET", reset.x, reset.y, "font/DOSGothic.ttf")
@@ -134,14 +142,14 @@ function scene:create( event )
 		end
 
 		if(event.target.closed == true) then
- 				local popup = display.newImageRect("image/popup.png", 400, 400)
+ 				local popup = display.newImageRect("image/custom/popup.png", 400, 400)
  				popup.x, popup.y = display.contentWidth*0.5, display.contentHeight*0.5
 
- 				btn_ok = display.newImageRect("image/btn_ok.png", 100, 200)
+ 				btn_ok = display.newImageRect("image/custom/btn_ok.png", 100, 200)
  				btn_ok.x, btn_ok.y = display.contentWidth*0.45, display.contentHeight*0.55
  				btn_ok.name = "btn_ok"
 
- 				btn_no = display.newImageRect("image/btn_ok.png", 100, 200)
+ 				btn_no = display.newImageRect("image/custom/btn_ok.png", 100, 200)
  				btn_no.x, btn_no.y = display.contentWidth*0.55, display.contentHeight*0.55
  				btn_no.name = "btn_no"
 
@@ -178,6 +186,12 @@ function scene:create( event )
  		cat.xScale = -1
  	end 
 
+ 	local function goBackToMap(event)
+ 		resetText.alpha = 0 
+ 		composer.removeScene("custom")
+		composer.gotoScene("view05_main_map")
+	end
+
 	objectGroup:insert(cat)
 
 	for i = 1, 9 do
@@ -188,8 +202,12 @@ function scene:create( event )
 		objectGroup:insert(paint[i])
 		objectGroup:insert(expression[i])
 	end
-
+	
 	objectGroup:insert(reset)
+	objectGroup:insert(map)
+ 	objectGroup:insert(map_text)
+ 	objectGroup:insert(can)
+ 	objectGroup:insert(can_cnt_text)
 
  	sceneGroup:insert(background)
  	sceneGroup:insert(objectGroup)
@@ -198,6 +216,7 @@ function scene:create( event )
 	 	panel[i]:addEventListener("tap", changeCatApperanceEvent)
 	 end
 
+	map:addEventListener("tap", goBackToMap)
  	reset:addEventListener("tap", resetListener)
 end
 

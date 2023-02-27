@@ -102,7 +102,7 @@ function scene:create( event )
 		speechbubble_exmark.alpha = 0
 		speech.alpha = 0
 		accept.alpha = 0
-		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
+		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 150)
 		speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
 		local speech2 = display.newText("고마워!\n 이걸로 과제 할 수 있겠어! ", 
 			speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")

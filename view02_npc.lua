@@ -15,19 +15,19 @@ function scene:create( event )
 	local background = display.newImageRect("image/npc/place2.jpg", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc/npc1.png", 300, 300)
-	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.6
+ 	local npc = display.newImageRect("image/npc/npc1.png", 250, 250)
+	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.7
 	npc.xScale = -1
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
-	cat.x, cat.y = display.contentWidth*0.5, display.contentHeight*0.8
+	cat.x, cat.y = display.contentWidth*0.5, display.contentHeight*0.88
 
 	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 330, 200)
-	speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
+	speechbubble.x, speechbubble.y = npc.x, npc.y-150
 	speechbubble.alpha = 0
 
 	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
-	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, display.contentHeight*0.35
+	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-150
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
@@ -85,7 +85,7 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble2.alpha = 0
 			speech2.alpha = 0
-			composer.removeScene("pre_basket")
+			composer.removeScene("view02_npc")
 			composer.gotoScene("view02_fall_game")
 		end)
 	end
@@ -94,16 +94,16 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
-	if(composer.getVariable("score") == 5) then
+	if(composer.getVariable("success") == "success") then
 		-- local tmp = composer.getVariable("can_cnt_global")
 		-- composer.setVariable("can_cnt_global", tmp + 1)
 		speechbubble_exmark.alpha = 0
 		speech.alpha = 0
 		accept.alpha = 0
 		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
-		speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
+		speechbubble.x, speechbubble.y = npc.x,  npc.y-150
 		local speech2 = display.newText("엄청 많이 모았네! ", 
-			speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
+			speechbubble.x, npc.y-150, "font/DOSGothic.ttf")
 		speech2.size = 20
 		speech2:setFillColor(0)
 
