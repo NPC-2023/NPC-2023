@@ -23,25 +23,28 @@ point=0
 -- event listeners for tab buttons:
 local function onFirstView( event )
 
+
     -- Path for the file to read
     local path = system.pathForFile( "endings.json", system.DocumentsDirectory)
 
     -- Open the file handle
     local file, errorString = io.open( path, "r" )
     
-    composer.gotoScene("view07_game")
+    composer.gotoScene("pre_lost_stuId_game")
     if not file then
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( 0.5 )
-			composer.gotoScene( "view07_game" )
+			composer.gotoScene( "pre_lost_stuId_game" )
     else
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
-			composer.gotoScene( "view07_game" )
+			composer.gotoScene( "pre_lost_stuId_game" )
     end
+
+
 end
 
 local function onSecondView( event )
