@@ -18,9 +18,10 @@ function scene:create( event )
 
 	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
 	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
-	
+
 
 	can_cnt = loadedSettings.friendship
+
 	print(can_cnt)
 	-- can_cnt = 20
 
