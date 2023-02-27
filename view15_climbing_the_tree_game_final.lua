@@ -19,6 +19,7 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
+	physics.start()
 
 	local gametitle = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
