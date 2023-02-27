@@ -19,10 +19,16 @@ function scene:create( event )
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(background)
 
-	local newgame = display.newImageRect("image/게임시작/새게임.png", 200, 80)
-    newgame.x,newgame.y = display.contentWidth * 0.5, display.contentHeight * 0.8
+	local newgame = display.newImageRect("image/게임시작/이름결정.png", 250, 200)
+    newgame.x,newgame.y = display.contentWidth * 0.5, display.contentHeight * 0.89
     sceneGroup:insert(newgame)
 
+    local text1 = "게임 시작!"
+    local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.88)
+    showText1:setFillColor(0)
+    showText1.size = 30
+    --showText1.alpha = 0
+    sceneGroup:insert(showText1)
 
 	-- 엔딩 제이쓴 파일 생성
     local path = system.pathForFile( "endings.json", system.DocumentsDirectory)
