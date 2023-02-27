@@ -13,12 +13,14 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	----저장관련 기능------
-	loadedEndings = loadsave.loadTable( "endings.json" )
-
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
+	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
+	
 	local loadedSettings = loadsave.loadTable( "settings.json" )
-	can_cnt = loadedSettings.can
+	can_cnt = loadedSettings.friendship
 	print(can_cnt)
 	-- can_cnt = 20
 
@@ -26,10 +28,10 @@ function scene:create( event )
 	--------------
 
 
-	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.1, display.contentHeight*1.1)
- 	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
+	--local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.1, display.contentHeight*1.1)
+ 	--background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
 
-	sceneGroup:insert(background)
+	--sceneGroup:insert(background)
 
  	--[[local backgroundMusic = audio.loadStream( "soundEffect/custom_music.mp3" )
 	audio.play( backgroundMusic )]]
