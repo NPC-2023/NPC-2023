@@ -2,6 +2,8 @@
 --
 -- pre_climbtree
 --
+-- # 변경 사항
+-- (1) 고양이 위치 조정
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
@@ -19,8 +21,8 @@ function scene:create( event )
 	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.6
 	npc.xScale = -1
 
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
-	cat.x, cat.y = display.contentWidth*0.5, display.contentHeight*0.8
+	local cat = display.newImageRect("image/npc/cat_back.png", 400, 400)
+	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.8
 
 	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 200)
 	speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35

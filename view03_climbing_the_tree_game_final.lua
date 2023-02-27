@@ -1,7 +1,17 @@
 -----------------------------------------------------------------------------------------
 --
--- view03_climbing_the_tree_game_final.lua
+-- view03_climbing_the_tree_game_final.lua -> 나무 올라가기 게임 화면
 --
+-- ## 변경 사항
+-- (1) 15번째 줄 게임 타이틀 이미지 변경 및 gameName 추가
+-- (2) 327번째 줄 titleremove 함수를 아래로 이동 및  
+--     hint:addEventListener("tap", hintShow), display.remove(gameName)를 titleremove 함수로 이동
+--
+-- ## 게임 성공 시 
+-- 244번째 줄 (result: 1)를 view03_climbing_the_tree_game_over로 전달
+--
+-- ## 게임 실패 시 
+-- 142번째 줄 (result: 0)를 view03_climbing_the_tree_game_over로 전달
 -----------------------------------------------------------------------------------------
 local composer = require( "composer" )
 local physics = require("physics")
@@ -10,8 +20,12 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local gametitle = display.newImage("image/climbing_the_tree/배경.png")
+	local gametitle = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+	local gameName = display.newText("나무 올라가기", 0, 0, "ttf/Galmuri7.ttf", 45)
+	gameName:setFillColor(0)
+	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
@@ -251,13 +265,6 @@ function scene:create( event )
 		end
 	end	
 
-	local function titleremove(event)
-		gametitle.alpha=0
-		section.alpha=1
-		script.alpha=1
-		section:addEventListener("tap", scriptremove)
-		pagecheck=0
-	end
 
 	local function pagemove()
 		display.remove(objectGroup)
@@ -319,10 +326,19 @@ function scene:create( event )
 
 	end
 
+	local function titleremove(event)
+		gametitle.alpha=0
+		section.alpha=1
+		script.alpha=1
+		section:addEventListener("tap", scriptremove)
+		hint:addEventListener("tap", hintShow)
+		display.remove(gameName)
+		pagecheck=0
+	end
+
 	gametitle:addEventListener("tap", titleremove)
 	cat:addEventListener("collision", onCollision)
 	floor:addEventListener("collision", onCollision2)
-	hint:addEventListener("tap", hintShow)
 
 	sceneGroup:insert(background)
 	sceneGroup:insert(floor)
