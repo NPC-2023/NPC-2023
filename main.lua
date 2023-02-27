@@ -43,7 +43,10 @@ local function onFirstView( event )
 	-- 		composer.gotoScene( "view17_menu" )
     -- end
 
+
 	composer.gotoScene( "custom" )
+
+	--composer.gotoScene( "pre_fishGame" )
 end
 
 local function onSecondView( event )
