@@ -196,9 +196,11 @@ function scene:create( event )
  	end 
 
  	local function goBackToMap(event)
- 		resetText.alpha = 0 
- 		composer.removeScene("custom")
-		composer.gotoScene("view05_main_map")
+ 		if event.phase == "began" then
+ 			resetText.alpha = 0 
+	 		composer.removeScene("custom")
+			composer.gotoScene("view05_main_map")
+		end
 	end
 
 	objectGroup:insert(cat)
@@ -226,7 +228,7 @@ function scene:create( event )
 	 	panel[i]:addEventListener("tap", changeCatApperanceEvent)
 	 end
 
-	map:addEventListener("tap", goBackToMap)
+	map:addEventListener("touch", goBackToMap)
  	reset:addEventListener("tap", resetListener)
 end
 

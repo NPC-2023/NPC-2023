@@ -14,7 +14,7 @@ function scene:create( event )
 	sceneGroup:insert(background)
 
 	
-	--샘플 볼륨 이미지
+	--[[--샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
     sceneGroup:insert(volumeButton)
@@ -23,16 +23,16 @@ function scene:create( event )
     local function setVolume(event)
         composer.showOverlay( "volumeControl", options )
     end
-    volumeButton:addEventListener("tap",setVolume)
+    volumeButton:addEventListener("tap",setVolume)]]
     
 
-    local newgame = display.newImage("image/게임시작/새게임.png")
+    --[[local newgame = display.newImage("image/게임시작/새게임.png")
     newgame.x,newgame.y = display.contentWidth * 0.42, display.contentHeight * 0.9
-    sceneGroup:insert(newgame)
+    sceneGroup:insert(newgame)]]
 
 
-	local titlePopup = display.newImage("image/게임시작/이름설정팝업.png")
-	titlePopup.x,titlePopup.y = display.contentWidth/2,display.contentHeight * 0.8
+	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 700, 700)
+	titlePopup.x,titlePopup.y = display.contentWidth/2,display.contentHeight*0.6
 	titlePopup.alpha = 0
 	sceneGroup:insert(titlePopup)
 
@@ -51,14 +51,23 @@ function scene:create( event )
 		end
 	end	
 
-	newError = display.newImage("image/게임시작/이름입력.png")
+	newError = display.newImageRect("image/게임시작/이름설정팝업.png", 700, 700)
 	sceneGroup:insert(newError)
-	newError.x, newError.y = display.contentWidth/2,display.contentHeight/2
-	
+	newError.x, newError.y = display.contentWidth/2,display.contentHeight*0.6
 
-	exit = display.newImageRect("image/설정/닫기.png", 100, 100)
+
+
+	local text = "**이름을 입력하세요**"
+	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.46)
+	showText:setFillColor(0)
+	showText.size = 30
+	--showText.alpha = 0
+	sceneGroup:insert(showText)
+
+
+	exit = display.newImageRect("image/설정/닫기.png", 50, 50)
 	sceneGroup:insert(exit)
-	exit.x, exit.y = display.contentWidth*0.68, display.contentHeight*0.28
+	exit.x, exit.y = display.contentWidth*0.70, display.contentHeight*0.37
 	exit:addEventListener("touch",gohome)
 	
 

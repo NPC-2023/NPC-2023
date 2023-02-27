@@ -19,10 +19,16 @@ function scene:create( event )
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(background)
 
-	local newgame = display.newImageRect("image/게임시작/새게임.png", 200, 80)
-    newgame.x,newgame.y = display.contentWidth * 0.5, display.contentHeight * 0.8
+	local newgame = display.newImageRect("image/게임시작/이름결정.png", 250, 200)
+    newgame.x,newgame.y = display.contentWidth * 0.5, display.contentHeight * 0.89
     sceneGroup:insert(newgame)
 
+    local text1 = "게임 시작!"
+    local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.88)
+    showText1:setFillColor(0)
+    showText1.size = 30
+    --showText1.alpha = 0
+    sceneGroup:insert(showText1)
 
 	-- 엔딩 제이쓴 파일 생성
     local path = system.pathForFile( "endings.json", system.DocumentsDirectory)
@@ -79,10 +85,10 @@ function scene:create( event )
 
 
     --샘플 볼륨 이미지
+    --volumeButton:addEventListener("mouse",bigbig)
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton:addEventListener("mouse",bigbig)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
-    sceneGroup:insert(volumeButton)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+
 
     --샘플볼륨함수--
     local function setVolume(event)
@@ -95,7 +101,12 @@ function scene:create( event )
     audio.play(home)]]
 
 
-
+-- 화면전환 이펙트
+    local options1={
+        --effect = "fade",
+        --time = 2000
+        isModal = true
+    }
     
 -- newgame 객체 생성 및 openpopup 리스너 추가
     local function openPopup()
@@ -105,11 +116,7 @@ function scene:create( event )
     newgame:addEventListener("touch",openPopup)
     newgame:addEventListener("mouse",bigbig)
 
-    -- 화면전환 이펙트
-    local options1={
-        effect = "fade",
-        time = 2000
-    }
+    
 
 end
 

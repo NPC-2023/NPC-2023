@@ -31,19 +31,32 @@ local function onFirstView( event )
     
     composer.gotoScene( "view07_npc_schoolfood_game")
     -- composer.gotoScene("view05_main_map")
+
+
+    composer.gotoScene("view01_1_start_game")
+
+
     if not file then
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( 0.5 )
 			composer.gotoScene( "custom" )
 			-- composer.gotoScene( "view05_main_map" )
+
+			composer.gotoScene( "view01_1_start_game" )
+
+
     else
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
+
 			composer.gotoScene(  "custom" )
 			-- composer.gotoScene( "view05_main_map" )
+
+			composer.gotoScene( "view01_1_start_game" )
+
     end
 
 
