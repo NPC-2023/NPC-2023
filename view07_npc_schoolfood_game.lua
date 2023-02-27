@@ -5,11 +5,16 @@
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+	loadedEndings = loadsave.loadTable( "endings.json" )
 
+	
 	local objectGroup = display.newGroup()
 
 	local background = display.newImageRect("image/npc/place2.jpg", display.contentWidth, display.contentHeight)

@@ -187,7 +187,7 @@ function scene:create( event )
 				--composer.gotoScene( "tutorial00",options)
 				audio.pause( titleMusic )
 
-				tutorialMusic = audio.loadStream( "music/Trust.mp3" )
+				tutorialMusic = audio.loadStream( "music/music4.mp3" )
 	    		audio.play(tutorialMusic)
 	    		--audio.setVolume( loadedEndings.logValue )
 				composer.gotoScene( "tutorial00" ,options)

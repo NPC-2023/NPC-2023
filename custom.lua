@@ -124,9 +124,10 @@ function scene:create( event )
     end
     volumeButton:addEventListener("tap",setVolume)
 
-    local home = audio.loadStream( "soundEffect/custom_music.mp3" )
+    loadedEndings.bgMusic = "soundEffect/custom_music.mp3"
+    local custom = audio.loadStream( loadedEndings.bgMusic )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
-    audio.play(home)
+    audio.play(custom)
 
 
     -------------

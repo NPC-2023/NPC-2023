@@ -29,7 +29,7 @@ local function onFirstView( event )
     -- Open the file handle
     local file, errorString = io.open( path, "r" )
     
-    composer.gotoScene( "custom")
+    composer.gotoScene( "view01_1_start_game")
     -- composer.gotoScene("view05_main_map")
 
 
@@ -43,7 +43,7 @@ local function onFirstView( event )
 			-- composer.gotoScene( "custom" )
 			-- composer.gotoScene( "view05_main_map" )
 
-			composer.gotoScene( "custom" )
+			composer.gotoScene( "view01_1_start_game" )
 
 
     else
@@ -55,7 +55,7 @@ local function onFirstView( event )
 			-- composer.gotoScene(  "custom" )
 			-- composer.gotoScene( "view05_main_map" )
 
-			composer.gotoScene( "custom" )
+			composer.gotoScene( "view01_1_start_game" )
 
     end
 

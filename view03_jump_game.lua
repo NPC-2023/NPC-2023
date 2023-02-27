@@ -7,9 +7,13 @@
 local composer = require( "composer" )
 local physics = require("physics")
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
+local json = require( "json" )
+
 
 function scene:create( event )
 	local sceneGroup = self.view
+	loadedEndings = loadsave.loadTable( "endings.json" )
 
 	physics.start()
 	--physics.setDrawMode( "hybrid" )
@@ -278,6 +282,34 @@ function scene:create( event )
 	arrowGroup.alpha = 0
 	cat.alpha = 0
 	goal.alpha = 0
+
+
+
+	-----음악
+
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    sceneGroup:insert(volumeButton)
+
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+    local home = audio.loadStream( "music/music3.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+    audio.play(home)
+
+
+    -------------
 end
 
 function scene:show( event )

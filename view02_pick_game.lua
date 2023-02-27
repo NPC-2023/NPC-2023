@@ -4,16 +4,19 @@
 --
 -----------------------------------------------------------------------------------------
 
-local composer = require("composer")
-local physics = require("physics")
+local loadsave = require( "loadsave" )
+local composer = require( "composer" )
 local scene = composer.newScene()
+local json = require( "json" ) 
 
 function scene:create( event )
 	local sceneGroup = self.view
 
 	--physics.start()
 	--physics.setDrawMode("hybrid")
+	loadedEndings = loadsave.loadTable( "endings.json" )
 
+	
 	local background = display.newImageRect("image/pick/image/background_final.png",display.contentWidth, display.contentHeight) ---배경
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	background.alpha = 0.5
@@ -105,6 +108,24 @@ function scene:create( event )
 		i = i + 1	
 		
 	end
+
+
+	--샘플 볼륨 이미지
+    local volumeButton = display.newImage("이미지/타이틀/설정.png")
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.9
+    sceneGroup:insert(volumeButton)
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+
+    local home1 = audio.loadStream( "music/music2.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+    audio.play(home1)
+
 
 	--------------게임 시작--------------
 	local function apper(event)

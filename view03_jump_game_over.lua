@@ -1,11 +1,15 @@
 --fallgame 통과하는 게임 종료된 화면
 
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
---local loadsave = require( "loadsave" )
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+	loadedEndings = loadsave.loadTable( "endings.json" )
+
 	
 	local background = display.newImageRect("image/background_water.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
