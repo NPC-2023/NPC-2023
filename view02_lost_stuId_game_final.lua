@@ -1,7 +1,16 @@
 -----------------------------------------------------------------------------------------
 --
--- view02_lost_stuId_game_final.lua
+-- view02_lost_stuId_game_final.lua -> 학생증 찾기 게임입니다!
 --
+-- ## 2023-02-27 PM4:00 변경 사항
+-- (1) 16-21번째 -> 게임타이틀 그림과 게임타이틀명 추가
+-- (2) 367번째줄 -> titleremove 함수를 밑으로 이동 및 hint:addEventListener("tap", hintShow)를 titleremove 함수로 이동
+-- 
+-- ## 게임 성공 시 이동
+-- 245번째 줄 -> result: 1를 view02_lost_stuId_game_over.lua에 전달
+
+-- ## 게임 실패 시 이동
+-- 292번째 줄 -> result: 0를 view02_lost_stuId_game_over.lua에 전달
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
@@ -11,8 +20,12 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local gametitle = display.newImageRect("image/lost_stuId/background.png", display.contentWidth, display.contentHeight)
+	local gametitle = display.newImageRect("image/lost_stuId/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+	local gameName = display.newText("학생증 찾기", 0, 0, "ttf/Galmuri7.ttf", 45)
+	gameName:setFillColor(0)
+	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
@@ -308,13 +321,6 @@ function scene:create( event )
 
 	end	
 
-	local function titleremove(event)
-		gametitle.alpha=0
-		section.alpha=1
-		script.alpha=1
-		section:addEventListener("tap", scriptremove)
-	end
-
 	local function pagemove()
 		display.remove(objectGroup)
 		display.remove(floor)
@@ -363,9 +369,16 @@ function scene:create( event )
 		timer.pauseAll()
 	end
 
-	
 
-	hint:addEventListener("tap", hintShow)
+	local function titleremove(event)
+		gametitle.alpha=0
+		section.alpha=1
+		script.alpha=1
+		display.remove(gameName)
+		section:addEventListener("tap", scriptremove)
+		hint:addEventListener("tap", hintShow)
+	end
+
 
 	gametitle:addEventListener("tap", titleremove)
 	
