@@ -15,16 +15,16 @@ function scene:create( event )
 	-- background:setStrokeColor( 0.4, 0.2, 0.2 )
  -- 	background:setFillColor(0.6, 0.5, 0.5)
 
- 	local background = display.newImageRect("image/memo.png", 720, 720)--배경이미지 
+ 	local background = display.newImageRect("image/game/memo.png", 720, 720)--배경이미지 
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
  	-- local cancelButton = display.newText("hint", display.contentWidth/2, display.contentHeight*0.3)
  	-- title.size = 70
-    local cancelButton = display.newImageRect("image/cancelButton.png", 50, 50) 
+    local cancelButton = display.newImageRect("image/game/cancelButton.png", 50, 50) 
  	cancelButton.x, cancelButton.y = display.contentWidth*0.71, display.contentHeight*0.073
 
  	function cancelButton:tap( event )
- 		composer.hideOverlay('setting')
+ 		composer.hideOverlay('view08_setting')
  	end
  	cancelButton:addEventListener("tap", cancelButton)
 

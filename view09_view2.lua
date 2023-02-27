@@ -10,7 +10,7 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newImageRect("image/cafeteria.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/game/cafeteria.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -30,36 +30,36 @@ function scene:create( event )
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
-				composer.removeScene("view2")
-				composer.gotoScene("game")
+				composer.removeScene("view09_view2")
+				composer.gotoScene("view07_game")
 		end
 	end
 
 	--close 버튼
-	local clear_close = display.newImageRect("image/exit.png", 150, 150)
+	local clear_close = display.newImageRect("image/game/exit.png", 150, 150)
 	clear_close.x, clear_close.y = 950, 400
 	clear_close.alpha = 0
 	
 
-	local fail_close = display.newImageRect("image/retry.png", 150, 150)
+	local fail_close = display.newImageRect("image/game/retry.png", 150, 150)
 	fail_close.x, fail_close.y = 950, 400
 	fail_close.alpha = 0
 	
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
-				composer.removeScene("view2")
-				composer.gotoScene( "view1" )
+				composer.removeScene("view09_view2")
+				composer.gotoScene( "view05_main_map" )
 		end
 	end
 
-	local backtomap = display.newImage("image/클리어창.png") --성공할 경우, 원래 코드 : display.newImageRect("image/클리어창.png", display.contentWidth/5, display.contentHeight/5 )
+	local backtomap = display.newImage("image/game/클리어창.png") --성공할 경우, 원래 코드 : display.newImageRect("image/클리어창.png", display.contentWidth/5, display.contentHeight/5 )
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
 	
 
-	local backgame = display.newImage("image/fail.png") --실패할 경우
+	local backgame = display.newImage("image/game/fail.png") --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
 	sceneGroup:insert(backgame)
