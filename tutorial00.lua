@@ -155,13 +155,13 @@ function scene:create( event )
 	end
 
 	local skipButton = display.newImageRect("image/게임시작/이름결정.png", 250, 200) -- 스킵 버튼
-    skipButton.x, skipButton.y = display.contentWidth * 0.93, display.contentHeight * 0.1
+    skipButton.x, skipButton.y = display.contentWidth * 0.90, display.contentHeight * 0.1
     skipButton.alpha = 1
     sceneGroup:insert(skipButton)
     	
 
     local text = "스킵"
-	local showText = display.newText(text, display.contentWidth*0.93, display.contentHeight*0.09)
+	local showText = display.newText(text, display.contentWidth*0.90, display.contentHeight*0.09)
 	showText:setFillColor(0)
 	showText.size = 30
 	showText.alpha = 1
