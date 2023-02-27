@@ -38,6 +38,7 @@ function scene:create( event )
 
 	local function gomap(event) -- 게임 pass 후 map으로 넘어감
 		if event.phase == "began" then--view20ring
+			composer.setVariable("success", "success")
 			audio.pause(home)
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("pre_pickGame") 
@@ -68,7 +69,7 @@ function scene:create( event )
 		backgame1.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("touch",gomap)
+		close:addEventListener("touch", gomap)
 		backgame1:addEventListener("touch",backtogame) --행복한고양이 눌렀을 때 다시하기
 	end
 	sceneGroup:insert(close)

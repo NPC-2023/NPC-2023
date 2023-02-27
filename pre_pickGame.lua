@@ -91,9 +91,9 @@ function scene:create( event )
 		end)
 	end
 
-	local function goBackToMap(event) 
-		composer.gotoScene("map")
-	end
+	-- local function goBackToMap(event) 
+	-- 	composer.gotoScene("map")
+	-- end
 
 	if(composer.getVariable("success") == "success") then
 		-- local tmp = composer.getVariable("can_cnt_global")
@@ -151,7 +151,7 @@ function scene:create( event )
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
 	speechbubble:addEventListener("tap", acceptQuest)
-	map:addEventListener("tap", goBackToMap)
+	-- map:addEventListener("tap", goBackToMap)
 
 
  	objectGroup:insert(npc)

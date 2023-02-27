@@ -14,7 +14,7 @@ function scene:create( event )
 	--physics.start()
 	--physics.setDrawMode("hybrid")
 
-	local background = display.newImageRect("image/background.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/background_final.png",display.contentWidth, display.contentHeight) ---배경
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	background.alpha = 0.5
 	
