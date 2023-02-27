@@ -129,6 +129,7 @@ function scene:create( event )
 							text:setFillColor(0)
 							timer.performWithDelay( 1000, function() 
 								text.alpha = 0
+								gametitle.alpha = 0
 								composer.setVariable("success", "success")
 								composer.removeScene("fishGame")
 								composer.gotoScene("pre_fishGame")
