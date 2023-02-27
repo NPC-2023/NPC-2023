@@ -41,10 +41,11 @@ function scene:create( event )
 	fail_close.alpha = 0
 
 	local function gomap(event) -- 게임 pass 후 넘어감
+			composer.setVariable("success", "success")
 			if event.phase == "began" then--view20ring
 			audio.pause(home)
 			composer.removeScene("view03_jump_game_over")
-			composer.gotoScene("view03_jump_game")
+			composer.gotoScene("pre_jumpGame")
 		end
 	end
 	local backtomap =display.newImageRect("image/클리어창.png",display.contentWidth/5,display.contentHeight/5) --성공할 경우
@@ -56,7 +57,7 @@ function scene:create( event )
 	backtomap1.x, backtomap1.y = display.contentWidth/2, display.contentHeight/1.65466
 	sceneGroup:insert(backtomap1)
 	backtomap1.alpha = 0
-	backtomap1:addEventListener("touch",gomap)
+	backtomap1:addEventListener("touch", gomap)
 
 	local backgame =display.newImage("image/fail.png") --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2

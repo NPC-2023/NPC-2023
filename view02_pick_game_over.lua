@@ -42,9 +42,10 @@ function scene:create( event )
 
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
+			composer.setVariable("success", "success")
 			audio.pause(home)
 			composer.removeScene("view02_pick_game_over")
-			composer.gotoScene("view02_pick_game")
+			composer.gotoScene("pre_pickGame")
 		end
 	end
 	local backtomap =display.newImageRect("image/클리어창.png",display.contentWidth/5,display.contentHeight/5) --성공할 경우
