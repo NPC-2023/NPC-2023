@@ -24,7 +24,7 @@ function scene:create( event )
 	sceneGroup:insert(background)
 
 
-
+--[[
 	--샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
@@ -34,7 +34,7 @@ function scene:create( event )
     local function setVolume(event)
         composer.showOverlay( "volumeControl", options )
     end
-    volumeButton:addEventListener("tap",setVolume)
+    volumeButton:addEventListener("tap",setVolume)]]
 
 
 
@@ -50,7 +50,7 @@ function scene:create( event )
 	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.46)
 	showText:setFillColor(0)
 	showText.size = 30
-	showText.alpha = 0
+	--showText.alpha = 0
 	sceneGroup:insert(showText)
 
 
@@ -60,11 +60,12 @@ function scene:create( event )
 	titleButton.alpha = 0
 	sceneGroup:insert(titleButton)
 
+
 	local text1 = "확인"
-	local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.68)
+	local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.67)
 	showText1:setFillColor(0)
 	showText1.size = 30
-	showText1.alpha = 0
+	showText1.alpha = 1
 	sceneGroup:insert(showText1)
 
 
