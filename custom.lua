@@ -235,6 +235,7 @@ function scene:create( event )
  		cat = display.newImageRect("image/custom/cat.png", 300, 300)
  		cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
  		cat.xScale = -1
+ 		objectGroup:insert(cat)
  	end 
 
  	local function goBackToMap(event)
@@ -258,6 +259,7 @@ function scene:create( event )
 		objectGroup:insert(clothes[i])
 	end
 	
+	objectGroup:insert(cat)
 	objectGroup:insert(reset)
 	objectGroup:insert(resetText)
 	objectGroup:insert(map)
