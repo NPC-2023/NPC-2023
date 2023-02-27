@@ -23,7 +23,6 @@ point=0
 -- event listeners for tab buttons:
 local function onFirstView( event )
 
-
     -- Path for the file to read
     local path = system.pathForFile( "endings.json", system.DocumentsDirectory)
 
@@ -44,7 +43,7 @@ local function onFirstView( event )
 			composer.gotoScene( "view13_pre_climbingTree" )
     end
 
-
+	composer.gotoScene( "pre_fishGame" )
 end
 
 local function onSecondView( event )
