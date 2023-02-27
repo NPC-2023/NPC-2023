@@ -29,30 +29,21 @@ local function onFirstView( event )
     -- Open the file handle
     local file, errorString = io.open( path, "r" )
     
-<<<<<<< Updated upstream
-    composer.gotoScene("view01_1_start_game")
-=======
-    composer.gotoScene("view05_main_map")
->>>>>>> Stashed changes
+    composer.gotoScene( "view07_npc_schoolfood_game")
+    -- composer.gotoScene("view05_main_map")
     if not file then
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( 0.5 )
-<<<<<<< Updated upstream
-			composer.gotoScene( "view01_1_start_game" )
-=======
-			composer.gotoScene( "view05_main_map" )
->>>>>>> Stashed changes
+			composer.gotoScene( "custom" )
+			-- composer.gotoScene( "view05_main_map" )
     else
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
-<<<<<<< Updated upstream
-			composer.gotoScene( "view01_1_start_game" )
-=======
-			composer.gotoScene( "view05_main_map" )
->>>>>>> Stashed changes
+			composer.gotoScene(  "custom" )
+			-- composer.gotoScene( "view05_main_map" )
     end
 
 

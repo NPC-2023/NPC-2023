@@ -69,7 +69,7 @@ function scene:create( event )
             elseif(name == "음악관") then
                 print("음악관")
                 composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view10_pre_lost_stuId_game")
+                composer.gotoScene("view07_npc_schoolfood_game")
                 return true
             elseif(name == "예지관")then
                 print("예지관")

@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- game.lua
+-- schoolfood.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -11,17 +11,17 @@ function scene:create( event )
 	local sceneGroup = self.view
 	
 	---------1차시-------------
-	local background = display.newImageRect("image/game/cafeteria.png", 1280, 720)--배경이미지 display.contentWidth, display.contentHeight
+	local background = display.newImageRect("image/schoolfood/cafeteria.png", 1280, 720)--배경이미지 display.contentWidth, display.contentHeight
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
-	local pan = display.newImageRect("image/game/pan.png", 900, 900)--식판 이미지 
+	local pan = display.newImageRect("image/schoolfood/pan.png", 900, 900)--식판 이미지 
  	pan.x, pan.y = display.contentWidth/2, display.contentHeight/2
 
  	local foodGroup = display.newGroup()--음식이미지 
  	local food = {}
 
  	for i = 1, 10 do
- 		food[i] = display.newImageRect(foodGroup, "image/game/f (" .. i .. ").png", 135, 135)
+ 		food[i] = display.newImageRect(foodGroup, "image/schoolfood/f (" .. i .. ").png", 135, 135)
  	end
 
  	for i = 1, 5 do--음식 위치 
@@ -44,14 +44,14 @@ function scene:create( event )
  	time.alpha = 0.5
 
     ----힌트 버튼 
-    local hintBbg = display.newImageRect("image/game/hintButton.png", 250, 250)--힌트버튼 배경  
+    local hintBbg = display.newImageRect("image/schoolfood/hintButton.png", 250, 250)--힌트버튼 배경  
  	hintBbg.x, hintBbg.y = display.contentWidth*0.07, display.contentHeight*0.05 
  	local hintButton = display.newText("hint", display.contentWidth*0.07, display.contentHeight*0.045)
  	hintButton.size = 50
  	hintButton:setFillColor(0.3)
 
  	function hintButton:tap( event )
- 		composer.showOverlay('view08_setting')
+ 		composer.showOverlay('view08_schoolfood_setting')
  	end
  	hintButton:addEventListener("tap", hintButton)
 
@@ -98,9 +98,9 @@ function scene:create( event )
  							if(score.text == '5') then
  								score.text = '성공!'
  								time.alpha = 0
-								composer.removeScene("view07_game")--다현님
+								composer.removeScene("view07_schoolfood_game")--다현님
 								composer.setVariable("score", 5)---다현님
-								composer.gotoScene( "view09_view2" )---다현님 veiw2가 게임오버창 
+								composer.gotoScene( "view09_schoolfood_view2" )---다현님 veiw2가 게임오버창 
  							end
  						else --싫어하는 음식일때는 제자리로 
  							event.target.x = event.target.initX
@@ -134,9 +134,9 @@ function scene:create( event )
 
  			if( score.text ~= '성공!' ) then
  				score.text = '실패!'
- 				composer.removeScene("view07_game")---다현님코드 
+ 				composer.removeScene("view07_schoolfood_game")---다현님코드 
 				composer.setVariable("score", -1)---다현님 코드 
-				composer.gotoScene("view09_view2")---다현님 코드 
+				composer.gotoScene("view09_schoolfood_view2")---다현님 코드 
  			
  				for i = 1, 10 do
  					if (food[i]) then

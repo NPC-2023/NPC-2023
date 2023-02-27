@@ -42,7 +42,7 @@ function scene:create( event )
 
  	local expression_name = {"cat_twinkle", "cat_tear", "cat_crank"}
  	local color_name = {"graycat", "pinkcat", "blackcat"}
- 	local clothes_name = {}
+ 	local clothes_name = {"outer1", "outer2", "outer3"}
 
  	local panel = {}
  	for i = 1,3 do
@@ -87,6 +87,13 @@ function scene:create( event )
 	paint[3] = display.newImageRect("image/custom/blackpaint.png", 80, 80)
  	paint[3].x, paint[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.5
 
+ 	local clothes = {}
+ 	clothes[1] = display.newImageRect("image/custom/outer1.png", 80, 80)
+ 	clothes[1].x, clothes[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
+ 	clothes[2] = display.newImageRect("image/custom/outer2.png", 80, 80)
+ 	clothes[2].x, clothes[2].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
+	clothes[3] = display.newImageRect("image/custom/outer3.png", 80, 80)
+ 	clothes[3].x, clothes[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
  	
  	local reset = display.newImageRect("image/custom/cat_paw.png", 150, 150)
  	reset.x, reset.y = display.contentWidth*0.1, display.contentHeight*0.1
@@ -114,6 +121,8 @@ function scene:create( event )
  						cat = display.newImageRect("image/custom/"..item_name..".png", 300, 300)
 			 			cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
 			 			cat.xScale = -1
+
+			 			objectGroup:insert(cat)
 
 			 			event_occur = true
 
@@ -201,6 +210,7 @@ function scene:create( event )
 	for i = 1, 3 do
 		objectGroup:insert(paint[i])
 		objectGroup:insert(expression[i])
+		objectGroup:insert(clothes[i])
 	end
 	
 	objectGroup:insert(reset)
