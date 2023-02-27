@@ -29,7 +29,7 @@ local function onFirstView( event )
     -- Open the file handle
     local file, errorString = io.open( path, "r" )
     
-    composer.gotoScene( "view01_1_start_game")
+    -- composer.gotoScene( "view01_1_start_game")
     -- composer.gotoScene("view05_main_map")
 
 
@@ -52,7 +52,7 @@ local function onFirstView( event )
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
 
-			composer.gotoScene(  "custom" )
+			-- composer.gotoScene(  "custom" )
 			composer.gotoScene( "view05_main_map" )
 
 			-- composer.gotoScene( "view01_1_start_game" )

@@ -83,7 +83,7 @@ end
 
 local function createAsteroid()
 
-	local newAsteroid = display.newImageRect( mainGroup, "image/frontgate/os4.png", 102, 85 )--외부인 사진 
+	local newAsteroid = display.newImageRect( mainGroup, "image/frontgate/outsider.png", 102, 85 )--외부인 사진 
 	table.insert( asteroidsTable, newAsteroid )
 	physics.addBody( newAsteroid, "dynamic", { radius=40, bounce=0.8 } )
 	newAsteroid.myName = "asteroid"
@@ -193,9 +193,9 @@ end
 
 
 local function endGame() --게임 실패 (처음 play화면으로)
-	composer.removeScene("highscores") 
+	composer.removeScene("view19_highscores") 
 	composer.setVariable("score", -1)
-	composer.gotoScene( "highscores", { time=800, effect="crossFade" } )
+	composer.gotoScene( "view19_highscores", { time=800, effect="crossFade" } )
 end
 
 
@@ -226,11 +226,11 @@ local function onCollision( event )
 			-- Increase score
 			score = score + 100
 			scoreText.text = "Score: " .. score
-			if (score >= 5000)then----게임 성공 (5000점 넘겼을때)
+			if (score >= 300)then----게임 성공 (5000점 넘겼을때)
 				composer.removeScene("game")
 				composer.setVariable("score", 5)
 				audio.stop ( 1 )
-				composer.gotoScene( "highscores" )
+				composer.gotoScene( "view19_highscores" )
 			end
 
 		elseif ( ( obj1.myName == "ship" and obj2.myName == "asteroid" ) or
