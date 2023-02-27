@@ -41,11 +41,11 @@ function scene:create( event )
 
 
 	-- 건물 배치 코드
-	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관"}
-	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관"}
-	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53}
-	local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54}
-	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 }
+	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
+	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
+	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.9}
+	local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54, 0.1}
+	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 1.1}
 
 	local buildingGroup = display.newGroup()
 	local building = {}
