@@ -111,12 +111,12 @@ function scene:create( event )
 	t[5] = display.newText("학교? 학생?\n뭐가 뭔지 모르겠지만 나는 용기있는 기사니까!\n어서 학생이라는 인간을 만나러 나가볼까냥! ",display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	
 
-    for i = 2, 6 do
+    for i = 2, 5 do
 		b[i].alpha = 0
 		t[i].alpha = 0
 	end
 
-	for i = 1, 6 do
+	for i = 1, 5 do
 		if i == 18 then
 			t[i]:setFillColor(0, 0.4, 0)
 		elseif i == 20 then
