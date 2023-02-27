@@ -5,8 +5,10 @@
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
---local loadsave = require( "loadsave" )
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -38,14 +40,25 @@ function scene:create( event )
 	end
 
 	--close 버튼
-	local clear_close = display.newImageRect("image/climbing_the_tree/닫기.png", 150, 150)
-	clear_close.x, clear_close.y = 950, 400
+	local clear_close = display.newImageRect("image/climbing_the_tree/확인,힌트 버튼.png", 768/5, 768/5)
+	clear_close.x, clear_close.y = display.contentWidth/2, display.contentHeight*0.755
 	clear_close.alpha = 0
+
+	local clear_closeScript = display.newText("돌아가기", 0, 0, "ttf/Galmuri7.ttf", 25)
+	clear_closeScript:setFillColor(1)
+	clear_closeScript.x, clear_closeScript.y=display.contentWidth/2, display.contentHeight*0.75
+	clear_closeScript.alpha = 0
 	
 
-	local fail_close = display.newImageRect("image/climbing_the_tree/닫기.png", 150, 150)
-	fail_close.x, fail_close.y = 950, 400
+	local fail_close = display.newImageRect("image/climbing_the_tree/확인,힌트 버튼.png", 768/4, 768/4)
+	fail_close:setFillColor(1)
+	fail_close.x, fail_close.y=display.contentWidth/2, display.contentHeight*0.75
 	fail_close.alpha = 0
+
+	local fail_closeScript = display.newText("다시하기", 0, 0, "ttf/Galmuri7.ttf", 28)
+	fail_closeScript:setFillColor(1)
+	fail_closeScript.x, fail_closeScript.y=display.contentWidth/2, display.contentHeight*0.74
+	fail_closeScript.alpha = 0
 	
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
@@ -56,13 +69,19 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap =display.newImageRect("image/climbing_the_tree/클리어창.png", 970/4, 1187/4) --성공할 경우
+	local backtomap = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2) --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
+
+	local backtomapScript = display.newText("퀘스트 성공!", 0, 0, "ttf/Galmuri7.ttf", 45)
+	backtomapScript:setFillColor(0)
+	backtomapScript.x, backtomapScript.y=display.contentWidth/2, display.contentHeight*0.65
+	backtomapScript.alpha = 0
+	sceneGroup:insert(backtomapScript)
 	
 
-	local backgame =display.newImage("image/climbing_the_tree/fail.png") --실패할 경우
+	local backgame =display.newImageRect("image/climbing_the_tree/우는고ㅇ앵.png", 512/2, 512/2) --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
 	sceneGroup:insert(backgame)
@@ -72,15 +91,20 @@ function scene:create( event )
 	if result1 == 0 then
 		backgame.alpha = 1
 		fail_close.alpha = 1
+		fail_closeScript.alpha = 1
 		fail_close:addEventListener("touch",backtogame)
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
+		clear_closeScript.alpha = 1
+		backtomapScript.alpha = 1
 		clear_close:addEventListener("touch",gomap)
 	end
 	sceneGroup:insert(fail_close)
 	sceneGroup:insert(clear_close)
 
+	sceneGroup:insert(clear_closeScript)
+	sceneGroup:insert(fail_closeScript)
 
 end
 

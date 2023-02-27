@@ -1,12 +1,16 @@
 --fallgame 통과하는 게임 종료된 화면
 
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
---local loadsave = require( "loadsave" )
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
+	physics.start()
+	loadedEndings = loadsave.loadTable( "endings.json" )
+
 	local background = display.newImageRect("image/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
@@ -26,7 +30,7 @@ function scene:create( event )
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then
-			audio.pause(home)
+			audio.pause(home1)
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("view02_pick_game")
 		end
@@ -39,7 +43,7 @@ function scene:create( event )
 	local function gomap(event) -- 게임 pass 후 map으로 넘어감
 		if event.phase == "began" then--view20ring
 			composer.setVariable("success", "success")
-			audio.pause(home)
+			audio.pause(home1)
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("pre_pickGame") 
 		end
@@ -58,6 +62,34 @@ function scene:create( event )
 	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", 600, 80)
 	lastText.size = 40
 	lastText.alpha = 0
+
+
+	--[[-----음악
+
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    sceneGroup:insert(volumeButton)
+
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+    local home = audio.loadStream( "music/music3.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+    audio.play(home)
+
+
+    -------------]]
+
 
 	if (score1 == -1) then ---score1이 -1일 때 fail
 		backgame2.alpha = 1

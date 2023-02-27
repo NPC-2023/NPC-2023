@@ -14,13 +14,13 @@ function scene:create( event )
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
 
-	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.1, display.contentHeight*1.1)
+	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
  	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
 
 	sceneGroup:insert(background)
 
- 	local backgroundMusic = audio.loadStream( "soundEffect/custom_music.mp3" )
-	audio.play( backgroundMusic )
+ 	--[[local backgroundMusic = audio.loadStream( "soundEffect/custom_music.mp3" )
+	audio.play( backgroundMusic )]]
 
 	local cat = display.newImageRect("image/custom/cat.png", 300, 300)
  	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
@@ -39,7 +39,7 @@ function scene:create( event )
  	can_cnt_text:setFillColor(1)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
+	map.x, map.y = display.contentWidth*0.83, display.contentHeight*0.12
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
@@ -106,6 +106,31 @@ function scene:create( event )
  	resetText.size = 40
  	resetText:setFillColor(1)
 
+ 	-----음악
+
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+    loadedEndings.bgMusic = "soundEffect/custom_music.mp3"
+    local custom = audio.loadStream( loadedEndings.bgMusic )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+    audio.play(custom)
+
+
+    -------------
 	local function changeCatApperanceEvent(event)
 		-- 이름 적는 화면에서 퀘스트 성공 갯수, can 갯수 변수 설정, 커스텀 창 열린거 여부 확인
 		-- setVariable() -> 히든게임 성공시 사용하여 can 갯수늘리고, 
@@ -192,8 +217,8 @@ function scene:create( event )
  	end
 
  	local function resetListener( event )
- 		local soundEffect = audio.loadSound( "soundEffect/cat_meow4.wav" )
-		audio.play( soundEffect )
+ 		--[[local soundEffect = audio.loadSound( "soundEffect/custom_music.mp3" )
+		audio.play( soundEffect )]]
  		cat = display.newImageRect("image/custom/cat.png", 300, 300)
  		cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
  		cat.xScale = -1
@@ -203,6 +228,7 @@ function scene:create( event )
  		if event.phase == "began" then
  			resetText.alpha = 0 
 	 		composer.removeScene("custom")
+	 		audio.pause(home)
 			composer.gotoScene("view05_main_map")
 		end
 	end
@@ -228,38 +254,15 @@ function scene:create( event )
 
  	sceneGroup:insert(background)
  	sceneGroup:insert(objectGroup)
+    sceneGroup:insert(volumeButton)
+
 
  	for i = 1, 9 do
 	 	panel[i]:addEventListener("tap", changeCatApperanceEvent)
 	 end
 
 
-	-----음악
-
-    -- showoverlay 함수 사용 option
-    local options = {
-        isModal = true
-    }
-
-    --샘플 볼륨 이미지
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.5
-    sceneGroup:insert(volumeButton)
-
-
-
-    --샘플볼륨함수--
-    local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
-    end
-    volumeButton:addEventListener("tap",setVolume)
-
-    local home = audio.loadStream( "music/Trust.mp3" )
-    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
-    audio.play(home)
-
-
-    -------------
+	
 
 
 	map:addEventListener("touch", goBackToMap)
