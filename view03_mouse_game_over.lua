@@ -10,7 +10,7 @@ function scene:create( event )
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
 	
-	local background = display.newImageRect("image/mouse/background.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/mouse/background_final.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -60,7 +60,7 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 				audio.pause(home)
 				composer.removeScene("view03_mouse_game_over")
-				composer.gotoScene( "view05_main_map" )
+				composer.gotoScene( "view03_npc" )
 		end
 	end
 

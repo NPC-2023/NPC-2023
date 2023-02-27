@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- fall_game with npc
+-- mouse_game with npc
 --
 -----------------------------------------------------------------------------------------
 
@@ -85,8 +85,8 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble2.alpha = 0
 			speech2.alpha = 0
-			composer.removeScene("view02_npc")
-			composer.gotoScene("view02_fall_game")
+			composer.removeScene("view03_npc")
+			composer.gotoScene("view03_mouse_game")
 		end)
 	end
 
@@ -94,7 +94,7 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
-	if(composer.getVariable("score") == 5) then
+	if(composer.getVariable("score") >= 15) then
 		-- local tmp = composer.getVariable("can_cnt_global")
 		-- composer.setVariable("can_cnt_global", tmp + 1)
 		speechbubble_exmark.alpha = 0
