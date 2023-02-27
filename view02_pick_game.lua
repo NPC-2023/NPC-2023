@@ -14,7 +14,7 @@ function scene:create( event )
 	--physics.start()
 	--physics.setDrawMode("hybrid")
 
-	local background = display.newImageRect("image/background_final.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/pick/image/background_final.png",display.contentWidth, display.contentHeight) ---배경
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	background.alpha = 0.5
 	
@@ -29,14 +29,14 @@ function scene:create( event )
 	script.alpha=0
 
 	local score1=0 
-	local score = display.newImageRect("image/score.png", 130, 130)
+	local score = display.newImageRect("image/pick/image/score.png", 130, 130)
 	score.x,score.y = display.contentWidth/11, display.contentHeight/5.5
 
  	local showScore = display.newText(score1, display.contentWidth/11,display.contentHeight/5.555) 
 	showScore:setFillColor(1,0,0) 
 	showScore.size = 60
 
-	local alarm = display.newImageRect("image/alarm.png", 150, 150)
+	local alarm = display.newImageRect("image/pick/image/alarm.png", 150, 150)
 	alarm.x, alarm.y = display.contentWidth*0.9, display.contentHeight*0.15
 
 	local objectGroup = display.newGroup()
@@ -89,7 +89,7 @@ function scene:create( event )
 	local function generate()
 		local objIdx = math.random(#objects)
 		local objName = objects[objIdx]
-		object[i] = display.newImageRect(objectGroup, "image/obj".. objName..".png", 110, 110)
+		object[i] = display.newImageRect(objectGroup, "image/pick/image/obj".. objName..".png", 110, 110)
 		object[i].x, object[i].y = math.random(250,1000), math.random(100,550)
 		local obj = object[i] 
 		timer.performWithDelay(1100, function() display.remove(obj) end)
