@@ -155,11 +155,11 @@ function scene:create( event )
 				loadedEndings = loadsave.loadTable( "endings.json" )
 				loadsave.saveTable(loadedEndings,"endings.json")
 				local gameSettings = {
-    				money = 2000,
-    				can = 0, 
-    				hobby = 0,
+    				money = 20,
+    				can = 33, 
+    				hobby = 20,
     				study = 0,
-    				friendship =0,
+    				friendship = 20,
     				tutorial = 0,			
     				next1 = "",
     				next2 = "",
