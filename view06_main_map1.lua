@@ -63,22 +63,22 @@ function scene:create( event )
         if event.phase == "began" then
             if(name == "인문관")then
                 print("인문관")
-                composer.hideOverlay("view06_main_map1")
+                composer.removeScene("view06_main_map1")
                 composer.gotoScene("view02_npc")
                 return true
             elseif(name == "음악관") then
                 print("음악관")
-                composer.hideOverlay("view06_main_map1")
+                composer.removeScene("view06_main_map1")
                 composer.gotoScene("view07_npc_schoolfood_game")
                 return true
             elseif(name == "예지관")then
                 print("예지관")
-                composer.hideOverlay("view06_main_map1")
+                composer.removeScene("view06_main_map1")
                 composer.gotoScene("view10_pre_lost_stuId_game")
                 return true
             elseif(name == "대학원")then
                 print("대학원")
-                composer.hideOverlay("view06_main_map1")
+                composer.removeScene("view06_main_map1")
                 if(math.random(1, 2) == 1) then
                     composer.gotoScene("pre_moneyGame")
                 else
@@ -87,7 +87,7 @@ function scene:create( event )
                 return true
             elseif(name == "본관")then
                 print("본관")
-                composer.hideOverlay("view06_main_map1")
+                composer.removeScene("view06_main_map1")
                 if(math.random(1, 2) == 1) then
                     composer.gotoScene("pre_fishGame")
                 else
@@ -96,17 +96,17 @@ function scene:create( event )
                 return true
             elseif(name == "정문")then
                 print("정문")
-                composer.hideOverlay("view06_main_map1")
+                composer.removeScene("view06_main_map1")
                 composer.gotoScene("view18_npc_frontgate_game")
                 return true
             elseif(name == "백주년")then
                 print("백주년")
-                composer.hideOverlay("view06_main_map1")
+                composer.removeScene("view06_main_map1")
                 composer.gotoScene("view13_pre_climbingTree")
                 return true
             elseif(name == "학생관")then
                 print("학생관")
-                composer.hideOverlay("view06_main_map1")
+                composer.removeScene("view06_main_map1")
                 composer.gotoScene("pre_pickGame")
                 return true
             end
