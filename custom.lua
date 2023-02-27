@@ -3,12 +3,16 @@
 -- custom.lua
 --
 -----------------------------------------------------------------------------------------
-
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+	loadedEndings = loadsave.loadTable( "endings.json" )
+
 
 	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.1, display.contentHeight*1.1)
  	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
@@ -228,6 +232,35 @@ function scene:create( event )
  	for i = 1, 9 do
 	 	panel[i]:addEventListener("tap", changeCatApperanceEvent)
 	 end
+
+
+	-----음악
+
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.5
+    sceneGroup:insert(volumeButton)
+
+
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+    local home = audio.loadStream( "music/Trust.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+    audio.play(home)
+
+
+    -------------
+
 
 	map:addEventListener("touch", goBackToMap)
  	reset:addEventListener("tap", resetListener)
