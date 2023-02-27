@@ -14,6 +14,7 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+	local widget = require ("widget")
 
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 
@@ -38,7 +39,7 @@ function scene:create( event )
 
 
 
-	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 600, 600)
+	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 700, 700)
 	titlePopup.x,titlePopup.y = display.contentWidth/2,display.contentHeight*0.6
 	titlePopup.alpha = 0
 	sceneGroup:insert(titlePopup)
@@ -46,7 +47,7 @@ function scene:create( event )
 
 
     local text = "입장하기 전, 이름을 입력해주세요. (7글자 내)"
-	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.5)
+	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.46)
 	showText:setFillColor(0)
 	showText.size = 30
 	showText.alpha = 0
@@ -54,10 +55,18 @@ function scene:create( event )
 
 
 
-	local titleButton = display.newImageRect("image/게임시작/이름결정.png", 200, 100)
-	titleButton.x,titleButton.y = display.contentWidth/2,display.contentHeight * 0.65
+	local titleButton = display.newImageRect("image/게임시작/이름결정.png", 250, 200)
+	titleButton.x,titleButton.y = display.contentWidth/2,display.contentHeight * 0.68
 	titleButton.alpha = 0
 	sceneGroup:insert(titleButton)
+
+	local text1 = "확인"
+	local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.68)
+	showText1:setFillColor(0)
+	showText1.size = 30
+	showText1.alpha = 0
+	sceneGroup:insert(showText1)
+
 
 
 	--이름 입력을 위한 텍스트상자 생성--
@@ -125,9 +134,9 @@ function scene:create( event )
 	end
 
 
-	local exit1 = display.newImageRect("image/설정/닫기.png", 100, 100)
+	local exit1 = display.newImageRect("image/설정/닫기.png", 50, 50)
 	sceneGroup:insert(exit1)
-	exit1.x, exit1.y = display.contentWidth*0.68, display.contentHeight*0.28
+	exit1.x, exit1.y = display.contentWidth*0.70, display.contentHeight*0.37
 	exit1:addEventListener("touch",gotomap)
 
 	

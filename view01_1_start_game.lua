@@ -79,10 +79,10 @@ function scene:create( event )
 
 
     --샘플 볼륨 이미지
+    --volumeButton:addEventListener("mouse",bigbig)
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton:addEventListener("mouse",bigbig)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
-    sceneGroup:insert(volumeButton)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+
 
     --샘플볼륨함수--
     local function setVolume(event)
@@ -95,7 +95,12 @@ function scene:create( event )
     audio.play(home)]]
 
 
-
+-- 화면전환 이펙트
+    local options1={
+        --effect = "fade",
+        --time = 2000
+        isModal = true
+    }
     
 -- newgame 객체 생성 및 openpopup 리스너 추가
     local function openPopup()
@@ -105,11 +110,7 @@ function scene:create( event )
     newgame:addEventListener("touch",openPopup)
     newgame:addEventListener("mouse",bigbig)
 
-    -- 화면전환 이펙트
-    local options1={
-        effect = "fade",
-        time = 2000
-    }
+    
 
 end
 
