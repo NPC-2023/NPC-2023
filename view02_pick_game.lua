@@ -66,9 +66,9 @@ function scene:create( event )
 			composer.gotoScene("view02_pick_game_over")
 		end
 	end
-
+	local tapSound = audio.loadSound("music/tap.mp3")
 	local function tapEventListener(event)
-		local tapSound = audio.loadSound("music/tap.mp3")
+		
     	audio.play(tapSound)
     	audio.setVolume(0.2)
 
@@ -77,7 +77,7 @@ function scene:create( event )
 			display.remove(event.target)
 			showScore.text = score1
 		elseif (event.target.type == "trash") then
-			score1 = score1-1
+			score1 = score1 - 1
 			display.remove(event.target)
 			showScore.text = score1
 		else

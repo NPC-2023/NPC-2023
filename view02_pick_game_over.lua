@@ -32,50 +32,47 @@ function scene:create( event )
 		end
 	end
 	--close 버튼
-	local clear_close = display.newImageRect("image/닫기.png", 150, 150)
-	clear_close.x, clear_close.y = 950, 400
-	clear_close.alpha = 0
+	local close = display.newImageRect("image/닫기.png", 80, 80)
+	close.x, close.y = 1200, 80
+	close.alpha = 0
 
-	local fail_close = display.newImageRect("image/닫기.png", 150, 150)
-	fail_close.x, fail_close.y = 950, 400
-	fail_close.alpha = 0
-
-	local function gomap(event) -- 게임 pass 후 넘어감
+	local function gomap(event) -- 게임 pass 후 map으로 넘어감
 		if event.phase == "began" then--view20ring
-			composer.setVariable("success", "success")
 			audio.pause(home)
 			composer.removeScene("view02_pick_game_over")
-			composer.gotoScene("pre_pickGame")
+			composer.gotoScene("pre_pickGame") 
 		end
 	end
-	local backtomap =display.newImageRect("image/클리어창.png",display.contentWidth/5,display.contentHeight/5) --성공할 경우
-	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
-	backtomap.alpha = 0
-	sceneGroup:insert(backtomap)
 
-	local backtomap1 =display.newImageRect("image/미니게임_지도로 돌아가기 버튼.png",display.contentWidth/6.112,display.contentHeight/17.3050)
-	backtomap1.x, backtomap1.y = display.contentWidth/2, display.contentHeight/1.65466
-	sceneGroup:insert(backtomap1)
-	backtomap1.alpha = 0
-	backtomap1:addEventListener("touch",gomap)
+	local backgame1 =display.newImage("image/클리어창.png") --성공할 경우
+	backgame1.x, backgame1.y = display.contentWidth/2, display.contentHeight/2
+	backgame1.alpha = 0
+	sceneGroup:insert(backgame1)
 
-	local backgame =display.newImage("image/fail.png") --실패할 경우
-	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
-	backgame.alpha = 0
-	sceneGroup:insert(backgame)
+	local backgame2 =display.newImage("image/실패창.png") --실패할 경우
+	backgame2.x, backgame2.y = display.contentWidth/2, display.contentHeight/2
+	backgame2.alpha = 0
+	sceneGroup:insert(backgame2)
 
+	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", 600, 80)
+	lastText.size = 40
+	lastText.alpha = 0
 
-	if (score1 == -1) then
-		backgame.alpha = 1
-		fail_close.alpha = 1
-		fail_close:addEventListener("touch",backtogame)
-	else
-		backtomap.alpha = 1
-		clear_close.alpha = 1
-		clear_close:addEventListener("touch",gomap)
+	if (score1 == -1) then ---score1이 -1일 때 fail
+		backgame2.alpha = 1
+		close.alpha = 1
+		lastText.alpha = 1
+		close:addEventListener("touch", gomap) --close버튼을 눌렀을 때 gomap
+		backgame2:addEventListener("touch",backtogame) --우는고양이를 눌렀을 때 다시하기
+	else ---score1이 5일 때 sucess
+		backgame1.alpha = 1
+		close.alpha = 1
+		lastText.alpha = 1
+		close:addEventListener("touch",gomap)
+		backgame1:addEventListener("touch",backtogame) --행복한고양이 눌렀을 때 다시하기
 	end
-	sceneGroup:insert(fail_close)
-	sceneGroup:insert(clear_close)
+	sceneGroup:insert(close)
+	sceneGroup:insert(lastText)
 
 end
 function scene:show( event )

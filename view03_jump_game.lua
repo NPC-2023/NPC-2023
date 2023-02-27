@@ -24,7 +24,7 @@ function scene:create( event )
 	
 	local score1 = 0
 
-	local script = display.newText("게임방법\n방향키와 점프키를 이용해 고양이이에게 츄르를 주세요!\n\n고양이가 바닥에 닿으면 GAMEOVER!", section.x+30, section.y-100, native.systemFontBold)
+	local script = display.newText("게임방법\n방향키와 점프키를 이용해 고양이이에게 츄르를 주세요!\n\n고양이가 왼쪽, 오른쪽, 아래 벽면에 닿으면 GAMEOVER!", section.x+30, section.y-100, native.systemFontBold)
 	script.size = 30
 	script:setFillColor(1)
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
@@ -93,10 +93,11 @@ function scene:create( event )
 	sRock[6].x, sRock[6].y = 970, 250
 
 	local wall = {}
-	wall[1] = display.newRect(0, background.y, 30, background.height)
-	wall[2] = display.newRect(background.width, background.y, 30, background.height)
-	wall[3] = display.newRect(background.x, 0, background.width, 30)
-	wall[4] = display.newRect(background.x, background.height, background.width, 30)
+	local wallGroup = display.newGroup()
+	wall[1] = display.newRect(wallGroup, 0, background.y, 30, background.height) --왼
+	wall[2] = display.newRect(wallGroup, background.width, background.y, 30, background.height) --오
+	wall[3] = display.newRect(wallGroup, background.x, 0, background.width, 30) --위
+	wall[4] = display.newRect(wallGroup, background.x, background.height, background.width, 30)--아래
 
 	for i = 1, #bRock do 
 		physics.addBody(bRock[i], "static", {outline=bRock_outline})
@@ -111,6 +112,7 @@ function scene:create( event )
 	for i = 1, #wall do
 		physics.addBody(wall[i], "static")
 		wall[i].name = "wall"
+		wall[i].alpha = 0
 	end
 	for i = 1, #leaf do
 		physics.addBody(leaf[i], "static", {outline=leaf_outline})
@@ -147,7 +149,7 @@ function scene:create( event )
 	cat.x, cat.y = 110, 550
 	cat.name = "cat"
 
-	physics.addBody(cat, {friction=1, outline = cat_outline})
+	physics.addBody(cat, {friction=1, outline = cat_outline_none})
 	cat.isFixedRotation = true 
 
 	function arrowTab(event)
@@ -160,7 +162,7 @@ function scene:create( event )
 			    transition.to(cat, {time=100, x=(x+80), y=(y-100)})
 			end
 		else
-			if (event.target.name == arrow[4]) then --왼쪽 클ㄹ
+			if (event.target.name == arrow[4]) then --왼쪽 클
 			    if (event.target.name == "left") then
 			       transition.to(cat, {time=100, x=(x-30)})
 			    else
@@ -233,8 +235,8 @@ function scene:create( event )
 				end )
 		end
 	end
-	function soundEffect(event)
-		local jumpSound = audio.loadSound("music/bounce.mp3")
+	local jumpSound = audio.loadSound("music/bounce.mp3")
+	function soundEffect(event)	
     	audio.play(jumpSound)
     	audio.setVolume(0.2)
 	end
@@ -256,11 +258,16 @@ function scene:create( event )
 	end
 	titleremove()
 	arrow[2]:addEventListener("tap", soundEffect)
+	wall[1].collision = gameOver
+	wall[1]:addEventListener("collision")
+	wall[2].collision = gameOver
+	wall[2]:addEventListener("collision")
 	wall[4].collision = gameOver
 	wall[4]:addEventListener("collision")
 	cat:addEventListener("collision", onCollision)
 	
 	sceneGroup:insert(background)
+	sceneGroup:insert(wallGroup)
 	sceneGroup:insert(cat)
 	sceneGroup:insert(arrowGroup)
 	sceneGroup:insert(objectGroup)
