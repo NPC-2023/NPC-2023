@@ -103,7 +103,7 @@ function scene:create( event )
             elseif(name == "학생관")then
                 print("학생관")
                 composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view02_pick_game")
+                composer.gotoScene("pre_pickGame")
                 return true
             end
         end
