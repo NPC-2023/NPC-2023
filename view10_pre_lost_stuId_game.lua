@@ -85,13 +85,13 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble2.alpha = 0
 			speech2.alpha = 0
-			composer.removeScene("pre_lost_stuId_game")
-			composer.gotoScene("view02_lost_stuId_game_final")
+			composer.removeScene("view10_pre_lost_stuId_game")
+			composer.gotoScene("view11_lost_stuId_game_final")
 		end)
 	end
 
 	local function goBackToMap(event) 
-		composer.gotoScene("map")
+		composer.gotoScene("view05_main_map")
 	end
 
 	if(composer.getVariable("result") == 1) then

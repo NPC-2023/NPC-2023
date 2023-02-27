@@ -247,9 +247,9 @@ function scene:create( event )
  					result = 1
  					timer.cancelAll()
  					
- 					composer.removeScene("view02_lost_stuId_game_final")
+ 					composer.removeScene("view11_lost_stuId_game_final")
  					composer.setVariable("result", 1)
- 					composer.gotoScene("view02_lost_stuId_game_over")
+ 					composer.gotoScene("view12_lost_stuId_game_over")
 
  				else
  					event.target.x = event.target.initX
@@ -289,9 +289,9 @@ function scene:create( event )
  				stuId:removeEventListener("touch", dragStuId)
  				
 				-- audio.pause(explosionSound)
-				composer.removeScene("view02_lost_stuId_game_final")
+				composer.removeScene("view11_lost_stuId_game_final")
 				composer.setVariable("result", 0)
-				composer.gotoScene("view02_lost_stuId_game_over")
+				composer.gotoScene("view12_lost_stuId_game_over")
 
  			end
  		end
