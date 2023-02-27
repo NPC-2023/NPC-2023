@@ -88,7 +88,7 @@ function scene:create( event )
     --volumeButton:addEventListener("mouse",bigbig)
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
-
+    sceneGroup:insert(volumeButton)
 
     --샘플볼륨함수--
     local function setVolume(event)

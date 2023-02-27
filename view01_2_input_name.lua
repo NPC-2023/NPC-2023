@@ -180,6 +180,8 @@ function scene:create( event )
 				titlePopup.alpha = 0
 				exit1.alpha = 0
 				showText.alpha = 0
+				showText1.alpha = 0
+				--volumeButton.alpha = 0
 
 				composer.removeScene("view01_2_input_name")
 				--composer.gotoScene( "tutorial00",options)

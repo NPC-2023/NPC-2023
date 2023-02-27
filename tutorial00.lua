@@ -39,10 +39,6 @@ function scene:create( event )
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(background)
 	
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
-	section:setFillColor(0.8, 0.8, 0.8, 0.8)
-	sceneGroup:insert(section)
-	--local speakerImg = display.newRect(section.x, section.y - 700, 900, 900)
 
 	
 
@@ -75,16 +71,16 @@ function scene:create( event )
    
 	--sceneGroup:insert(volumeButton)]]
     -------------
-	--local b = {}
+	local b = {}
 
-	--bGroup = display.newGroup()
+	bGroup = display.newGroup()
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 	mainName = loadedSettings.name
 
 
 	--배경
-	--[[for i = 1, 26 do
-		b[i] = display.newImage(bGroup, "이미지/오프닝/" .. i .. ".png")
+	for i = 1, 5 do
+		b[i] = display.newImage(bGroup, "image/게임시작/" .. i .. ".png")
 	end
 	bGroup.x,bGroup.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(bGroup)
@@ -93,9 +89,17 @@ function scene:create( event )
 	composer.setVariable("find2", 0)	
 	composer.setVariable("find3", 0)	
 	composer.setVariable("find4", 0)	
-	composer.setVariable("find5", 0)	]]
+	composer.setVariable("find5", 0)	
 
 	loadsave.saveTable(loadedSettings,"settings.json")
+
+
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	section:setFillColor(0.8, 0.8, 0.8, 0.8)
+	sceneGroup:insert(section)
+	--local speakerImg = display.newRect(section.x, section.y - 700, 900, 900)
+
+
 
     --대화창
  	--대사
@@ -107,12 +111,12 @@ function scene:create( event )
 	t[5] = display.newText("학교? 학생?\n뭐가 뭔지 모르겠지만 나는 용기있는 기사니까!\n어서 학생이라는 인간을 만나러 나가볼까냥! ",display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	
 
-    for i = 2, 5 do
-		--b[i].alpha = 0
+    for i = 2, 6 do
+		b[i].alpha = 0
 		t[i].alpha = 0
 	end
 
-	for i = 1, 5 do
+	for i = 1, 6 do
 		if i == 18 then
 			t[i]:setFillColor(0, 0.4, 0)
 		elseif i == 20 then
@@ -131,11 +135,11 @@ function scene:create( event )
 
 	-- 화면전환
 	local function next1()
-		if j > 1 and j < 5 then
-			--b[j - 1].alpha = 0
+		if j > 1 and j < 6 then
+			b[j - 1].alpha = 0
 			
 			t[j - 1].alpha = 0
-			--b[j].alpha = 1
+			b[j].alpha = 1
 			t[j].alpha = 1
 		end
 
@@ -150,11 +154,20 @@ function scene:create( event )
 		end
 	end
 
-	local skipButton = display.newImage("image/설정/닫기.png") -- 스킵 버튼
+	local skipButton = display.newImageRect("image/게임시작/이름결정.png", 250, 200) -- 스킵 버튼
     skipButton.x, skipButton.y = display.contentWidth * 0.93, display.contentHeight * 0.1
     skipButton.alpha = 1
     sceneGroup:insert(skipButton)
-    
+    	
+
+    local text = "스킵"
+	local showText = display.newText(text, display.contentWidth*0.93, display.contentHeight*0.09)
+	showText:setFillColor(0)
+	showText.size = 30
+	showText.alpha = 1
+	sceneGroup:insert(showText)
+	
+
 	local function skip_tutorial()
 		skipButton.alpha = 0
 		Runtime:removeEventListener("tap", next1)
