@@ -30,6 +30,8 @@ function scene:create( event )
 
 	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, 1280, 720) --display.contentWidth, display.contentHeight
 	
+	local objectGroup = display.newGroup()
+
 	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000}) --배경 어둡게
 	sceneGroup:insert(background1)
@@ -54,7 +56,7 @@ function scene:create( event )
 	fail_close.alpha = 0
 	
 	
-	local function gomap(event) -- 게임 pass 후 메인화면(맵)으로 넘어가기 
+	local function backtomap(event) -- 게임 pass 후 메인화면(맵)으로 넘어가기 
 		if event.phase == "began" then
 				composer.setVariable("successFront", success)
 				composer.removeScene("highscores")
@@ -62,25 +64,30 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap = display.newImage("image/frontgate/exit.png") --성공할 경우
+	local backtomap = display.newImage("image/custom/cat_twinkle.png") --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
-	sceneGroup:insert(backtomap)
+
+
+	objectGroup:insert(backtomap)
+	
 	
 
-	local backgame = display.newImage("image/frontgate/exit.png") --실패할 경우
+	local backgame = display.newImage("image/custom/cat_tear.png") --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
-	sceneGroup:insert(backgame)
+
+	objectGroup:insert(backgame)
+	sceneGroup:insert(objectGroup)
 
 	if score3 < 0 then
 		backgame.alpha = 1
 		fail_close.alpha = 1
-		fail_close:addEventListener("touch",backtogame)--실패 
+		backtomap:addEventListener("tap", backtogame)--실패 
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
-		clear_close:addEventListener("touch",gomap)--성공 
+		backgame:addEventListener("tap", backtomap)--성공 
 	end
 	sceneGroup:insert(fail_close)
 	sceneGroup:insert(clear_close)
