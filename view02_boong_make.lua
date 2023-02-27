@@ -55,6 +55,7 @@ function scene:create( event )
 	end
 	sceneGroup:insert(kettle)
 	sceneGroup:insert(beans)
+	sceneGroup:insert(beans)
 
 	print(object)
 
@@ -92,6 +93,9 @@ function scene:create( event )
  	time.size = 100
  	time:setFillColor(0)
  	time.alpha = 0.5
+
+ 	sceneGroup:insert(score)
+ 	sceneGroup:insert(time)
  
 	local function drag( event )
  		if( event.phase == "began" ) then
@@ -184,6 +188,13 @@ function scene:create( event )
  	kettle:addEventListener("touch", drag)
  	beans:addEventListener("touch", drag)
 
+ 	local function sleep(sec)
+	    local t = os.clock()
+	    while os.clock() - t <= sec do
+	    end
+	end
+
+
  	local function touchEventListener1( event )
  		--turn1
  		if( event.phase == "began" ) then
@@ -199,9 +210,10 @@ function scene:create( event )
  					object[i].alpha = 0
 				end
  				score.text = score.text + 1
- 				if( score.text == '2') then
-			 		score.text = '성공!'
+ 				if( score.text == '8') then
 			 		time.alpha = 0
+			 		score.text = '성공'
+			 		sleep(5)
 			 		composer.gotoScene("ending")
 			 	end
  			end
@@ -222,9 +234,10 @@ function scene:create( event )
  					object[i].alpha = 0
 				end
  				score.text = score.text + 1
- 				if( score.text == '2') then
-			 		score.text = '성공!'
+ 				if( score.text == '8') then
 			 		time.alpha = 0
+			 		score.text = '성공'
+			 		sleep(5)
 			 		composer.gotoScene("ending")
 			 	end
  			end
@@ -245,9 +258,10 @@ function scene:create( event )
  					object[i].alpha = 0
 				end
  				score.text = score.text + 1
- 				if( score.text == '2') then
-			 		score.text = '성공!'
+ 				if( score.text == '8') then
 			 		time.alpha = 0
+			 		score.text = '성공'
+			 		sleep(5)
 			 		composer.gotoScene("ending")
 			 	end
  			end
@@ -263,6 +277,8 @@ function scene:create( event )
 	 	end
 	 	if( time.text == '-1') then
 	 		time.alpha = 0
+	 		score.text = '실패'
+	 		sleep(5)
 			composer.gotoScene("ending") -- 추가
 		end
 	 end
@@ -301,6 +317,9 @@ function scene:hide( event )
 		--
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
+		
+		composer.removeScene('view02_boong_make') -- 추가
+
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
 	end

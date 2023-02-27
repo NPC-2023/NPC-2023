@@ -8,8 +8,9 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 
 function scene:create( event )
+	local sceneGroup = self.view
 
-	local background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
+	local background = display.newImageRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
 
 	local student = {}
  	student[1] = display.newRect(display.contentCenterX-300, display.contentCenterY, 200, 200)
