@@ -43,14 +43,14 @@ function scene:create( event )
 	-- 건물 배치 코드
 	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
 	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
-	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.9}
+	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.85}
 	local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54, 0.1}
-	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 1.1}
+	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 3.5}
 
 	local buildingGroup = display.newGroup()
 	local building = {}
 
-	for i = 1, 8 do 
+	for i = 1, 9 do 
 		local size = building_size[i]
 		building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] ..".png", 512/size, 512/size)
  		building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
@@ -122,9 +122,10 @@ function scene:create( event )
 	    	--print(options.params.targetName)
 	    	print(name)
 
-			if name == "" then
+			if name == "커스텀" then
 				---상점 코드
-
+				composer.removeScene("view05_main_map")
+				composer.gotoScene("custom")
 			else
 				composer.setVariable("name", name)
 				composer.removeScene("view05_main_map")
@@ -134,7 +135,7 @@ function scene:create( event )
 	end
 
 -- 리스너 추가
-	for i=1, 8 do
+	for i=1, 9 do
 		building[i]:addEventListener("mouse",bigbig)
 		building[i]:addEventListener("touch",touch_ui)
 		--building[i]:addEventListener("tap", gotoCheckMsg)
@@ -158,7 +159,7 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.4
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
     
     sceneGroup:insert(volumeButton)
 
