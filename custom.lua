@@ -216,6 +216,7 @@ function scene:create( event )
 	end
 	
 	objectGroup:insert(reset)
+	objectGroup:insert(resetText)
 	objectGroup:insert(map)
  	objectGroup:insert(map_text)
  	objectGroup:insert(can)
