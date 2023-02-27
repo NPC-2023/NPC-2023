@@ -30,18 +30,23 @@ function scene:create( event )
 	local background = display.newImageRect( sceneGroup, "image/경비원/gate.jpg", 1280, 720)
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
-	sceneGroup:insert(background)
+	--sceneGroup:insert(background)
 
 	local title = display.newImageRect( sceneGroup, "image/경비원/title.png", 500, 450 ) --300 300
 	title.x = display.contentCenterX
 	title.y = 500
-	sceneGroup:insert(title)
+	--sceneGroup:insert(title)
 
 	local playButton = display.newText( sceneGroup, "Play", display.contentCenterX, 770, native.systemFont, 70 ) --700  44
 	playButton:setFillColor( 1 ) -- 0.82 0.86 1
 	playButton:addEventListener( "tap", gotoGame )
-	sceneGroup:insert(playButton)
+	--sceneGroup:insert(playButton)
 
+	local function gotoGame()
+		composer.gotoScene( "view18_game", { time=800, effect="crossFade" } )
+	end
+
+	title:addEventListener( "touch", gotoGame )
 end
 
 
