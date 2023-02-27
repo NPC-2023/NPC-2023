@@ -56,8 +56,6 @@ function scene:create( event )
     sceneGroup:insert(gotoButtonText)
 
     
-    -- 다음날 시각 설정
-    local fiveQuestsCount = 1
     
 
     -- 확인 버튼을 눌렀을 때 해당 건물의 게임 파일로 이동
@@ -66,13 +64,7 @@ function scene:create( event )
             if(name == "인문관")then
                 print("인문관")
                 composer.hideOverlay("view06_main_map1")
-                --퀘스트 4+1 가 한묶음이며, 한묶음 깼을때 fiveQuestsCount가 1씩 증가. 
-                --랜덤으로 npc를 나오게 하기위한 코드
-                if(fiveQuestsCount % 2 == 0) then
-                    composer.gotoScene("view02_npc")
-                else
-                    composer.gotoScene("view03_npc")
-                end
+                composer.gotoScene("pre_basket")
                 return true
             elseif(name == "음악관") then
                 print("음악관")

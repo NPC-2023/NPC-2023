@@ -11,7 +11,7 @@ function scene:create( event )
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
 	
-	local background = display.newImageRect("image/mouse/background_final.png",display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/mouse/background.png",display.contentWidth, display.contentHeight)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -396,8 +396,6 @@ function scene:create( event )
 			composer.gotoScene("view03_mouse_game_over")
 		end
 	end
-	 
-	composer.setVariable("score", score1)
 	 
 	timer.performWithDelay( 1000, timeAttack, 0 ,"attack")
 

@@ -54,7 +54,7 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 				audio.pause(home)
 				composer.removeScene("view02_fall_game_over")
-				composer.gotoScene( "view02_npc" )
+				composer.gotoScene( "pre_basket" )
 		end
 	end
 
