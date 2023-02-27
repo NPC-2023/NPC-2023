@@ -92,7 +92,7 @@ function scene:create( event )
 	end
 
 	local function goBackToMap(event) 
-		composer.gotoScene("map")
+		composer.gotoScene("view05_main_map")
 	end
 
 	if(composer.getVariable("success") == "success") then

@@ -41,9 +41,9 @@ local function onFirstView( event )
     		audio.play(titleMusic)
     		audio.setVolume( 0.5 )
 			-- composer.gotoScene( "custom" )
-			-- composer.gotoScene( "view05_main_map" )
+			composer.gotoScene( "view05_main_map" )
 
-			composer.gotoScene( "view01_1_start_game" )
+			-- composer.gotoScene( "view01_1_start_game" )
 
 
     else
@@ -52,10 +52,10 @@ local function onFirstView( event )
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
 
-			-- composer.gotoScene(  "custom" )
-			-- composer.gotoScene( "view05_main_map" )
+			composer.gotoScene(  "custom" )
+			composer.gotoScene( "view05_main_map" )
 
-			composer.gotoScene( "view01_1_start_game" )
+			-- composer.gotoScene( "view01_1_start_game" )
 
     end
 
@@ -70,7 +70,7 @@ local function onSecondView( event )
 end
 
 local function on3View( event )
-	composer.gotoScene( "store" )
+	composer.gotoScene( "custom" )
 end
 
 

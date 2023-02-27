@@ -74,20 +74,24 @@ function scene:create( event )
             elseif(name == "예지관")then
                 print("예지관")
                 composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view02_fall_game")
+                composer.gotoScene("view10_pre_lost_stuId_game")
                 return true
             elseif(name == "대학원")then
                 print("대학원")
                 composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view03_mouse_game")
+                if(math.random(1, 2) == 1) then
+                    composer.gotoScene("pre_moneyGame")
+                else
+                    composer.gotoScene("pre_jumpGame")
+                end
                 return true
             elseif(name == "본관")then
                 print("본관")
                 composer.hideOverlay("view06_main_map1")
-                if(cnt % 2 == 1) then
-                    composer.gotoScene("view10_pre_lost_stuId_game")
-                else
+                if(math.random(1, 2) == 1) then
                     composer.gotoScene("pre_fishGame")
+                else
+                    composer.gotoScene("view02_npc")
                 end
                 return true
             elseif(name == "정문")then
@@ -98,7 +102,7 @@ function scene:create( event )
             elseif(name == "백주년")then
                 print("백주년")
                 composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view03_mouse_game")
+                composer.gotoScene("view13_pre_climbingTree")
                 return true
             elseif(name == "학생관")then
                 print("학생관")

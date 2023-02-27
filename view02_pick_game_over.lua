@@ -8,10 +8,15 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+<<<<<<< Updated upstream
 	physics.start()
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
 	local background = display.newImageRect("image/background.png",display.contentWidth, display.contentHeight) ---배경
+=======
+	
+	local background = display.newImageRect("image/pick/image/background.png",display.contentWidth, display.contentHeight) ---배경
+>>>>>>> Stashed changes
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -36,7 +41,7 @@ function scene:create( event )
 		end
 	end
 	--close 버튼
-	local close = display.newImageRect("image/닫기.png", 80, 80)
+	local close = display.newImageRect("image/pick/image/닫기.png", 80, 80)
 	close.x, close.y = 1200, 80
 	close.alpha = 0
 
@@ -49,12 +54,12 @@ function scene:create( event )
 		end
 	end
 
-	local backgame1 =display.newImage("image/클리어창.png") --성공할 경우
+	local backgame1 =display.newImage("image/pick/image/클리어창.png") --성공할 경우
 	backgame1.x, backgame1.y = display.contentWidth/2, display.contentHeight/2
 	backgame1.alpha = 0
 	sceneGroup:insert(backgame1)
 
-	local backgame2 =display.newImage("image/실패창.png") --실패할 경우
+	local backgame2 =display.newImage("image/pick/image/실패창.png") --실패할 경우
 	backgame2.x, backgame2.y = display.contentWidth/2, display.contentHeight/2
 	backgame2.alpha = 0
 	sceneGroup:insert(backgame2)

@@ -140,12 +140,13 @@ function scene:create( event )
 	exit1.x, exit1.y = display.contentWidth*0.70, display.contentHeight*0.37
 	exit1:addEventListener("touch",gotomap)
 
+	local can = 20
 	
 	local function startNew(event)
 		--색깔 또는 이름을 선택하지 않았을 시 에러 팝업창으로 넘어간다
 		if defaultField.text == "" then
 			defaultField:removeSelf()
-			defaultField = nil
+			defaultField = 'nil'
 			composer.removeScene("view01_2_input_name")
 			composer.gotoScene("view01_3_error")
 		else
@@ -155,7 +156,7 @@ function scene:create( event )
 				loadsave.saveTable(loadedEndings,"endings.json")
 				local gameSettings = {
     				money = 2000,
-    				fun = 0,
+    				can = 0, 
     				hobby = 0,
     				study = 0,
     				friendship =0,

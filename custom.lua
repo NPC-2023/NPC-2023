@@ -11,10 +11,25 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	----저장관련 기능------
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
 
+<<<<<<< Updated upstream
 	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
+=======
+	local loadedSettings = loadsave.loadTable( "settings.json" )
+	can_cnt = loadedSettings.can
+	print(can_cnt)
+	-- can_cnt = 20
+
+	loadsave.saveTable(loadedSettings,"settings.json")
+	--------------
+
+
+	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.1, display.contentHeight*1.1)
+>>>>>>> Stashed changes
  	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
 
 	sceneGroup:insert(background)
@@ -31,10 +46,8 @@ function scene:create( event )
  	local can = display.newImageRect("image/custom/can.png", 200, 200)
  	can.x, can.y = display.contentWidth*0.25, display.contentHeight*0.15
 
- 	-- local can_cnt_global = composer.getVariable("can_cnt_global")
- 	local can_cnt = 20
 
- 	local can_cnt_text = display.newText(can_cnt, can.x + 20, can.y, "font/DOSGothic.ttf") --변수받아와서 쓰기
+ 	local can_cnt_text = display.newText(tostring(can_cnt), can.x + 20, can.y, "font/DOSGothic.ttf") --변수받아와서 쓰기
  	can_cnt_text.size = 40
  	can_cnt_text:setFillColor(1)
 
