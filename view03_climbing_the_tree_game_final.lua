@@ -6,6 +6,7 @@
 -- (1) 15번째 줄 게임 타이틀 이미지 변경 및 gameName 추가
 -- (2) 327번째 줄 titleremove 함수를 아래로 이동 및  
 --     hint:addEventListener("tap", hintShow), display.remove(gameName)를 titleremove 함수로 이동
+-- (3) 이미지 폴더명 변경
 --
 -- ## 게임 성공 시 
 -- 244번째 줄 (result: 1)를 view03_climbing_the_tree_game_over로 전달
@@ -304,7 +305,7 @@ function scene:create( event )
 			timer.pauseAll()
 			display.remove(objectGroup)
 		end
-		hintScript = display.newImageRect("image/lost_stuId/메뉴바.png", 1024/1.5, 1024/1.5)
+		hintScript = display.newImageRect("image/climbing_the_tree/메뉴바.png", 1024/1.5, 1024/1.5)
 		hintScript.x, hintScript.y = display.contentWidth/2, display.contentHeight/2
 		sceneGroup:insert(hintScript)
 
@@ -314,7 +315,7 @@ function scene:create( event )
 		hintContentScript.x, hintContentScript.y = display.contentWidth/2, display.contentHeight*0.4
 		sceneGroup:insert(hintContentScript)
 
-		hintClose = display.newImageRect("image/lost_stuId/확인,힌트 버튼.png", 768/4, 768/4)
+		hintClose = display.newImageRect("image/climbing_the_tree/확인,힌트 버튼.png", 768/4, 768/4)
 		hintClose.x, hintClose.y = display.contentWidth/2, display.contentHeight*0.6
 		sceneGroup:insert(hintClose)
 
@@ -325,6 +326,7 @@ function scene:create( event )
 		hintClose:addEventListener("tap", hintHide)
 
 	end
+
 
 	local function titleremove(event)
 		gametitle.alpha=0
