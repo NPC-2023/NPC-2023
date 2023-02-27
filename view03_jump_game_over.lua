@@ -41,7 +41,7 @@ function scene:create( event )
 	close.alpha = 0
 
 	local function gomap(event) -- 게임 pass 후 넘어감
-			composer.setVariable("success", "success")
+			composer.setVariable("successJump", "success")
 			if event.phase == "began" then--view20ring
 			audio.pause(home)
 			composer.removeScene("view03_jump_game_over")

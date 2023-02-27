@@ -80,7 +80,7 @@ function scene:create( event )
 			objectGroup:insert(text)
 			--다시 퀘스트 수락 화면으로 돌아옴
 			timer.performWithDelay( 1000, function() 
-				composer.setVariable("success", "success")
+				composer.setVariable("successMoney", "success")
 				composer.removeScene("moneyGame")
 				composer.gotoScene("pre_moneyGame")
 			end)

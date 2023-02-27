@@ -51,7 +51,7 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
-				composer.setVariable("success", "success")
+				composer.setVariable("successSchoolFood", "success")
 				composer.removeScene("view09_schoolfood_view2")
 				composer.gotoScene( "view07_npc_schoolfood_game" )
 		end

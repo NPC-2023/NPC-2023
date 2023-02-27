@@ -88,11 +88,7 @@ function scene:create( event )
             elseif(name == "본관")then
                 print("본관")
                 composer.removeScene("view06_main_map1")
-                if(math.random(1, 2) == 1) then
-                    composer.gotoScene("pre_fishGame")
-                else
-                    composer.gotoScene("view02_npc")
-                end
+                composer.gotoScene("pre_fishGame")
                 return true
             elseif(name == "정문")then
                 print("정문")

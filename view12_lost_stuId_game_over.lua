@@ -70,6 +70,7 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
+				composer.setVariable("successLost", "success")
 				composer.removeScene("view12_lost_stuId_game_over")
 				composer.gotoScene( "view10_pre_lost_stuId_game" )
 		end

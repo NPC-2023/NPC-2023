@@ -45,7 +45,7 @@ function scene:create( event )
 
 	local function gomap(event) -- 게임 pass 후 map으로 넘어감
 		if event.phase == "began" then--view20ring
-			composer.setVariable("success", "success")
+			composer.setVariable("successPickGame", "success")
 			audio.pause(home1)
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("pre_pickGame") 
