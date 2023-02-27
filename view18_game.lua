@@ -301,10 +301,10 @@ function scene:create( event )
 	ship:addEventListener( "tap", fireLaser )
 	ship:addEventListener( "touch", dragShip )
 
-	explosionSound = audio.loadSound( "audio/Meow 2.mp3" ) --고양이 맞았을때 
-    fireSound = audio.loadSound( "audio/Mew 1.mp3" )--고양이 펀치쏠때
-    screamSound = audio.loadSound("audio/No.mp3") --펀치가 적중했을때 
-    musicTrack = audio.loadStream( "audio/backgroundM.mp3")--배경음악 
+	explosionSound = audio.loadSound( "music/Meow 2.mp3" ) --고양이 맞았을때 
+    fireSound = audio.loadSound( "music/Mew 1.mp3" )--고양이 펀치쏠때
+    screamSound = audio.loadSound("music/No.mp3") --펀치가 적중했을때 
+    musicTrack = audio.loadStream( "music/backgroundM.mp3")--배경음악 
 end
 
 
