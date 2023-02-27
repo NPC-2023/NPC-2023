@@ -107,7 +107,7 @@ function scene:create( event )
 	t[1] = display.newText("나는 고양이 왕국의 일등 기사도 ".. mainName .."! 좋은 아침이다냥!\n오늘도 힘차게 왕국을 지켜볼까?", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	t[2] = display.newText("어.. 그런데 여기가 어디지?\n꿈을 꾸고 있나..? 여기는 왕국이 아니잖아!", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	t[3] = display.newText("예지관... A? 여기가 어디지?\n응? 그런데 이 쪽지는 뭐지?", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("오늘부터는 왕국이 아닌 인간 세계의 학교에서 학생이라는 인간을 보필하도록 하여라.\n안전한 학교를 만드는 것이 너의 의무이니라. 16일이 지나면 좋은 결과가 있을 것이다..\n행운을 빌며.", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("쪽지를 읽어볼까?", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	t[5] = display.newText("학교? 학생?\n뭐가 뭔지 모르겠지만 나는 용기있는 기사니까!\n어서 학생이라는 인간을 만나러 나가볼까냥! ",display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	
 
