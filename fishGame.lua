@@ -7,6 +7,8 @@ function scene:create( event )
 	local background = display.newImageRect("image/fishing/mainbd_back.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
+ 	
+
  	local gametitle = display.newText("물고기 사냥", display.contentWidth, display.contentHeight, "font/DOSGothic.ttf", 80)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 

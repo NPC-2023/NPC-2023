@@ -13,6 +13,35 @@ local json = require( "json" )
 function scene:create( event )
 	local sceneGroup = self.view
 
+	local questedListGet = composer.getVariable("questedList")
+	local gameName = "대신 학식 받아주기"
+	
+	-- 퀘스트 완료된 퀘스트 리스트
+	local addQuest = true
+
+	if (questedListGet == nil) then
+		questedListGet = {}
+		questedListGet[1] = gameName
+	elseif (#questedListGet == 0)then
+		questedListGet[1] = gameName
+	else
+		if(#questedListGet == 1) then
+			if (questedListGet[#questedListGet] ~= gameName) then
+					questedListGet[#questedListGet+1] = gameName
+			end  
+		else
+			for i = 1, #questedListGet do 
+				if (questedListGet[i] == gameName) then
+					addQuest = false
+				end
+			end
+			if(addQuest==true)then
+				questedListGet[#questedListGet+1] = gameName
+				print("처음이니깐 추가!")
+			end
+		end
+	end
+
 	local background = display.newImageRect("image/schoolfood/cafeteria.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
@@ -53,6 +82,7 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 				composer.setVariable("successSchoolFood", "success")
 				composer.removeScene("view09_schoolfood_view2")
+				composer.setVariable("questedList", questedListGet)
 				composer.gotoScene( "view07_npc_schoolfood_game" )
 		end
 	end

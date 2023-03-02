@@ -95,7 +95,7 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
-	if(composer.getVariable("success") == "success") then
+	if(composer.getVariable("successPickGame") == "success") then
 		-- local tmp = composer.getVariable("can_cnt_global")
 		-- composer.setVariable("can_cnt_global", tmp + 1)
 		speechbubble_exmark.alpha = 0

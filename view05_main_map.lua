@@ -16,10 +16,27 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
     local loadedEndings = loadsave.loadTable( "endings.json" )
 
+    -- 퀘스트 완료된 게임명 가져오기
+    local questedListGet = composer.getVariable("questedList")
+    if(questedListGet ~= nil) then
+		print("받아온 것 ", #questedListGet)
+	else
+		print("questedListGet에 아무것도 없음")
+	end
+
 	local gametitle = display.newImageRect("image/map/background.png", display.contentWidth, display.contentHeight)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(gametitle)
 
+	-- 추가
+	-- 퀘스트 완료된 보드 배치 -> 오른쪽 하단 위치 
+	local board = display.newImageRect("image/map/퀘스트.png", 1280/2.4, 720/2.4)
+	board.x, board.y=display.contentWidth*0.82, display.contentHeight*0.83
+
+	local boardTitle = display.newText("📌 퀘스트 완료 목록 📌", 0, 0, "font/DOSGothic.ttf", 22)
+	boardTitle:setFillColor(0)
+	boardTitle.x = display.contentWidth * 0.82
+	boardTitle.y = display.contentHeight * 0.741
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
@@ -60,10 +77,49 @@ function scene:create( event )
 
 	--sceneGroup:insert(background)
 	sceneGroup:insert(buildingGroup)
-	
+	sceneGroup:insert(board)
+	sceneGroup:insert(boardTitle)
 	local target
 	
 
+	-- quest는 받아온 것을 저장 / questShow는 퀘스트 문구명을 저장하는 리스트
+	local questShow = {}
+	local quested
+
+	-- get으로 받아온 퀘스트목록이 있으면 quest에 복사
+	if (questedListGet ~= nil) then
+		quested = questedListGet
+	else
+		quested = {}
+	end
+
+	local j = 0
+
+	-- 퀘스트 보드에 퀘스트 완료된 게임명 show
+	if (#quested ~= nil and #quested ~= 0)then
+		if (#quested == 1) then
+			questShow[1] = display.newText("- "..quested[1].."", 0, 0, "ttf/Galmuri7.ttf", 20)
+			questShow[1]:setFillColor(0, 0, 1)
+			questShow[1].x = display.contentWidth * 0.74
+			questShow[1].y = display.contentHeight * 0.93 - 90
+			sceneGroup:insert(questShow[1])
+		else
+			for i = 1, #quested do 
+				print(#quested)
+				questShow[i] = display.newText("- "..quested[i].."", 0, 0, "ttf/DungGeunMo.ttf", 20)
+				
+				if (i <= #quested/2) then
+					questShow[i].x = display.contentWidth * 0.74
+					questShow[i].y = display.contentHeight * 0.93 - (110-i*20)
+				else
+					questShow[i].x = display.contentWidth * 0.88
+					questShow[i].y = display.contentHeight * 0.93 - (110-(i - #quested/2)*20)
+				end
+				questShow[i]:setFillColor(0, 0, 1)
+			end
+		end
+	end
+	-- 추가 끝
 
 	--[[local function gotoCheckMsg( event )
 		print("클릭함")
@@ -141,7 +197,9 @@ function scene:create( event )
 		--building[i]:addEventListener("tap", gotoCheckMsg)
 	end
 
-
+	for i = 1, #questShow do 
+		sceneGroup:insert(questShow[i])
+	end
 
 
 

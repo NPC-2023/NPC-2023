@@ -22,6 +22,7 @@ local json = require( "json" )
 function scene:create( event )
 	local sceneGroup = self.view
 
+
 	local gametitle = display.newImageRect("image/lost_stuId/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 

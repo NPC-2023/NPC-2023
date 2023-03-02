@@ -18,7 +18,7 @@ function scene:create( event )
 	physics.start()
 	--physics.setDrawMode( "hybrid" )
 
-	local background = display.newImageRect("image/background_water.png", display.contentWidth, display.contentHeight)
+	local background = display.newImage("image/jump/호수.png")
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	background.alpha = 0.5
 	
@@ -34,66 +34,66 @@ function scene:create( event )
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
 	script.alpha=0
 
-	local bRock_outline = graphics.newOutline(1, "image/bigRock.png")
-	local leaf_outline = graphics.newOutline(1, "image/leaf.png")
-	local sRock_outline = graphics.newOutline(1, "image/smallRock.png")
-	local plant1_outline = graphics.newOutline(1, "image/plant1.png")
-	local plant2_outline = graphics.newOutline(1, "image/plant2.png")
-	local rock_outline = graphics.newOutline(1, "image/rock.png")
+	local bRock_outline = graphics.newOutline(1, "image/jump/bigRock.png")
+	local leaf_outline = graphics.newOutline(1, "image/jump/leaf.png")
+	local sRock_outline = graphics.newOutline(1, "image/jump/smallRock.png")
+	local plant1_outline = graphics.newOutline(1, "image/jump/plant1.png")
+	local plant2_outline = graphics.newOutline(1, "image/jump/plant2.png")
+	local rock_outline = graphics.newOutline(1, "image/jump/rock.png")
 
 	local objectGroup = display.newGroup()
 	local leaf = {}
-	leaf[1] = display.newImageRect(objectGroup, "image/leaf.png", 250, 150)
+	leaf[1] = display.newImageRect(objectGroup, "image/jump/leaf.png", 250, 150)
 	leaf[1].x, leaf[1].y = 1150, 480
-	leaf[2] = display.newImageRect(objectGroup, "image/leaf.png", 300, 180)
+	leaf[2] = display.newImageRect(objectGroup, "image/jump/leaf.png", 300, 180)
 	leaf[2].x, leaf[2].y = 630, 120
 
 	local plant1 = {}
-	plant1[1] = display.newImageRect(objectGroup, "image/plant1.png", 150, 100)
+	plant1[1] = display.newImageRect(objectGroup, "image/jump/plant1.png", 150, 100)
 	plant1[1].x, plant1[1].y = 640, 610
-	plant1[2] = display.newImageRect(objectGroup, "image/plant1.png", 200, 80)
+	plant1[2] = display.newImageRect(objectGroup, "image/jump/plant1.png", 200, 80)
 	plant1[2].x, plant1[2].y = 150, 300
 
 	local plant2 = {}
-	plant2[1] = display.newImageRect(objectGroup, "image/plant2.png", 130, 90)
+	plant2[1] = display.newImageRect(objectGroup, "image/jump/plant2.png", 130, 90)
 	plant2[1].x, plant2[1].y = 240, 550
 	
 	local bRock = {}
-	bRock[1] = display.newImageRect(objectGroup, "image/bigRock.png", 130, 96)
+	bRock[1] = display.newImageRect(objectGroup, "image/jump/bigRock.png", 130, 96)
 	bRock[1].x, bRock[1].y = 800, 640
-	bRock[2] = display.newImageRect(objectGroup, "image/bigRock.png", bRock[1].width+100, bRock[1].height+50)
+	bRock[2] = display.newImageRect(objectGroup, "image/jump/bigRock.png", bRock[1].width+100, bRock[1].height+50)
 	bRock[2].xScale = -1
 	bRock[2].x, bRock[2].y = 710, 330
 
 	local rock = {}
-	rock[1] = display.newImageRect(objectGroup, "image/rock.png", 130, 96)
+	rock[1] = display.newImageRect(objectGroup, "image/jump/rock.png", 130, 96)
 	rock[1].x, rock[1].y = 110, 610
-	rock[2] = display.newImageRect(objectGroup, "image/rock.png", rock[1].width, rock[1].height)
+	rock[2] = display.newImageRect(objectGroup, "image/jump/rock.png", rock[1].width, rock[1].height)
 	rock[2].x, rock[2].y = 330, 640
-	rock[3] = display.newImageRect(objectGroup, "image/rock.png", 80, 60)
+	rock[3] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
 	rock[3].x, rock[3].y = 900, 580
-	rock[4] = display.newImageRect(objectGroup, "image/rock.png", 260, 90)
+	rock[4] = display.newImageRect(objectGroup, "image/jump/rock.png", 260, 90)
 	rock[4].x, rock[4].y = 1150, 200 --1번 goal
-	rock[5] = display.newImageRect(objectGroup, "image/rock.png", 80, 60)
+	rock[5] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
 	rock[5].x, rock[5].y = 900, 340 
-	rock[6] = display.newImageRect(objectGroup, "image/rock.png", 80, 60)
+	rock[6] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
 	rock[6].x, rock[6].y = 300, 210
-	rock[7] = display.newImageRect(objectGroup, "image/rock.png", 80, 60)
+	rock[7] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
 	rock[7].x, rock[7].y = 1000, 400
 
 	local sRock = {}
-	sRock[1] = display.newImageRect(objectGroup, "image/smallRock.png", 130, 96)
+	sRock[1] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[1].x, sRock[1].y = 460, 580
-	sRock[2] = display.newImageRect(objectGroup, "image/smallRock.png", 130, 96)
+	sRock[2] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[2].x, sRock[2].y =  980, 540
-	sRock[3] = display.newImageRect(objectGroup, "image/smallRock.png", 130, 96)
+	sRock[3] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[3].x, sRock[3].y = 390, 300
-	sRock[4] = display.newImageRect(objectGroup, "image/smallRock.png", 130, 96)
+	sRock[4] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[4].x, sRock[4].y = 430, 170
-	sRock[5] = display.newImageRect(objectGroup, "image/smallRock.png", 130, 96)
+	sRock[5] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[5].x, sRock[5].y = 500, 350
 
-	sRock[6] = display.newImageRect(objectGroup, "image/smallRock.png", 130, 96)
+	sRock[6] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[6].x, sRock[6].y = 970, 250
 
 	local wall = {}
@@ -131,24 +131,24 @@ function scene:create( event )
 	
 	local arrow = {}
 	local arrowGroup = display.newGroup()
-	arrow[1] = display.newImageRect(arrowGroup, "image/arrow.png", 70, 70)
+	arrow[1] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 70, 70)
 	arrow[1].x, arrow[1].y = 1010, 630
 	arrow[1].xScale = -1
 	arrow[1].name = "left"
 
-	arrow[2] = display.newImageRect(arrowGroup, "image/jump.png", 80, 80)
+	arrow[2] = display.newImageRect(arrowGroup, "image/jump/jump.png", 80, 80)
 	arrow[2].x, arrow[2].y = arrow[1].x+86, 630
 	arrow[2].name = "center"
 
-	arrow[3] = display.newImageRect(arrowGroup, "image/arrow.png", 70, 70)
+	arrow[3] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 70, 70)
 	arrow[3].x, arrow[3].y = arrow[2].x+86, 630
 	arrow[3].name = "right"
 
 	arrow[4] = "left"
 
-	local cat = display.newImageRect("image/cat.png", 65, 50)
-	local cat_outline_none = graphics.newOutline(1, "image/cat.png")
-	local cat_outline_flip = graphics.newOutline(1, "image/cat_flip.png")
+	local cat = display.newImageRect("image/jump/cat.png", 65, 50)
+	local cat_outline_none = graphics.newOutline(1, "image/jump/cat.png")
+	local cat_outline_flip = graphics.newOutline(1, "image/jump/cat_flip.png")
 
 	cat.x, cat.y = 110, 550
 	cat.name = "cat"
@@ -193,8 +193,8 @@ function scene:create( event )
 		arrow[i]:addEventListener("tap", arrowTab)
 	end
 
-	local goal = display.newImageRect("image/goal.png", 80, 80)
-	local goal_outline = graphics.newOutline(1, "image/goal.png")
+	local goal = display.newImageRect("image/jump/goal.png", 80, 80)
+	local goal_outline = graphics.newOutline(1, "image/jump/goal.png")
 	goal.alpha = 0
 
 	local num = math.random(1,3)

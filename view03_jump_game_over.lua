@@ -11,7 +11,7 @@ function scene:create( event )
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
 	
-	local background = display.newImageRect("image/background_water.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/jump/호수.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 

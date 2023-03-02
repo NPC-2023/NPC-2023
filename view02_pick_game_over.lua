@@ -12,6 +12,35 @@ function scene:create( event )
 	physics.start()
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
+	local questedListGet = composer.getVariable("questedList")
+	local gameName = "Pick Game"
+	
+	-- 퀘스트 완료된 퀘스트 리스트
+	local addQuest = true
+
+	if (questedListGet == nil) then
+		questedListGet = {}
+		questedListGet[1] = gameName
+	elseif (#questedListGet == 0)then
+		questedListGet[1] = gameName
+	else
+		if(#questedListGet == 1) then
+			if (questedListGet[#questedListGet] ~= gameName) then
+					questedListGet[#questedListGet+1] = gameName
+			end  
+		else
+			for i = 1, #questedListGet do 
+				if (questedListGet[i] == gameName) then
+					addQuest = false
+				end
+			end
+			if(addQuest==true)then
+				questedListGet[#questedListGet+1] = gameName
+				print("처음이니깐 추가!")
+			end
+		end
+	end
+
 	local background = display.newImageRect("image/background.png",display.contentWidth, display.contentHeight) ---배경
 	
 	local background = display.newImageRect("image/pick/image/background.png",display.contentWidth, display.contentHeight) ---배경
@@ -30,6 +59,7 @@ function scene:create( event )
 	sceneGroup:insert(board)]]
 
 	local score1 = composer.getVariable("score1")
+	print("score1:", score1)
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then
@@ -47,6 +77,7 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 			composer.setVariable("successPickGame", "success")
 			audio.pause(home1)
+			composer.setVariable("questedList", questedListGet)
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("pre_pickGame") 
 		end
@@ -96,9 +127,9 @@ function scene:create( event )
 
 	if (score1 == -1) then ---score1이 -1일 때 fail
 		backgame2.alpha = 1
-		close.alpha = 1
+		-- close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("touch", gomap) --close버튼을 눌렀을 때 gomap
+		-- close:addEventListener("touch", gomap) --close버튼을 눌렀을 때 gomap
 		backgame2:addEventListener("touch",backtogame) --우는고양이를 눌렀을 때 다시하기
 	else ---score1이 5일 때 sucess
 		backgame1.alpha = 1

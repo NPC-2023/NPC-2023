@@ -72,12 +72,14 @@ function scene:create( event )
 	local tapSound = audio.loadSound("music/tap.mp3")
 	local function tapEventListener(event)
 		
-    	audio.play(tapSound)
-    	audio.setVolume(0.2)
+		-- music 폴더에 tap.mp3 없음 
+    	--audio.play(tapSound)
+    	--audio.setVolume(0.2)
 
 		if (event.target.type == "food") then
 			score1 = score1 + 1
 			display.remove(event.target)
+			print(score1)
 			showScore.text = score1
 		elseif (event.target.type == "trash") then
 			score1 = score1 - 1
@@ -111,9 +113,9 @@ function scene:create( event )
 
 
 	--샘플 볼륨 이미지
-    local volumeButton = display.newImage("이미지/타이틀/설정.png")
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.9
-    sceneGroup:insert(volumeButton)
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.9, display.contentHeight * 0.35
+
 
     --샘플볼륨함수--
     local function setVolume(event)
@@ -175,6 +177,7 @@ function scene:create( event )
 	sceneGroup:insert(background)
 	sceneGroup:insert(time)
 	sceneGroup:insert(score)
+	sceneGroup:insert(volumeButton)
 	sceneGroup:insert(showScore)
 	
 end

@@ -55,7 +55,7 @@ local function onFirstView( event )
 end
 
 local function onSecondView( event )
-	composer.gotoScene( "view00Room" )
+    composer.gotoScene( "view00Room" )
 end
 
 local function on3View( event )

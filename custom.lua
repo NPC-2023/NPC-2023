@@ -41,6 +41,7 @@ function scene:create( event )
  	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
  	cat.xScale = -1
 
+
  	local objectGroup = display.newGroup()
 
  	local can = display.newImageRect("image/custom/can.png", 200, 200)

@@ -9,6 +9,34 @@ function scene:create( event )
 	local sceneGroup = self.view
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
+	local questedListGet = composer.getVariable("questedList")
+	local gameName = "떨어지는 참치캔 줍기"
+	
+	-- 퀘스트 완료된 퀘스트 리스트
+	local addQuest = true
+
+	if (questedListGet == nil) then
+		questedListGet = {}
+		questedListGet[1] = gameName
+	elseif (#questedListGet == 0)then
+		questedListGet[1] = gameName
+	else
+		if(#questedListGet == 1) then
+			if (questedListGet[#questedListGet] ~= gameName) then
+					questedListGet[#questedListGet+1] = gameName
+			end  
+		else
+			for i = 1, #questedListGet do 
+				if (questedListGet[i] == gameName) then
+					addQuest = false
+				end
+			end
+			if(addQuest==true)then
+				questedListGet[#questedListGet+1] = gameName
+				print("처음이니깐 추가!")
+			end
+		end
+	end
 
 	local background = display.newImageRect("image/fall/background_final.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -54,6 +82,7 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 				composer.setVariable("success", "success")
 				audio.pause(home)
+				composer.setVariable("questedList", questedListGet)
 				composer.removeScene("view02_fall_game_over")
 				composer.gotoScene( "view02_npc" )
 		end
