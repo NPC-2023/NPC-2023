@@ -19,11 +19,7 @@ function scene:create( event )
 	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
 	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
 
-
 	can_cnt = loadedSettings.friendship
-
-	print(can_cnt)
-	-- can_cnt = 20
 
 	loadsave.saveTable(loadedSettings,"settings.json")
 	--------------
@@ -138,10 +134,12 @@ function scene:create( event )
     volumeButton:addEventListener("tap",setVolume)
 
     loadedEndings.bgMusic = "soundEffect/custom_music.mp3"
+
     local custom = audio.loadStream( loadedEndings.bgMusic )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
     audio.play(custom)
 
+    local clothesFlag = 0
 
     -------------
 	local function changeCatApperanceEvent(event)
@@ -157,16 +155,17 @@ function scene:create( event )
 		local event_occur = false
 
 		local function btnTapListener(event)
-			print(can_cnt)
  					if(event.target.name == "btn_ok" and can_cnt >= 3) then
  						--고양이 모습 바뀜
+ 						if(clothesFlag == 1) then --이전 선택에서 옷을 선택했다면 곧 바로 옷을 숨김
+ 							cat.alpha = 0
+ 						end
+
  						cat = display.newImageRect("image/custom/"..item_name..".png", 300, 300)
 			 			cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
 			 			cat.xScale = -1
 
-			 			objectGroup:insert(cat)
-
-			 			event_occur = true
+			 			event_occur = true --모습 바뀌었다는 것을 알려주는 변수
 
 			 			--팝업창
 			 			popup_text.text = "해제되었습니다."
@@ -181,6 +180,14 @@ function scene:create( event )
 							can_cnt = can_cnt - 3 can_cnt_text.text = can_cnt event_occur = false
 						end end) 
 			 			item.closed = false --잠금해제
+			 			
+			 			if(string.find(item_name, "outer") == nil) then
+							clothesFlag = 0
+			 			else
+			 				clothesFlag = 1
+			 			end			
+
+			 			objectGroup:insert(cat)			
 			 		elseif (event.target.name == "btn_ok" and can_cnt < 3) then
 			 			popup_text.text = "캔 수가 모자랍니다."
 			 			btn_ok.x = display.contentWidth*0.5
@@ -223,9 +230,20 @@ function scene:create( event )
  				btn_ok:addEventListener("tap", btnTapListener)	
 			 	btn_no:addEventListener("tap", btnTapListener)	
  		else
- 				cat = display.newImageRect("image/custom/"..item_name..".png", 300, 300)
-			 	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
-			 	cat.xScale = -1	
+ 			if(clothesFlag == 1) then --이전 선택에서 옷을 선택했다면 곧 바로 옷을 숨김
+ 				cat.alpha = 0
+ 			end
+
+ 			if(string.find(item_name, "outer") == nil) then --옷 숨기는 함수
+				clothesFlag = 0
+			else
+			 	clothesFlag = 1
+			end	
+
+ 			cat = display.newImageRect("image/custom/"..item_name..".png", 300, 300)
+			cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
+			cat.xScale = -1	
+			objectGroup:insert(cat)
 		end
  	end
 
@@ -271,14 +289,9 @@ function scene:create( event )
  	sceneGroup:insert(objectGroup)
     sceneGroup:insert(volumeButton)
 
-
  	for i = 1, 9 do
 	 	panel[i]:addEventListener("tap", changeCatApperanceEvent)
 	 end
-
-
-	
-
 
 	map:addEventListener("touch", goBackToMap)
  	reset:addEventListener("tap", resetListener)
