@@ -19,7 +19,7 @@ function scene:create( event )
 	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
 	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
 
-	can_cnt = loadedSettings.friendship
+	can_cnt = loadedSettings.money
 
 	loadsave.saveTable(loadedSettings,"settings.json")
 	--------------
@@ -187,7 +187,11 @@ function scene:create( event )
 			 				clothesFlag = 1
 			 			end			
 
-			 			objectGroup:insert(cat)			
+			 			objectGroup:insert(cat)	
+
+			 			loadedSettings.money = can_cnt	
+			 			print(loadedSettings.money) 	
+			 			--저장어케함			
 			 		elseif (event.target.name == "btn_ok" and can_cnt < 3) then
 			 			popup_text.text = "캔 수가 모자랍니다."
 			 			btn_ok.x = display.contentWidth*0.5
@@ -295,6 +299,8 @@ function scene:create( event )
 
 	map:addEventListener("touch", goBackToMap)
  	reset:addEventListener("tap", resetListener)
+
+ 	loadsave.saveTable(loadedSettings,"settings.json")	
 end
 
 function scene:show( event )

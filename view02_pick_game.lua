@@ -111,7 +111,7 @@ function scene:create( event )
 
 
 	--샘플 볼륨 이미지
-    local volumeButton = display.newImage("이미지/타이틀/설정.png")
+    local volumeButton = display.newImage("image/설정/설정.png")
     volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.9
     sceneGroup:insert(volumeButton)
 

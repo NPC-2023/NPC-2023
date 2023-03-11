@@ -128,8 +128,8 @@ function scene:create( event )
 			
 			defaultField:removeSelf()
 			defaultField = nil
-				composer.removeScene("view01_2_input_name")
-				composer.gotoScene("view01_1_start_game")
+			composer.removeScene("view01_2_input_name")
+			composer.gotoScene("view01_1_start_game")
 
 		end
 	end
@@ -154,17 +154,24 @@ function scene:create( event )
 				
 				loadedEndings = loadsave.loadTable( "endings.json" )
 				loadsave.saveTable(loadedEndings,"endings.json")
+
+				local talk = {}
+				for i = 1, 8 do
+					talk[i] = 0
+				end
+
 				local gameSettings = {
     				money = 20,
     				can = 33, 
     				hobby = 20,
     				study = 0,
-    				friendship = 20,
+    				-- friendship = 20,
     				tutorial = 0,			
     				next1 = "",
     				next2 = "",
     				name = defaultField.text,
-  
+  					-- 게임 진행도
+  					talk = talk
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
 				

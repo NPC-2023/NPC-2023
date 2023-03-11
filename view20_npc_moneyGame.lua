@@ -95,8 +95,8 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble2.alpha = 0
 			speech2.alpha = 0
-			composer.removeScene("pre_moneyGame")
-			composer.gotoScene("moneyGame")
+			composer.removeScene("view20_npc_moneyGame")
+			composer.gotoScene("view20_moneyGame")
 		end)
 	end
 

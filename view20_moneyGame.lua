@@ -81,8 +81,8 @@ function scene:create( event )
 			--다시 퀘스트 수락 화면으로 돌아옴
 			timer.performWithDelay( 1000, function() 
 				composer.setVariable("successMoney", "success")
-				composer.removeScene("moneyGame")
-				composer.gotoScene("pre_moneyGame")
+				composer.removeScene("view20_moneyGame")
+				composer.gotoScene("view20_npc_moneyGame")
 			end)
 		else
 			text = display.newText("실패다냥", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)

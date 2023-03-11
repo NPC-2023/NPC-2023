@@ -131,8 +131,8 @@ function scene:create( event )
 								text.alpha = 0
 								gametitle.alpha = 0
 								composer.setVariable("successFishing", "success")
-								composer.removeScene("fishGame")
-								composer.gotoScene("pre_fishGame")
+								composer.removeScene("view21_fishGame")
+								composer.gotoScene("view21_npc_fishGame")
 							end )
 						end	
 					end )				

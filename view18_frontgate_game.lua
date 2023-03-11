@@ -226,7 +226,7 @@ local function onCollision( event )
 			-- Increase score
 			score = score + 100
 			scoreText.text = "Score: " .. score
-			if (score >= 300)then----게임 성공 (5000점 넘겼을때)
+			if (score >= 700)then----게임 성공 (5000점 넘겼을때)
 				composer.removeScene("game")
 				composer.setVariable("score", 5)
 				audio.stop ( 1 )
@@ -241,8 +241,8 @@ local function onCollision( event )
 
                 -- Play explosion sound!--고양이가 맞았을 때 
                 audio.play( explosionSound )
-
 				-- Update lives
+
 				lives = lives - 1
 				livesText.text = "Lives: " .. lives
 

@@ -11,10 +11,8 @@ function scene:create( event )
 
 	physics.start()
 	loadedEndings = loadsave.loadTable( "endings.json" )
-
-	local background = display.newImageRect("image/background.png",display.contentWidth, display.contentHeight) ---배경
 	
-	local background = display.newImageRect("image/pick/image/background.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/pick/image/background_final.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -48,7 +46,7 @@ function scene:create( event )
 			composer.setVariable("successPickGame", "success")
 			audio.pause(home1)
 			composer.removeScene("view02_pick_game_over")
-			composer.gotoScene("pre_pickGame") 
+			composer.gotoScene("view02_npc_pickGame") 
 		end
 	end
 

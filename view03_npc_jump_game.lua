@@ -86,7 +86,7 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble2.alpha = 0
 			speech2.alpha = 0
-			composer.removeScene("pre_jumpGame")
+			composer.removeScene("view03_npc_jump_game")
 			composer.gotoScene("view03_jump_game")
 		end)
 	end

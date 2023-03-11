@@ -6,6 +6,7 @@
 
 local composer = require( "composer" )
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -32,7 +33,6 @@ function scene:create( event )
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 60, "font/DOSGothic.ttf")
-	local money = math.random(1, 10) * 1000 --고양이가 받을 심부름 돈
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
 	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
@@ -43,25 +43,17 @@ function scene:create( event )
 	-- local coin = display.newImageRect("image/coin.png", 100, 100)
 	-- coin.alpha = 0
 
-	--npc 말풍선 및 수락 텍스트
-	local function talkWithNPC( event )
-		speechbubble_exmark.alpha = 0
-		speechbubble.alpha = 1
-		speech.text = "우와 여기 물고기 엄청 많네!\n우리 냥이도 좋아하겠다"
-		speech.size = 20
-		speech:setFillColor(0)
+	local gossip_script = 'a'
+	local game_script = 'a'
 
-		composer.setVariable("money", money)
 
-		timer.performWithDelay( 1500, function() 
-			-- coin.alpha = 1
- 			-- coin.x, coin.y = npc.x-80, npc.y-20
- 			-- objectGroup:insert(coin)
-			accept.text = "말풍선을 누르세요\n"
-			accept.size = 20
-			accept:setFillColor(1)
-		end)
-	end
+	local loadedSettings = loadsave.loadTable( "settings.json" )
+	mainName = loadedSettings.name
+	talk = loadedSettings.talk
+	times = talk[3] --본관 번호는 3
+
+	--npc와 대화한 횟수 테스트 용 코드 ( 잘뜸 )
+	local text = display.newText(times, display.contentWidth*0.9, display.contentHeight*0.1, "font/DOSGothic.ttf", 80)
 
 	local function acceptQuest( event )
 		--수락시 말풍선, 대화 사라짐
@@ -96,16 +88,75 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble2.alpha = 0
 			speech2.alpha = 0
-			composer.removeScene("pre_fishGame")
-			composer.gotoScene("fishGame")
+			composer.removeScene("view21_npc_fishGame")
+			composer.gotoScene("view21_fishGame")
 		end)
+	end
+
+		--npc 말풍선 및 수락 텍스트
+	local function talkWithNPC( event )
+		speechbubble_exmark.alpha = 0
+		speechbubble.alpha = 1
+		speech.text = "우와 여기 물고기 엄청 많네!\n우리 냥이도 좋아하겠다"
+		speech.size = 20
+		speech:setFillColor(0)
+
+		timer.performWithDelay( 1000, function() 
+			-- npc가 고양이에게 물건 줄때 사용하는 코드(없는 경우도 있음)
+			-- coin.alpha = 1
+ 			-- coin.x, coin.y = npc.x-80, npc.y-20
+ 			-- objectGroup:insert(coin)
+
+ 			--스크립트
+			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+			section:setFillColor(0.35, 0.35, 0.35, 0.35)
+
+			local script = display.newText("어떤 것을 할까?", display.contentWidth*0.2, display.contentHeight*0.7, "font/DOSGothic.ttf", 80)
+			script.size = 30
+			script:setFillColor(1)
+
+			gossip_click = display.newText("▼대화", display.contentWidth*0.15, display.contentHeight*0.8, "font/DOSGothic.ttf", 80)
+			gossip_click.size = 30
+			gossip_click:setFillColor(1)
+
+			game_click = display.newText("▼게임", display.contentWidth*0.15, display.contentHeight*0.88, "font/DOSGothic.ttf", 80)
+			game_click.size = 30
+			game_click:setFillColor(1)
+
+			objectGroup:insert(section)
+			objectGroup:insert(script)
+			objectGroup:insert(gossip_click)
+			objectGroup:insert(game_click)
+
+			gossip_click:addEventListener("tap", function() --대화 클릭 시 페이지 이동
+				if(composer.getVariable("talk_status") == "fin") then
+					times = times + 1
+					script.alpha = 0
+					script = display.newText("이미 대화를 끝냈습니다.", display.contentWidth*0.2, display.contentHeight*0.7, "font/DOSGothic.ttf", 80)
+					script.size = 30
+					script.alpha = 1
+
+					objectGroup:insert(script)
+				else
+					composer.removeScene("view21_npc_fishGame")
+					composer.gotoScene("view21_talk_fishGame")
+				end
+			end
+			)
+
+			game_click:addEventListener("tap", acceptQuest)
+
+			-- accept.text = "말풍선을 누르세요\n"
+			-- accept.size = 20
+			-- accept:setFillColor(1)
+		end )
 	end
 
 	local function goBackToMap(event) 
 		composer.gotoScene("view05_main_map")
 	end
 
-	if(composer.getVariable("success") == "success") then
+	if(composer.getVariable("successFishing") == "success") then
 		-- local tmp = composer.getVariable("can_cnt_global")
 		-- composer.setVariable("can_cnt_global", tmp + 1)
 		speechbubble_exmark.alpha = 0
@@ -115,7 +166,7 @@ function scene:create( event )
 		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
 		speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
 		local speech2 = display.newText("이거 나 주는거야?", 
-			speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
+		speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
 		speech2.size = 20
 		speech2:setFillColor(0)
 
@@ -146,11 +197,9 @@ function scene:create( event )
 		objectGroup:insert(fish)
 	end
 
-	print(composer.getVariable("success"))
-
+	loadsave.saveTable(loadedSettings,"settings.json")
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
-	speechbubble:addEventListener("tap", acceptQuest)
 	map:addEventListener("tap", goBackToMap)
 
 

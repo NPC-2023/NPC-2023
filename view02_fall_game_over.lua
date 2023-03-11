@@ -55,7 +55,7 @@ function scene:create( event )
 				composer.setVariable("success", "success")
 				audio.pause(home)
 				composer.removeScene("view02_fall_game_over")
-				composer.gotoScene( "view02_npc" )
+				composer.gotoScene( "view02_npc_fallgame" )
 		end
 	end
 

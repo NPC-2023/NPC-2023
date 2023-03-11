@@ -80,7 +80,7 @@ function scene:create( event )
                 print("대학원")
                 composer.removeScene("view06_main_map1")
                 if(math.random(1, 2) == 1) then
-                    composer.gotoScene("pre_moneyGame")
+                    composer.gotoScene("view20_npc_moneyGame")
                 else
                     composer.gotoScene("view03_npc_jump_game")
                 end
@@ -88,7 +88,7 @@ function scene:create( event )
             elseif(name == "본관")then
                 print("본관")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("pre_fishGame")
+                composer.gotoScene("view21_npc_fishGame")
                 return true
             elseif(name == "정문")then
                 print("정문")

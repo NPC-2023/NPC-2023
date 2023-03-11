@@ -45,7 +45,7 @@ function scene:create( event )
 			if event.phase == "began" then--view20ring
 			audio.pause(home)
 			composer.removeScene("view03_jump_game_over")
-			composer.gotoScene("pre_jumpGame") --map으로 가기!
+			composer.gotoScene("view03_npc_jump_game") --npc로
 		end
 	end
 
