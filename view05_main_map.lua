@@ -75,6 +75,28 @@ function scene:create( event )
 	end
 
 
+	if (questedListGet~=nil) then
+		for i = 1, #questedListGet do
+			if (questedListGet[i] == "떨어지는 참치캔 줍기")then
+				building[1].fill.effect = "filter.desaturate"
+				building[1].fill.effect.intensity = 0.7
+			elseif (questedListGet[i] == "대신 학식 받아주기")then
+				building[2].fill.effect = "filter.desaturate"
+				building[2].fill.effect.intensity = 0.7
+			elseif (questedListGet[i] == "학생증 찾기")then
+				building[3].fill.effect = "filter.desaturate"
+				building[3].fill.effect.intensity = 0.7
+			elseif (questedListGet[i] == "나무 올라가기")then
+				building[7].fill.effect = "filter.desaturate"
+				building[7].fill.effect.intensity = 0.7
+			elseif (questedListGet[i] == "Pick Game")then
+				building[8].fill.effect = "filter.desaturate"
+				building[8].fill.effect.intensity = 0.7
+			end
+		end
+	end
+
+
 	--sceneGroup:insert(background)
 	sceneGroup:insert(buildingGroup)
 	sceneGroup:insert(board)
