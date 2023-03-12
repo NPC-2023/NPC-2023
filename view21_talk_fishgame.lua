@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------------------
 --
 -- view21_talk_fishgame.lua
---
+-- //230312 해야될것 . 영구저장 변수 설정(호감도, 퀘스트 끝냈는지 여부(대화, 게임 나눠서))
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
@@ -47,34 +47,35 @@ function scene:create( event )
 	local t = {}
 	t[1] = display.newText("못 보던 고양이 잖아! 이름이 뭐야?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	t[2] = display.newText(mainName .. "(이)다냥", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText(mainName .. "(이)? 별명으로 부르고 싶은데..\n".. mainName.." 어때? ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("(맘에 들진 않지만..) 좋다냥~", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("앞으로 만나면 " ..mainName.." 라고 부를게!" ..mainName .. " 흐흐 ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
-
+	t[3] = display.newText(mainName .. "(이)? 별명으로 부르고 싶은데..\n".. string.sub(mainName, 1, 3).."(이) 어때? ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("(흐음..) 좋다냥~", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[5] = display.newText("앞으로 만나면 " ..string.sub(mainName, 1, 3).."(이) 라고 부를게! 헤헤. ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	
 	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
 	
 	local i, j = 1, 1
-	for i = 2, 5 do
+	for i = 2, 6 do
 		-- b[i].alpha = 0
 		t[i].alpha = 0
 	end
 
-	for i = 1, 5 do
+	for i = 1, 6 do
 		t[i]:setFillColor(1)
 		objectGroup:insert(t[i])
 	end
 
 	-- 화면전환
 	local function next1()
-		if j > 1 and j < 6 then				
+		if j > 1 and j < 7 then				
 			t[j - 1].alpha = 0
 			t[j].alpha = 1
 		end
 
 		j = j + 1
 
-		if j == 6 then
-			composer.setVariable("talk_status", "fin")
+		if j == 8 then
+			composer.setVariable("talk3_status", "fin")
 			composer.removeScene("view21_talk_fishGame")
 			composer.gotoScene("view21_npc_fishGame")
 		end

@@ -130,7 +130,7 @@ function scene:create( event )
 							timer.performWithDelay( 1000, function() 
 								text.alpha = 0
 								gametitle.alpha = 0
-								composer.setVariable("successFishing", "success")
+								composer.setVariable("fishgame_status", "success")
 								composer.removeScene("view21_fishGame")
 								composer.gotoScene("view21_npc_fishGame")
 							end )
