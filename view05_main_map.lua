@@ -24,9 +24,80 @@ function scene:create( event )
 		print("questedListGet에 아무것도 없음")
 	end
 
-	local gametitle = display.newImageRect("image/map/background.png", display.contentWidth, display.contentHeight)
-	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
-	sceneGroup:insert(gametitle)
+
+	-- 리스너 함수 (시간)
+	function getDate(date)
+		print(date.day)
+		local now = os.date( "*t" )   
+
+		if(now.year > date.year) then
+			print("몇 년이 흐름...")
+			return 1
+		else
+			if(now.month > date.month) then
+				print("몇 달이 흐름...")
+				return 1
+			else
+				if(now.day > date.day)then
+					print(now.day - date.day,"이 지남...")
+					return 1
+				else
+					print("하루도 안 지남")
+					return 2
+				end
+			end
+		end
+	end
+
+	-- 설정 파일에서 저장된 시간 가져오기
+	-- local time = loadsave.loadTable( "..." )
+	local saveTime = os.date( "*t" )
+	saveTime.day = 20
+	print(saveTime.month, saveTime.day)
+
+	-- 현재 시간 가져오기
+
+	local compareTime = getDate(saveTime)
+
+	-- 퀘스트 4개를 실행하면 계절 바꾸게 하기
+	local background
+	
+	if(questedListGet == nil) then
+		background = display.newImageRect("image/map/background.png", display.contentWidth, display.contentHeight)
+	end 
+
+	if(questedListGet ~= nil and #questedListGet >= 1 ) then
+		local cnt = #questedListGet
+
+		if(cnt == 1) then
+			print("4개 성공 / 계절 바꿈")
+			-- 백그라운드 변경
+			background = display.newImageRect("image/map/background1.png", display.contentWidth, display.contentHeight)
+		elseif(cnt == 8)then
+			print("8개 성공 / 계절 바꿈")
+		elseif(cnt == 12)then
+			print("12개 성공 / 계절 바꿈")
+		end
+	end
+
+	background.x, background.y=display.contentWidth/2, display.contentHeight/2
+	sceneGroup:insert(background)
+
+
+	-- 계절에 따라 백그라운드 변경
+	local season = os.date( "%m" )
+	
+	if(season == "03" or season == "04" or season == "05") then
+		print("봄")
+	elseif (season == "06" or season == "07" or season == "08") then
+		print("여름")
+	elseif (season == "09" or season == "10" or season == "11") then
+		print("가을")
+	else
+		print("겨울")
+	end
+
+
 
 	-- 추가
 	-- 퀘스트 완료된 보드 배치 -> 오른쪽 하단 위치 
@@ -37,24 +108,6 @@ function scene:create( event )
 	boardTitle:setFillColor(0)
 	boardTitle.x = display.contentWidth * 0.82
 	boardTitle.y = display.contentHeight * 0.741
-
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
-	section:setFillColor(0.35, 0.35, 0.35, 0.35)
-	section.alpha=0
-	sceneGroup:insert(section)
-
-
-	local script = display.newText("학교 지도야!\n건물을 클릭해보자!", section.x+30, section.y-100, native.systemFontBold)
-	script.size = 30
-	script:setFillColor(1)
-	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
-	script.alpha=0
-	sceneGroup:insert(script)
-
-
-	local background = display.newImageRect("image/map/background.png", display.contentWidth, display.contentHeight)
-	background.x, background.y=display.contentWidth/2, display.contentHeight/2
-	sceneGroup:insert(background)
 
 
 	-- 건물 배치 코드
@@ -212,6 +265,7 @@ function scene:create( event )
 		end
 	end
 
+
 -- 리스너 추가
 	for i=1, 9 do
 		building[i]:addEventListener("mouse",bigbig)
@@ -222,6 +276,7 @@ function scene:create( event )
 	for i = 1, #questShow do 
 		sceneGroup:insert(questShow[i])
 	end
+
 
 
 
