@@ -38,13 +38,13 @@ function scene:create( event )
     
 
     local gotoScript = display.newImageRect("image/설정/창.png", 1024/1.5, 1024/1.5)
-    gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight/2
+    gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight/2+50
     sceneGroup:insert(gotoScript)
 
     local gotoContentScript = display.newText(name.."으로 이동하시겠습니까?", display.contentWidth/2, display.contentHeight/2, native.systemFontBold)
     gotoContentScript.size = 30
     gotoContentScript:setFillColor(0, 0, 0)
-    gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4
+    gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4 +50
     sceneGroup:insert(gotoContentScript)
 
     local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", 768/4, 768/4)
@@ -120,15 +120,16 @@ function scene:create( event )
         -- end
         --composer.hideOverlay("view06_main_map1")
         if event.phase == "began" then
-            composer.removeScene("view06_main_map1")
-            composer.gotoScene("view05_main_map")
+            --composer.removeScene("view06_main_map1")
+            --composer.gotoScene("view05_main_map")
+            composer.hideOverlay("view06_main_map1")
         end
     end
 
 
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
-    local exit = display.newImageRect("image/설정/닫기.png", 768/6, 768/6)
+    local exit = display.newImageRect("image/설정/닫기.png", 80, 80)
 
     exit.x, exit.y = display.contentWidth*0.7, display.contentHeight*0.3
     exit:addEventListener("touch",goback)
@@ -187,6 +188,7 @@ function scene:hide( event )
         -- INSERT code here to pause the scene
         -- e.g. stop timers, stop animation, unload sounds, etc.)
     elseif phase == "did" then
+        composer.removeScene("view06_main_map1")
         -- Called when the scene is now off screen
     end
 end
