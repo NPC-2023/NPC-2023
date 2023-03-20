@@ -27,7 +27,7 @@ function scene:create( event )
 
 	-- 리스너 함수 (시간)
 	function getDate(date)
-		print(date.day)
+		--print("설정 파일에 저장된 일: ", date.day, "일")
 		local now = os.date( "*t" )   
 
 		if(now.year > date.year) then
@@ -53,7 +53,7 @@ function scene:create( event )
 	-- local time = loadsave.loadTable( "..." )
 	local saveTime = os.date( "*t" )
 	saveTime.day = 20
-	print(saveTime.month, saveTime.day)
+	print("설정 파일에 저장된 날짜: ", saveTime.month,"월", saveTime.day, "일")
 
 	-- 현재 시간 가져오기
 
@@ -61,10 +61,11 @@ function scene:create( event )
 
 	-- 퀘스트 4개를 실행하면 계절 바꾸게 하기
 	local background
-	
+	--if(questedListGet == nil or #questedListGet < 2) then
 	if(questedListGet == nil) then
 		background = display.newImageRect("image/map/background.png", display.contentWidth, display.contentHeight)
-	end 
+	end
+
 
 	if(questedListGet ~= nil and #questedListGet >= 1 ) then
 		local cnt = #questedListGet
@@ -73,8 +74,9 @@ function scene:create( event )
 			print("4개 성공 / 계절 바꿈")
 			-- 백그라운드 변경
 			background = display.newImageRect("image/map/background1.png", display.contentWidth, display.contentHeight)
-		elseif(cnt == 8)then
+		elseif(cnt == 2)then
 			print("8개 성공 / 계절 바꿈")
+			background = display.newImageRect("image/mouse/background.png", display.contentWidth, display.contentHeight)
 		elseif(cnt == 12)then
 			print("12개 성공 / 계절 바꿈")
 		end
@@ -88,13 +90,13 @@ function scene:create( event )
 	local season = os.date( "%m" )
 	
 	if(season == "03" or season == "04" or season == "05") then
-		print("봄")
+		--print("봄")
 	elseif (season == "06" or season == "07" or season == "08") then
-		print("여름")
+		--print("여름")
 	elseif (season == "09" or season == "10" or season == "11") then
-		print("가을")
+		--print("가을")
 	else
-		print("겨울")
+		--print("겨울")
 	end
 
 
