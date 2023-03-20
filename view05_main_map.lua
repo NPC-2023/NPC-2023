@@ -15,6 +15,8 @@ function scene:create( event )
 	
 	local loadedSettings = loadsave.loadTable( "settings.json" )
     local loadedEndings = loadsave.loadTable( "endings.json" )
+	local saveTime = loadedSettings.date
+
 
     -- 퀘스트 완료된 게임명 가져오기
     local questedListGet = composer.getVariable("questedList")
@@ -51,8 +53,8 @@ function scene:create( event )
 
 	-- 설정 파일에서 저장된 시간 가져오기
 	-- local time = loadsave.loadTable( "..." )
-	local saveTime = os.date( "*t" )
-	saveTime.day = 20
+	--local saveTime = os.date( "*t" )
+	--saveTime.day = 20
 	print("설정 파일에 저장된 날짜: ", saveTime.month,"월", saveTime.day, "일")
 
 	-- 현재 시간 가져오기
