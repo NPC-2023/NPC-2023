@@ -275,11 +275,7 @@ function scene:create( event )
 		objectGroup:insert(panel[i])
 	end
 
-	for i = 1, 3 do
-		objectGroup:insert(paint[i])
-		objectGroup:insert(expression[i])
-		objectGroup:insert(clothes[i])
-	end
+	
 	
 	objectGroup:insert(cat)
 	objectGroup:insert(reset)
@@ -292,6 +288,17 @@ function scene:create( event )
  	sceneGroup:insert(background)
  	sceneGroup:insert(objectGroup)
     sceneGroup:insert(volumeButton)
+	
+
+	for i = 1, 3 do
+		objectGroup:insert(paint[i])
+	end
+	for i = 1, 3 do
+		objectGroup:insert(expression[i])
+	end
+	for i = 1, 3 do
+		objectGroup:insert(clothes[i])
+	end
 
  	for i = 1, 9 do
 	 	panel[i]:addEventListener("tap", changeCatApperanceEvent)
