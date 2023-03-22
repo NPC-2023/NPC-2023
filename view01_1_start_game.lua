@@ -20,15 +20,31 @@ function scene:create( event )
 	sceneGroup:insert(background)
 
 	local newgame = display.newImageRect("image/게임시작/이름결정.png", 250, 200)
-    newgame.x,newgame.y = display.contentWidth * 0.5, display.contentHeight * 0.89
+    newgame.x,newgame.y = display.contentWidth * 0.4, display.contentHeight * 0.89
     sceneGroup:insert(newgame)
 
-    local text1 = "게임 시작!"
-    local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.88)
+    local loadgame = display.newImageRect("image/게임시작/이름결정.png", 250, 200)
+    loadgame.x,loadgame.y = display.contentWidth * 0.6, display.contentHeight * 0.89
+    sceneGroup:insert(loadgame)
+
+
+    local text1 = "NEW!"
+    local showText1 = display.newText(text1, display.contentWidth*0.4, display.contentHeight*0.884)
     showText1:setFillColor(0)
     showText1.size = 30
     --showText1.alpha = 0
     sceneGroup:insert(showText1)
+
+
+     local text2 = "LOAD!"
+    local showText2 = display.newText(text2, display.contentWidth*0.605, display.contentHeight*0.884)
+    showText2:setFillColor(0)
+    showText2.size = 30
+    --showText2.alpha = 0
+    sceneGroup:insert(showText2)
+
+
+
 
 	-- 엔딩 제이쓴 파일 생성
     local path = system.pathForFile( "endings.json", system.DocumentsDirectory)
@@ -117,6 +133,33 @@ function scene:create( event )
     newgame:addEventListener("mouse",bigbig)
 
     
+
+
+    local function startLoad(event)
+            --세이브 파일 불러오기--
+            -- Path for the file to read
+            local path = system.pathForFile( "settings.json", system.DocumentsDirectory)
+ 
+            -- Open the file handle
+            local file, errorString = io.open( path, "r" )
+ 
+            if not file or (loadedEndings.end_num==1) then
+                composer.showOverlay( "nosave", options )
+            else
+                composer.removeScene("view01_1_start_game")
+                composer.gotoScene( "view05_main_map")
+                -- ,options1
+                audio.pause( titleMusic )
+                local home = audio.loadStream( "music/Trust.mp3" )
+                audio.setVolume( loadedEndings.logValue )
+                audio.play(home)
+            end
+    end
+    loadgame:addEventListener("touch",startLoad)
+    loadgame:addEventListener("mouse",bigbig)
+
+
+
 
 end
 
