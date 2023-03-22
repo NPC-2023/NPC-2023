@@ -164,10 +164,8 @@ function scene:create( event )
     				next1 = "",
     				next2 = "",
     				name = defaultField.text,
-    				date = os.date( "*t" )
+    				date = os.date( "*t" ),
  	
-					}
-  
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
 				
