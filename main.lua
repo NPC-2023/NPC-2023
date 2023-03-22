@@ -14,7 +14,7 @@ local composer = require "composer"
 
 -- event listeners for tab buttons:
 local function onFirstView( event )
-	composer.gotoScene( "pre_jumpGame" ) --첫 번째로 불러올 lua 파일 
+	composer.gotoScene( "stopGame" ) --첫 번째로 불러올 lua 파일 
 end
 
 
