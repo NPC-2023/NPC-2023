@@ -210,12 +210,12 @@ function scene:create( event )
  				local popup = display.newImageRect("image/custom/popup.png", 400, 400)
  				popup.x, popup.y = display.contentWidth*0.5, display.contentHeight*0.5
 
- 				btn_ok = display.newImageRect("image/custom/btn_ok.png", 100, 200)
- 				btn_ok.x, btn_ok.y = display.contentWidth*0.45, display.contentHeight*0.55
+ 				btn_ok = display.newImageRect("image/custom/btn_ok.png", 155, 200)
+ 				btn_ok.x, btn_ok.y = display.contentWidth*0.44, display.contentHeight*0.55
  				btn_ok.name = "btn_ok"
 
- 				btn_no = display.newImageRect("image/custom/btn_ok.png", 100, 200)
- 				btn_no.x, btn_no.y = display.contentWidth*0.55, display.contentHeight*0.55
+ 				btn_no = display.newImageRect("image/custom/btn_ok.png", 155, 200)
+ 				btn_no.x, btn_no.y = display.contentWidth*0.56, display.contentHeight*0.55
  				btn_no.name = "btn_no"
 
  				popup_text = display.newText("캔을 3개 사용하여 해제할까요?", popup.x, popup.y-50, "font/DOSGothic.ttf")

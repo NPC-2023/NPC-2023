@@ -47,9 +47,9 @@ function scene:create( event )
 	local t = {}
 	t[1] = display.newText("못 보던 고양이 잖아! 이름이 뭐야?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	t[2] = display.newText(mainName .. "(이)다냥", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText(mainName .. "(이)? 별명으로 부르고 싶은데..\n".. string.sub(mainName, 1, 3).."(이) 어때? ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText(mainName .. "? 별명으로 부르고 싶은데..\n".. string.sub(mainName, 1, 3).."어때? ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	t[4] = display.newText("(흐음..) 좋다냥~", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("앞으로 만나면 " ..string.sub(mainName, 1, 3).."(이) 라고 부를게! 헤헤. ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[5] = display.newText("앞으로 만나면 " ..string.sub(mainName, 1, 3).."라고 부를게! 헤헤. ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
 	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	
 	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
