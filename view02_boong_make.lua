@@ -59,7 +59,7 @@ function scene:create( event )
 		title:toFront()
 	end
 
-	--게임 엔딩---------------------------------------------------------------------------------------------------------------------------------------------------
+	--게임 엔딩---
 	function endingscene()
 		local endingBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
 		endingBackground:setFillColor(0)
@@ -95,88 +95,92 @@ function scene:create( event )
 
 	--게임 시작---------------------------------------------------------------------------------------------------------------------------------------------------
 	function gamescene()
-		--붕어빵 만들기--
-		local background = display.newImage("H_image/view02_background.png")
-		background.x, background.y = display.contentWidth/2, display.contentHeight/2
+		local background = display.newImage("H_image/view02_background.png", display.contentWidth/2, display.contentHeight/2)
+	 	local kettle = display.newImage("H_image/kettle.png", display.contentWidth*0.9, display.contentHeight*0.75)
+	 	local beans = display.newImage("H_image/beans.png", display.contentWidth*0.9, display.contentHeight*0.45)
+	 	local timerImage = display.newImage("H_image/timerImage.png", display.contentWidth*0.9-10, display.contentHeight*0.15-20)
+	 	local boongCountBackground = display.newImage("H_image/boongCountBackground.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 
-		local object = {}
-		--반죽 봉투
-	 	local kettle = display.newImage("H_image/kettle.png")
-	 	kettle.x, kettle.y = display.contentWidth*0.9, display.contentHeight*0.7
-
-	 	--팥 봉투
-	 	local beans = display.newImage("H_image/beans.png")
-	 	beans.x, beans.y = display.contentWidth*0.9, display.contentHeight*0.3
-
+	 	local object = {}
 		--틀
-		for i = 1,18,6 do
-		 	object[i] = display.newImage("H_image/object01.png")
-		 	object[i].x, object[i].y = display.contentWidth*0.1 + i*50, display.contentHeight*0.6
+		for i = 1,19,9 do
+		 	object[i] = display.newImage("H_image/object01.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--반죽1
-		 	object[i+1] = display.newImage("H_image/object02.png")
-		 	object[i+1].x, object[i+1].y = display.contentWidth*0.1 + i*50, display.contentHeight*0.6
+		 	object[i+1] = display.newImage("H_image/object02.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--팥
-		 	object[i+2] = display.newImage("H_image/object03.png")
-		 	object[i+2].x, object[i+2].y = display.contentWidth*0.1 + i*50, display.contentHeight*0.6
+		 	object[i+2] = display.newImage("H_image/object03.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--반죽2
-		 	object[i+3] = display.newImage("H_image/object04.png")
-		 	object[i+3].x, object[i+3].y = display.contentWidth*0.1 + i*50, display.contentHeight*0.6
+		 	object[i+3] = display.newImage("H_image/object04.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--틀
-		 	object[i+4] = display.newImage("H_image/object05.png")
-		 	object[i+4].x, object[i+4].y = display.contentWidth*0.1 + i*50, display.contentHeight*0.6
+		 	object[i+4] = display.newImage("H_image/object05.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+
+		 	--연기
+		 	object[i+5] = display.newImage("H_image/object06.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--완성된 붕어빵
-		 	object[i+5] = display.newImage("H_image/object06.png")
-		 	object[i+5].x, object[i+5].y = display.contentWidth*0.1 + i*50, display.contentHeight*0.6
-		 end
+		 	object[i+6] = display.newImage("H_image/object07.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+
+		 	--탄 연기
+		 	object[i+7] = display.newImage("H_image/object08.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+
+		 	--탄 붕어빵
+		 	object[i+8] = display.newImage("H_image/object09.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		end
 
 		sceneGroup:insert(background)
-		for i = 1, 18, 1 do
+		for i = 1, 27, 1 do
 			sceneGroup:insert(object[i])
 		end
 		sceneGroup:insert(kettle)
 		sceneGroup:insert(beans)
-		sceneGroup:insert(beans)
+		sceneGroup:insert(timerImage)
+		sceneGroup:insert(boongCountBackground)
 
-		print(object)
-
-
-	 	for i = 1,18,1 do
+	 	for i = 1,27,1 do
 	 		object[i]:scale(0.6,0.6)
 	 	end
 
 	 	kettle:scale(0.4,0.4)
 	 	beans:scale(0.4,0.4)
+	 	timerImage:scale(0.4,0.4)
 
-	 	for i = 1, 18, 6 do
-			object[i+1].alpha = 0
-			object[i+2].alpha = 0
-			object[i+3].alpha = 0
-			object[i+4].alpha = 0
-			object[i+5].alpha = 0
+		for i = 1, 27, 1 do
+			object[i].alpha = 0
+		end
+		for i = 1, 27, 9 do
+			object[i].alpha = 1
 		end
 
 		kettle:toFront()
 	 	beans:toFront()
+	 	for i = 1, 19, 9 do
+	 		object[i+5]:toFront()
+	 	end
 
-		local turn1 = 1
-		local turn2 = 1
-		local turn3 = 1
-
-		local score = display.newText(0, display.contentWidth*0.1, display.contentHeight*0.15)
-	 	score.size = 100
+		local score = display.newText(0, display.contentWidth*0.1+50, display.contentHeight*0.15-20)
+	 	score.size = 50
 	 	score:setFillColor(0)
-	 	score.alpha = 0.5
-
-	 	local time= display.newText(40, display.contentWidth*0.9, display.contentHeight*0.15)
-	 	time.size = 100
+	 	local time= display.newText(40, display.contentWidth*0.9, display.contentHeight*0.15-5)
+	 	time.size = 40
 	 	time:setFillColor(0)
-	 	time.alpha = 0.5
-	 
+
+	 	local tapSound = audio.loadSound("music/tapSound.wav")
+	 	local success = audio.loadSound("music/success.wav")
+	 	local fail = audio.loadSound("music/fail.mp3")
+
+	 	----------------------코드 시작------------------------------------------
+
+	 	--붕어빵만드는 순서
+	 	local turn = {}
+	 	for i = 1, 19, 9 do
+			turn[i] = 1
+		end
+		local count = 0
+
 		local function drag( event )
 	 		if( event.phase == "began" ) then
 	 			display.getCurrentStage():setFocus( event.target )
@@ -197,65 +201,29 @@ function scene:create( event )
 	 			if ( event.target.isFocus ) then
 	 				display.getCurrentStage():setFocus( nil )
 	 				event.target.isFocus = false
-	 				-- 드래그 끝났을 때
-	 				--turn1
-	 				if ( event.target.x > object[1].x - 50 and event.target.x < object[1].x + 50
-	 					and event.target.y > object[1].y - 100 and event.target.y < object[1].y + 100) then
-
-	 					if ( event.target == kettle) then
-	 						if( turn1 == 1) then
-	 							object[2].alpha = 1
-	 							turn1 = turn1 + 1
-	 						elseif (turn1 == 3) then
-	 							object[4].alpha = 1
-	 							turn1 = turn1 + 1
+	 				--반죽부터 반죽까지
+	 				for j = 1, 19, 9 do
+	 					if ( event.target.x > object[j].x - 50 and event.target.x < object[j].x + 50
+	 						and event.target.y > object[j].y - 100 and event.target.y < object[j].y + 100) then
+	 						if ( event.target == kettle) then
+	 							if( turn[j] == 1) then
+	 								object[j+1].alpha = 1
+	 								turn[j] = turn[j] + 1
+	 								
+	 							elseif (turn[j] == 3) then
+	 								object[j+3].alpha = 1
+	 								turn[j] = turn[j] + 1
+	 							end
+							elseif (event.target == beans) then
+								if( turn[j] == 2) then
+									object[j+2].alpha = 1
+									turn[j] = turn[j] + 1
+									audio.play( tapSound )
+								end
 	 						end
-						elseif (event.target == beans) then
-							if( turn1 == 2) then
-								object[3].alpha = 1
-								turn1 = turn1 + 1
-							end
+	 						audio.play( tapSound )
 	 					end
 	 				end
-	 				--turn2
-	 				if ( event.target.x > object[7].x - 50 and event.target.x < object[7].x + 50
-	 					and event.target.y > object[7].y - 100 and event.target.y < object[7].y + 100) then
-
-	 					if ( event.target == kettle) then
-	 						if( turn2 == 1) then
-	 							object[8].alpha = 1
-	 							turn2 = turn2 + 1
-	 						elseif (turn2 == 3) then
-	 							object[10].alpha = 1
-	 							turn2 = turn2 + 1
-	 						end
-						elseif (event.target == beans) then
-							if( turn2 == 2) then
-								object[9].alpha = 1
-								turn2 = turn2 + 1
-							end
-	 					end
-	 				end
-	 				--turn3
-	 				if ( event.target.x > object[13].x - 50 and event.target.x < object[13].x + 50
-	 					and event.target.y > object[13].y - 100 and event.target.y < object[13].y + 100) then
-
-	 					if ( event.target == kettle) then
-	 						if( turn3 == 1) then
-	 							object[14].alpha = 1
-	 							turn3 = turn3 + 1
-	 						elseif (turn3 == 3) then
-	 							object[16].alpha = 1
-	 							turn3 = turn3 + 1
-	 						end
-						elseif (event.target == beans) then
-							if( turn3 == 2) then
-								object[15].alpha = 1
-								turn3 = turn3 + 1
-							end
-	 					end
-	 				end
-
 	 				event.target.x = event.target.initX
 	 				event.target.y = event.target.initY
 	 			else
@@ -268,81 +236,69 @@ function scene:create( event )
 	 	kettle:addEventListener("touch", drag)
 	 	beans:addEventListener("touch", drag)
 
-	 	local function touchEventListener1( event )
-	 		--turn1
+	 	local function touchEventListener( event )
 	 		if( event.phase == "began" ) then
-	 			if( turn1 == 4) then
-					object[5].alpha = 1
-					turn1 = turn1 + 1
-	 			elseif( turn1 == 5 ) then
-	 				object[6].alpha = 1
-	 				turn1 = turn1 + 1
-	 			elseif( turn1 == 6 ) then
-	 				turn1 = 1
-	 				for i = 2,6,1 do
-	 					object[i].alpha = 0
-					end
-	 				score.text = score.text + 1
-	 	--게임 성공 판별 기준 score.text == '8'이되면 ending으로 이동------------------------------------------------------------------------
-	 				if( score.text == '8') then
-				 		time.alpha = 0
-				 		score.alpha = 0
-				 		score.text = '성공'
-				 		endingscene()
+	 			for j = 1, 19, 9 do
+	 				if( turn[j] == 4 and event.target == object[j+3]) then
+	 					transition.to( object[j+5], { time=1000, alpha=1, delay=3000 } )
+						object[j+4].alpha = 1
+						turn[j] = turn[j] + 1
+						audio.play( tapSound )
+					--object[j+5]가 나오고 6초 안에 터치를 하면 turnj = 5로, 터치를 안하면 turnj = 6으
+					--완성한 붕어빵
+						local clicked = false
+						-- 3초 후에 object8이 나타나도록 타이머 생성
+						local timer = timer.performWithDelay(6000, function()
+						    -- object7이 클릭되지 않았으면 object8 생성
+						    if not clicked then
+						    	transition.to( object[j+7], { time=1000, alpha=1 } )
+						        print("넘어감")
+						        turn[j] = 6
+						    end
+						end)
+						-- object7 클릭 시 clicked 변수를 true로 변경하고 타이머 중지
+						object[j+5]:addEventListener("tap", function()
+						    clicked = true
+						end)
+			 		elseif( turn[j] == 5 and event.target == object[j+5]) then
+				 		object[j+6].alpha = 1
+				 		turn[j] = turn[j] + 2
+				 		audio.play( tapSound )
+				 	--탄 붕어빵
+				 	elseif( turn[j] == 6 and event.target == object[j+7]) then
+				 		object[j+8].alpha = 1
+				 		turn[j] = turn[j] + 1
+				 		audio.play( tapSound )
+				 	--완성해서 초기화
+				 	elseif( turn[j] == 7 and (event.target == object[j+8] or event.target == object[j+6]))then
+				 		turn[j] = 1
+						for i = j+1,j+8,1 do
+		 					object[i].alpha = 0
+						end
+						if(event.target == object[j+6]) then
+				 			score.text = score.text + 1
+				 			count = count + 1
+				 			audio.play(success)
+				 		else
+				 			audio.play(fail)
+				 		end
+				 		print(count)
+				 		--score.text대신 붕어빵 개수 삽입--
+				 	--게임 성공 판별 기준 score.text == '8'이되면 ending으로 이동------------------------------------------------------------------------
+				 		if( score.text == '8') then
+							 time.alpha = 0
+							 score.alpha = 0
+							 score.text = '성공'
+							 endingscene()
+				 		end
 				 	end
 	 			end
 	 		end
 	 	end
-	 	local function touchEventListener2( event )
-	 		--turn2
-	 		if( event.phase == "began" ) then
-	 			if( turn2 == 4) then
-					object[11].alpha = 1
-					turn2 = turn2 + 1
-	 			elseif( turn2 == 5 ) then
-	 				object[12].alpha = 1
-	 				turn2 = turn2 + 1
-	 			elseif( turn2 == 6 ) then
-	 				turn2 = 1
-	 				for i = 8,12,1 do
-	 					object[i].alpha = 0
-					end
-	 				score.text = score.text + 1
-	 	--게임 성공 판별 기준 score.text == '8'이되면 ending으로 이동------------------------------------------------------------------------
-	 				if( score.text == '8') then
-				 		time.alpha = 0
-				 		score.alpha = 0
-				 		score.text = '성공'
-				 		endingscene()
-				 	end
-	 			end
-	 		end
-	 	end
-	 	local function touchEventListener3( event )
-	 		--turn3
-	 		if( event.phase == "began" ) then
-	 			if( turn3 == 4) then
-					object[17].alpha = 1
-					turn3 = turn3 + 1
-	 			elseif( turn3 == 5 ) then
-	 				object[18].alpha = 1
-	 				turn3 = turn3 + 1
-	 			elseif( turn3 == 6 ) then
-	 				turn3 = 1
-	 				for i = 14,18,1 do
-	 					object[i].alpha = 0
-					end
-	 				score.text = score.text + 1
-	 	--게임 성공 판별 기준 score.text == '8'이되면 ending으로 이동------------------------------------------------------------------------
-	 				if( score.text == '8') then
-				 		time.alpha = 0
-				 		score.alpha = 0
-				 		score.text = '성공'
-				 		endingscene()
-				 	end
-	 			end
-	 		end
-	 	end
+	 	
+		for i = 1, 27, 1 do
+			object[i]:addEventListener("touch", touchEventListener)
+		end	 
 
 	 	--time
 	 	local function counter( event )
@@ -361,12 +317,7 @@ function scene:create( event )
 		 end
 
 		 local timeAttack = timer.performWithDelay(1000, counter, 41)
-
-
-	 	object[1]:addEventListener("touch", touchEventListener1)
-	 	object[7]:addEventListener("touch", touchEventListener2)
-	 	object[13]:addEventListener("touch", touchEventListener3)
-	 	
+	
 	 	--코드 끝
 	end
 

@@ -170,13 +170,29 @@ function scene:create( event )
 	 			AIpaper.alpha = 1
 	 		end
 
+	 		local function moveObject(object, distance)
+				local function move(object)
+				  -- object를 10만큼 이동시킵니다.
+					while objdct.y < objdct.y + distance do
+						object.y = object.y - 10
+						-- 1초간 일시 중단합니다.
+						coroutine.yield(1)
+						-- 다시 10만큼 이동시킵니다.
+						object.y = object.y - 10
+					end
+				end
+
+				-- coroutine을 시작합니다.
+				local co = coroutine.create(move)
+			end
+
 	 		--가위바위보시작
 		 	if (event.target == rock) then
 		 		if AIDO == 1 then
 		 			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
 		 		elseif AIDO == 2 then
-		 			cat.y = cat.y-10
+		 			moveObject(cat, -10)
 		 			winText.text = '이겼습니다. 고양이가 1칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 1칸 올라갑니다.")
 		 		else
@@ -187,14 +203,13 @@ function scene:create( event )
 		 			winText.text = '졌습니다. 학생이 5칸 올라갑니다.'
 		 			print("졌습니다. 학생이 5칸 올라갑니다.")
 		 		end
-		 		who_win()
 
 		  	elseif (event.target == scissors) then
 		  		if AIDO == 2 then
 		  			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
 		 		elseif AIDO == 3 then
-		 			cat.y = cat.y-20
+		 			moveObject(cat, -20)
 		 			winText.text = '이겼습니다. 고양이가 2칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 2칸 올라갑니다.")
 		 		else
@@ -205,14 +220,13 @@ function scene:create( event )
 		 			winText.text = '졌습니다. 학생이 1칸 올라갑니다.'
 		 			print("졌습니다. 학생이 1칸 올라갑니다.")
 		 		end
-		 		who_win()
 
 		 	elseif (event.target == paper) then
 		 		if AIDO == 3 then
 		 			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
 		 		elseif AIDO == 1 then
-		 			cat.y = cat.y-50
+		 			moveObject(cat, -50)
 		 			winText.text = '이겼습니다. 고양이가 5칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 5칸 올라갑니다.")
 		 		else
@@ -223,7 +237,7 @@ function scene:create( event )
 		 			winText.text = '졌습니다. 학생이 2칸 올라갑니다.'
 		 			print("졌습니다. 학생이 2칸 올라갑니다.")
 		 		end
-		 		who_win()
+		 	who_win()
 		 	end
 		end
 		rock:addEventListener("tap", tap)
