@@ -46,10 +46,10 @@ function scene:create( event )
 
 
 
-    local text = "입장하기 전, 이름을 입력해주세요. (7글자 내)"
+    local text = "입장하기 전, 이름을 입력해주세요."
 	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.46)
 	showText:setFillColor(0)
-	showText.size = 30
+	showText.size = 45
 	--showText.alpha = 0
 	sceneGroup:insert(showText)
 
@@ -64,7 +64,7 @@ function scene:create( event )
 	local text1 = "확인"
 	local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.67)
 	showText1:setFillColor(0)
-	showText1.size = 30
+	showText1.size = 45
 	showText1.alpha = 1
 	sceneGroup:insert(showText1)
 
@@ -98,7 +98,7 @@ function scene:create( event )
 	local function make_text()
 		defaultField = native.newTextField( display.contentWidth/2,display.contentHeight * 0.56, 370, 60 )
 		defaultField:addEventListener( "userInput", textListener )
-		defaultField.font = native.newFont( "font/잘풀리는오늘 Medium.ttf", 40)
+		defaultField.font = native.newFont( "font/font.ttf", 40)
 		defaultFied = ""
 		defaultField.align = "center"
 		sceneGroup:insert(defaultField)

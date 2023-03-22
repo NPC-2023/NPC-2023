@@ -37,21 +37,21 @@ function scene:create( event )
     sceneGroup:insert(black)
     
 
-    local gotoScript = display.newImageRect("image/설정/창.png", 1024/1.5, 1024/1.5)
-    gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight/2+50
+    local gotoScript = display.newImageRect("image/설정/창.png", 700, 700)
+    gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight*0.6
     sceneGroup:insert(gotoScript)
 
     local gotoContentScript = display.newText(name.."으로 이동하시겠습니까?", display.contentWidth/2, display.contentHeight/2, native.systemFontBold)
-    gotoContentScript.size = 30
+    gotoContentScript.size = 42
     gotoContentScript:setFillColor(0, 0, 0)
     gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4 +50
     sceneGroup:insert(gotoContentScript)
 
     local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", 768/4, 768/4)
-    gotoButton.x, gotoButton.y = display.contentWidth/2, display.contentHeight*0.6
+    gotoButton.x, gotoButton.y = display.contentWidth/2, display.contentHeight*0.66
     sceneGroup:insert(gotoButton)
 
-    local gotoButtonText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.59, native.systemFont, 30 )
+    local gotoButtonText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.65, native.systemFont, 40 )
     gotoButtonText:setFillColor( 1, 1, 1 )  -- black
     sceneGroup:insert(gotoButtonText)
 
@@ -129,9 +129,9 @@ function scene:create( event )
 
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
-    local exit = display.newImageRect("image/설정/닫기.png", 80, 80)
+    local exit = display.newImageRect("image/설정/닫기.png", 50, 50)
 
-    exit.x, exit.y = display.contentWidth*0.7, display.contentHeight*0.3
+    exit.x, exit.y = display.contentWidth*0.7, display.contentHeight*0.37
     exit:addEventListener("touch",goback)
     sceneGroup:insert(exit)
 
