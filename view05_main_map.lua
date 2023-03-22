@@ -61,31 +61,79 @@ function scene:create( event )
 
 	local compareTime = getDate(saveTime)
 
+
+	-- 건물 배치 코드
+	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
+	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
+	
+	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.85}
+	local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54, 0.1}
+	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 3.5}
+
+	local buildingGroup = display.newGroup()
+	local building = {}
+
+
 	-- 퀘스트 4개를 실행하면 계절 바꾸게 하기
 	local background
+
 	--if(questedListGet == nil or #questedListGet < 2) then
 	if(questedListGet == nil) then
-		background = display.newImageRect("image/map/background.png", display.contentWidth, display.contentHeight)
+		print("봄")
+		background = display.newImageRect("image/map/봄맵.png", display.contentWidth, display.contentHeight)
+
+		for i = 1, 8 do 
+			local size = building_size[i]
+			building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."봄.png", 512/size, 512/size)
+ 		end
 	end
 
 
 	if(questedListGet ~= nil and #questedListGet >= 1 ) then
 		local cnt = #questedListGet
-
 		if(cnt == 1) then
-			print("4개 성공 / 계절 바꿈")
+			print("4개 성공 / 계절 바꿈(여름)")
 			-- 백그라운드 변경
-			background = display.newImageRect("image/map/background1.png", display.contentWidth, display.contentHeight)
+			background = display.newImageRect("image/map/여름맵.png", display.contentWidth, display.contentHeight)
+
+			for i = 1, 8 do 
+				local size = building_size[i]
+				building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."여름.png", 512/size, 512/size)
+	 		end
+
 		elseif(cnt == 2)then
-			print("8개 성공 / 계절 바꿈")
-			background = display.newImageRect("image/mouse/background.png", display.contentWidth, display.contentHeight)
-		elseif(cnt == 12)then
-			print("12개 성공 / 계절 바꿈")
+			print("8개 성공 / 계절 바꿈(가을)")
+			background = display.newImageRect("image/map/가을맵.png", display.contentWidth, display.contentHeight)
+
+			for i = 1, 8 do 
+				local size = building_size[i]
+				building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."가을.png", 512/size, 512/size)
+	 		end
+
+		elseif(cnt == 3)then
+			print("12개 성공 / 계절 바꿈(겨울)")
+			background = display.newImageRect("image/map/겨울맵.png", display.contentWidth, display.contentHeight)
+
+			for i = 1, 8 do 
+				local size = building_size[i]
+				building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."겨울.png", 512/size, 512/size)
+			end
 		end
 	end
 
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
-	sceneGroup:insert(background)
+
+
+	for i = 1, 8 do 
+		building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
+		building[i].name = buildingNames[i]
+	end
+
+	local size = building_size[9]
+	building[9] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[9] ..".png", 512/size, 512/size)
+	building[9].x, building[9].y = display.contentWidth*building_x[9], display.contentHeight*building_y[9]
+	building[9].name = buildingNames[9]
+
 
 
 	-- 계절에 따라 백그라운드 변경
@@ -114,22 +162,22 @@ function scene:create( event )
 	boardTitle.y = display.contentHeight * 0.741
 
 
-	-- 건물 배치 코드
-	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
-	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
-	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.85}
-	local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54, 0.1}
-	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 3.5}
+	-- -- 건물 배치 코드
+	-- local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
+	-- local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
+	-- local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.85}
+	-- local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54, 0.1}
+	-- local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 3.5}
 
-	local buildingGroup = display.newGroup()
-	local building = {}
+	-- local buildingGroup = display.newGroup()
+	-- local building = {}
 
-	for i = 1, 9 do 
-		local size = building_size[i]
-		building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] ..".png", 512/size, 512/size)
- 		building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
- 		building[i].name = buildingNames[i]
-	end
+	-- for i = 1, 9 do 
+	-- 	local size = building_size[i]
+	-- 	building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] ..".png", 512/size, 512/size)
+ 	-- 	building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
+ 	-- 	building[i].name = buildingNames[i]
+	-- end
 
 
 	if (questedListGet~=nil) then
@@ -154,10 +202,7 @@ function scene:create( event )
 	end
 
 
-	--sceneGroup:insert(background)
-	sceneGroup:insert(buildingGroup)
-	sceneGroup:insert(board)
-	sceneGroup:insert(boardTitle)
+	
 	local target
 	
 
@@ -231,6 +276,7 @@ function scene:create( event )
 				event.target.width = event.target.width*1.1
 				event.target.height = event.target.height*1.1
 				i = i + 1
+				print("IN", event.target.width, event.target.height)
 			end
 		
 		elseif (event.target.x-event.x)^2 + (event.target.y-event.y)^2 > 110^2 then
@@ -238,6 +284,7 @@ function scene:create( event )
 				event.target.width =event.target.width/11*10
 				event.target.height =event.target.height/11*10
 				i = i - 1 
+				print("OUT", event.target.width, event.target.height)
 			end
 			
 		end
@@ -269,6 +316,8 @@ function scene:create( event )
 		end
 	end
 
+	sceneGroup:insert(background)
+	sceneGroup:insert(buildingGroup)
 
 -- 리스너 추가
 	for i=1, 9 do
@@ -276,6 +325,9 @@ function scene:create( event )
 		building[i]:addEventListener("touch",touch_ui)
 		--building[i]:addEventListener("tap", gotoCheckMsg)
 	end
+
+	sceneGroup:insert(board)
+	sceneGroup:insert(boardTitle)
 
 	for i = 1, #questShow do 
 		sceneGroup:insert(questShow[i])
