@@ -178,6 +178,9 @@ function scene:create( event )
 
  						btn_ok:addEventListener("tap", function() popupGroup.alpha = 0 popup_text.alpha = 0 if(event_occur == true) then
 							can_cnt = can_cnt - 3 can_cnt_text.text = can_cnt event_occur = false
+							loadedSettings.money = loadedSettings.money - 3
+							loadsave.saveTable(loadedSettings,"settings.json")
+							loadsave.saveTable(loadedItems,"items.json")
 						end end) 
 			 			item.closed = false --잠금해제
 			 			
