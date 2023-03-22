@@ -19,9 +19,8 @@ function scene:create( event )
 		title.size = 50
 		title:setFillColor(0)
 
-		local titleBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
-		titleBackground:setFillColor(0)
-		titleBackground.alpha = 0.5
+		local titleBackground = display.newImageRect("H_image/view03_background.jpg", display.contentWidth, display.contentHeight)
+		titleBackground.x, titleBackground.y = display.contentWidth/2, display.contentHeight/2
 
 		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.7)
 		section:setFillColor(0.5, 0.5, 0.5, 0.5)
@@ -50,7 +49,6 @@ function scene:create( event )
 		local function titleremove(event)
 			gametitle.alpha=0
 			title.alpha=0
-			titleBackground.alpha=0
 			section.alpha=1
 			script.alpha=1
 			section:addEventListener("tap", scriptremove)
@@ -170,31 +168,19 @@ function scene:create( event )
 	 			AIpaper.alpha = 1
 	 		end
 
-	 		local function moveObject(object, distance)
-				local function move(object)
-				  -- object를 10만큼 이동시킵니다.
-					while objdct.y < objdct.y + distance do
-						object.y = object.y - 10
-						-- 1초간 일시 중단합니다.
-						coroutine.yield(1)
-						-- 다시 10만큼 이동시킵니다.
-						object.y = object.y - 10
-					end
-				end
-
-				-- coroutine을 시작합니다.
-				local co = coroutine.create(move)
-			end
-
 	 		--가위바위보시작
 		 	if (event.target == rock) then
 		 		if AIDO == 1 then
 		 			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
 		 		elseif AIDO == 2 then
-		 			moveObject(cat, -10)
+		 			cat.y = cat.y-10
 		 			winText.text = '이겼습니다. 고양이가 1칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 1칸 올라갑니다.")
+		 			while catmove < 0 do
+		 				cat.y = cat.y-10
+		 				wait(0.5)
+		 			end
 		 		else
 		 			student.y = student.y-50
 		 			AIscissors.y = AIscissors.y-50
@@ -209,7 +195,7 @@ function scene:create( event )
 		  			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
 		 		elseif AIDO == 3 then
-		 			moveObject(cat, -20)
+		 			cat.y = cat.y-20
 		 			winText.text = '이겼습니다. 고양이가 2칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 2칸 올라갑니다.")
 		 		else
@@ -226,7 +212,7 @@ function scene:create( event )
 		 			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
 		 		elseif AIDO == 1 then
-		 			moveObject(cat, -50)
+		 			cat.y = cat.y-50
 		 			winText.text = '이겼습니다. 고양이가 5칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 5칸 올라갑니다.")
 		 		else

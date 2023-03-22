@@ -10,55 +10,6 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	--게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
-	function startscene()
-		local gametitle = display.newImage("H_image/title.png")
-		gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
-
-		local title = display.newText("붕어빵 만들기", gametitle.x, gametitle.y+130, native.systemFontBold)
-		title.size = 50
-		title:setFillColor(0)
-
-		local titleBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
-		titleBackground:setFillColor(0)
-		titleBackground.alpha = 0.5
-
-		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
-		section:setFillColor(0.35, 0.35, 0.35, 0.35)
-		section.alpha=0
-
-		local script = display.newText("게임방법\n\n40초 안에 붕어빵 8개를 만드세요! \n 반죽과 팥앙금을 순서대로 놓고 터치하세요! \n 붕어빵 8개를 완성하면 게임 클리어 입니다.", section.x+30, section.y-100, native.systemFontBold)
-		script.size = 30
-		script:setFillColor(1)
-		script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
-		script.alpha=0
-
-		sceneGroup:insert(gametitle)
-		sceneGroup:insert(title)
-		sceneGroup:insert(titleBackground)
-		sceneGroup:insert(section)
-		sceneGroup:insert(script)
-
-		local function scriptremove(event)
-			timer1=timer.performWithDelay(500, spawn, 0)
-			section.alpha=0
-			script.alpha=0
-			gamescene()
-		end
-
-		local function titleremove(event)
-			gametitle.alpha=0
-			title.alpha=0
-			titleBackground.alpha=0
-			section.alpha=1
-			script.alpha=1
-			section:addEventListener("tap", scriptremove)
-		end
-		gametitle:addEventListener("tap", titleremove)
-		gametitle:toFront()
-		title:toFront()
-	end
-
 	--게임 엔딩---
 	function endingscene()
 		local endingBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
@@ -90,6 +41,53 @@ function scene:create( event )
 	 	replay:addEventListener("touch", touchEventListener)
 	 	endingText:toFront()
 	 	replay:toFront()
+	end
+
+--게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
+
+	function startscene()
+		local gametitle = display.newImage("H_image/title.png")
+		gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+		local title = display.newText("붕어빵 만들기", gametitle.x, gametitle.y+130, native.systemFontBold)
+		title.size = 50
+		title:setFillColor(0)
+
+		local titleBackground = display.newImage("H_image/view02_background.png", display.contentWidth/2, display.contentHeight/2)
+
+		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+		section:setFillColor(0.35, 0.35, 0.35, 0.35)
+		section.alpha=0
+
+		local script = display.newText("게임방법\n\n40초 안에 붕어빵 8개를 만드세요! \n 반죽과 팥앙금을 순서대로 놓고 터치하세요! \n 붕어빵 8개를 완성하면 게임 클리어 입니다.", section.x+30, section.y-100, native.systemFontBold)
+		script.size = 30
+		script:setFillColor(1)
+		script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+		script.alpha=0
+
+		sceneGroup:insert(gametitle)
+		sceneGroup:insert(title)
+		sceneGroup:insert(titleBackground)
+		sceneGroup:insert(section)
+		sceneGroup:insert(script)
+
+		local function scriptremove(event)
+			timer1=timer.performWithDelay(500, spawn, 0)
+			section.alpha=0
+			script.alpha=0
+			gamescene()
+		end
+
+		local function titleremove(event)
+			gametitle.alpha=0
+			title.alpha=0
+			section.alpha=1
+			script.alpha=1
+			section:addEventListener("tap", scriptremove)
+		end
+		gametitle:addEventListener("tap", titleremove)
+		gametitle:toFront()
+		title:toFront()
 	end
 
 
@@ -164,7 +162,7 @@ function scene:create( event )
 		local score = display.newText(0, display.contentWidth*0.1+50, display.contentHeight*0.15-20)
 	 	score.size = 50
 	 	score:setFillColor(0)
-	 	local time= display.newText(40, display.contentWidth*0.9, display.contentHeight*0.15-5)
+	 	local time= display.newText(60, display.contentWidth*0.9, display.contentHeight*0.15-5)
 	 	time.size = 40
 	 	time:setFillColor(0)
 
@@ -240,7 +238,7 @@ function scene:create( event )
 	 		if( event.phase == "began" ) then
 	 			for j = 1, 19, 9 do
 	 				if( turn[j] == 4 and event.target == object[j+3]) then
-	 					transition.to( object[j+5], { time=1000, alpha=1, delay=3000 } )
+	 					transition.to( object[j+5], { time=500, alpha=1, delay=3000 } )
 						object[j+4].alpha = 1
 						turn[j] = turn[j] + 1
 						audio.play( tapSound )
