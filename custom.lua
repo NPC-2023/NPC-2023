@@ -238,6 +238,12 @@ function scene:create( event )
 						--잠금해제
 						loadedSettings.closed[item.i] = false 
 						setAlpha()
+
+						loadedSettings.money = loadedSettings.money - 3
+						loadsave.saveTable(loadedSettings,"settings.json")
+						loadsave.saveTable(loadedItems,"items.json")
+
+			 			item.closed = false --잠금해제
 			 			
 			 			--옷 갈아입을때 오류 방지용 코드(선택한 것이 옷이면 1)
 			 			if(string.find(item_name, "outer") == nil) then
@@ -267,12 +273,12 @@ function scene:create( event )
  				local popup = display.newImageRect("image/custom/popup.png", 400, 400)
  				popup.x, popup.y = display.contentWidth*0.5, display.contentHeight*0.5
 
- 				btn_ok = display.newImageRect("image/custom/btn_ok.png", 100, 200)
- 				btn_ok.x, btn_ok.y = display.contentWidth*0.45, display.contentHeight*0.55
+ 				btn_ok = display.newImageRect("image/custom/btn_ok.png", 155, 200)
+ 				btn_ok.x, btn_ok.y = display.contentWidth*0.44, display.contentHeight*0.55
  				btn_ok.name = "btn_ok"
 
- 				btn_no = display.newImageRect("image/custom/btn_ok.png", 100, 200)
- 				btn_no.x, btn_no.y = display.contentWidth*0.55, display.contentHeight*0.55
+ 				btn_no = display.newImageRect("image/custom/btn_ok.png", 155, 200)
+ 				btn_no.x, btn_no.y = display.contentWidth*0.56, display.contentHeight*0.55
  				btn_no.name = "btn_no"
 
  				popup_text = display.newText("캔을 3개 사용하여 해제할까요?", popup.x, popup.y-50, "font/DOSGothic.ttf")
@@ -336,11 +342,7 @@ function scene:create( event )
 		objectGroup:insert(panel[i])
 	end
 
-	for i = 1, 3 do
-		objectGroup:insert(paint[i])
-		objectGroup:insert(expression[i])
-		objectGroup:insert(clothes[i])
-	end
+	
 	
 	objectGroup:insert(cat)
 	objectGroup:insert(reset)
@@ -353,6 +355,17 @@ function scene:create( event )
  	sceneGroup:insert(background)
  	sceneGroup:insert(objectGroup)
     sceneGroup:insert(volumeButton)
+	
+
+	for i = 1, 3 do
+		objectGroup:insert(paint[i])
+	end
+	for i = 1, 3 do
+		objectGroup:insert(expression[i])
+	end
+	for i = 1, 3 do
+		objectGroup:insert(clothes[i])
+	end
 
  	for i = 1, 9 do
 	 	panel[i]:addEventListener("tap", changeCatApperanceEvent)

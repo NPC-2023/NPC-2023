@@ -141,8 +141,9 @@ function scene:create( event )
 				composer.gotoScene("custom")
 			else
 				composer.setVariable("name", name)
-				composer.removeScene("view05_main_map")
-				composer.gotoScene("view06_main_map1")
+				composer.showOverlay( "view06_main_map1", options )
+				--composer.removeScene("view05_main_map")
+				--composer.gotoScene("view06_main_map1")
 			end
 		end
 	end
@@ -218,7 +219,7 @@ function scene:hide( event )
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		composer.removeScene("stage01")
+		--composer.removeScene("view05_main_map")
 		-- Called when the scene is now off screen
 	end
 end

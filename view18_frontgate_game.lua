@@ -226,7 +226,7 @@ local function onCollision( event )
 			-- Increase score
 			score = score + 100
 			scoreText.text = "Score: " .. score
-			if (score >= 700)then----게임 성공 (5000점 넘겼을때)
+			if (score >= 2000)then----게임 성공 (5000점 넘겼을때)
 				composer.removeScene("game")
 				composer.setVariable("score", 5)
 				audio.stop ( 1 )
