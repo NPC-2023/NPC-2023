@@ -176,6 +176,7 @@ function scene:create( event )
   					today_success = 0, --오늘 성공한 게임 갯수
   					today_talk = 0, --오늘 대화한 횟수
   					buildings_index = {"백주년", "정문", "본관", "학생관", "대학원", "인문관", "숭인관", "예지관"},
+  					date = os.date( "*t" ),
   					days = 0,
   					--커스텀
   					closed = {true, true, true, true, true, true, true, true, true},
