@@ -150,12 +150,13 @@ function scene:create( event )
 			composer.removeScene("view01_2_input_name")
 			composer.gotoScene("view01_3_error")
 		else
-				--게임 진행을 위한 저장 데이터들 생성
-				
+				--게임 진행을 위한 저장 데이터들 생성				
 				loadedEndings = loadsave.loadTable( "endings.json" )
 				loadsave.saveTable(loadedEndings,"endings.json")
 
-				local talk = {}
+				-- 각 건물 당 npc와 얼마나 대화를 했는지 나타내는 리스트.
+				-- 각 건물의 위치를 숫자로 나타냄. ex)백주년은 1, 예지관은 8
+				local talk = {} 
 				for i = 1, 8 do
 					talk[i] = 0
 				end
@@ -171,13 +172,19 @@ function scene:create( event )
     				next2 = "",
     				name = defaultField.text,
   					-- 게임 진행도
-  					talk = talk
+  					talk = talk,
+  					today_success = 0, --오늘 성공한 게임 갯수
+  					today_talk = 0, --오늘 대화한 횟수
+  					buildings_index = {"백주년", "정문", "본관", "학생관", "대학원", "인문관", "숭인관", "예지관"},
+  					days = 0,
+  					--커스텀
+  					closed = {true, true, true, true, true, true, true, true, true},
+  					
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
 				
 				local serializedJSON = json.encode(itme)
 				--loadsave.saveTable(custumeBuy, "items.json")
-
 
 				loadsave.saveTable( itmes ,"items.json" )
 				composer.setVariable("name",defaultField.text)
@@ -201,12 +208,7 @@ function scene:create( event )
 				composer.gotoScene( "tutorial00" ,options)
 			end
 	end
-	titleButton:addEventListener("tap",startNew)
-
-
-	
-	
-
+	titleButton:addEventListener("tap",startNew)	
 end
 
 function scene:show( event )

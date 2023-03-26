@@ -19,9 +19,8 @@ function scene:create( event )
 	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
 	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
 
-	can_cnt = loadedSettings.money
+	local can_cnt = loadedSettings.money
 
-	loadsave.saveTable(loadedSettings,"settings.json")
 	--------------
 
 
@@ -42,7 +41,6 @@ function scene:create( event )
  	local can = display.newImageRect("image/custom/can.png", 200, 200)
  	can.x, can.y = display.contentWidth*0.25, display.contentHeight*0.15
 
-
  	local can_cnt_text = display.newText(tostring(can_cnt), can.x + 20, can.y, "font/DOSGothic.ttf") --변수받아와서 쓰기
  	can_cnt_text.size = 40
  	can_cnt_text:setFillColor(1)
@@ -62,21 +60,21 @@ function scene:create( event )
 	 	panel[i] = display.newImageRect("image/custom/glassPanel_tab.png", 100, 100)
 	 	panel[i].x, panel[i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.3
 	 	panel[i].name = "panel"..i
-	 	panel[i].closed = true
+	 	panel[i].i = i --i번째 panel 이라는 뜻. 전체 저장 변수의 인덱스로 쓰기위함.
 	 	panel[i].item = expression_name[i]
 	 	objectGroup:insert(panel[i])
 
 	 	panel[3+i] = display.newImageRect("image/custom/glassPanel_tab.png", 100, 100)
 	 	panel[3+i].x, panel[3+i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.5
 	 	panel[3+i].name = "panel"..(3+i)
-	 	panel[3+i].closed = true
+	 	panel[3+i].i = 3+i
 	 	panel[3+i].item = color_name[i]
 	 	objectGroup:insert(panel[3+i])
 
 	 	panel[6+i] = display.newImageRect("image/custom/glassPanel_tab.png", 100, 100)
 	 	panel[6+i].x, panel[6+i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.7
 	 	panel[6+i].name = "panel"..(6+i)
-	 	panel[6+i].closed = true
+	 	panel[6+i].i = 6+i
 	 	panel[6+i].item = clothes_name[i]
 	 	objectGroup:insert(panel[6+i])
  	end	
@@ -84,13 +82,20 @@ function scene:create( event )
  	local expression = {}
  	expression[1] = display.newImageRect("image/custom/cat_twinkle.png", 80, 80)
  	expression[1].x, expression[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.3
- 	-- expression[1].alpha = 0.5 --잠금해제전 투명도 설정
  	expression[2] = display.newImageRect("image/custom/cat_tear.png", 80, 80)
  	expression[2].x, expression[2].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.3
- 	-- expression[2].alpha = 0.5
 	expression[3] = display.newImageRect("image/custom/cat_crank.png", 80, 80)
  	expression[3].x, expression[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.3
- 	-- expression[3].alpha = 0.5
+
+ 	--잠금해제전 투명도 설정
+ 	-- local i = 1
+	-- for i = 1,3 do
+	--  		if(loadedSettings.expression[i] == true) then
+	--  			expression[i].alpha = 0.5
+	--  		else
+	--  			expression[i].alpha = 1
+	--  		end
+	--  end
 
  	local paint = {}
  	paint[1] = display.newImageRect("image/custom/graypaint.png", 80, 80)
@@ -100,6 +105,14 @@ function scene:create( event )
 	paint[3] = display.newImageRect("image/custom/blackpaint.png", 80, 80)
  	paint[3].x, paint[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.5
 
+	 -- for i = 1,3 do
+	 -- 		if(loadedSettings.paint[i] == true) then
+	 -- 			paint[i].alpha = 0.5
+	 -- 		else
+	 -- 			paint[i].alpha = 1
+	 -- 		end
+	 -- end
+
  	local clothes = {}
  	clothes[1] = display.newImageRect("image/custom/outer1.png", 80, 80)
  	clothes[1].x, clothes[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
@@ -107,6 +120,43 @@ function scene:create( event )
  	clothes[2].x, clothes[2].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
 	clothes[3] = display.newImageRect("image/custom/outer3.png", 80, 80)
  	clothes[3].x, clothes[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
+
+
+ 	-- for i = 1,3 do
+	--  		if(loadedSettings.clothes[i] == true) then
+	--  			clothes[i].alpha = 0.5
+	--  		else
+	--  			clothes[i].alpha = 1
+	--  		end
+	--  end
+
+ 	local function setAlpha()
+ 		print("실행됨")
+ 		local i = 1
+	 	for i = 1,9 do
+	 		if(loadedSettings.closed[i] == true) then
+	 			print("미해제")
+	 			if(i <= 3) then
+	 				expression[i].alpha = 0.5
+	 			elseif(i <= 6) then
+	 				paint[i-3].alpha = 0.5
+	 			else
+	 				clothes[i-6].alpha = 0.5
+	 			end
+	 		else
+	 			print("해제됨")
+	 			if(i <= 3) then
+	 				expression[i].alpha = 1
+	 			elseif(i <= 6) then
+	 				paint[i-3].alpha = 1
+	 			else
+	 				clothes[i-6].alpha = 1
+	 			end
+	 		end --closed
+	 	end --for문
+ 	end --function
+
+ 	setAlpha()
  	
  	local reset = display.newImageRect("image/custom/cat_paw.png", 150, 150)
  	reset.x, reset.y = display.contentWidth*0.1, display.contentHeight*0.1
@@ -156,10 +206,11 @@ function scene:create( event )
 
 		local function btnTapListener(event)
  					if(event.target.name == "btn_ok" and can_cnt >= 3) then
- 						--고양이 모습 바뀜
+
  						if(clothesFlag == 1) then --이전 선택에서 옷을 선택했다면 곧 바로 옷을 숨김
- 							cat.alpha = 0
- 						end
+				 			cat.alpha = 0
+				 			print("숨김")
+				 		end
 
  						cat = display.newImageRect("image/custom/"..item_name..".png", 300, 300)
 			 			cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
@@ -175,12 +226,20 @@ function scene:create( event )
  						btn_ok_text.text, btn_ok_text.x = "확인", btn_ok.x
  						btn_no.alpha, btn_no_text.alpha = 0, 0
 
+ 						btn_ok:addEventListener("tap", function() 
+ 							popupGroup.alpha = 0 
+ 							popup_text.alpha = 0 
 
- 						btn_ok:addEventListener("tap", function() popupGroup.alpha = 0 popup_text.alpha = 0 if(event_occur == true) then
+ 							if(event_occur == true) then
 							can_cnt = can_cnt - 3 can_cnt_text.text = can_cnt event_occur = false
-						end end) 
-			 			item.closed = false --잠금해제
+							end 
+						end)
+
+						--잠금해제
+						loadedSettings.closed[item.i] = false 
+						setAlpha()
 			 			
+			 			--옷 갈아입을때 오류 방지용 코드(선택한 것이 옷이면 1)
 			 			if(string.find(item_name, "outer") == nil) then
 							clothesFlag = 0
 			 			else
@@ -189,9 +248,9 @@ function scene:create( event )
 
 			 			objectGroup:insert(cat)	
 
-			 			loadedSettings.money = can_cnt	
-			 			print(loadedSettings.money) 	
-			 			--저장어케함			
+			 			loadedSettings.money = can_cnt - 3	--왜 3을 빼야 제대로 저장되는지 이해못함
+			 			print("@@@@@" .. loadedSettings.money) 
+			 			loadsave.saveTable(loadedSettings,"settings.json")					
 			 		elseif (event.target.name == "btn_ok" and can_cnt < 3) then
 			 			popup_text.text = "캔 수가 모자랍니다."
 			 			btn_ok.x = display.contentWidth*0.5
@@ -203,7 +262,8 @@ function scene:create( event )
 			 		end
 		end
 
-		if(event.target.closed == true) then
+
+		if(loadedSettings.closed[item.i] == true) then
  				local popup = display.newImageRect("image/custom/popup.png", 400, 400)
  				popup.x, popup.y = display.contentWidth*0.5, display.contentHeight*0.5
 
@@ -233,15 +293,16 @@ function scene:create( event )
 
  				btn_ok:addEventListener("tap", btnTapListener)	
 			 	btn_no:addEventListener("tap", btnTapListener)	
- 		else
- 			if(clothesFlag == 1) then --이전 선택에서 옷을 선택했다면 곧 바로 옷을 숨김
- 				cat.alpha = 0
- 			end
+ 		else		
+			if(clothesFlag == 1) then --이전 선택에서 옷을 선택했다면 곧 바로 옷을 숨김
+	 			cat.alpha = 0
+	 		end
 
- 			if(string.find(item_name, "outer") == nil) then --옷 숨기는 함수
+	 		--아이템 선택이 옷인지 아닌지의 여부
+	 		if(string.find(item_name, "outer") == nil) then 
 				clothesFlag = 0
 			else
-			 	clothesFlag = 1
+				clothesFlag = 1
 			end	
 
  			cat = display.newImageRect("image/custom/"..item_name..".png", 300, 300)
@@ -299,8 +360,6 @@ function scene:create( event )
 
 	map:addEventListener("touch", goBackToMap)
  	reset:addEventListener("tap", resetListener)
-
- 	loadsave.saveTable(loadedSettings,"settings.json")	
 end
 
 function scene:show( event )

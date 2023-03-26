@@ -29,7 +29,6 @@ function scene:create( event )
     print(name)
 
 
-
   -- 배경 어둡게
     local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
     black.alpha = 0.5
@@ -55,8 +54,6 @@ function scene:create( event )
     gotoButtonText:setFillColor( 1, 1, 1 )  -- black
     sceneGroup:insert(gotoButtonText)
 
-    
-    
 
     -- 확인 버튼을 눌렀을 때 해당 건물의 게임 파일로 이동
     local function gotoChallenge(event)
@@ -111,8 +108,6 @@ function scene:create( event )
 
     gotoButton:addEventListener("touch", gotoChallenge)
 
-
-
     -- exit 버튼 눌렀을 때 volumeControl.lua파일에서 벗어나기
     local function goback(event)
         -- if event.phase == "began" then
@@ -125,7 +120,7 @@ function scene:create( event )
         end
     end
 
-
+    loadsave.saveTable(loadedSettings,"settings.json")
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
     local exit = display.newImageRect("image/설정/닫기.png", 768/6, 768/6)

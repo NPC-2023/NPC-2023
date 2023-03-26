@@ -77,16 +77,14 @@ function scene:create( event )
 	mainName = loadedSettings.name
 	times = loadedSettings.talk[3]
 
-	--npc와 대화한 횟수 테스트 용 코드 ( 잘뜸 )
-	local text = display.newText(times, display.contentWidth*0.1, display.contentHeight*0.1, "font/DOSGothic.ttf", 80)
-
 	if(composer.getVariable("talk3_status") == "fin") then
 		loadedSettings.talk[3] = 0 --0으로 초기화하기 위한 임시 코드
 		loadedSettings.talk[3] = loadedSettings.talk[3] + 1
 	end
 
+	--오늘 완수한 게임 개수(4면 히든게임 등장)
 	if(composer.getVariable("fishgame_status") == "success") then
-		loadedSettings.today_game_success = loadedSettings.today_game_success + 1
+		loadedSettings.today_success = loadedSettings.today_success + 1
 	end
 
 	local function acceptQuest( event )
@@ -213,6 +211,8 @@ function scene:create( event )
 
 		fish = display.newImageRect("image/npc/fish1.png", 100, 100)
  		fish.x, fish.y = cat.x - 80, cat.y - 80
+
+ 		loadedSettings.days = 16 --엔딩 테스트용
 
  		objectGroup:insert(fish)
  		fish:addEventListener("tap", fishTapEventListener)

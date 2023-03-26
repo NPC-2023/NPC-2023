@@ -38,14 +38,14 @@ local function onFirstView( event )
     		audio.play(titleMusic)
     		audio.setVolume( 0.5 )
 			composer.gotoScene( "view01_1_start_game" )
-            -- composer.gotoScene( "view21_npc_fishGame" )
+            -- composer.gotoScene( "ending" )
     else
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
     		audio.play(titleMusic)
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
 			composer.gotoScene( "view01_1_start_game" )		
-            -- composer.gotoScene( "view21_npc_fishGame" )
+            -- composer.gotoScene( "ending" )
     end
 
 end
