@@ -14,6 +14,7 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+	local widget = require ("widget")
 
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 
@@ -23,7 +24,7 @@ function scene:create( event )
 	sceneGroup:insert(background)
 
 
-
+--[[
 	--샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
@@ -33,31 +34,40 @@ function scene:create( event )
     local function setVolume(event)
         composer.showOverlay( "volumeControl", options )
     end
-    volumeButton:addEventListener("tap",setVolume)
+    volumeButton:addEventListener("tap",setVolume)]]
 
 
 
 
-	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 600, 600)
+	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 700, 700)
 	titlePopup.x,titlePopup.y = display.contentWidth/2,display.contentHeight*0.6
 	titlePopup.alpha = 0
 	sceneGroup:insert(titlePopup)
 
 
 
-    local text = "입장하기 전, 이름을 입력해주세요. (7글자 내)"
-	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.5)
+    local text = "입장하기 전, 이름을 입력해주세요."
+	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.46)
 	showText:setFillColor(0)
-	showText.size = 30
-	showText.alpha = 0
+	showText.size = 45
+	--showText.alpha = 0
 	sceneGroup:insert(showText)
 
 
 
-	local titleButton = display.newImageRect("image/게임시작/이름결정.png", 200, 100)
-	titleButton.x,titleButton.y = display.contentWidth/2,display.contentHeight * 0.65
+	local titleButton = display.newImageRect("image/게임시작/이름결정.png", 250, 200)
+	titleButton.x,titleButton.y = display.contentWidth/2,display.contentHeight * 0.68
 	titleButton.alpha = 0
 	sceneGroup:insert(titleButton)
+
+
+	local text1 = "확인"
+	local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.67)
+	showText1:setFillColor(0)
+	showText1.size = 45
+	showText1.alpha = 1
+	sceneGroup:insert(showText1)
+
 
 
 	--이름 입력을 위한 텍스트상자 생성--
@@ -88,7 +98,7 @@ function scene:create( event )
 	local function make_text()
 		defaultField = native.newTextField( display.contentWidth/2,display.contentHeight * 0.56, 370, 60 )
 		defaultField:addEventListener( "userInput", textListener )
-		defaultField.font = native.newFont( "font/잘풀리는오늘 Medium.ttf", 40)
+		defaultField.font = native.newFont( "font/font.ttf", 40)
 		defaultFied = ""
 		defaultField.align = "center"
 		sceneGroup:insert(defaultField)
@@ -118,48 +128,81 @@ function scene:create( event )
 			
 			defaultField:removeSelf()
 			defaultField = nil
-				composer.removeScene("view01_2_input_name")
-				composer.gotoScene("view01_1_start_game")
+			composer.removeScene("view01_2_input_name")
+			composer.gotoScene("view01_1_start_game")
 
 		end
 	end
 
 
-	local exit1 = display.newImageRect("image/설정/닫기.png", 100, 100)
+	local exit1 = display.newImageRect("image/설정/닫기.png", 50, 50)
 	sceneGroup:insert(exit1)
-	exit1.x, exit1.y = display.contentWidth*0.68, display.contentHeight*0.28
+	exit1.x, exit1.y = display.contentWidth*0.70, display.contentHeight*0.37
 	exit1:addEventListener("touch",gotomap)
 
+	local can = 20
 	
 	local function startNew(event)
 		--색깔 또는 이름을 선택하지 않았을 시 에러 팝업창으로 넘어간다
 		if defaultField.text == "" then
 			defaultField:removeSelf()
-			defaultField = nil
+			defaultField = 'nil'
 			composer.removeScene("view01_2_input_name")
 			composer.gotoScene("view01_3_error")
 		else
-				--게임 진행을 위한 저장 데이터들 생성
-				
+				--게임 진행을 위한 저장 데이터들 생성				
 				loadedEndings = loadsave.loadTable( "endings.json" )
 				loadsave.saveTable(loadedEndings,"endings.json")
+
+				-- 각 건물 당 npc와 얼마나 대화를 했는지 나타내는 리스트.
+				-- 각 건물의 위치를 숫자로 나타냄. ex)백주년은 1, 예지관은 8
+				local talk = {} 
+				for i = 1, 8 do
+					talk[i] = 0
+				end
+
 				local gameSettings = {
-    				money = 2000,
-    				fun = 0,
-    				hobby = 0,
+    				money = 20,
+    				can = 33, 
+    				hobby = 20,
     				study = 0,
-    				friendship =0,
+    				-- friendship = 20,
     				tutorial = 0,			
     				next1 = "",
     				next2 = "",
     				name = defaultField.text,
-  
+  					-- 게임 진행도
+  					talk = talk,
+  					today_success = 0, --오늘 성공한 게임 갯수
+  					today_talk = 0, --오늘 대화한 횟수
+  					buildings_index = {"백주년", "정문", "본관", "학생관", "대학원", "인문관", "숭인관", "예지관"},
+  					days = 0,
+  					--커스텀
+  					closed = {true, true, true, true, true, true, true, true, true},
+  					
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
 				
+
+
+
+
+				local itme = {
+						--itemCount = 0,
+						item1 = 0,
+						item2 = 0,
+						item3 = 0,
+						item4 = 0,
+						item5 = 0,
+						item6 = 0,
+						item7 = 0,
+						item8 = 0,
+						item9 = 0,
+					}
+
+		
 				local serializedJSON = json.encode(itme)
 				--loadsave.saveTable(custumeBuy, "items.json")
-
 
 				loadsave.saveTable( itmes ,"items.json" )
 				composer.setVariable("name",defaultField.text)
@@ -170,23 +213,20 @@ function scene:create( event )
 				titlePopup.alpha = 0
 				exit1.alpha = 0
 				showText.alpha = 0
+				showText1.alpha = 0
+				--volumeButton.alpha = 0
 
 				composer.removeScene("view01_2_input_name")
 				--composer.gotoScene( "tutorial00",options)
 				audio.pause( titleMusic )
 
-				tutorialMusic = audio.loadStream( "music/Trust.mp3" )
+				tutorialMusic = audio.loadStream( "music/music4.mp3" )
 	    		audio.play(tutorialMusic)
 	    		--audio.setVolume( loadedEndings.logValue )
 				composer.gotoScene( "tutorial00" ,options)
 			end
 	end
-	titleButton:addEventListener("tap",startNew)
-
-
-	
-	
-
+	titleButton:addEventListener("tap",startNew)	
 end
 
 function scene:show( event )

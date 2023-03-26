@@ -1,5 +1,6 @@
 -- 두더지게임
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
 local loadsave = require( "loadsave" )
 local json = require( "json" )
@@ -190,6 +191,34 @@ function scene:create( event )
 	showScore:setFillColor(1,0,0) 
 	showScore.size = 60
 	sceneGroup:insert(showScore)
+
+
+
+	-----음악
+
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    sceneGroup:insert(volumeButton)
+
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+    local home = audio.loadStream( "music/music5.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+    audio.play(home)
+
+
+    -------------
 
 	-- 1번째 ~ 3번째 (1,2,3 위치 랜덤으로 등장/같은 함수 쓰면 중첩돼서 함수 따로 써야됨)
 

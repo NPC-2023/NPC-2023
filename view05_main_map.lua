@@ -41,16 +41,16 @@ function scene:create( event )
 
 
 	-- 건물 배치 코드
-	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관"}
-	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관"}
-	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53}
-	local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54}
-	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 }
+	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
+	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
+	local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.85}
+	local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54, 0.1}
+	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 3.5}
 
 	local buildingGroup = display.newGroup()
 	local building = {}
 
-	for i = 1, 8 do 
+	for i = 1, 9 do 
 		local size = building_size[i]
 		building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] ..".png", 512/size, 512/size)
  		building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
@@ -79,7 +79,20 @@ function scene:create( event )
 		composer.showOverlay("showGotoCheckMsg", options)
 	end]]
 
-	
+    print("@@@@@test.." .. loadedSettings.days)
+
+    -- 화면전환 이펙트
+	local options={
+		effect = "fade",
+		time = 4000
+	}
+
+    if(loadedSettings.days == 16) then --1일째에 엔딩. day는 히든퀘 깨면 플러스. (0부터 시작)
+        composer.removeScene("view06_main_map1")
+        composer.gotoScene("ending", options)
+    end
+
+     loadsave.saveTable(loadedSettings,"settings.json")
 
 
 -- 마을 맵 마을 객체 생성.
@@ -122,19 +135,21 @@ function scene:create( event )
 	    	--print(options.params.targetName)
 	    	print(name)
 
-			if name == "" then
+			if name == "커스텀" then
 				---상점 코드
-
+				composer.removeScene("view05_main_map")
+				composer.gotoScene("custom")
 			else
 				composer.setVariable("name", name)
-				composer.removeScene("view05_main_map")
-				composer.gotoScene("view06_main_map1")
+				composer.showOverlay( "view06_main_map1", options )
+				--composer.removeScene("view05_main_map")
+				--composer.gotoScene("view06_main_map1")
 			end
 		end
 	end
 
 -- 리스너 추가
-	for i=1, 8 do
+	for i=1, 9 do
 		building[i]:addEventListener("mouse",bigbig)
 		building[i]:addEventListener("touch",touch_ui)
 		--building[i]:addEventListener("tap", gotoCheckMsg)
@@ -158,7 +173,7 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.4
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
     
     sceneGroup:insert(volumeButton)
 
@@ -204,7 +219,7 @@ function scene:hide( event )
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		composer.removeScene("stage01")
+		--composer.removeScene("view05_main_map")
 		-- Called when the scene is now off screen
 	end
 end

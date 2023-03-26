@@ -1,7 +1,8 @@
-local loadsave = require( "loadsave" )
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
-local json = require( "json" )  
+local loadsave = require( "loadsave" )
+local json = require( "json" ) 
 
 function scene:create( event )
     local sceneGroup = self.view
@@ -33,7 +34,7 @@ function scene:create( event )
     audio.reserveChannels(1)
     local backgroundSound = audio.loadStream(music)
 
-    local bgImage = display.newImageRect("image/volume/창.png", 600, 600)
+    local bgImage = display.newImageRect("image/volume/창.png", 700, 700)
     bgImage.x = display.contentWidth / 2; 
     bgImage.y = display.contentHeight  *0.6; 
     sceneGroup:insert(bgImage)
@@ -106,9 +107,9 @@ function scene:create( event )
     end
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
-    local exit = display.newImageRect("image/설정/닫기.png", 100, 100)
+    local exit = display.newImageRect("image/설정/닫기.png", 50, 50)
     sceneGroup:insert(exit)
-    exit.x, exit.y = display.contentWidth*0.68, display.contentHeight*0.28
+    exit.x, exit.y = display.contentWidth*0.70, display.contentHeight*0.37
     exit:addEventListener("touch",goback)
 end
 

@@ -10,7 +10,7 @@ function scene:create( event )
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
 
-	local background = display.newImageRect("image/fall/background.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/fall/background_final.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -52,17 +52,22 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
+				composer.setVariable("success", "success")
 				audio.pause(home)
 				composer.removeScene("view02_fall_game_over")
-				composer.gotoScene( "view05_main_map" )
+				composer.gotoScene( "view02_npc_fallgame" )
 		end
 	end
 
-	local backtomap =display.newImageRect("image/fall/클리어창.png",display.contentWidth/5,display.contentHeight/5) --성공할 경우
+	local backtomap =display.newImageRect("image/custom/cat_twinkle.png", 200, 200) --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
-	
+
+	local backtomap_text = display.newText("성공!", display.contentWidth*0.5, display.contentHeight*0.3, "font/DOSGothic.ttf")
+	backtomap_text:setFillColor(1)
+	backtomap_text.size = 60
+	sceneGroup:insert(backtomap_text)
 
 	local backgame =display.newImage("image/fall/fail.png") --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2

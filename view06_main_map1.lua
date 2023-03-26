@@ -29,7 +29,6 @@ function scene:create( event )
     print(name)
 
 
-
   -- 배경 어둡게
     local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
     black.alpha = 0.5
@@ -37,77 +36,77 @@ function scene:create( event )
     sceneGroup:insert(black)
     
 
-    local gotoScript = display.newImageRect("image/설정/창.png", 1024/1.5, 1024/1.5)
-    gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight/2
+    local gotoScript = display.newImageRect("image/설정/창.png", 700, 700)
+    gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight*0.6
     sceneGroup:insert(gotoScript)
 
     local gotoContentScript = display.newText(name.."으로 이동하시겠습니까?", display.contentWidth/2, display.contentHeight/2, native.systemFontBold)
-    gotoContentScript.size = 30
+    gotoContentScript.size = 42
     gotoContentScript:setFillColor(0, 0, 0)
-    gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4
+    gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4 +50
     sceneGroup:insert(gotoContentScript)
 
     local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", 768/4, 768/4)
-    gotoButton.x, gotoButton.y = display.contentWidth/2, display.contentHeight*0.6
+    gotoButton.x, gotoButton.y = display.contentWidth/2, display.contentHeight*0.66
     sceneGroup:insert(gotoButton)
 
-    local gotoButtonText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.59, native.systemFont, 30 )
+    local gotoButtonText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.65, native.systemFont, 40 )
     gotoButtonText:setFillColor( 1, 1, 1 )  -- black
     sceneGroup:insert(gotoButtonText)
 
-    
-    
 
     -- 확인 버튼을 눌렀을 때 해당 건물의 게임 파일로 이동
     local function gotoChallenge(event)
         if event.phase == "began" then
             if(name == "인문관")then
                 print("인문관")
-                composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view02_fall_game")
+                composer.removeScene("view06_main_map1")
+                composer.gotoScene("view02_npc_fallgame")
                 return true
             elseif(name == "음악관") then
                 print("음악관")
-                composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view02_fall_game")
+                composer.removeScene("view06_main_map1")
+                composer.gotoScene("view07_npc_schoolfood_game")
                 return true
             elseif(name == "예지관")then
                 print("예지관")
-                composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view02_fall_game")
+                composer.removeScene("view06_main_map1")
+                composer.gotoScene("view10_pre_lost_stuId_game")
                 return true
             elseif(name == "대학원")then
                 print("대학원")
-                composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view03_mouse_game")
+                composer.removeScene("view06_main_map1")
+                if(math.random(1, 2) == 1) then
+                    composer.gotoScene("view20_npc_moneyGame")
+                else
+                    composer.gotoScene("view03_npc_jump_game")
+                end
                 return true
             elseif(name == "본관")then
                 print("본관")
-                composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view03_mouse_game")
+                composer.removeScene("view06_main_map1")
+                composer.gotoScene("view21_npc_fishGame")
                 return true
             elseif(name == "정문")then
                 print("정문")
-                composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view03_mouse_game")
+                composer.removeScene("view06_main_map1")
+                composer.gotoScene("view18_npc_frontgate_game")
                 return true
             elseif(name == "백주년")then
                 print("백주년")
-                composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view03_mouse_game")
+                composer.removeScene("view06_main_map1")
+                composer.gotoScene("view13_pre_climbingTree")
                 return true
             elseif(name == "학생관")then
                 print("학생관")
-                composer.hideOverlay("view06_main_map1")
-                composer.gotoScene("view03_mouse_game")
+                composer.removeScene("view06_main_map1")
+                composer.gotoScene("view02_npc_pickGame")
                 return true
             end
         end
     end
 
     gotoButton:addEventListener("touch", gotoChallenge)
-
-
 
     -- exit 버튼 눌렀을 때 volumeControl.lua파일에서 벗어나기
     local function goback(event)
@@ -116,17 +115,18 @@ function scene:create( event )
         -- end
         --composer.hideOverlay("view06_main_map1")
         if event.phase == "began" then
-            composer.removeScene("view06_main_map1")
-            composer.gotoScene("view05_main_map")
+            --composer.removeScene("view06_main_map1")
+            --composer.gotoScene("view05_main_map")
+            composer.hideOverlay("view06_main_map1")
         end
     end
 
-
+    loadsave.saveTable(loadedSettings,"settings.json")
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
-    local exit = display.newImageRect("image/설정/닫기.png", 768/6, 768/6)
+    local exit = display.newImageRect("image/설정/닫기.png", 50, 50)
 
-    exit.x, exit.y = display.contentWidth*0.7, display.contentHeight*0.3
+    exit.x, exit.y = display.contentWidth*0.7, display.contentHeight*0.37
     exit:addEventListener("touch",goback)
     sceneGroup:insert(exit)
 
@@ -183,6 +183,7 @@ function scene:hide( event )
         -- INSERT code here to pause the scene
         -- e.g. stop timers, stop animation, unload sounds, etc.)
     elseif phase == "did" then
+        composer.removeScene("view06_main_map1")
         -- Called when the scene is now off screen
     end
 end
