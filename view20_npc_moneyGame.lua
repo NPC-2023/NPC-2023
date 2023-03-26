@@ -32,7 +32,7 @@ function scene:create( event )
 	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-130
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
-	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
+	local accept = display.newText("", speechbubble.x, speechbubble.y-50, "font/DOSGothic.ttf")
 	local money = math.random(1, 10) * 1000 --고양이가 받을 심부름 돈
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
@@ -49,7 +49,7 @@ function scene:create( event )
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha = 0
 
-	local script = display.newText("", display.contentWidth/2, display.contentHeight*0.789, "font/DOSGothic.ttf", 80)
+	local script = display.newText("", display.contentWidth*0.2, display.contentHeight*0.789, "font/DOSGothic.ttf", 80)
 	script.size = 30
 	script:setFillColor(1)
 	script.alpha = 0
@@ -103,6 +103,7 @@ function scene:create( event )
 		speech.size = 20
 		speech:setFillColor(0)
 
+		objectGroup:insert(script)
 		objectGroup:insert(speechbubble)
 		objectGroup:insert(speech)
 
@@ -151,7 +152,7 @@ function scene:create( event )
 				else 
 					--동전 누르면 게임 시작
 					coin.alpha = 1
-		 			coin.x, coin.y = npc.x-120, npc.y+10
+		 			coin.x, coin.y = npc.x-100, npc.y+50
 		 			objectGroup:insert(coin)
 
 					accept.text = "동전을 누르세요\n"

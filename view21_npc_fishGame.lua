@@ -106,6 +106,8 @@ function scene:create( event )
 		speech.size = 20
 		speech:setFillColor(0)
 
+
+		objectGroup:insert(script)
 		objectGroup:insert(speechbubble)
 		objectGroup:insert(speech)
 
