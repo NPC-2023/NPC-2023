@@ -89,8 +89,9 @@ function scene:create( event )
 	-- 퀘스트 4개를 실행하면 계절 바꾸게 하기
 	local background
 
+	print(loadedSettings.toal_success)
 	--if(questedListGet == nil or #questedListGet < 2) then
-	if(questedListGet == nil or #questedListGet < 4) then
+	if(loadedSettings.toal_success < 5) then
 		print("봄")
 		background = display.newImageRect("image/map/봄맵.png", display.contentWidth, display.contentHeight)
 
@@ -98,14 +99,9 @@ function scene:create( event )
 			local size = building_size[i]
 			building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."봄.png", 512/size, 512/size)
  		end
-	end
-
-
-	if(questedListGet ~= nil and #questedListGet >= 1 ) then
-		local cnt = #questedListGet
-		print("cnt:", cnt)
-		if(cnt == 4) then
-			print("4개 성공 / 계절 바꿈(여름)")
+	else
+		if(loadedSettings.toal_success >= 4 or loadedSettings.toal_success < 8) then
+			print("4개이상 성공 / 계절 바꿈(여름)")
 			-- 백그라운드 변경
 			background = display.newImageRect("image/map/여름맵.png", display.contentWidth, display.contentHeight)
 
@@ -114,17 +110,16 @@ function scene:create( event )
 				building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."여름.png", 512/size, 512/size)
 	 		end
 
-		elseif(cnt == 8)then
-			print("8개 성공 / 계절 바꿈(가을)")
+		elseif(loadedSettings.toal_success >= 8 or loadedSettings.toal_success < 12)then
+			print("8개이상 성공 / 계절 바꿈(가을)")
 			background = display.newImageRect("image/map/가을맵.png", display.contentWidth, display.contentHeight)
 
 			for i = 1, 8 do 
 				local size = building_size[i]
 				building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."가을.png", 512/size, 512/size)
 	 		end
-
-		elseif(cnt == 12)then
-			print("12개 성공 / 계절 바꿈(겨울)")
+		else
+			print("12개이상 성공 / 계절 바꿈(겨울)")
 			background = display.newImageRect("image/map/겨울맵.png", display.contentWidth, display.contentHeight)
 
 			for i = 1, 8 do 
@@ -181,8 +176,8 @@ function scene:create( event )
 				building[3].fill.effect = "filter.desaturate"
 				building[3].fill.effect.intensity = 0.7
 			elseif (loadedSettings.toal_success_names[i] == "매점에서 간식 사기")then
-				for j = 1, #questedListGet do 
-					if(questedListGet[j] == "고양이 점프해서 츄르 찾기") then -- pre_jumpGame이지만 임시로 설정
+				for j = 1, loadedSettings.toal_success do 
+					if (loadedSettings.toal_success_names[j] == "고양이 점프해서 츄르 찾기") then -- pre_jumpGame이지만 임시로 설정
 						catSoles_idx = catSoles_idx + 1
 						catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 						catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.32
@@ -191,8 +186,8 @@ function scene:create( event )
 					end
 				end
 			elseif (loadedSettings.toal_success_names[i] == "고양이 점프해서 츄르 찾기")then -- pre_jumpGame이지만 임시로 설정
-				for j = 1, #questedListGet do 
-					if(questedListGet[j] == "매점에서 간식 사기") then
+				for j = 1, loadedSettings.toal_success do 
+					if(loadedSettings.toal_success_names[j] == "매점에서 간식 사기") then
 						catSoles_idx = catSoles_idx + 1
 						catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 						catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.32

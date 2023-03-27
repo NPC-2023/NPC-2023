@@ -4,12 +4,14 @@
 --
 -----------------------------------------------------------------------------------------
 
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 local composer = require( "composer" )
 local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
+
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
