@@ -15,9 +15,13 @@ function scene:create( event )
 	physics.start()
 	loadedEndings = loadsave.loadTable( "endings.json" )
 	
-	local gametitle = display.newImageRect("image/fall/background_final.png", display.contentWidth, display.contentHeight)
+	local gametitle = display.newImageRect("image/fall/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
-	sceneGroup:insert(gametitle)
+
+	local gameName = display.newText("떨어지는\n참치캔 받기", 0, 0, "ttf/Galmuri7.ttf", 45)
+	gameName.align = "center"
+	gameName:setFillColor(0)
+	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
 
 	
 	local background = display.newImageRect("image/fall/background_final.png", display.contentWidth, display.contentHeight)
@@ -143,6 +147,7 @@ function scene:create( event )
 		gametitle.alpha=0
 		section.alpha=1
 		script.alpha=1
+		display.remove(gameName)
 		section:addEventListener("tap", scriptremove)
 	end
 

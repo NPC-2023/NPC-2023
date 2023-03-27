@@ -4,11 +4,16 @@
 --
 -----------------------------------------------------------------------------------------
 
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 local composer = require( "composer" )
 local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	local background = display.newImageRect("image/cafeteria/store.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
@@ -80,6 +85,11 @@ function scene:create( event )
 			objectGroup:insert(text)
 			--다시 퀘스트 수락 화면으로 돌아옴
 			timer.performWithDelay( 1000, function() 
+
+				loadedSettings.toal_success = loadedSettings.toal_success + 1
+				loadedSettings.toal_success_names[loadedSettings.toal_success] = "매점에서 간식 사기"
+				loadsave.saveTable(loadedSettings,"settings.json")
+
 				composer.setVariable("moneygame_status", "success")
 				composer.removeScene("view20_moneyGame")
 				composer.gotoScene("view20_npc_moneyGame")

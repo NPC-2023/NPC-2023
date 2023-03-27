@@ -222,7 +222,8 @@ function scene:create( event )
 	end
 
 
-	local function goBackToMap(event) 
+	local function goBackToMap(event)
+		composer.setVariable("questedList", questedListGet) 
 		composer.gotoScene("view05_main_map")
 	end
 

@@ -16,6 +16,7 @@ function scene:create( event )
 	local objectGroup = display.newGroup()
 	local scriptGroup = display.newGroup()
 
+
 	-- Load the background
 	local background = display.newImageRect("image/frontgate/gate.jpg", 1280, 720 )--배경이미지 
 	background.x = display.contentCenterX
