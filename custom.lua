@@ -190,6 +190,7 @@ function scene:create( event )
     audio.play(custom)
 
     local clothesFlag = 0
+    local item_for_reset = ''
 
     -------------
 	local function changeCatApperanceEvent(event)
@@ -203,6 +204,7 @@ function scene:create( event )
 		local btn_ok_text, btn_no_text = "", ""
 		local popupGroup = display.newGroup()
 		local event_occur = false
+		item_for_reset = cat
 
 		local function btnTapListener(event)
  					if(event.target.name == "btn_ok" and can_cnt >= 3) then
@@ -321,6 +323,9 @@ function scene:create( event )
  	local function resetListener( event )
  		--[[local soundEffect = audio.loadSound( "soundEffect/custom_music.mp3" )
 		audio.play( soundEffect )]]
+		if(clothesFlag == 1) then 
+			cat.alpha = 0
+		end	
  		cat = display.newImageRect("image/custom/cat.png", 300, 300)
  		cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
  		cat.xScale = -1
