@@ -14,7 +14,6 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	local objectGroup = display.newGroup()
-	local scriptGroup = display.newGroup()
 
 
 	-- Load the background
@@ -30,8 +29,8 @@ function scene:create( event )
 	cat.x = display.contentCenterX
 	cat.y = display.contentHeight - 100
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 180)
-	speechbubble.x, speechbubble.y = npc.x, npc.y-110
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 200)
+	speechbubble.x, speechbubble.y = npc.x, npc.y-120
 	speechbubble.alpha = 0
 
 	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
@@ -46,181 +45,114 @@ function scene:create( event )
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
 
-	--스크립트
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
-	section:setFillColor(0.35, 0.35, 0.35, 0.35)
-	section.alpha = 0
+	--npc 말풍선 및 수락 텍스트
+	local function talkWithNPC( event )
+		speechbubble_exmark.alpha = 0
+		speechbubble.alpha = 1
+		speech.text = "정문에 외부인이 출입 못하도록 \n 냥냥편치를 날려줘!"
+		speech.size = 20
+		speech:setFillColor(0)
 
-	local script = display.newText("", display.contentWidth*0.2, display.contentHeight*0.789, "font/DOSGothic.ttf", 80)
-	script.size = 30
-	script:setFillColor(1)
-	script.alpha = 0
-
-	objectGroup:insert(section)
-	objectGroup:insert(script) 
-
-	--스크립트 속 선택지
-	local gossip_click = display.newText("▼대화", display.contentWidth*0.15, display.contentHeight*0.8, "font/DOSGothic.ttf", 80)
-	gossip_click.size = 30
-	gossip_click:setFillColor(1)
-	gossip_click.alpha = 0
-
-	local game_click = display.newText("▼게임", display.contentWidth*0.15, display.contentHeight*0.88, "font/DOSGothic.ttf", 80)
-	game_click.size = 30
-	game_click:setFillColor(1)
-	game_click.alpha = 0
-
-
-	--게임 전체 변수(저장됨)
-	local loadedSettings = loadsave.loadTable( "settings.json" )
-	mainName = loadedSettings.name
-	times = loadedSettings.talk[5]
-
-	if(composer.getVariable("talk2_status") == "fin") then
-		loadedSettings.talk[5] = 0 --0으로 초기화하기 위한 임시 코드
-		loadedSettings.talk[5] = loadedSettings.talk[5] + 1
-	end
-
-	--오늘 완수한 게임 개수(4면 히든게임 등장)
-	if(composer.getVariable("frontgategame_status") == "success") then
-		loadedSettings.today_success = loadedSettings.today_success + 1
+		timer.performWithDelay( 1500, function() 
+			accept.text = "말풍선을 눌러 수락하세요\n"
+			accept.size = 20
+			accept:setFillColor(1)
+		end)
 	end
 
 	local function acceptQuest( event )
 		--수락시 말풍선, 대화 사라짐
-		-- coin.alpha = 0
-		scriptGroup.alpha = 0
 		speechbubble.alpha = 0
 		speech.alpha = 0
-		accept.alpha = 0
+		timer.performWithDelay( 500, function() 
+			accept.alpha = 0
+		end)
 
-		section.alpha = 1
-		script.text = "퀘스트를 수락했습니다."
-		script.alpha = 1			
+		--스크립트
+
+		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+		section:setFillColor(0.35, 0.35, 0.35, 0.35)
+
+		local script = display.newText("퀘스트를 수락했습니다.", section.x+30, section.y-100, "font/DOSGothic.ttf", 80)
+		script.size = 30
+		script:setFillColor(1)
+		script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+
+		objectGroup:insert(section)
+		objectGroup:insert(script) 				
 
 		--수락(말풍선)누르면 고양이가 말함
-		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 200, 75)
-		speechbubble.x, speechbubble.y = cat.x, cat.y-100
-		local speech = display.newText("알았다냥!\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
-		speech.size = 20
-		speech:setFillColor(0)
-
-		objectGroup:insert(script)
-		objectGroup:insert(speechbubble)
-		objectGroup:insert(speech)
-
+		local speechbubble2 = display.newImageRect("image/npc/speechbubble.png", 200, 75)
+		speechbubble2.x, speechbubble2.y = cat.x, cat.y-100
+		local speech2 = display.newText("알았다냥!\n", 
+			speechbubble2.x, speechbubble2.y, "font/DOSGothic.ttf")
+		speech2.size = 20
+		speech2:setFillColor(0)
 		--1초뒤 고양이 대화 사라짐
 		timer.performWithDelay( 1000, function() 
-			speechbubble.alpha = 0
-			speech.alpha = 0
+			speechbubble2.alpha = 0
+			speech2.alpha = 0
 			composer.removeScene("view18_npc_frontgate_game")
 			composer.gotoScene("view18_frontgate_game")
 		end)
 	end
 
-
-	local function gossipOrGame(event)
-		timer.performWithDelay( 1500, function() 
-			scriptGroup.alpha = 1
-			--스크립트
-			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
-			section:setFillColor(0.35, 0.35, 0.35, 0.35)
-
-			local script = display.newText("어떤 것을 할까?", display.contentWidth*0.2, display.contentHeight*0.7, "font/DOSGothic.ttf", 80)
-			script.size = 30
-			script:setFillColor(1)
-
-			gossip_click.alpha = 1
-			game_click.alpha = 1
-
-			objectGroup:insert(section)
-			scriptGroup:insert(script)
-			scriptGroup:insert(gossip_click)
-			scriptGroup:insert(game_click)
-			objectGroup:insert(scriptGroup)
-
-			gossip_click:addEventListener("tap", function() --대화 클릭 시 페이지 이동
-				if(composer.getVariable("talk3_status") == "fin") then
-					script.text = "이미 대화를 끝냈습니다."
-				else
-					composer.removeScene("view18_npc_frontgate_game")
-					composer.gotoScene("view18_talk_frontgate_game")
-				end
-			end)
-
-			game_click:addEventListener("tap", function() 
-				if(composer.getVariable("frontgategame_status") == "success") then
-					script.text = "이미 게임을 끝냈습니다."
-				else 
-					composer.removeScene("view18_npc_frontgate_game")
-					composer.gotoScene("view18_frontgate_game")
-				end
-			end)
-		end) --가상함수
-	end 
-
-	--npc 말풍선 및 수락 텍스트
-	local function talkWithNPC( event )
-		if(composer.getVariable("frontgategame_status") == "success" and composer.getVariable("talk5_status") == "fin") then
-			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
-				section:setFillColor(0.35, 0.35, 0.35, 0.35)
-
-			local script = display.newText("퀘스트를 완료하였습니다. ", display.contentWidth/2, display.contentHeight*0.789, "font/DOSGothic.ttf", 80)
-				script.size = 30
-				script:setFillColor(1)
-			local scriptGroup = display.newGroup()
-
-			scriptGroup:insert(section)
-			scriptGroup:insert(script)
-			objectGroup:insert(scriptGroup)
-
-			section:addEventListener("tap", function() scriptGroup.alpha = 0 gossipOrGame() end)
-		end
-
-		speechbubble_exmark.alpha = 0
-		speechbubble.alpha = 1
-		speech.alpha = 1
-		scriptGroup.alpha = 1
-
-		if(composer.getVariable("frontgategame_status") ~= "success") then			
-			speech.text = "외부인이 못들어 오게\n냥냥펀치를 날려줘!"
-		else
-			speech.text = "누가 학생이 아닌지\n 잘 구분해야 할텐데.."
-		end
-		speech.size = 20
-		speech:setFillColor(0)
-
-		if(composer.getVariable("frontgategame_status") ~= "success" or composer.getVariable("talk3_status") ~= "fin") then
-			gossipOrGame()
-		end
-	end
-
-	-- --npc가 고양이에게 주는 선물 
-	-- local can = ''
-	-- local canFlag = 0
-	-- if(composer.getVariable("frontgategame_status") == "success" and canFlag == 0) then
-	-- 	canFlag = 1
-
-	-- 	speechbubble_exmark.alpha = 0
-	-- 	speechbubble.alpha = 1
-	-- 	speech.text = "고마워! 맛있겠다!\n너도 맛있는거 먹을래?"
-	-- 	speech.alpha = 1
-	-- 	speech:setFillColor(black)
-	-- 	coin.alpha = 0
-
-	-- 	can = display.newImageRect("image/npc/can.png", 100, 100)
- 	-- 	can.x, can.y = npc.x-120, npc.y+10
-
- 	-- 	objectGroup:insert(can)
-	-- 	can:addEventListener("tap", function() can.alpha = 0 speechbubble.alpha = 0 speech.alpha = 0 talkWithNPC() end)
-	-- end
-
-
 	local function goBackToMap(event) 
 		composer.gotoScene("view05_main_map")
 	end
 
-	loadsave.saveTable(loadedSettings,"settings.json")
+	if(composer.getVariable("successFront") == "success") then
+		-- local tmp = composer.getVariable("can_cnt_global")
+		-- composer.setVariable("can_cnt_global", tmp + 1)
+		speechbubble_exmark.alpha = 0
+		speech.alpha = 0
+		accept.alpha = 0
+		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 150)
+		speechbubble.x, speechbubble.y = npc.x, display.contentHeight*0.35
+		local speech2 = display.newText(" 학교가 위험에 빠질 뻔 했어. \n 너 덕분이야! ", 
+			speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
+		speech2.size = 20
+		speech2:setFillColor(0)
+
+		objectGroup:insert(speechbubble)
+		objectGroup:insert(speech2)
+
+		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+		section:setFillColor(0.35, 0.35, 0.35, 0.35)
+
+		local script = display.newText("퀘스트를 완료하였습니다. \n 맵으로 돌아가세요 ", section.x+30, section.y-100, "font/DOSGothic.ttf", 80)
+		script.size = 30
+		script:setFillColor(1)
+		script.x, script.y = display.contentWidth*0.2, display.contentHeight*0.789
+
+		objectGroup:insert(section)
+		objectGroup:insert(script)
+
+		--npc의선물
+		-- local fish = display.newImageRect("image/fish1.png", 100, 100)
+ 		-- fish.x, fish.y = npc.x-80, npc.y
+
+ 		-- local function fishTapEventListener(event)
+ 		-- 	fish.alpha = 0
+
+		-- 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+		-- 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
+
+		-- 	local script_can = display.newText("퀘스트를 완료하였습니다. \n 맵으로 돌아가세요 ", section.x+30, section.y-100, "font/DOSGothic.ttf", 80)
+		-- 	script_can.size = 30
+		-- 	script_can:setFillColor(1)
+		-- 	script_can.x, script_can.y = display.contentWidth/2, display.contentHeight*0.789
+
+		-- 	objectGroup:insert(section)
+		-- 	objectGroup:insert(script_can)
+		-- end
+
+		-- fish:addEventListener("tap", fishTapEventListener)
+		-- objectGroup:insert(fish)
+	end
+
+	-- print(composer.getVariable("success"))
+
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
 	speechbubble:addEventListener("tap", acceptQuest)
