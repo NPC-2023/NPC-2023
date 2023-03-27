@@ -80,6 +80,36 @@ function scene:create( event )
 			objectGroup:insert(text)
 			--다시 퀘스트 수락 화면으로 돌아옴
 			timer.performWithDelay( 1000, function() 
+
+				local questedListGet = composer.getVariable("questedList")
+				local gameName = "매점에서 간식 사기"
+
+				-- 퀘스트 완료된 퀘스트 리스트
+				local addQuest = true
+
+				if (questedListGet == nil) then
+					questedListGet = {}
+					questedListGet[1] = gameName
+				elseif (#questedListGet == 0)then
+					questedListGet[1] = gameName
+				else
+					if(#questedListGet == 1) then
+						if (questedListGet[#questedListGet] ~= gameName) then
+								questedListGet[#questedListGet+1] = gameName
+						end  
+					else
+						for i = 1, #questedListGet do 
+							if (questedListGet[i] == gameName) then
+								addQuest = false
+							end
+						end
+						if(addQuest==true)then
+							questedListGet[#questedListGet+1] = gameName
+							print("처음이니깐 추가!")
+						end
+					end
+				end
+				composer.setVariable("questedList", questedListGet)
 				composer.setVariable("moneygame_status", "success")
 				composer.removeScene("view20_moneyGame")
 				composer.gotoScene("view20_npc_moneyGame")

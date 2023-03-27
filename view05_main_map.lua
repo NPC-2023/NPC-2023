@@ -205,9 +205,9 @@ function scene:create( event )
 
 				building[3].fill.effect = "filter.desaturate"
 				building[3].fill.effect.intensity = 0.7
-			elseif (questedListGet[i] == "간식 사기")then
+			elseif (questedListGet[i] == "매점에서 간식 사기")then
 				for j = 1, #questedListGet do 
-					if(questedListGet[j] == "Pick Game") then -- pre_jumpGame이지만 임시로 설정
+					if(questedListGet[j] == "고양이 점프해서 츄르 찾기") then -- pre_jumpGame이지만 임시로 설정
 						catSoles_idx = catSoles_idx + 1
 						catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 						catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.32
@@ -215,9 +215,9 @@ function scene:create( event )
 						building[4].fill.effect.intensity = 0.7
 					end
 				end
-			elseif (questedListGet[i] == "Pick Game")then -- pre_jumpGame이지만 임시로 설정
+			elseif (questedListGet[i] == "고양이 점프해서 츄르 찾기")then -- pre_jumpGame이지만 임시로 설정
 				for j = 1, #questedListGet do 
-					if(questedListGet[j] == "간식 사기") then
+					if(questedListGet[j] == "매점에서 간식 사기") then
 						catSoles_idx = catSoles_idx + 1
 						catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 						catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.32

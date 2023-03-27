@@ -123,7 +123,7 @@ function scene:create( event )
 		-- objectGroup:insert(script)
 
 		-- npc의선물
-		local present = display.newImageRect("image/goal.png", 100, 100)
+		local present = display.newImageRect("image/jump/goal.png", 100, 100)
  		present.x, present.y = npc.x-80, npc.y
 
  		local function presentTapEventListener(event)
