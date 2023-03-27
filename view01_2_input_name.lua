@@ -173,8 +173,6 @@ function scene:create( event )
     				name = defaultField.text,
   					-- 게임 진행도
   					talk = talk,
-  					toal_success = 0, -- 총 성공한 게임 갯수
-  					toal_success_names = {}, -- 총 성공한 게임 이름 {}, 
   					today_success = 0, --오늘 성공한 게임 갯수
   					today_talk = 0, --오늘 대화한 횟수
   					buildings_index = {"백주년", "정문", "본관", "학생관", "대학원", "인문관", "숭인관", "예지관"},

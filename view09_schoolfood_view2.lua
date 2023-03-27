@@ -13,10 +13,6 @@ local json = require( "json" )
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local loadedEndings = loadsave.loadTable( "endings.json" )
-	local loadedSettings = loadsave.loadTable( "settings.json" )
-
-
 	local background = display.newImageRect("image/schoolfood/cafeteria.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
@@ -55,14 +51,9 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
-			composer.setVariable("successSchoolFood", "success")
-
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "대신 학식 받아주기"
-			loadsave.saveTable(loadedSettings,"settings.json")
-
-			composer.removeScene("view09_schoolfood_view2")
-			composer.gotoScene( "view07_npc_schoolfood_game" )
+				composer.setVariable("successSchoolFood", "success")
+				composer.removeScene("view09_schoolfood_view2")
+				composer.gotoScene( "view07_npc_schoolfood_game" )
 		end
 	end
 

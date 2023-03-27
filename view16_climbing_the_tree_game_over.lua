@@ -12,11 +12,6 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-
-	local loadedEndings = loadsave.loadTable( "endings.json" )
-	local loadedSettings = loadsave.loadTable( "settings.json" )
-
-
 	local background = display.newImage("image/climbing_the_tree/배경.png")
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(background)
@@ -68,14 +63,9 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
-			composer.removeScene("view16_climbing_the_tree_game_over")
-			composer.setVariable("successClimbing", "success")
-
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "나무 올라가기"
-			loadsave.saveTable(loadedSettings,"settings.json")
-			
-			composer.gotoScene( "view13_pre_climbingTree" )
+				composer.removeScene("view16_climbing_the_tree_game_over")
+				-- composer.gotoScene( "view01" )
+				composer.gotoScene( "view13_pre_climbingTree" )
 		end
 	end
 

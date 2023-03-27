@@ -8,12 +8,10 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-
-	local loadedEndings = loadsave.loadTable( "endings.json" )
-	local loadedSettings = loadsave.loadTable( "settings.json" )
+	loadedEndings = loadsave.loadTable( "endings.json" )
 
 	
-	local background = display.newImageRect("image/jump/background_water.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/background_water.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -38,7 +36,7 @@ function scene:create( event )
 		end
 	end
 	--close 버튼
-	local close = display.newImageRect("image/jump/닫기.png", 80, 80)
+	local close = display.newImageRect("image/닫기.png", 80, 80)
 	close.x, close.y = 1200, 80
 	close.alpha = 0
 
@@ -46,22 +44,17 @@ function scene:create( event )
 			composer.setVariable("successJump", "success")
 			if event.phase == "began" then--view20ring
 			audio.pause(home)
-
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "고양이 점프해서 츄르 찾기"
-			loadsave.saveTable(loadedSettings,"settings.json")
-
 			composer.removeScene("view03_jump_game_over")
 			composer.gotoScene("view03_npc_jump_game") --npc로
 		end
 	end
 
-	local backgame1 =display.newImage("image/jump/클리어창.png") --성공할 경우
+	local backgame1 =display.newImage("image/클리어창.png") --성공할 경우
 	backgame1.x, backgame1.y = display.contentWidth/2, display.contentHeight/2
 	backgame1.alpha = 0
 	sceneGroup:insert(backgame1)
 
-	local backgame2 =display.newImage("image/jump/실패창.png") --실패할 경우
+	local backgame2 =display.newImage("image/실패창.png") --실패할 경우
 	backgame2.x, backgame2.y = display.contentWidth/2, display.contentHeight/2
 	backgame2.alpha = 0
 	sceneGroup:insert(backgame2)

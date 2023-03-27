@@ -10,10 +10,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	physics.start()
-
-	local loadedEndings = loadsave.loadTable( "endings.json" )
-	local loadedSettings = loadsave.loadTable( "settings.json" )
-
+	loadedEndings = loadsave.loadTable( "endings.json" )
 	
 	local background = display.newImageRect("image/pick/image/background_final.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -41,19 +38,13 @@ function scene:create( event )
 	end
 	--close 버튼
 	local close = display.newImageRect("image/pick/image/닫기.png", 80, 80)
-	-- close.x, close.y = 1200, 80 -> 맵보기 아이콘이랑 겹쳐있어 닫기 버튼을 누르면 맵보기 아이콘도 같이 눌러짐
-	close.x, close.y = 1200, 30
+	close.x, close.y = 1200, 80
 	close.alpha = 0
 
 	local function gomap(event) -- 게임 pass 후 map으로 넘어감
 		if event.phase == "began" then--view20ring
 			composer.setVariable("successPickGame", "success")
 			audio.pause(home1)
-
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
-			loadsave.saveTable(loadedSettings,"Pick Game")
-			
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("view02_npc_pickGame") 
 		end

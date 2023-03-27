@@ -7,9 +7,7 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-
-	local loadedEndings = loadsave.loadTable( "endings.json" )
-	local loadedSettings = loadsave.loadTable( "settings.json" )
+	loadedEndings = loadsave.loadTable( "endings.json" )
 
 
 	local background = display.newImageRect("image/fall/background_final.png",display.contentWidth, display.contentHeight) ---배경
@@ -56,11 +54,6 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 				composer.setVariable("success", "success")
 				audio.pause(home)
-
-				loadedSettings.toal_success = loadedSettings.toal_success + 1
-				loadedSettings.toal_success_names[loadedSettings.toal_success] = "떨어지는 참치캔 받기"
-				loadsave.saveTable(loadedSettings,"settings.json")
-
 				composer.removeScene("view02_fall_game_over")
 				composer.gotoScene( "view02_npc_fallgame" )
 		end
