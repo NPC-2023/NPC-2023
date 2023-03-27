@@ -13,6 +13,11 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
+
+
 	local background = display.newImageRect("image/lost_stuId/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
@@ -72,6 +77,40 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 				composer.setVariable("successLost", "success")
 				composer.removeScene("view12_lost_stuId_game_over")
+
+				loadedSettings.toal_success = loadedSettings.toal_success + 1
+				loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
+				loadsave.saveTable(loadedSettings,"settings.json")
+
+				-- local questedListGet = composer.getVariable("questedList")
+				-- local gameName = "학생증 찾기"
+				
+				-- -- 퀘스트 완료된 퀘스트 리스트
+				-- local addQuest = true
+
+				-- if (questedListGet == nil) then
+				-- 	questedListGet = {}
+				-- 	questedListGet[1] = gameName
+				-- elseif (#questedListGet == 0)then
+				-- 	questedListGet[1] = gameName
+				-- else
+				-- 	if(#questedListGet == 1) then
+				-- 		if (questedListGet[#questedListGet] ~= gameName) then
+				-- 				questedListGet[#questedListGet+1] = gameName
+				-- 		end  
+				-- 	else
+				-- 		for i = 1, #questedListGet do 
+				-- 			if (questedListGet[i] == gameName) then
+				-- 				addQuest = false
+				-- 			end
+				-- 		end
+				-- 		if(addQuest==true)then
+				-- 			questedListGet[#questedListGet+1] = gameName
+				-- 			print("처음이니깐 추가!")
+				-- 		end
+				-- 	end
+				-- end
+				-- composer.setVariable("questedList", questedListGet)
 				composer.gotoScene( "view10_pre_lost_stuId_game" )
 		end
 	end

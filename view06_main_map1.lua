@@ -31,7 +31,7 @@ function scene:create( event )
 
   -- 배경 어둡게
     local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
-    black.alpha = 0.5
+    black.alpha = 0.9
     black:setFillColor(0)
     sceneGroup:insert(black)
     
@@ -115,9 +115,9 @@ function scene:create( event )
         -- end
         --composer.hideOverlay("view06_main_map1")
         if event.phase == "began" then
-            --composer.removeScene("view06_main_map1")
-            --composer.gotoScene("view05_main_map")
-            composer.hideOverlay("view06_main_map1")
+            composer.removeScene("view06_main_map1")
+            composer.gotoScene("view05_main_map")
+            --composer.hideOverlay("view06_main_map1")
         end
     end
 
