@@ -13,6 +13,9 @@ local json = require( "json" )
 function scene:create( event )
 	local sceneGroup = self.view
 
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
+
 
 	local background = display.newImage("image/climbing_the_tree/배경.png")
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
@@ -68,36 +71,10 @@ function scene:create( event )
 			composer.removeScene("view16_climbing_the_tree_game_over")
 			composer.setVariable("successClimbing", "success")
 
-			local questedListGet = composer.getVariable("questedList")
-			local gameName = "나무 올라가기"
+			loadedSettings.toal_success = loadedSettings.toal_success + 1
+			loadedSettings.toal_success_names[loadedSettings.toal_success] = "나무 올라가기"
+			loadsave.saveTable(loadedSettings,"settings.json")
 			
-			-- 퀘스트 완료된 퀘스트 리스트
-			local addQuest = true
-
-			if (questedListGet == nil) then
-				questedListGet = {}
-				questedListGet[1] = gameName
-			elseif (#questedListGet == 0)then
-				questedListGet[1] = gameName
-			else
-				if(#questedListGet == 1) then
-					if (questedListGet[#questedListGet] ~= gameName) then
-							questedListGet[#questedListGet+1] = gameName
-					end  
-				else
-					for i = 1, #questedListGet do 
-						if (questedListGet[i] == gameName) then
-							addQuest = false
-						end
-					end
-					if(addQuest==true)then
-						questedListGet[#questedListGet+1] = gameName
-						print("처음이니깐 추가!")
-					end
-				end
-			end
-			composer.setVariable("questedList", questedListGet)
-			-- composer.gotoScene( "view01" )
 			composer.gotoScene( "view13_pre_climbingTree" )
 		end
 	end

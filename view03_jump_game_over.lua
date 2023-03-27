@@ -8,7 +8,9 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-	loadedEndings = loadsave.loadTable( "endings.json" )
+
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	
 	local background = display.newImageRect("image/jump/background_water.png",display.contentWidth, display.contentHeight) ---배경
@@ -45,35 +47,9 @@ function scene:create( event )
 			if event.phase == "began" then--view20ring
 			audio.pause(home)
 
-			local questedListGet = composer.getVariable("questedList")
-			local gameName = "고양이 점프해서 츄르 찾기"
-			
-			-- 퀘스트 완료된 퀘스트 리스트
-			local addQuest = true
-
-			if (questedListGet == nil) then
-				questedListGet = {}
-				questedListGet[1] = gameName
-			elseif (#questedListGet == 0)then
-				questedListGet[1] = gameName
-			else
-				if(#questedListGet == 1) then
-					if (questedListGet[#questedListGet] ~= gameName) then
-							questedListGet[#questedListGet+1] = gameName
-					end  
-				else
-					for i = 1, #questedListGet do 
-						if (questedListGet[i] == gameName) then
-							addQuest = false
-						end
-					end
-					if(addQuest==true)then
-						questedListGet[#questedListGet+1] = gameName
-						print("처음이니깐 추가!")
-					end
-				end
-			end
-			composer.setVariable("questedList", questedListGet)
+			loadedSettings.toal_success = loadedSettings.toal_success + 1
+			loadedSettings.toal_success_names[loadedSettings.toal_success] = "고양이 점프해서 츄르 찾기"
+			loadsave.saveTable(loadedSettings,"settings.json")
 
 			composer.removeScene("view03_jump_game_over")
 			composer.gotoScene("view03_npc_jump_game") --npc로

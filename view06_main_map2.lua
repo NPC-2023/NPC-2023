@@ -19,38 +19,56 @@ function scene:create( event )
     print("퀘스트 완료 창 / Modal창")
 
     -- 퀘스트 완료된 게임명 가져오기
-    local questedListGet = composer.getVariable("questedList")
-    if(questedListGet ~= nil) then
-        print("퀘스트 완료된 게임 갯수", #questedListGet)
-    else
-        print("questedListGet에 아무것도 없음")
-    end
+    -- local questedListGet = composer.getVariable("questedList")
+    -- if(questedListGet ~= nil) then
+    --     print("퀘스트 완료된 게임 갯수", #questedListGet)
+    -- else
+    --     print("questedListGet에 아무것도 없음")
+    -- end
 
     -- quest는 받아온 것을 저장 / questShow는 퀘스트 문구명을 저장하는 리스트
     local questShow = {}
-    local quested
+    -- local quested
 
-    -- get으로 받아온 퀘스트목록이 있으면 quest에 복사
-    if (questedListGet ~= nil) then
-        quested = questedListGet
-    else
-        quested = {}
-    end
+    -- -- get으로 받아온 퀘스트목록이 있으면 quest에 복사
+    -- if (questedListGet ~= nil) then
+    --     quested = questedListGet
+    -- else
+    --     quested = {}
+    -- end
 
-    local j = 0
+    -- local j = 0
 
     -- 퀘스트 보드에 퀘스트 완료된 게임명 show
-    if (#quested ~= nil and #quested ~= 0)then
+    -- if (#quested ~= nil and #quested ~= 0)then
 
-        if (#quested == 1) then
-            questShow[1] = display.newText("- "..quested[1].."", 0, 30, "ttf/Galmuri7.ttf", 30)
+    --     if (#quested == 1) then
+    --         questShow[1] = display.newText("- "..quested[1].."", 0, 30, "ttf/Galmuri7.ttf", 30)
+    --         questShow[1]:setFillColor(0, 0, 0)
+    --         questShow[1].x = display.contentWidth * 0.5
+    --         questShow[1].y = display.contentHeight * 0.35
+    --         sceneGroup:insert(questShow[1])
+    --     else
+    --         for i = 1, #quested do 
+    --             questShow[i] = display.newText("- "..quested[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
+    --             print(questShow[i].y)
+    --             questShow[i].align="left"
+    --             questShow[i]:setFillColor(0, 0, 0)
+    --         end
+    --     end
+    -- end
+
+     if (loadedSettings.toal_success ~= 0)then
+
+        if (loadedSettings.toal_success == 1) then
+            questShow[1] = display.newText("- "..loadedSettings.toal_success_names[1].."", 0, 30, "ttf/Galmuri7.ttf", 30)
             questShow[1]:setFillColor(0, 0, 0)
             questShow[1].x = display.contentWidth * 0.5
             questShow[1].y = display.contentHeight * 0.35
             sceneGroup:insert(questShow[1])
         else
-            for i = 1, #quested do 
-                questShow[i] = display.newText("- "..quested[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
+            for i = 1, loadedSettings.toal_success do 
+                questShow[i] = display.newText("- "..loadedSettings.toal_success_names[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
                 print(questShow[i].y)
                 questShow[i].align="left"
                 questShow[i]:setFillColor(0, 0, 0)

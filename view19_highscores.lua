@@ -23,10 +23,9 @@ function scene:create( event )
     -- Code here runs when the scene is first created but has not yet appeared on screen
 
     -- Load the previous scores
-
-    local questedListGet = composer.getVariable("questedList")
-	local gameName = "정문 지키기"
-		
+	
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	local background = display.newImageRect("image/frontgate/gate.jpg",1280, 720) --엔딩화면 배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -64,33 +63,10 @@ function scene:create( event )
 		if event.phase == "began" then
 			composer.setVariable("successFront", success)
 
-			-- 퀘스트 완료된 퀘스트 리스트
-			local addQuest = true
+			loadedSettings.toal_success = loadedSettings.toal_success + 1
+			loadedSettings.toal_success_names[loadedSettings.toal_success] = "정문 지키기"
+			loadsave.saveTable(loadedSettings,"settings.json")
 
-			if (questedListGet == nil) then
-				questedListGet = {}
-				questedListGet[1] = gameName
-			elseif (#questedListGet == 0)then
-				questedListGet[1] = gameName
-			else
-				if(#questedListGet == 1) then
-					if (questedListGet[#questedListGet] ~= gameName) then
-							questedListGet[#questedListGet+1] = gameName
-					end  
-				else
-					for i = 1, #questedListGet do 
-						if (questedListGet[i] == gameName) then
-							addQuest = false
-						end
-					end
-					if(addQuest==true)then
-						questedListGet[#questedListGet+1] = gameName
-						print("처음이니깐 추가!")
-					end
-				end
-			end
-			
-			composer.setVariable("questedList", questedListGet)
 			composer.removeScene("highscores")
 			composer.gotoScene( "view18_npc_frontgate_game" )
 		end
