@@ -16,97 +16,74 @@ function scene:create( event )
     local loadedEndings = loadsave.loadTable( "endings.json" )
     local widget = require ("widget")
     -- 객체 생성
-    print("건물 선택 창 / Modal창")
+    print("퀘스트 완료 창 / Modal창")
 
+    -- 퀘스트 완료된 게임명 가져오기
+    local questedListGet = composer.getVariable("questedList")
+    if(questedListGet ~= nil) then
+        print("퀘스트 완료된 게임 갯수", #questedListGet)
+    else
+        print("questedListGet에 아무것도 없음")
+    end
 
-    -- showoverlay 함수 사용 option
-    -- local options = {
-    --     isModal = true
-    -- }
+    -- quest는 받아온 것을 저장 / questShow는 퀘스트 문구명을 저장하는 리스트
+    local questShow = {}
+    local quested
+
+    -- get으로 받아온 퀘스트목록이 있으면 quest에 복사
+    if (questedListGet ~= nil) then
+        quested = questedListGet
+    else
+        quested = {}
+    end
+
+    local j = 0
+
+    -- 퀘스트 보드에 퀘스트 완료된 게임명 show
+    if (#quested ~= nil and #quested ~= 0)then
+
+        if (#quested == 1) then
+            questShow[1] = display.newText("- "..quested[1].."", 0, 30, "ttf/Galmuri7.ttf", 30)
+            questShow[1]:setFillColor(0, 0, 0)
+            questShow[1].x = display.contentWidth * 0.5
+            questShow[1].y = display.contentHeight * 0.35
+            sceneGroup:insert(questShow[1])
+        else
+            for i = 1, #quested do 
+                questShow[i] = display.newText("- "..quested[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
+                print(questShow[i].y)
+                questShow[i].align="left"
+                questShow[i]:setFillColor(0, 0, 0)
+            end
+        end
+    end
+
 
     name = composer.getVariable("name")
 
     print(name)
 
 
+
   -- 배경 어둡게
     local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
-    black.alpha = 0.9
+    black.alpha = 0.8
     black:setFillColor(0)
     sceneGroup:insert(black)
     
 
-    local gotoScript = display.newImageRect("image/설정/창.png", 700, 700)
-    gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight*0.6
-    sceneGroup:insert(gotoScript)
+    local questScript = display.newImageRect("image/map/퀘스트.png", 900, 900)
+    questScript.x, questScript.y = display.contentWidth/2, display.contentHeight/2
+    sceneGroup:insert(questScript)
 
-    local gotoContentScript = display.newText(name.."으로 이동하시겠습니까?", display.contentWidth/2, display.contentHeight/2, native.systemFontBold)
-    gotoContentScript.size = 42
-    gotoContentScript:setFillColor(0, 0, 0)
-    gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4 +50
-    sceneGroup:insert(gotoContentScript)
-
-    local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", 768/4, 768/4)
-    gotoButton.x, gotoButton.y = display.contentWidth/2, display.contentHeight*0.66
-    sceneGroup:insert(gotoButton)
-
-    local gotoButtonText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.65, native.systemFont, 40 )
-    gotoButtonText:setFillColor( 1, 1, 1 )  -- black
-    sceneGroup:insert(gotoButtonText)
+    local boardTitle = display.newText("📌 퀘스트 완료 목록 📌", 0, 0, "font/DOSGothic.ttf", 22)
+    boardTitle:setFillColor(0)
+    boardTitle.size = 42
+    boardTitle.x = display.contentWidth * 0.5
+    boardTitle.y = display.contentHeight * 0.25
+    sceneGroup:insert(boardTitle)
 
 
-    -- 확인 버튼을 눌렀을 때 해당 건물의 게임 파일로 이동
-    local function gotoChallenge(event)
-        if event.phase == "began" then
-            if(name == "인문관")then
-                print("인문관")
-                composer.removeScene("view06_main_map1")
-                composer.gotoScene("view02_npc_fallgame")
-                return true
-            elseif(name == "음악관") then
-                print("음악관")
-                composer.removeScene("view06_main_map1")
-                composer.gotoScene("view07_npc_schoolfood_game")
-                return true
-            elseif(name == "예지관")then
-                print("예지관")
-                composer.removeScene("view06_main_map1")
-                composer.gotoScene("view10_pre_lost_stuId_game")
-                return true
-            elseif(name == "대학원")then
-                print("대학원")
-                composer.removeScene("view06_main_map1")
-                if(math.random(1, 2) == 1) then
-                    composer.gotoScene("view20_npc_moneyGame")
-                else
-                    composer.gotoScene("view03_npc_jump_game")
-                end
-                return true
-            elseif(name == "본관")then
-                print("본관")
-                composer.removeScene("view06_main_map1")
-                composer.gotoScene("view21_npc_fishGame")
-                return true
-            elseif(name == "정문")then
-                print("정문")
-                composer.removeScene("view06_main_map1")
-                composer.gotoScene("view18_npc_frontgate_game")
-                return true
-            elseif(name == "백주년")then
-                print("백주년")
-                composer.removeScene("view06_main_map1")
-                composer.gotoScene("view13_pre_climbingTree")
-                return true
-            elseif(name == "학생관")then
-                print("학생관")
-                composer.removeScene("view06_main_map1")
-                composer.gotoScene("view02_npc_pickGame")
-                return true
-            end
-        end
-    end
-
-    gotoButton:addEventListener("touch", gotoChallenge)
 
     -- exit 버튼 눌렀을 때 volumeControl.lua파일에서 벗어나기
     local function goback(event)
@@ -115,20 +92,24 @@ function scene:create( event )
         -- end
         --composer.hideOverlay("view06_main_map1")
         if event.phase == "began" then
-            composer.removeScene("view06_main_map1")
-            composer.gotoScene("view05_main_map")
-            --composer.hideOverlay("view06_main_map1")
+            --composer.removeScene("view06_main_map1")
+            --composer.gotoScene("view05_main_map")
+            composer.hideOverlay("view06_main_map2")
         end
     end
 
-    loadsave.saveTable(loadedSettings,"settings.json")
+
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
     local exit = display.newImageRect("image/설정/닫기.png", 50, 50)
 
-    exit.x, exit.y = display.contentWidth*0.7, display.contentHeight*0.37
+    exit.x, exit.y = display.contentWidth*0.75, display.contentHeight*0.15
     exit:addEventListener("touch",goback)
     sceneGroup:insert(exit)
+
+    for i = 1, #questShow do 
+        sceneGroup:insert(questShow[i])
+    end
 
 --[[
     --샘플 볼륨 이미지

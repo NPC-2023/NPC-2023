@@ -40,15 +40,15 @@ function scene:create( event )
 	-- background.x, background.y=display.contentWidth/2, display.contentHeight/2
 	-- sceneGroup:insert(background)
 
-
+	print("맵화면 시작")
 	-- 퀘스트 완료된 게임명 가져오기
     local questedListGet = composer.getVariable("questedList")
     if(questedListGet ~= nil) then
-		print("받아온 것 ", #questedListGet)
+		print("퀘스트 완료된 게임 갯수", #questedListGet)
 	else
 		print("questedListGet에 아무것도 없음")
 	end
-
+	print("퀘스트 완료 게임 get")
 
 	-- 리스너 함수 (시간)
 	function getDate(date)
@@ -114,6 +114,7 @@ function scene:create( event )
 
 	if(questedListGet ~= nil and #questedListGet >= 1 ) then
 		local cnt = #questedListGet
+		print("cnt:", cnt)
 		if(cnt == 1) then
 			print("4개 성공 / 계절 바꿈(여름)")
 			-- 백그라운드 변경
@@ -172,91 +173,82 @@ function scene:create( event )
 		--print("겨울")
 	end
 
-
-
-	-- 추가
-	-- 퀘스트 완료된 보드 배치 -> 오른쪽 하단 위치 
-	local board = display.newImageRect("image/map/퀘스트.png", 1280/2.4, 720/2.4)
-	board.x, board.y=display.contentWidth*0.82, display.contentHeight*0.83
-
-	local boardTitle = display.newText("📌 퀘스트 완료 목록 📌", 0, 0, "font/DOSGothic.ttf", 22)
-	boardTitle:setFillColor(0)
-	boardTitle.x = display.contentWidth * 0.82
-	boardTitle.y = display.contentHeight * 0.741
-
-
-	-- for i = 1, 9 do 
-	-- 	local size = building_size[i]
-	-- 	building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] ..".png", 512/size, 512/size)
- 	-- 	building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
- 	-- 	building[i].name = buildingNames[i]
-	-- end
-
+	local catSolesGroup = display.newGroup()
+	local catSoles = {}
+	local catSoles_idx = 0
 
 	if (questedListGet~=nil) then
 		for i = 1, #questedListGet do
-			if (questedListGet[i] == "떨어지는 참치캔 줍기")then
+			if (questedListGet[i] == "떨어지는 참치캔 받기")then
+				catSoles_idx = catSoles_idx + 1
+				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.44, display.contentHeight*0.2
+
 				building[1].fill.effect = "filter.desaturate"
-				building[1].fill.effect.intensity = 0.7
+				building[1].fill.effect.intensity = 0.9
+
+				-- building[1].fill.effect = "filter.brightness"
+				-- building[1].fill.effect.intensity = 0.25
+
 			elseif (questedListGet[i] == "대신 학식 받아주기")then
+				catSoles_idx = catSoles_idx + 1
+				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.75, display.contentHeight*0.21
+
 				building[2].fill.effect = "filter.desaturate"
 				building[2].fill.effect.intensity = 0.7
 			elseif (questedListGet[i] == "학생증 찾기")then
+				catSoles_idx = catSoles_idx + 1
+				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.86, display.contentHeight*0.45
+
 				building[3].fill.effect = "filter.desaturate"
 				building[3].fill.effect.intensity = 0.7
+			elseif (questedListGet[i] == "간식 사기")then
+				for j = 1, #questedListGet do 
+					if(questedListGet[j] == "Pick Game") then -- pre_jumpGame이지만 임시로 설정
+						catSoles_idx = catSoles_idx + 1
+						catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
+						catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.32
+						building[4].fill.effect = "filter.desaturate"
+						building[4].fill.effect.intensity = 0.7
+					end
+				end
+			elseif (questedListGet[i] == "Pick Game")then -- pre_jumpGame이지만 임시로 설정
+				for j = 1, #questedListGet do 
+					if(questedListGet[j] == "간식 사기") then
+						catSoles_idx = catSoles_idx + 1
+						catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
+						catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.32
+						building[4].fill.effect = "filter.desaturate"
+						building[4].fill.effect.intensity = 0.7
+						
+					end
+				end
+
 			elseif (questedListGet[i] == "나무 올라가기")then
+				catSoles_idx = catSoles_idx + 1
+				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.1, display.contentHeight*0.85	
+
 				building[7].fill.effect = "filter.desaturate"
 				building[7].fill.effect.intensity = 0.7
 			elseif (questedListGet[i] == "Pick Game")then
+				catSoles_idx = catSoles_idx + 1
+				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.54, display.contentHeight*0.52
+
 				building[8].fill.effect = "filter.desaturate"
 				building[8].fill.effect.intensity = 0.7
 			end
 		end
 	end
 
-	
-	local target
 
-	-- quest는 받아온 것을 저장 / questShow는 퀘스트 문구명을 저장하는 리스트
-	local questShow = {}
-	local quested
+	building[10] = display.newImageRect(buildingGroup, "image/map/맵아이콘.png", 384/3, 384/3)
+	building[10].x, building[10].y=display.contentWidth*0.94, display.contentHeight*0.9
+	building[10].name="퀘스트아이콘"
 
-	-- get으로 받아온 퀘스트목록이 있으면 quest에 복사
-	if (questedListGet ~= nil) then
-		quested = questedListGet
-	else
-		quested = {}
-	end
-
-	local j = 0
-
-	-- 퀘스트 보드에 퀘스트 완료된 게임명 show
-	if (#quested ~= nil and #quested ~= 0)then
-		if (#quested == 1) then
-			questShow[1] = display.newText("- "..quested[1].."", 0, 0, "ttf/Galmuri7.ttf", 20)
-			questShow[1]:setFillColor(0, 0, 1)
-			questShow[1].x = display.contentWidth * 0.74
-			questShow[1].y = display.contentHeight * 0.93 - 90
-			sceneGroup:insert(questShow[1])
-		else
-			for i = 1, #quested do 
-				print(#quested)
-				questShow[i] = display.newText("- "..quested[i].."", 0, 0, "ttf/DungGeunMo.ttf", 20)
-				
-				if (i <= #quested/2) then
-					questShow[i].x = display.contentWidth * 0.74
-					questShow[i].y = display.contentHeight * 0.93 - (110-i*20)
-				else
-					questShow[i].x = display.contentWidth * 0.88
-					questShow[i].y = display.contentHeight * 0.93 - (110-(i - #quested/2)*20)
-				end
-				questShow[i]:setFillColor(0, 0, 1)
-			end
-		end
-	end
-	-- 추가 끝
-
-	
 
 
 	--[[local function gotoCheckMsg( event )
@@ -319,8 +311,10 @@ function scene:create( event )
 
 	local options = {
         	isModal = true,
-        	params = { targetName = name }
+        	params = { targetName = name,
+        	TargetquestedList = questedListGet }
 	    	}	
+
 
 -- 리스너 함수 생성
 	local function touch_ui (event)
@@ -333,20 +327,26 @@ function scene:create( event )
 				---상점 코드
 				composer.removeScene("view05_main_map")
 				composer.gotoScene("custom")
+			elseif name == "퀘스트아이콘" then
+				composer.setVariable("questedListGet", questedListGet)
+				
+				composer.showOverlay( "view06_main_map2", options )
 			else
 				composer.setVariable("name", name)
-				composer.showOverlay( "view06_main_map1", options )
-				--composer.removeScene("view05_main_map")
-				--composer.gotoScene("view06_main_map1")
+				-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
+				--composer.showOverlay( "view06_main_map1", options )
+				composer.removeScene("view05_main_map")
+				composer.gotoScene("view06_main_map1")
 			end
 		end
 	end
 
 	sceneGroup:insert(background)
 	sceneGroup:insert(buildingGroup)
+	sceneGroup:insert(catSolesGroup)
 
 -- 리스너 추가
-	for i=1, 9 do
+	for i=1, 10 do
 		building[i]:addEventListener("mouse",bigbig)
 		building[i]:addEventListener("touch",touch_ui)
 		--building[i]:addEventListener("tap", gotoCheckMsg)
