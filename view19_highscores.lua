@@ -24,6 +24,10 @@ function scene:create( event )
 
     -- Load the previous scores
 
+    local questedListGet = composer.getVariable("questedList")
+	local gameName = "정문 지키기"
+		
+
 	local background = display.newImageRect("image/frontgate/gate.jpg",1280, 720) --엔딩화면 배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
@@ -58,9 +62,37 @@ function scene:create( event )
 	
 	local function backtomap(event) -- 게임 pass 후 메인화면(맵)으로 넘어가기 
 		if event.phase == "began" then
-				composer.setVariable("successFront", success)
-				composer.removeScene("highscores")
-				composer.gotoScene( "view18_npc_frontgate_game" )
+			composer.setVariable("successFront", success)
+
+			-- 퀘스트 완료된 퀘스트 리스트
+			local addQuest = true
+
+			if (questedListGet == nil) then
+				questedListGet = {}
+				questedListGet[1] = gameName
+			elseif (#questedListGet == 0)then
+				questedListGet[1] = gameName
+			else
+				if(#questedListGet == 1) then
+					if (questedListGet[#questedListGet] ~= gameName) then
+							questedListGet[#questedListGet+1] = gameName
+					end  
+				else
+					for i = 1, #questedListGet do 
+						if (questedListGet[i] == gameName) then
+							addQuest = false
+						end
+					end
+					if(addQuest==true)then
+						questedListGet[#questedListGet+1] = gameName
+						print("처음이니깐 추가!")
+					end
+				end
+			end
+			
+			composer.setVariable("questedList", questedListGet)
+			composer.removeScene("highscores")
+			composer.gotoScene( "view18_npc_frontgate_game" )
 		end
 	end
 

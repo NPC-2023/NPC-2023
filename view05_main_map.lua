@@ -177,6 +177,7 @@ function scene:create( event )
 	local catSoles = {}
 	local catSoles_idx = 0
 
+	
 	if (questedListGet~=nil) then
 		for i = 1, #questedListGet do
 			if (questedListGet[i] == "떨어지는 참치캔 받기")then
@@ -240,6 +241,13 @@ function scene:create( event )
 
 				building[8].fill.effect = "filter.desaturate"
 				building[8].fill.effect.intensity = 0.7
+			elseif (questedListGet[i] == "정문 지키기")then
+				catSoles_idx = catSoles_idx + 1
+				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.3, display.contentHeight*0.85
+
+				building[6].fill.effect = "filter.desaturate"
+				building[6].fill.effect.intensity = 0.7
 			end
 		end
 	end
