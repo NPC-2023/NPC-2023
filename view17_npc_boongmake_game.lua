@@ -17,34 +17,35 @@ function scene:create( event )
 	local scriptGroup = display.newGroup()
 
 
-	-- Load the background
-	local background = display.newImageRect("image/frontgate/gate.jpg", 1280, 720 )--배경이미지 
-	background.x = display.contentCenterX
-	background.y = display.contentCenterY
+	local background = display.newImageRect("image/npc/place3.jpg", display.contentWidth, display.contentHeight)
+ 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
-	local npc = display.newImageRect("image/frontgate/security.png", 200, 200)--경비원 이미지 
-	npc.x = display.contentCenterX*1.7
-	npc.y = display.contentCenterY*1.2
-	
-	local cat = display.newImageRect("image/frontgate/cat1.png", 200, 191)--고양이 이미지 108 99
-	cat.x = display.contentCenterX
-	cat.y = display.contentHeight - 100
+ 	local npc = display.newImageRect("image/npc/npc3.png", 200, 200)
+	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
+	npc.xScale = -1
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 180)
-	speechbubble.x, speechbubble.y = npc.x, npc.y-110
+	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
+	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
+	cat.xScale = -1
+
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 150)
+	speechbubble.x, speechbubble.y = npc.x, npc.y - 150
 	speechbubble.alpha = 0
 
 	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
-	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-120
+	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, display.contentHeight*0.35
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
-	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
+	speech.size = 20
+	speech:setFillColor(0)
+	local accept = display.newText("", speechbubble.x, speechbubble.y - 60, "font/DOSGothic.ttf")
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
 	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
+
 
 	--스크립트
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
@@ -76,13 +77,13 @@ function scene:create( event )
 	mainName = loadedSettings.name
 	times = loadedSettings.talk[5]
 
-	if(composer.getVariable("talk2_status") == "fin") then
+	if(composer.getVariable("talk3_status") == "fin") then
 		loadedSettings.talk[5] = 0 --0으로 초기화하기 위한 임시 코드
 		loadedSettings.talk[5] = loadedSettings.talk[5] + 1
 	end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
-	if(composer.getVariable("frontgategame_status") == "success") then
+	if(composer.getVariable("boongmakegame_status") == "success") then
 		loadedSettings.today_success = loadedSettings.today_success + 1
 	end
 
@@ -113,8 +114,8 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble.alpha = 0
 			speech.alpha = 0
-			composer.removeScene("view18_npc_frontgate_game")
-			composer.gotoScene("view18_frontgate_game")
+			composer.removeScene("view17_npc_boongmake_game")
+			composer.gotoScene("view17_boongmake_game")
 		end)
 	end
 
@@ -140,20 +141,20 @@ function scene:create( event )
 			objectGroup:insert(scriptGroup)
 
 			gossip_click:addEventListener("tap", function() --대화 클릭 시 페이지 이동
-				if(composer.getVariable("talk2_status") == "fin") then
+				if(composer.getVariable("talk3_status") == "fin") then
 					script.text = "이미 대화를 끝냈습니다."
 				else
-					composer.removeScene("view18_npc_frontgate_game")
-					composer.gotoScene("view18_talk_frontgate_game")
+					composer.removeScene("view17_npc_boongmake_game")
+					composer.gotoScene("view17_boongmake_game")
 				end
 			end)
 
 			game_click:addEventListener("tap", function() 
-				if(composer.getVariable("frontgategame_status") == "success") then
+				if(composer.getVariable("boongmakegame_status") == "success") then
 					script.text = "이미 게임을 끝냈습니다."
 				else 
-					composer.removeScene("view18_npc_frontgate_game")
-					composer.gotoScene("view18_frontgate_game")
+					composer.removeScene("view17_npc_boongmake_game")
+					composer.gotoScene("view17_boongmake_game")
 				end
 			end)
 		end) --가상함수
@@ -161,7 +162,7 @@ function scene:create( event )
 
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
-		if(composer.getVariable("frontgategame_status") == "success" and composer.getVariable("talk2_status") == "fin") then
+		if(composer.getVariable("boongmakegame_status") == "success" and composer.getVariable("talk3_status") == "fin") then
 			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 				section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
@@ -182,7 +183,7 @@ function scene:create( event )
 		speech.alpha = 1
 		scriptGroup.alpha = 1
 
-		if(composer.getVariable("frontgategame_status") ~= "success") then			
+		if(composer.getVariable("boongmakegame_status") ~= "success") then			
 			speech.text = "외부인이 못들어 오게\n냥냥펀치를 날려줘!"
 		else
 			speech.text = "누가 학생이 아닌지\n 잘 구분해야 할텐데.."
@@ -190,7 +191,7 @@ function scene:create( event )
 		speech.size = 20
 		speech:setFillColor(0)
 
-		if(composer.getVariable("frontgategame_status") ~= "success" or composer.getVariable("talk2_status") ~= "fin") then
+		if(composer.getVariable("boongmakegame_status") ~= "success" or composer.getVariable("talk3_status") ~= "fin") then
 			gossipOrGame()
 		end
 	end

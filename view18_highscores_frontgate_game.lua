@@ -43,7 +43,7 @@ function scene:create( event )
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
-				composer.removeScene("highscores")
+				composer.removeScene("view18_frontgate_game_highscores")
 				composer.gotoScene("view18_menu")--시작화면으로 
 		end
 	end
@@ -67,7 +67,7 @@ function scene:create( event )
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "정문 지키기"
 			loadsave.saveTable(loadedSettings,"settings.json")
 
-			composer.removeScene("highscores")
+			composer.removeScene("view18_frontgate_game_highscores")
 			composer.gotoScene( "view18_npc_frontgate_game" )
 		end
 	end
@@ -130,7 +130,7 @@ function scene:hide( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-		composer.removeScene( "highscores" )
+		composer.removeScene( "view18_frontgate_game_highscores" )
 	end
 end
 
