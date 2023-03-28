@@ -120,7 +120,7 @@ function scene:create( event )
 
     --샘플볼륨함수--
     local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
+        composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap",setVolume)
 
