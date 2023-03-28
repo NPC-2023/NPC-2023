@@ -143,7 +143,7 @@ function scene:create( event )
             -- Open the file handle
             local file, errorString = io.open( path, "r" )
  
-            if not file or (loadedEndings.end_num==1) then
+            if not file then --or (loadedEndings.end_num==1) then
                 composer.showOverlay( "nosave", options )
             else
                 composer.removeScene("view01_1_start_game")
