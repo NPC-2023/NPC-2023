@@ -1,13 +1,19 @@
 --fallgame 통과하는 게임 종료된 화면
 
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
---local loadsave = require( "loadsave" )
+local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
-	local background = display.newImageRect("image/background.png",display.contentWidth, display.contentHeight) ---배경
+
+	physics.start()
+	loadedEndings = loadsave.loadTable( "endings.json" )
+	loadedSettings = loadsave.loadTable( "settings.json" )
+
+	local background = display.newImageRect("image/pick/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -26,31 +32,32 @@ function scene:create( event )
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then
-			audio.pause(home)
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("view02_pick_game")
 		end
 	end
 	--close 버튼
-	local close = display.newImageRect("image/닫기.png", 80, 80)
+	local close = display.newImageRect("image/pick/닫기.png", 80, 80)
 	close.x, close.y = 1200, 80
 	close.alpha = 0
 
-	local function gomap(event) -- 게임 pass 후 map으로 넘어감
-		if event.phase == "began" then--view20ring
-			composer.setVariable("success", "success")
-			audio.pause(home)
-			composer.removeScene("view02_pick_game_over")
-			composer.gotoScene("pre_pickGame") 
-		end
+	local function gomap(event) -- 게임 pass 후 map으로 넘어가
+			if score1 == 5 then
+				composer.setVariable("successPickGame", "success")
+				composer.removeScene("view02_pick_game_over")
+				composer.gotoScene("view02_npc_pickGame") 
+			else
+				composer.removeScene("view02_pick_game_over")
+				composer.gotoScene("view05_main_map")
+			end
 	end
 
-	local backgame1 =display.newImage("image/클리어창.png") --성공할 경우
+	local backgame1 =display.newImage("image/pick/클리어창.png") --성공할 경우
 	backgame1.x, backgame1.y = display.contentWidth/2, display.contentHeight/2
 	backgame1.alpha = 0
 	sceneGroup:insert(backgame1)
 
-	local backgame2 =display.newImage("image/실패창.png") --실패할 경우
+	local backgame2 =display.newImage("image/pick/실패창.png") --실패할 경우
 	backgame2.x, backgame2.y = display.contentWidth/2, display.contentHeight/2
 	backgame2.alpha = 0
 	sceneGroup:insert(backgame2)
@@ -63,13 +70,13 @@ function scene:create( event )
 		backgame2.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("touch", gomap) --close버튼을 눌렀을 때 gomap
+		close:addEventListener("tap", gomap) --close버튼을 눌렀을 때 gomap
 		backgame2:addEventListener("touch",backtogame) --우는고양이를 눌렀을 때 다시하기
-	else ---score1이 5일 때 sucess
+	elseif (score1 == 5) then---score1이 5일 때 sucess
 		backgame1.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("touch", gomap)
+		close:addEventListener("tap",gomap)
 		backgame1:addEventListener("touch",backtogame) --행복한고양이 눌렀을 때 다시하기
 	end
 	sceneGroup:insert(close)
