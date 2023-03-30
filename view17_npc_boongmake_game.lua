@@ -20,13 +20,14 @@ function scene:create( event )
 	local background = display.newImageRect("image/npc/place3.jpg", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc/npc3.png", 200, 200)
+ 	local npc = display.newImageRect("image/npc/npc2.png", 200, 200)
 	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
 	npc.xScale = -1
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
 	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
 	cat.xScale = -1
+	objectGroup:insert(cat)
 
 	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 150)
 	speechbubble.x, speechbubble.y = npc.x, npc.y - 150
@@ -75,15 +76,15 @@ function scene:create( event )
 	--게임 전체 변수(저장됨)
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 	mainName = loadedSettings.name
-	times = loadedSettings.talk[5]
+	times = loadedSettings.talk[3]
 
 	if(composer.getVariable("talk3_status") == "fin") then
-		loadedSettings.talk[5] = 0 --0으로 초기화하기 위한 임시 코드
-		loadedSettings.talk[5] = loadedSettings.talk[5] + 1
+		loadedSettings.talk[3] = 0 --0으로 초기화하기 위한 임시 코드
+		loadedSettings.talk[3] = loadedSettings.talk[3] + 1
 	end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
-	if(composer.getVariable("boongmakegame_status") == "success") then
+	if(composer.getVariable("boongmake_status") == "success") then
 		loadedSettings.today_success = loadedSettings.today_success + 1
 	end
 
@@ -145,12 +146,12 @@ function scene:create( event )
 					script.text = "이미 대화를 끝냈습니다."
 				else
 					composer.removeScene("view17_npc_boongmake_game")
-					composer.gotoScene("view17_boongmake_game")
+					composer.gotoScene("view17_talk_boongmake_game")
 				end
 			end)
 
 			game_click:addEventListener("tap", function() 
-				if(composer.getVariable("boongmakegame_status") == "success") then
+				if(composer.getVariable("boongmake_status") == "success") then
 					script.text = "이미 게임을 끝냈습니다."
 				else 
 					composer.removeScene("view17_npc_boongmake_game")
@@ -162,7 +163,7 @@ function scene:create( event )
 
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
-		if(composer.getVariable("boongmakegame_status") == "success" and composer.getVariable("talk3_status") == "fin") then
+		if(composer.getVariable("boongmake_status") == "success" and composer.getVariable("talk3_status") == "fin") then
 			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 				section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
@@ -183,38 +184,38 @@ function scene:create( event )
 		speech.alpha = 1
 		scriptGroup.alpha = 1
 
-		if(composer.getVariable("boongmakegame_status") ~= "success") then			
-			speech.text = "외부인이 못들어 오게\n냥냥펀치를 날려줘!"
+		if(composer.getVariable("boongmake_status") ~= "success") then			
+			speech.text = "붕어빵 먹고싶다.."
 		else
-			speech.text = "누가 학생이 아닌지\n 잘 구분해야 할텐데.."
+			speech.text = "노릇노릇하게 잘 됐다!\n너도 먹을래?"
 		end
 		speech.size = 20
 		speech:setFillColor(0)
 
-		if(composer.getVariable("boongmakegame_status") ~= "success" or composer.getVariable("talk3_status") ~= "fin") then
+		if(composer.getVariable("boongmake_status") ~= "success" or composer.getVariable("talk3_status") ~= "fin") then
 			gossipOrGame()
 		end
 	end
 
-	-- --npc가 고양이에게 주는 선물 
-	-- local can = ''
-	-- local canFlag = 0
-	-- if(composer.getVariable("frontgategame_status") == "success" and canFlag == 0) then
-	-- 	canFlag = 1
+	--npc가 고양이에게 주는 선물 
+	local gift = ''
+	local giftFlag = 0
+	if(composer.getVariable("boongmake_status") == "success" and giftFlag == 0) then
+		giftFlag = 1
 
-	-- 	speechbubble_exmark.alpha = 0
-	-- 	speechbubble.alpha = 1
-	-- 	speech.text = "고마워! 맛있겠다!\n너도 맛있는거 먹을래?"
-	-- 	speech.alpha = 1
-	-- 	speech:setFillColor(black)
-	-- 	coin.alpha = 0
+		speechbubble_exmark.alpha = 0
+		speechbubble.alpha = 1
+		speech.text = "고마워! 맛있겠다!\n너도 맛있는거 먹을래?"
+		speech.alpha = 1
+		speech:setFillColor(black)
+		coin.alpha = 0
 
-	-- 	can = display.newImageRect("image/npc/can.png", 100, 100)
- 	-- 	can.x, can.y = npc.x-120, npc.y+10
+		gift = display.newImageRect("image/boong/붕어빵 완성.png", 100, 100)
+ 		gift.x, gift.y = npc.x-120, npc.y+10
 
- 	-- 	objectGroup:insert(can)
-	-- 	can:addEventListener("tap", function() can.alpha = 0 speechbubble.alpha = 0 speech.alpha = 0 talkWithNPC() end)
-	-- end
+ 		objectGroup:insert(gift)
+		gift:addEventListener("tap", function() gift.alpha = 0 speechbubble.alpha = 0 speech.alpha = 0 talkWithNPC() end)
+	end
 
 
 	local function goBackToMap(event) 
@@ -229,7 +230,6 @@ function scene:create( event )
 
 
  	objectGroup:insert(npc)
- 	objectGroup:insert(cat)
  	objectGroup:insert(speechbubble)
  	objectGroup:insert(speechbubble_exmark)
  	objectGroup:insert(speech)

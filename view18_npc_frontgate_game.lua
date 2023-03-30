@@ -29,13 +29,14 @@ function scene:create( event )
 	local cat = display.newImageRect("image/frontgate/cat1.png", 200, 191)--고양이 이미지 108 99
 	cat.x = display.contentCenterX
 	cat.y = display.contentHeight - 100
+	objectGroup:insert(cat)
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 180)
-	speechbubble.x, speechbubble.y = npc.x, npc.y-110
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 270, 150)
+	speechbubble.x, speechbubble.y = npc.x, npc.y-140
 	speechbubble.alpha = 0
 
 	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
-	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-120
+	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-140
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
@@ -74,11 +75,11 @@ function scene:create( event )
 	--게임 전체 변수(저장됨)
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 	mainName = loadedSettings.name
-	times = loadedSettings.talk[5]
+	times = loadedSettings.talk[1]
 
 	if(composer.getVariable("talk2_status") == "fin") then
-		loadedSettings.talk[5] = 0 --0으로 초기화하기 위한 임시 코드
-		loadedSettings.talk[5] = loadedSettings.talk[5] + 1
+		loadedSettings.talk[1] = 0 --0으로 초기화하기 위한 임시 코드
+		loadedSettings.talk[1] = loadedSettings.talk[1] + 1
 	end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
@@ -152,8 +153,7 @@ function scene:create( event )
 				if(composer.getVariable("frontgategame_status") == "success") then
 					script.text = "이미 게임을 끝냈습니다."
 				else 
-					composer.removeScene("view18_npc_frontgate_game")
-					composer.gotoScene("view18_frontgate_game")
+					acceptQuest()
 				end
 			end)
 		end) --가상함수
@@ -223,12 +223,10 @@ function scene:create( event )
 	loadsave.saveTable(loadedSettings,"settings.json")
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
-	speechbubble:addEventListener("tap", acceptQuest)
 	map:addEventListener("tap", goBackToMap)
 
 
  	objectGroup:insert(npc)
- 	objectGroup:insert(cat)
  	objectGroup:insert(speechbubble)
  	objectGroup:insert(speechbubble_exmark)
  	objectGroup:insert(speech)

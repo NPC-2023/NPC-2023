@@ -292,7 +292,7 @@ function scene:create( event )
             elseif(name == "예지관")then
                 print("예지관")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view10_pre_lost_stuId_game")
+                composer.gotoScene("view10_npc_lost_stuId_game")
                 return true
             elseif(name == "대학원")then
                 print("대학원")
@@ -306,7 +306,11 @@ function scene:create( event )
             elseif(name == "본관")then
                 print("본관")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view21_npc_fishGame")
+                if(math.random(1, 2) == 1) then
+                    composer.gotoScene("view21_npc_fishGame")
+                else
+                    composer.gotoScene("view17_npc_boongmake_game")
+                end
                 return true
             elseif(name == "정문")then
                 print("정문")
@@ -316,7 +320,7 @@ function scene:create( event )
             elseif(name == "백주년")then
                 print("백주년")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view13_pre_climbingTree")
+                composer.gotoScene("view13_npc_climbingTree")
                 return true
             elseif(name == "학생관")then
                 print("학생관")

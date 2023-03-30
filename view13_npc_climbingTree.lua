@@ -1,12 +1,14 @@
 -----------------------------------------------------------------------------------------
 --
--- pre_moneyGame.lua
+-- pre_frontdoor with cop game
 --
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
+local physics = require("physics")
 local scene = composer.newScene()
 local loadsave = require( "loadsave" )
+local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -14,36 +16,36 @@ function scene:create( event )
 	local objectGroup = display.newGroup()
 	local scriptGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/store_entry.png", display.contentWidth, display.contentHeight)
- 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc/npc1.png", 250, 220)
-	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.72
-	npc.xScale = -1
+	-- Load the background
+	local background = display.newImageRect("image/frontgate/gate.jpg", 1280, 720 )--배경이미지 
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
 
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 180)
-	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.88
+	local npc = display.newImageRect("image/frontgate/security.png", 200, 200)--경비원 이미지 
+	npc.x = display.contentCenterX*1.7
+	npc.y = display.contentCenterY*1.2
+	
+	local cat = display.newImageRect("image/frontgate/cat1.png", 200, 191)--고양이 이미지 108 99
+	cat.x = display.contentCenterX
+	cat.y = display.contentHeight - 100
 	objectGroup:insert(cat)
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
-	speechbubble.x, speechbubble.y = npc.x, npc.y-130
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 270, 150)
+	speechbubble.x, speechbubble.y = npc.x, npc.y-140
 	speechbubble.alpha = 0
 
-	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 120)
-	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-130
+	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
+	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-140
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
-	local accept = display.newText("", speechbubble.x, speechbubble.y-50, "font/DOSGothic.ttf")
-	local money = math.random(1, 10) * 1000 --고양이가 받을 심부름 돈
+	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
 	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
-
-	local coin = display.newImageRect("image/npc/coin.png", 100, 100)
-	coin.alpha = 0
 
 	--스크립트
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
@@ -73,28 +75,28 @@ function scene:create( event )
 	--게임 전체 변수(저장됨)
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 	mainName = loadedSettings.name
-	times = loadedSettings.talk[5]
+	times = loadedSettings.talk[1]
 
-	if(composer.getVariable("talk5_status") == "fin") then
-		loadedSettings.talk[5] = 0 --0으로 초기화하기 위한 임시 코드
-		loadedSettings.talk[5] = loadedSettings.talk[5] + 1
+	if(composer.getVariable("talk1_status") == "fin") then
+		loadedSettings.talk[1] = 0 --0으로 초기화하기 위한 임시 코드
+		loadedSettings.talk[1] = loadedSettings.talk[1] + 1
 	end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
-	if(composer.getVariable("moneygame_status") == "success") then
+	if(composer.getVariable("climbgame_status") == "success") then
 		loadedSettings.today_success = loadedSettings.today_success + 1
 	end
 
 	local function acceptQuest( event )
 		--수락시 말풍선, 대화 사라짐
-		coin.alpha = 0
+		-- coin.alpha = 0
 		scriptGroup.alpha = 0
 		speechbubble.alpha = 0
 		speech.alpha = 0
 		accept.alpha = 0
 
 		section.alpha = 1
-		script.text = money.."를 받았습니다.\n퀘스트를 수락했습니다."
+		script.text = "퀘스트를 수락했습니다."
 		script.alpha = 1			
 
 		--수락(말풍선)누르면 고양이가 말함
@@ -112,8 +114,8 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble.alpha = 0
 			speech.alpha = 0
-			composer.removeScene("view20_npc_moneyGame")
-			composer.gotoScene("view20_moneyGame")
+			composer.removeScene("view13_npc_climbingTree")
+			composer.gotoScene("view15_climbing_the_tree_game_final")
 		end)
 	end
 
@@ -139,26 +141,19 @@ function scene:create( event )
 			objectGroup:insert(scriptGroup)
 
 			gossip_click:addEventListener("tap", function() --대화 클릭 시 페이지 이동
-				if(composer.getVariable("talk5_status") == "fin") then
+				if(composer.getVariable("talk1_status") == "fin") then
 					script.text = "이미 대화를 끝냈습니다."
 				else
-					composer.removeScene("view20_npc_moneyGame")
-					composer.gotoScene("view20_talk_moneyGame")
+					composer.removeScene("view13_npc_climbingTree")
+					composer.gotoScene("view13_talk_climbingTree")
 				end
 			end)
 
 			game_click:addEventListener("tap", function() 
-				if(composer.getVariable("moneygame_status") == "success") then
+				if(composer.getVariable("climb_status") == "success") then
 					script.text = "이미 게임을 끝냈습니다."
 				else 
-					--동전 누르면 게임 시작
-					coin.alpha = 1
-		 			coin.x, coin.y = npc.x-100, npc.y+50
-		 			objectGroup:insert(coin)
-
-					accept.text = "동전을 누르세요\n"
-					accept.size = 20
-					accept:setFillColor(1)
+					acceptQuest()
 				end
 			end)
 		end) --가상함수
@@ -166,7 +161,7 @@ function scene:create( event )
 
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
-		if(composer.getVariable("moneygame_status") == "success" and composer.getVariable("talk5_status") == "fin") then
+		if(composer.getVariable("climb_status") == "success" and composer.getVariable("talk1_status") == "fin") then
 			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 				section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
@@ -187,51 +182,47 @@ function scene:create( event )
 		speech.alpha = 1
 		scriptGroup.alpha = 1
 
-		if(composer.getVariable("moneygame_status") ~= "success") then			
-			speech.text = money.."어치\n간식 좀 사다줄래?"
+		if(composer.getVariable("climb_status") ~= "success") then			
+			speech.text = "과제를 하려면 목화솜이 필요한데..\n너무 높이 있어"
 		else
-			speech.text = "너도 간식 나눠줄까?"
+			speech.text = "그거 알아?\n 목화가 바로 교화야."
 		end
 		speech.size = 20
 		speech:setFillColor(0)
 
-		composer.setVariable("money", money)
-
-		if(composer.getVariable("moneygame_status") ~= "success" or composer.getVariable("talk5_status") ~= "fin") then
+		if(composer.getVariable("climb_status") ~= "success" or composer.getVariable("talk1_status") ~= "fin") then
 			gossipOrGame()
 		end
 	end
 
-	--npc가 고양이에게 주는 선물 
-	local gift = ''
-	local giftFlag = 0
-	if(composer.getVariable("moneygame_status") == "success" and giftFlag == 0) then
-		giftFlag = 1
+	-- --npc가 고양이에게 주는 선물 
+	-- local can = ''
+	-- local canFlag = 0
+	-- if(composer.getVariable("frontgategame_status") == "success" and canFlag == 0) then
+	-- 	canFlag = 1
 
-		speechbubble_exmark.alpha = 0
-		speechbubble.alpha = 1
-		speech.text = "고마워! 맛있겠다!\n너도 맛있는거 먹을래?"
-		speech.alpha = 1
-		speech:setFillColor(black)
-		coin.alpha = 0
+	-- 	speechbubble_exmark.alpha = 0
+	-- 	speechbubble.alpha = 1
+	-- 	speech.text = "고마워! 맛있겠다!\n너도 맛있는거 먹을래?"
+	-- 	speech.alpha = 1
+	-- 	speech:setFillColor(black)
+	-- 	coin.alpha = 0
 
-		gift = display.newImageRect("image/npc/can.png", 100, 100)
- 		gift.x, gift.y = npc.x-120, npc.y+10
+	-- 	can = display.newImageRect("image/npc/can.png", 100, 100)
+ 	-- 	can.x, can.y = npc.x-120, npc.y+10
 
- 		objectGroup:insert(gift)
-		gift:addEventListener("tap", function() gift.alpha = 0 speechbubble.alpha = 0 speech.alpha = 0 talkWithNPC() end)
-	end
+ 	-- 	objectGroup:insert(can)
+	-- 	can:addEventListener("tap", function() can.alpha = 0 speechbubble.alpha = 0 speech.alpha = 0 talkWithNPC() end)
+	-- end
 
 
-	local function goBackToMap(event)
-		composer.setVariable("questedList", questedListGet) 
+	local function goBackToMap(event) 
 		composer.gotoScene("view05_main_map")
 	end
 
 	loadsave.saveTable(loadedSettings,"settings.json")
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
-	coin:addEventListener("tap", acceptQuest)
 	map:addEventListener("tap", goBackToMap)
 
 

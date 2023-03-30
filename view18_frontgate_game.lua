@@ -193,9 +193,9 @@ end
 
 
 local function endGame() --게임 실패 (처음 play화면으로)
-	composer.removeScene("view18_frontgate_game_highscores") 
+	composer.removeScene("view18_highscores_frontgate_game") 
 	composer.setVariable("score", -1)
-	composer.gotoScene( "view18_frontgate_game_highscores", { time=800, effect="crossFade" } )
+	composer.gotoScene( "view18_highscores_frontgate_game", { time=800, effect="crossFade" } )
 end
 
 
@@ -230,7 +230,7 @@ local function onCollision( event )
 				composer.removeScene("game")
 				composer.setVariable("score", 5)
 				audio.stop ( 1 )
-				composer.gotoScene( "view18_frontgate_game_highscores" )
+				composer.gotoScene( "view18_highscores_frontgate_game" )
 			end
 
 		elseif ( ( obj1.myName == "ship" and obj2.myName == "asteroid" ) or

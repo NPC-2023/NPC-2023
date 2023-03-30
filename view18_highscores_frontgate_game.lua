@@ -44,7 +44,7 @@ function scene:create( event )
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
 				composer.removeScene("view18_frontgate_game_highscores")
-				composer.gotoScene("view18_menu")--시작화면으로 
+				composer.gotoScene("view18_menu_frontgate_game")--시작화면으로 
 		end
 	end
 
@@ -91,11 +91,11 @@ function scene:create( event )
 	if score3 < 0 then
 		backgame.alpha = 1
 		fail_close.alpha = 1
-		backtomap:addEventListener("tap", backtogame)--실패 
+		fail_close:addEventListener("tap", backtogame)--실패 
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
-		backgame:addEventListener("tap", backtomap)--성공 
+		clear_close:addEventListener("tap", backtomap)--성공 
 	end
 	sceneGroup:insert(fail_close)
 	sceneGroup:insert(clear_close)

@@ -13,15 +13,17 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/store_entry.png", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/frontgate/gate.jpg", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc/npc1.png", 250, 220)
-	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.72
-	npc.xScale = -1
-
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 180)
-	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.88
+ 	local npc = display.newImageRect("image/frontgate/security.png", 200, 200)
+	npc.x = display.contentCenterX*1.7
+	npc.y = display.contentCenterY*1.2
+	
+	local cat = display.newImageRect("image/frontgate/cat1.png", 200, 191)
+	cat.x = display.contentCenterX
+	cat.y = display.contentHeight - 100
+	objectGroup:insert(cat)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
 	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
@@ -44,11 +46,11 @@ function scene:create( event )
 
 	--대사
 	local t = {}
-	t[1] = display.newText("뭘 먹을지 고민돼.. \n 간메추 해주라.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("통조림캔 어떠냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("사람은 이거 못먹어!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("그럼 고등어는 먹을 수 있냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("이대론 못 먹어...", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[1] = display.newText("요즘 사람이 너무 많아서 출입자 통제가 힘드네....", display.contentWidth*0.4, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("내가 좀 도와줄까냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("음.. 그럼 정문 앞에서 \n외부인이 출입하지 못하도록 막아주겠니?!", display.contentWidth*0.4, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("그럼 내가 냥냥펀치로 모조리 날려버릴게냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[5] = display.newText("허허...녀석 참 든든하구나.\n2000점을 획득하면 성공이란다. \n그럼 부탁하마" ..mainName.. "아~", display.contentWidth*0.4, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
 	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	
 	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
@@ -74,7 +76,7 @@ function scene:create( event )
 		j = j + 1
 
 		if j == 8 then
-			composer.setVariable("talk3_status", "fin")
+			composer.setVariable("talk2_status", "fin")
 			composer.removeScene("view18_talk_frontgate_game")
 			composer.gotoScene("view18_npc_frontgate_Game")
 		end
@@ -85,7 +87,6 @@ function scene:create( event )
 	end
 
  	objectGroup:insert(npc)
- 	objectGroup:insert(cat)
  	objectGroup:insert(map)
  	objectGroup:insert(map_text)
  	objectGroup:insert(next_text)

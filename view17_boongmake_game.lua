@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------------------
 --
 -- view1.lua
---
+-- 230331 어느 부분이 게임 종료인지 주석 달아주기!
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
@@ -38,6 +38,7 @@ function scene:create( event )
 	 		end
 	 	end
 
+	 	composer.setVariable("boongmake_status", "success")
 	 	replay:addEventListener("touch", touchEventListener)
 	 	endingText:toFront()
 	 	replay:toFront()

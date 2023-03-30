@@ -23,6 +23,7 @@ function scene:create( event )
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
 	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
 	cat.xScale = -1
+	objectGroup:insert(cat)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
 	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
@@ -85,7 +86,6 @@ function scene:create( event )
 	end
 
  	objectGroup:insert(npc)
- 	objectGroup:insert(cat)
  	objectGroup:insert(map)
  	objectGroup:insert(map_text)
  	objectGroup:insert(next_text)

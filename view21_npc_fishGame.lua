@@ -24,6 +24,7 @@ function scene:create( event )
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
 	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
 	cat.xScale = -1
+	objectGroup:insert(cat)
 
 	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 150)
 	speechbubble.x, speechbubble.y = npc.x, npc.y - 150
@@ -224,13 +225,12 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
-	loadsave.saveTable(loadedSettings,"settings.json")
+	loadsave.saveTable(loadedSettings,"settings.jsn")
 
-	speechbubble_exmark:addEventListener("tap", talkWithNPC)
+	speechbubble_exmark:addEventListener("tap", takWithNPC)
 	map:addEventListener("tap", goBackToMap)
 
  	objectGroup:insert(npc)
- 	objectGroup:insert(cat)
  	objectGroup:insert(speechbubble)
  	objectGroup:insert(speechbubble_exmark)
  	objectGroup:insert(speech)

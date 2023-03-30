@@ -74,8 +74,9 @@ function scene:create( event )
 			loadedSettings.toal_success = loadedSettings.toal_success + 1
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "나무 올라가기"
 			loadsave.saveTable(loadedSettings,"settings.json")
-			
-			composer.gotoScene( "view13_pre_climbingTree" )
+
+			composer.setVariable("climb_status", "success")
+			composer.gotoScene( "view13_npc_climbingTree" )
 		end
 	end
 

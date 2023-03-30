@@ -111,7 +111,8 @@ function scene:create( event )
 				-- 	end
 				-- end
 				-- composer.setVariable("questedList", questedListGet)
-				composer.gotoScene( "view10_pre_lost_stuId_game" )
+				composer.setVariable("stuId_status", "success")
+				composer.gotoScene( "view10_npc_lost_stuId_game" )
 		end
 	end
 

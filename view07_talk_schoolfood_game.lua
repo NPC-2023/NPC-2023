@@ -1,7 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- view20_talk_moenygame.lua
--- //230312 해야될것 . 영구저장 변수 설정(호감도, 퀘스트 끝냈는지 여부(대화, 게임 나눠서))
+-- view17_talk_boongmake_game.lua
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
@@ -13,15 +12,16 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/store_entry.png", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/npc/place1.jpg", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc/npc1.png", 250, 220)
-	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.72
+ 	local npc = display.newImageRect("image/npc/npc1.png", 200, 200)
+	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
 	npc.xScale = -1
 
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 180)
-	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.88
+	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
+	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
+	cat.xScale = -1
 	objectGroup:insert(cat)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
@@ -37,21 +37,20 @@ function scene:create( event )
 	mainName = loadedSettings.name
 	loadsave.saveTable(loadedSettings,"settings.json")
 
-
-	 --대화창
+	--대화창
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	objectGroup:insert(section)
 
 	--대사
 	local t = {}
-	t[1] = display.newText("뭘 먹을지 고민돼.. \n 간메추 해주라.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("통조림캔 어떠냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("사람은 이거 못먹어!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("그럼 고등어는 먹을 수 있냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("이대론 못 먹어...", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[1] = display.newText("팔을 다쳐서 밥과 반찬을 담을 수 없어... \n학식을 어떻게 먹는담?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("내가 도와줄까냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("그럼 학식 좀 대신 가져다줄래?", display.contentWidth*0.4, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("어떤 반찬이 좋냥?", display.contentWidth*0.4, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[5] = display.newText("좋아! 나랑 같이 학생증 만들어 갈래?!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
 	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	
+
 	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
 	
 	local i, j = 1, 1
@@ -75,9 +74,9 @@ function scene:create( event )
 		j = j + 1
 
 		if j == 8 then
-			composer.setVariable("talk5_status", "fin")
-			composer.removeScene("view20_talk_moneyGame")
-			composer.gotoScene("view20_npc_moneyGame")
+			composer.setVariable("talk7_status", "fin")
+			composer.removeScene("view07_talk_schoolfood_game")
+			composer.gotoScene("view07_npc_schoolfood_game")
 		end
 	end
 
