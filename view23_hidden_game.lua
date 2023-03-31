@@ -12,14 +12,14 @@ function scene:create( event )
 
 	--게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
 	function startscene()
-		local gametitle = display.newImage("H_image/title.png")
+		local gametitle = display.newImage("image/hidden/title.png")
 		gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
 		local title = display.newText("바위가위보로 \n계단 올라가기", gametitle.x, gametitle.y+130, native.systemFontBold)
 		title.size = 50
 		title:setFillColor(0)
 
-		local titleBackground = display.newImageRect("H_image/view03_background.jpg", display.contentWidth, display.contentHeight)
+		local titleBackground = display.newImageRect("image/hidden/view03_background.jpg", display.contentWidth, display.contentHeight)
 		titleBackground.x, titleBackground.y = display.contentWidth/2, display.contentHeight/2
 
 		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.7)
@@ -61,31 +61,31 @@ function scene:create( event )
 	--게임 시작------------------------------------------------------------------------------------------------------------------------------------
 	function gamescene()
 		--이미지 설정
-		local background = display.newImageRect("H_image/view03_background.jpg", display.contentWidth, display.contentHeight)
+		local background = display.newImageRect("image/hidden/view03_background.jpg", display.contentWidth, display.contentHeight)
 		background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
-		local cat = display.newImage("H_image/cat.png")
+		local cat = display.newImage("image/hidden/cat.png")
 	 	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6+20
 
-	 	local student = display.newImage("H_image/student.png")
+	 	local student = display.newImage("image/hidden/student.png")
 	 	student.x, student.y = display.contentWidth*0.7, display.contentHeight*0.6
 
-	 	local paper = display.newImage("H_image/paper.png")
+	 	local paper = display.newImage("image/hidden/paper.png")
 	 	paper.x, paper.y = display.contentWidth*0.7, display.contentHeight*0.9
 
-	 	local scissors = display.newImage("H_image/scissors.png")
+	 	local scissors = display.newImage("image/hidden/scissors.png")
 	 	scissors.x, scissors.y = display.contentWidth*0.5, display.contentHeight*0.9
 
-	 	local rock = display.newImage("H_image/rock.png")
+	 	local rock = display.newImage("image/hidden/rock.png")
 	 	rock.x, rock.y = display.contentWidth*0.3, display.contentHeight*0.9
 
-	 	local AIpaper = display.newImage("H_image/AIpaper.png")
+	 	local AIpaper = display.newImage("image/hidden/AIpaper.png")
 	 	AIpaper.x, AIpaper.y = display.contentWidth*0.7, display.contentHeight*0.45
 
-	 	local AIscissors = display.newImage("H_image/AIscissors.png")
+	 	local AIscissors = display.newImage("image/hidden/AIscissors.png")
 	 	AIscissors.x, AIscissors.y = display.contentWidth*0.7, display.contentHeight*0.45
 
-	 	local AIrock = display.newImage("H_image/AIrock.png")
+	 	local AIrock = display.newImage("image/hidden/AIrock.png")
 	 	AIrock.x, AIrock.y = display.contentWidth*0.7, display.contentHeight*0.45
 
 	 	cat:scale(0.15,0.15)
