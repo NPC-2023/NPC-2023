@@ -13,7 +13,6 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-	loadedEndings = loadsave.loadTable( "endings.json" )
 
 	physics.start()
 	--physics.setDrawMode( "hybrid" )
@@ -24,15 +23,11 @@ function scene:create( event )
 	
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
-	section.alpha=0
-	
-	local score1 = 0
 
-	local script = display.newText("게임방법\n방향키와 점프키를 이용해 고양이이에게 츄르를 주세요!\n\n고양이가 왼쪽, 오른쪽, 아래 벽면에 닿으면 GAMEOVER!", section.x+30, section.y-100, native.systemFontBold)
+	local script = display.newText("게임방법\n방향키와 점프키를 이용해 고양이이에게 츄르를 가져다주세요!\n\n고양이가 왼쪽, 오른쪽, 아래 벽면에 닿으면 GAMEOVER!", section.x+30, section.y-100, native.systemFontBold)
 	script.size = 30
 	script:setFillColor(1)
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
-	script.alpha=0
 
 	local bRock_outline = graphics.newOutline(1, "image/jump/bigRock.png")
 	local leaf_outline = graphics.newOutline(1, "image/jump/leaf.png")
@@ -50,7 +45,7 @@ function scene:create( event )
 
 	local plant1 = {}
 	plant1[1] = display.newImageRect(objectGroup, "image/jump/plant1.png", 150, 100)
-	plant1[1].x, plant1[1].y = 640, 610
+	plant1[1].x, plant1[1].y = 600, 610
 	plant1[2] = display.newImageRect(objectGroup, "image/jump/plant1.png", 200, 80)
 	plant1[2].x, plant1[2].y = 150, 300
 
@@ -63,7 +58,7 @@ function scene:create( event )
 	bRock[1].x, bRock[1].y = 800, 640
 	bRock[2] = display.newImageRect(objectGroup, "image/jump/bigRock.png", bRock[1].width+100, bRock[1].height+50)
 	bRock[2].xScale = -1
-	bRock[2].x, bRock[2].y = 710, 330
+	bRock[2].x, bRock[2].y = 700, 330
 
 	local rock = {}
 	rock[1] = display.newImageRect(objectGroup, "image/jump/rock.png", 130, 96)
@@ -87,14 +82,15 @@ function scene:create( event )
 	sRock[2] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[2].x, sRock[2].y =  980, 540
 	sRock[3] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[3].x, sRock[3].y = 390, 300
+	sRock[3].x, sRock[3].y = 360, 300
 	sRock[4] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[4].x, sRock[4].y = 430, 170
 	sRock[5] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[5].x, sRock[5].y = 500, 350
-
+	sRock[5].x, sRock[5].y = 470, 350
 	sRock[6] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[6].x, sRock[6].y = 970, 250
+	
+	objectGroup.alpha = 0
 
 	local wall = {}
 	local wallGroup = display.newGroup()
@@ -105,66 +101,84 @@ function scene:create( event )
 
 	for i = 1, #bRock do 
 		physics.addBody(bRock[i], "static", {outline=bRock_outline})
+		bRock[i].name = "ground"
 	end
 	for i = 1, #rock do 
 		physics.addBody(rock[i], "static", {outline=rock_outline})
+		rock[i].name = "ground"
 	end
 	for i = 1, #sRock do 
 		physics.addBody(sRock[i], "static", {outline=sRock_outline})
-
+		sRock[i].name = "ground"
 	end
 	for i = 1, #wall do
 		physics.addBody(wall[i], "static")
 		wall[i].name = "wall"
-		wall[i].alpha = 0
 	end
 	for i = 1, #leaf do
 		physics.addBody(leaf[i], "static", {outline=leaf_outline})
+		leaf[i].name = "ground"
 	end
-
 	for i = 1, #plant1 do 
 		physics.addBody(plant1[i], "static", {outline=plant1_outline})
+		plant1[i].name = "ground"
 	end
 		for i = 1, #plant2 do 
 		physics.addBody(plant2[i], "static", {outline=plant2_outline})
+		plant2[i].name = "ground"
 	end
 	
+	wallGroup.alpha = 0
+
 	local arrow = {}
 	local arrowGroup = display.newGroup()
 	arrow[1] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 70, 70)
 	arrow[1].x, arrow[1].y = 1010, 630
 	arrow[1].xScale = -1
 	arrow[1].name = "left"
-
 	arrow[2] = display.newImageRect(arrowGroup, "image/jump/jump.png", 80, 80)
 	arrow[2].x, arrow[2].y = arrow[1].x+86, 630
 	arrow[2].name = "center"
-
 	arrow[3] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 70, 70)
 	arrow[3].x, arrow[3].y = arrow[2].x+86, 630
 	arrow[3].name = "right"
+	arrow[4] = "right"
 
-	arrow[4] = "left"
+	arrowGroup.alpha = 0
 
 	local cat = display.newImageRect("image/jump/cat.png", 65, 50)
 	local cat_outline_none = graphics.newOutline(1, "image/jump/cat.png")
 	local cat_outline_flip = graphics.newOutline(1, "image/jump/cat_flip.png")
-
 	cat.x, cat.y = 110, 550
 	cat.name = "cat"
 
 	physics.addBody(cat, {friction=1, outline = cat_outline_none})
 	cat.isFixedRotation = true 
+	cat.alpha = 0
 
+	local jumpSound = audio.loadSound("music/bounce.mp3")
+	local home = audio.loadStream( "music/music3.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.9, display.contentHeight * 0.1
+    volumeButton.alpha = 0
+
+	local isJumping = false
 	function arrowTab(event)
 		x = cat.x
 		y = cat.y
 		if (event.target.name == "center") then
-			if (arrow[4] == "left") then
-				transition.to(cat, {time=100, x=(x-80), y=(y-100)})
-			else
-			    transition.to(cat, {time=100, x=(x+80), y=(y-100)})
-			end
+			--if(isJumping == false) then	
+				--isJumping = true
+				if (arrow[4] == "left") then
+					transition.to(cat, {time=100, x=(x-80), y=(y-80)})
+				else
+				    transition.to(cat, {time=100, x=(x+80), y=(y-80)})
+				end
+				audio.play(jumpSound)
+    			audio.setVolume(0.2)
+		    --end
 		else
 			if (event.target.name == arrow[4]) then --왼쪽 클
 			    if (event.target.name == "left") then
@@ -185,12 +199,8 @@ function scene:create( event )
 			       transition.to(cat, {time=100, x=(x+10)})
 			    end
 			    cat.isFixedRotation = true
-				end
+			end
 		end
-	end
-
-	for i = 1, 3 do
-		arrow[i]:addEventListener("tap", arrowTab)
 	end
 
 	local goal = display.newImageRect("image/jump/goal.png", 80, 80)
@@ -209,13 +219,15 @@ function scene:create( event )
 	physics.addBody(goal, "static", {outline=goal_outline})
 	sceneGroup:insert(goal)
 
-	local function pagemove()
-		display.remove(objectGroup)
-		display.remove(arrowGroup)
-		display.remove(cat)
-		display.remove(goal)
-		display.remove(showScore)
+	function pagemove() 
+		audio.pause(home)
+		objectGroup.alpha = 0
+		arrowGroup.alpha = 0
+		cat.alpha = 0
+		goal.alpha = 0
+		volumeButton.alpha = 0
 	end
+
 	function onCollision(event)
 		if(event.other.name == "goal") then
 			pagemove()
@@ -225,43 +237,60 @@ function scene:create( event )
 		end
 	end
 
-	local flag = false
+	local flag = true
+	function onCollision1(event)	
+		if(isJumping == true and event.other.name == "ground") then
+			print("땅이야")
+			if(flag == true) then
+				flag = false
+				timer.performWithDelay(700, function () isJumping = false flag = true end)
+			end
+		end
+	end
+
+	local flag1 = false
 	function gameOver(self, event)
-		if(event.phase == "ended" and flag == false) then
+		if(event.phase == "ended" and flag1 == false) then
 			flag = true
 
 			timer.performWithDelay(10, function()
 				pagemove()
-				composer.removeScene("view03_jump_game")
 				composer.setVariable("score1", -1)
+				composer.removeScene("view03_jump_game")
 				composer.gotoScene("view03_jump_game_over")
-					flag = false
+					flag1 = false
 				end )
 		end
 	end
-	local jumpSound = audio.loadSound("music/bounce.mp3")
+
 	function soundEffect(event)	
     	audio.play(jumpSound)
     	audio.setVolume(0.2)
 	end
-	local function scriptremove(event)
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
+
+	local function playGame(event)
+		audio.play(home)
 		objectGroup.alpha = 1
 		background.alpha = 1
 		arrowGroup.alpha = 1
 		cat.alpha = 1
 		section.alpha = 0
-		goal.alpha = 1
 		script.alpha = 0
+		goal.alpha = 1
+		volumeButton.alpha = 1
 	end
 
 	--처음 실행
-	local function titleremove(event)
-		section.alpha = 1
-		script.alpha = 1
-		section:addEventListener("tap", scriptremove)
+	section:addEventListener("tap", playGame)
+	for i=1,3 do 
+		arrow[i]:addEventListener("tap", arrowTab)
 	end
-	titleremove()
-	arrow[2]:addEventListener("tap", soundEffect)
 	wall[1].collision = gameOver
 	wall[1]:addEventListener("collision")
 	wall[2].collision = gameOver
@@ -269,47 +298,17 @@ function scene:create( event )
 	wall[4].collision = gameOver
 	wall[4]:addEventListener("collision")
 	cat:addEventListener("collision", onCollision)
+	cat:addEventListener("collision", onCollision1)
 	
 	sceneGroup:insert(background)
 	sceneGroup:insert(wallGroup)
 	sceneGroup:insert(cat)
+	sceneGroup:insert(volumeButton)
 	sceneGroup:insert(arrowGroup)
 	sceneGroup:insert(objectGroup)
 	sceneGroup:insert(goal)
 	sceneGroup:insert(section)
 	sceneGroup:insert(script)
-	objectGroup.alpha = 0
-	arrowGroup.alpha = 0
-	cat.alpha = 0
-	goal.alpha = 0
-
-
-
-	-----음악
-
-    -- showoverlay 함수 사용 option
-    local options = {
-        isModal = true
-    }
-
-    --샘플 볼륨 이미지
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
-    sceneGroup:insert(volumeButton)
-
-
-    --샘플볼륨함수--
-    local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
-    end
-    volumeButton:addEventListener("tap",setVolume)
-
-    local home = audio.loadStream( "music/music3.mp3" )
-    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
-    audio.play(home)
-
-
-    -------------
 end
 
 function scene:show( event )

@@ -29,13 +29,12 @@ function scene:create( event )
 	sceneGroup:insert(board)]]
 
 	local score1 = composer.getVariable("score1")
+	print(score1)
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
-		if (event.phase == "began") then 
-			audio.pause(home)
-			composer.removeScene("view03_jump_game_over")
-			composer.gotoScene("view03_jump_game")
-		end
+		print("왜이래")
+		composer.removeScene("view03_jump_game_over")
+		composer.gotoScene("view03_jump_game")
 	end
 	--close 버튼
 	local close = display.newImageRect("image/jump/닫기.png", 80, 80)
@@ -43,16 +42,16 @@ function scene:create( event )
 	close.alpha = 0
 
 	local function gomap(event) -- 게임 pass 후 넘어감
+		if (score1 == 1) then
 			composer.setVariable("successJump", "success")
-			if event.phase == "began" then--view20ring
-			audio.pause(home)
-
 			loadedSettings.toal_success = loadedSettings.toal_success + 1
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "고양이 점프해서 츄르 찾기"
 			loadsave.saveTable(loadedSettings,"settings.json")
-
 			composer.removeScene("view03_jump_game_over")
-			composer.gotoScene("view03_npc_jump_game") --npc로
+			composer.gotoScene("view03_jump_game")
+		else
+			composer.removeScene("view03_jump_game_over")
+			composer.gotoScene("view05_main_map") --npc로
 		end
 	end
 
@@ -74,14 +73,14 @@ function scene:create( event )
 		backgame2.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("touch", gomap)
-		backgame2:addEventListener("touch",backtogame)
-	else --score1이 1일 때 sucess
+		close:addEventListener("tap", gomap)
+		backgame2:addEventListener("tap",backtogame)
+	elseif(score1 == 1) then--score1이 1일 때 sucess
 		backgame1.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("touch",gomap)
-		backgame1:addEventListener("touch",backtogame)
+		close:addEventListener("tap", gomap)
+		backgame1:addEventListener("tap",backtogame)
 	end
 
 	sceneGroup:insert(close)

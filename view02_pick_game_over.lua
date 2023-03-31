@@ -15,7 +15,7 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	
-	local background = display.newImageRect("image/pick/image/background_final.png",display.contentWidth, display.contentHeight) ---배경
+	local background = display.newImageRect("image/pick/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
@@ -33,41 +33,38 @@ function scene:create( event )
 	local score1 = composer.getVariable("score1")
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
-		if event.phase == "began" then
-			audio.pause(home1)
-			composer.removeScene("view02_pick_game_over")
-			composer.gotoScene("view02_pick_game")
-		end
+		composer.removeScene("view02_pick_game_over")
+		composer.gotoScene("view02_pick_game")
 	end
 	--close 버튼
-	local close = display.newImageRect("image/pick/image/닫기.png", 80, 80)
+	local close = display.newImageRect("image/pick/닫기.png", 80, 80)
 	-- close.x, close.y = 1200, 80 -> 맵보기 아이콘이랑 겹쳐있어 닫기 버튼을 누르면 맵보기 아이콘도 같이 눌러짐
 	close.x, close.y = 1200, 30
 	close.alpha = 0
 
 	local function gomap(event) -- 게임 pass 후 map으로 넘어감
-		if event.phase == "began" then--view20ring
+		if score1 == 5 then
 			composer.setVariable("successPickGame", "success")
-			audio.pause(home1)
-
 			loadedSettings.toal_success = loadedSettings.toal_success + 1
 			-- 로드세이브에 저장될 이름 수정
 			--loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "Pick Game"
 			loadsave.saveTable(loadedSettings,"Pick Game")
 			loadsave.saveTable(loadedSettings,"settings.json")
-			
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("view02_npc_pickGame") 
+		else
+			composer.removeScene("view02_pick_game_over")
+			composer.gotoScene("view05_main_map") 
 		end
 	end
 
-	local backgame1 =display.newImage("image/pick/image/클리어창.png") --성공할 경우
+	local backgame1 =display.newImage("image/pick/클리어창.png") --성공할 경우
 	backgame1.x, backgame1.y = display.contentWidth/2, display.contentHeight/2
 	backgame1.alpha = 0
 	sceneGroup:insert(backgame1)
 
-	local backgame2 =display.newImage("image/pick/image/실패창.png") --실패할 경우
+	local backgame2 =display.newImage("image/pick/실패창.png") --실패할 경우
 	backgame2.x, backgame2.y = display.contentWidth/2, display.contentHeight/2
 	backgame2.alpha = 0
 	sceneGroup:insert(backgame2)
@@ -108,14 +105,14 @@ function scene:create( event )
 		backgame2.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("touch", gomap) --close버튼을 눌렀을 때 gomap
-		backgame2:addEventListener("touch",backtogame) --우는고양이를 눌렀을 때 다시하기
-	else ---score1이 5일 때 sucess
+		close:addEventListener("tap", gomap) --close버튼을 눌렀을 때 gomap
+		backgame2:addEventListener("tap",backtogame) --우는고양이를 눌렀을 때 다시하기
+	elseif (score1 == 5) then---score1이 5일 때 sucess
 		backgame1.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("touch", gomap)
-		backgame1:addEventListener("touch",backtogame) --행복한고양이 눌렀을 때 다시하기
+		close:addEventListener("tap",gomap)
+		backgame1:addEventListener("tap",backtogame) --행복한고양이 눌렀을 때 다시하기
 	end
 	sceneGroup:insert(close)
 	sceneGroup:insert(lastText)
