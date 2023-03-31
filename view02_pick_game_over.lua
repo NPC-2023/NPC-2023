@@ -51,8 +51,11 @@ function scene:create( event )
 			audio.pause(home1)
 
 			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
+			-- 로드세이브에 저장될 이름 수정
+			--loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
+			loadedSettings.toal_success_names[loadedSettings.toal_success] = "Pick Game"
 			loadsave.saveTable(loadedSettings,"Pick Game")
+			loadsave.saveTable(loadedSettings,"settings.json")
 			
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("view02_npc_pickGame") 

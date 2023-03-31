@@ -10,8 +10,8 @@ function scene:create( event )
 	local sceneGroup = self.view
 	
 	loadedEndings = loadsave.loadTable( "endings.json" )
+	loadedSettings = loadsave.loadTable( "settings.json" )
 
-	
 	local background = display.newImageRect("image/mouse/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
@@ -61,6 +61,12 @@ function scene:create( event )
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
 				audio.pause(home)
+
+				-- 퀘스트 완료 목록에 저장
+				loadedSettings.toal_success = loadedSettings.toal_success + 1
+				loadedSettings.toal_success_names[loadedSettings.toal_success] = "쥐 잡기"
+				loadsave.saveTable(loadedSettings,"settings.json")
+
 				composer.removeScene("view03_mouse_game_over")
 				composer.gotoScene( "view05_main_map" )
 		end
