@@ -61,6 +61,7 @@ function scene:create( event )
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "대신 학식 받아주기"
 			loadsave.saveTable(loadedSettings,"settings.json")
 
+			composer.setVariable("food_status", "success")
 			composer.removeScene("view09_schoolfood_view2")
 			composer.gotoScene( "view07_npc_schoolfood_game" )
 		end

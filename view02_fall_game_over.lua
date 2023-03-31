@@ -61,6 +61,7 @@ function scene:create( event )
 				loadedSettings.toal_success_names[loadedSettings.toal_success] = "떨어지는 참치캔 받기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
+				composer.setVariable("fallgame_status", "success")
 				composer.removeScene("view02_fall_game_over")
 				composer.gotoScene( "view02_npc_fallgame" )
 		end

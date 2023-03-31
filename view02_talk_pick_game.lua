@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- view17_talk_boongmake_game.lua
+--
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
@@ -12,16 +12,16 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/place1.jpg", display.contentWidth, display.contentHeight)
+	
+	local background = display.newImageRect("image/npc/place5.jpg", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc/npc1.png", 200, 200)
-	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
+ 	local npc = display.newImageRect("image/npc/npc3.png", 200, 200)
+	npc.x, npc.y = display.contentWidth*0.9, display.contentHeight*0.75
 	npc.xScale = -1
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
-	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
-	cat.xScale = -1
+	cat.x, cat.y = display.contentWidth*0.5, display.contentHeight*0.88
 	objectGroup:insert(cat)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
@@ -44,11 +44,11 @@ function scene:create( event )
 
 	--대사
 	local t = {}
-	t[1] = display.newText("팔을 다쳐서 밥과 반찬을 담을 수 없어... \n학식을 어떻게 먹는담?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("내가 도와줄까냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("그럼 학식 좀 대신 가져다줄래?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("어떤 반찬이 좋냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("temppppp!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[1] = display.newText("어? 귀여운 고양이네 어디서 들어온 거지?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("나는 고양이 왕국 일등 기사"..mainName.."이다냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("일등 기사라니 정말 멋진데? 나도 너희 왕국에 가보고 싶어!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText(" 후후.. 내가 다음에 데려가 주겠다냥! 나만 믿어냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[5] = display.newText("빨리 가 보고 싶다!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
 	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 
 	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
@@ -74,9 +74,9 @@ function scene:create( event )
 		j = j + 1
 
 		if j == 8 then
-			composer.setVariable("talk7_status", "fin")
-			composer.removeScene("view07_talk_schoolfood_game")
-			composer.gotoScene("view07_npc_schoolfood_game")
+			composer.setVariable("talk4_status", "fin")
+			composer.removeScene("view02_talk_pick_game")
+			composer.gotoScene("view02_npc_pickGame")
 		end
 	end
 

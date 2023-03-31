@@ -32,14 +32,14 @@ function scene:create( event )
 	cat.xScale = -1
 	objectGroup:insert(cat)
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 200)
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 320, 200)
 	speechbubble.x, speechbubble.y = npc.x, npc.y-140
 	speechbubble.alpha = 0
 
 	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
 	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-140
 
-	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
+	local speech = display.newText("", speechbubble.x, speechbubble.y-30, "font/DOSGothic.ttf")
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
@@ -148,7 +148,7 @@ function scene:create( event )
 					script.text = "이미 대화를 끝냈습니다."
 				else
 					composer.removeScene("view07_npc_schoolfood_game")
-					composer.gotoScene("view07_schoolfood_game")
+					composer.gotoScene("view07_talk_schoolfood_game")
 				end
 			end)
 
@@ -156,7 +156,7 @@ function scene:create( event )
 				if(composer.getVariable("food_status") == "success") then
 					script.text = "이미 게임을 끝냈습니다."
 				else 
-					--동전 누르면 게임 시작
+					--메모 누르면 게임 시작
 					memo.alpha = 1
 		 			memo.x, memo.y = npc.x-100, npc.y+50
 		 			objectGroup:insert(memo)
@@ -194,7 +194,7 @@ function scene:create( event )
 		scriptGroup.alpha = 1
 
 		if(composer.getVariable("food_status") ~= "success") then			
-			speech.text = "다리를 다쳐서 그런데.. \n 학식 좀 대신 가져다줄래?\n 참고할 쪽지를 줄게."
+			speech.text = "다리를 다쳐서 그런데.. \n학식 좀 대신 가져다줄래?\n참고할 쪽지를 줄게."
 		else
 			speech.text = "너 정말 대단한 고양이구나!"
 		end
@@ -208,16 +208,14 @@ function scene:create( event )
 
 	--npc가 고양이에게 주는 선물 
 	local gift = ''
-	local giftFlag = 0
-	if(composer.getVariable("food_status") == "success" and giftFlag == 0) then
-		giftFlag = 1
-
+	if(composer.getVariable("food_status") == "success" and composer.getVariable("talk7_status") ~= "fin") then
 		speechbubble_exmark.alpha = 0
 		speechbubble.alpha = 1
 		speech.text = "고마워! 맛있겠다!\n너도 맛있는거 먹을래?"
 		speech.alpha = 1
+		speech.size = 20
 		speech:setFillColor(black)
-		coin.alpha = 0
+		memo.alpha = 0
 
 		gift = display.newImageRect("image/npc/can.png", 100, 100)
  		gift.x, gift.y = npc.x-120, npc.y+10

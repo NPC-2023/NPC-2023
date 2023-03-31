@@ -51,6 +51,7 @@ function scene:create( event )
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "Pick Game"
 			loadsave.saveTable(loadedSettings,"Pick Game")
 			loadsave.saveTable(loadedSettings,"settings.json")
+			composer.setVariable("pickgame_status", "success")
 			composer.removeScene("view02_pick_game_over")
 			composer.gotoScene("view02_npc_pickGame") 
 		else

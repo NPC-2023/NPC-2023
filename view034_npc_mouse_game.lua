@@ -17,11 +17,11 @@ function scene:create( event )
 	local scriptGroup = display.newGroup()
 
 
-	local background = display.newImageRect("image/npc/place2.jpg", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/npc/place1.jpg", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local npc = display.newImageRect("image/npc/npc3.png", 200, 200)
-	npc.x, npc.y = display.contentWidth*0.9, display.contentHeight*0.75
+ 	local npc = display.newImageRect("image/npc/npc2.png", 200, 200)
+	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.6
 	npc.xScale = -1
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
@@ -75,15 +75,15 @@ function scene:create( event )
 	--게임 전체 변수(저장됨)
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 	mainName = loadedSettings.name
-	times = loadedSettings.talk[6]
+	times = loadedSettings.talk[8]
 
-	if(composer.getVariable("talk6_status") == "fin") then
-		loadedSettings.talk[6] = 0 --0으로 초기화하기 위한 임시 코드
-		loadedSettings.talk[6] = loadedSettings.talk[6] + 1
+	if(composer.getVariable("talk8_status") == "fin") then
+		loadedSettings.talk[8] = 0 --0으로 초기화하기 위한 임시 코드
+		loadedSettings.talk[8] = loadedSettings.talk[8] + 1
 	end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
-	if(composer.getVariable("fallgame_status") == "success") then
+	if(composer.getVariable("mousegame_status") == "success") then
 		loadedSettings.today_success = loadedSettings.today_success + 1
 	end
 
@@ -102,7 +102,7 @@ function scene:create( event )
 		--수락(말풍선)누르면 고양이가 말함
 		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 200, 75)
 		speechbubble.x, speechbubble.y = cat.x, cat.y-100
-		local speech = display.newText("뭐다냥?\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
+		local speech = display.newText("쥐..?!\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
 		speech.size = 20
 		speech:setFillColor(0)
 
@@ -114,8 +114,8 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble.alpha = 0
 			speech.alpha = 0
-			composer.removeScene("view02_npc_fallgame")
-			composer.gotoScene("view02_fall_game")
+			composer.removeScene("view034_npc_mouse_game")
+			composer.gotoScene("view034_mouse_game")
 		end)
 	end
 
@@ -141,16 +141,16 @@ function scene:create( event )
 			objectGroup:insert(scriptGroup)
 
 			gossip_click:addEventListener("tap", function() --대화 클릭 시 페이지 이동
-				if(composer.getVariable("talk6_status") == "fin") then
+				if(composer.getVariable("talk8_status") == "fin") then
 					script.text = "이미 대화를 끝냈습니다."
 				else
-					composer.removeScene("view02_npc_fallgame")
-					composer.gotoScene("view02_talk_fallgame")
+					composer.removeScene("view034_npc_mouse_game")
+					composer.gotoScene("view034_talk_mouse_game")
 				end
 			end)
 
 			game_click:addEventListener("tap", function() 
-				if(composer.getVariable("fallgame_status") == "success") then
+				if(composer.getVariable("mousegame_status") == "success") then
 					script.text = "이미 게임을 끝냈습니다."
 				else 
 					acceptQuest()
@@ -161,7 +161,7 @@ function scene:create( event )
 
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
-		if(composer.getVariable("fallgame_status") == "success" and composer.getVariable("talk6_status") == "fin") then
+		if(composer.getVariable("mousegame_status") == "success" and composer.getVariable("talk8_status") == "fin") then
 			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 				section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
@@ -182,15 +182,15 @@ function scene:create( event )
 		speech.alpha = 1
 		scriptGroup.alpha = 1
 
-		if(composer.getVariable("fallgame_status") ~= "success") then			
-			speech.text = "인문관 꼭대기에서\n뭐가 떨어진다는데..?"
+		if(composer.getVariable("mousegame_status") ~= "success") then			
+			speech.text = "어휴 누가 쥐 좀 잡아줬으면!"
 		else
-			speech.text = "너 정말 날쌔다!"
+			speech.text = "굳이 쥐를 보여줄 필욘 없어.."
 		end
 		speech.size = 20
 		speech:setFillColor(0)
 
-		if(composer.getVariable("fallgame_status") ~= "success" or composer.getVariable("talk6_status") ~= "fin") then
+		if(composer.getVariable("mousegame_status") ~= "success" or composer.getVariable("talk8_status") ~= "fin") then
 			gossipOrGame()
 		end
 	end

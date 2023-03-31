@@ -227,7 +227,7 @@ function scene:create( event )
 
 	loadsave.saveTable(loadedSettings,"settings.jsn")
 
-	speechbubble_exmark:addEventListener("tap", takWithNPC)
+	speechbubble_exmark:addEventListener("tap", talkWithNPC)
 	map:addEventListener("tap", goBackToMap)
 
  	objectGroup:insert(npc)

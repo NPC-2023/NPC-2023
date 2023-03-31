@@ -49,7 +49,7 @@ function scene:create( event )
     local text = "입장하기 전, 이름을 입력해주세요."
 	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.46)
 	showText:setFillColor(0)
-	showText.size = 45
+	showText.size = 38
 	--showText.alpha = 0
 	sceneGroup:insert(showText)
 

@@ -32,7 +32,6 @@ function scene:create( event )
 	print(score1)
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
-		print("왜이래")
 		composer.removeScene("view03_jump_game_over")
 		composer.gotoScene("view03_jump_game")
 	end
@@ -47,11 +46,12 @@ function scene:create( event )
 			loadedSettings.toal_success = loadedSettings.toal_success + 1
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "고양이 점프해서 츄르 찾기"
 			loadsave.saveTable(loadedSettings,"settings.json")
+			composer.setVariable("jumpgame_status", "success") --npc 대화용
 			composer.removeScene("view03_jump_game_over")
-			composer.gotoScene("view03_jump_game")
+			composer.gotoScene("view03_npc_jump_game")
 		else
 			composer.removeScene("view03_jump_game_over")
-			composer.gotoScene("view05_main_map") --npc로
+			composer.gotoScene("view03_jump_game") --npc로
 		end
 	end
 

@@ -292,7 +292,11 @@ function scene:create( event )
             elseif(name == "예지관")then
                 print("예지관")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view10_npc_lost_stuId_game")
+                if(math.random(1, 2) == 1) then
+                    composer.gotoScene("view10_npc_lost_stuId_game")
+                else
+                    composer.gotoScene("view034_npc_mouse_game")
+                end
                 return true
             elseif(name == "대학원")then
                 print("대학원")

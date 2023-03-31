@@ -29,7 +29,7 @@ function scene:create( event )
 	cat.xScale = -1
 	objectGroup:insert(cat)
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 150)
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
 	speechbubble.x, speechbubble.y = npc.x, npc.y - 150
 	speechbubble.alpha = 0
 

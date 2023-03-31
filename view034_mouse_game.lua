@@ -421,8 +421,8 @@ function scene:create( event )
 				dudu_hit2[i] =nil
 			end
 
-			composer.removeScene("view03_mouse_game")
-			composer.gotoScene("view03_mouse_game_over")
+			composer.removeScene("view034_mouse_game")
+			composer.gotoScene("view034_mouse_game_over")
 		end
 	end
 	 

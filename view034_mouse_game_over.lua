@@ -42,7 +42,7 @@ function scene:create( event )
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
 				audio.pause(home)
-				composer.removeScene("view03_mouse_game_over")
+				composer.removeScene("view034_mouse_game_over")
 				composer.gotoScene("view03_mouse_game")
 		end
 	end
@@ -67,7 +67,8 @@ function scene:create( event )
 				loadedSettings.toal_success_names[loadedSettings.toal_success] = "쥐 잡기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
-				composer.removeScene("view03_mouse_game_over")
+				composer.setVariable("mousegame_status", "success")
+				composer.removeScene("view034_mouse_game_over")
 				composer.gotoScene( "view05_main_map" )
 		end
 	end
@@ -109,7 +110,7 @@ function scene:create( event )
 	local function gomap(event)
 		if event.phase == "began" then
 				audio.pause(home)
-				composer.removeScene("view03_mouse_game_over")
+				composer.removeScene("view034_mouse_game_over")
 				composer.gotoScene( "view05_main_map" )
 		end
 	end
