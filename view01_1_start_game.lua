@@ -19,31 +19,13 @@ function scene:create( event )
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	sceneGroup:insert(background)
 
-	local newgame = display.newImageRect("image/게임시작/새로시작.png", 250, 200)
+	local newgame = display.newImageRect("image/게임시작/새로시작.png", 250, 100)
     newgame.x,newgame.y = display.contentWidth * 0.4, display.contentHeight * 0.89
     sceneGroup:insert(newgame)
 
-    local loadgame = display.newImageRect("image/게임시작/이어하기.png", 250, 200)
-    loadgame.x,loadgame.y = display.contentWidth * 0.6, display.contentHeight * 0.89
+    local loadgame = display.newImageRect("image/게임시작/이어하기.png", 250, 100)
+    loadgame.x,loadgame.y = display.contentWidth * 0.63, display.contentHeight * 0.89
     sceneGroup:insert(loadgame)
-
-
-    local text1 = "NEW!"
-    local showText1 = display.newText(text1, display.contentWidth*0.4, display.contentHeight*0.884)
-    showText1:setFillColor(0)
-    showText1.size = 30
-    --showText1.alpha = 0
-    sceneGroup:insert(showText1)
-
-
-     local text2 = "LOAD!"
-    local showText2 = display.newText(text2, display.contentWidth*0.605, display.contentHeight*0.884)
-    showText2:setFillColor(0)
-    showText2.size = 30
-    --showText2.alpha = 0
-    sceneGroup:insert(showText2)
-
-
 
 
 	-- 엔딩 제이쓴 파일 생성
@@ -146,13 +128,13 @@ function scene:create( event )
             if not file then --or (loadedEndings.end_num==1) then
                 composer.showOverlay( "nosave", options )
             else
-                composer.removeScene("view01_1_start_game")
-                composer.gotoScene( "view05_main_map")
                 -- ,options1
                 audio.pause( titleMusic )
-                local home = audio.loadStream( "music/Trust.mp3" )
-                audio.setVolume( loadedEndings.logValue )
-                audio.play(home)
+              --local home = audio.loadStream( "music/Trust.mp3" )
+              --audio.setVolume( loadedEndings.logValue )
+               --audio.play(home)
+                composer.removeScene("view01_1_start_game")
+                composer.gotoScene( "view05_main_map")
             end
     end
     loadgame:addEventListener("touch",startLoad)
