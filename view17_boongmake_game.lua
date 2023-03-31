@@ -47,14 +47,14 @@ function scene:create( event )
 --게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
 
 	function startscene()
-		local gametitle = display.newImage("H_image/title.png")
+		local gametitle = display.newImage("image/boong_make/title.png")
 		gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
 		local title = display.newText("붕어빵 만들기", gametitle.x, gametitle.y+130, native.systemFontBold)
 		title.size = 50
 		title:setFillColor(0)
 
-		local titleBackground = display.newImage("H_image/view02_background.png", display.contentWidth/2, display.contentHeight/2)
+		local titleBackground = display.newImage("image/boong_make/view02_background.png", display.contentWidth/2, display.contentHeight/2)
 
 		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 		section:setFillColor(0.35, 0.35, 0.35, 0.35)
@@ -94,40 +94,40 @@ function scene:create( event )
 
 	--게임 시작---------------------------------------------------------------------------------------------------------------------------------------------------
 	function gamescene()
-		local background = display.newImage("H_image/view02_background.png", display.contentWidth/2, display.contentHeight/2)
-	 	local kettle = display.newImage("H_image/kettle.png", display.contentWidth*0.9, display.contentHeight*0.75)
-	 	local beans = display.newImage("H_image/beans.png", display.contentWidth*0.9, display.contentHeight*0.45)
-	 	local timerImage = display.newImage("H_image/timerImage.png", display.contentWidth*0.9-10, display.contentHeight*0.15-20)
-	 	local boongCountBackground = display.newImage("H_image/boongCountBackground.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
+		local background = display.newImage("image/boong_make/view02_background.png", display.contentWidth/2, display.contentHeight/2)
+	 	local kettle = display.newImage("image/boong_make/kettle.png", display.contentWidth*0.9, display.contentHeight*0.75)
+	 	local beans = display.newImage("image/boong_make/beans.png", display.contentWidth*0.9, display.contentHeight*0.45)
+	 	local timerImage = display.newImage("image/boong_make/timerImage.png", display.contentWidth*0.9-10, display.contentHeight*0.15-20)
+	 	local boongCountBackground = display.newImage("image/boong_make/boongCountBackground.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 
 	 	local object = {}
 		--틀
 		for i = 1,19,9 do
-		 	object[i] = display.newImage("H_image/object01.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i] = display.newImage("image/boong_make/object01.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--반죽1
-		 	object[i+1] = display.newImage("H_image/object02.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+1] = display.newImage("image/boong_make/object02.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--팥
-		 	object[i+2] = display.newImage("H_image/object03.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+2] = display.newImage("image/boong_make/object03.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--반죽2
-		 	object[i+3] = display.newImage("H_image/object04.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+3] = display.newImage("image/boong_make/object04.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--틀
-		 	object[i+4] = display.newImage("H_image/object05.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+4] = display.newImage("image/boong_make/object05.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--연기
-		 	object[i+5] = display.newImage("H_image/object06.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+5] = display.newImage("image/boong_make/object06.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--완성된 붕어빵
-		 	object[i+6] = display.newImage("H_image/object07.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+6] = display.newImage("image/boong_make/object07.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--탄 연기
-		 	object[i+7] = display.newImage("H_image/object08.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+7] = display.newImage("image/boong_make/object08.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 
 		 	--탄 붕어빵
-		 	object[i+8] = display.newImage("H_image/object09.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+8] = display.newImage("image/boong_make/object09.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
 		end
 
 		sceneGroup:insert(background)
