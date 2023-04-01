@@ -67,7 +67,7 @@ function scene:create( event )
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "정문 지키기"
 			loadsave.saveTable(loadedSettings,"settings.json")
 
-			composer.removeScene("view18_frontgate_game_highscores")
+			composer.removeScene("view18_highscores_frontgate_game")
 			composer.gotoScene( "view18_npc_frontgate_game" )
 		end
 	end
