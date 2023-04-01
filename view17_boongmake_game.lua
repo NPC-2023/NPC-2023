@@ -60,7 +60,7 @@ function scene:create( event )
 		section:setFillColor(0.35, 0.35, 0.35, 0.35)
 		section.alpha=0
 
-		local script = display.newText("게임방법\n\n40초 안에 붕어빵 8개를 만드세요! \n 반죽과 팥앙금을 순서대로 놓고 터치하세요! \n 붕어빵 8개를 완성하면 게임 클리어 입니다.", section.x+30, section.y-100, native.systemFontBold)
+		local script = display.newText("게임방법\n\n50초 안에 붕어빵 8개를 만드세요! \n 반죽과 팥앙금을 순서대로 놓고 터치하세요! \n 붕어빵 8개를 완성하면 게임 클리어 입니다.", section.x+30, section.y-100, native.systemFontBold)
 		script.size = 30
 		script:setFillColor(1)
 		script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
@@ -163,7 +163,7 @@ function scene:create( event )
 		local score = display.newText(0, display.contentWidth*0.1+50, display.contentHeight*0.15-20)
 	 	score.size = 50
 	 	score:setFillColor(0)
-	 	local time= display.newText(60, display.contentWidth*0.9, display.contentHeight*0.15-5)
+	 	local time= display.newText(50, display.contentWidth*0.9, display.contentHeight*0.15-5)
 	 	time.size = 40
 	 	time:setFillColor(0)
 
@@ -202,8 +202,8 @@ function scene:create( event )
 	 				event.target.isFocus = false
 	 				--반죽부터 반죽까지
 	 				for j = 1, 19, 9 do
-	 					if ( event.target.x > object[j].x - 50 and event.target.x < object[j].x + 50
-	 						and event.target.y > object[j].y - 100 and event.target.y < object[j].y + 100) then
+	 					if ( event.target.x > object[j].x - 100 and event.target.x < object[j].x + 100
+	 						and event.target.y > object[j].y - 200 and event.target.y < object[j].y + 200) then
 	 						if ( event.target == kettle) then
 	 							if( turn[j] == 1) then
 	 								object[j+1].alpha = 1
@@ -315,7 +315,7 @@ function scene:create( event )
 			end
 		 end
 
-		 local timeAttack = timer.performWithDelay(1000, counter, 61)
+		 local timeAttack = timer.performWithDelay(1000, counter, 51)
 	
 	 	--코드 끝
 	end
