@@ -195,6 +195,7 @@ end
 local function endGame() --게임 실패 (처음 play화면으로)
 	composer.removeScene("view18_highscores_frontgate_game") 
 	composer.setVariable("score", -1)
+	audio.stop ( 1 )
 	composer.gotoScene( "view18_highscores_frontgate_game", { time=800, effect="crossFade" } )
 end
 
