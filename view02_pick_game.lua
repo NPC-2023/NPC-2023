@@ -157,7 +157,7 @@ function scene:create( event )
 		showScore.alpha = 1
 		section.alpha = 0
 		script.alpha = 0
-		timer2 = timer.performWithDelay(870, generate, 30, "generateTime")
+		timer2 = timer.performWithDelay(880, generate, 30, "generateTime")
 	end
 
 
@@ -171,7 +171,6 @@ function scene:create( event )
     end
 
 	section:addEventListener("tap", playGame)
-	stopButton:addEventListener("tap", showStop)
 end
 
 function scene:show( event )

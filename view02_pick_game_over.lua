@@ -1,4 +1,3 @@
---fallgame 통과하는 게임 종료된 화면
 
 local composer = require( "composer" )
 local physics = require("physics")
@@ -42,22 +41,21 @@ function scene:create( event )
 	close.x, close.y = 1200, 30
 	close.alpha = 0
 
-	local function gomap(event) -- 게임 pass 후 map으로 넘어감
-		if score1 == 5 then
-			composer.setVariable("successPickGame", "success")
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			-- 로드세이브에 저장될 이름 수정
-			--loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "Pick Game"
-			loadsave.saveTable(loadedSettings,"Pick Game")
-			loadsave.saveTable(loadedSettings,"settings.json")
-			composer.setVariable("pickgame_status", "success")
-			composer.removeScene("view02_pick_game_over")
-			composer.gotoScene("view02_npc_pickGame") 
-		else
-			composer.removeScene("view02_pick_game_over")
-			composer.gotoScene("view05_main_map") 
-		end
+	local function gomap1(event) -- 게임 pass 후 map으로 넘어감
+		composer.setVariable("successPickGame", "success")
+		loadedSettings.toal_success = loadedSettings.toal_success + 1
+		-- 로드세이브에 저장될 이름 수정
+		--loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
+		loadedSettings.toal_success_names[loadedSettings.toal_success] = "Pick Game"
+		loadsave.saveTable(loadedSettings,"Pick Game")
+		loadsave.saveTable(loadedSettings,"settings.json")
+		composer.removeScene("view02_pick_game_over")
+		composer.gotoScene("view02_npc_pickGame") 
+	end
+
+	local function gomap2(event) -- 게임 fail 후 map으로 넘어감
+		composer.removeScene("view02_pick_game_over")
+		composer.gotoScene("view05_main_map") 
 	end
 
 	local backgame1 =display.newImage("image/pick/클리어창.png") --성공할 경우
@@ -106,14 +104,12 @@ function scene:create( event )
 		backgame2.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("tap", gomap) --close버튼을 눌렀을 때 gomap
+		close:addEventListener("tap", gomap2) --close버튼을 눌렀을 때 gomap
 		backgame2:addEventListener("tap",backtogame) --우는고양이를 눌렀을 때 다시하기
 	elseif (score1 == 5) then---score1이 5일 때 sucess
 		backgame1.alpha = 1
 		close.alpha = 1
-		lastText.alpha = 1
-		close:addEventListener("tap",gomap)
-		backgame1:addEventListener("tap",backtogame) --행복한고양이 눌렀을 때 다시하기
+		close:addEventListener("tap",gomap1)
 	end
 	sceneGroup:insert(close)
 	sceneGroup:insert(lastText)

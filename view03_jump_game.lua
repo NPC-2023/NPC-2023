@@ -55,7 +55,7 @@ function scene:create( event )
 	
 	local bRock = {}
 	bRock[1] = display.newImageRect(objectGroup, "image/jump/bigRock.png", 130, 96)
-	bRock[1].x, bRock[1].y = 800, 640
+	bRock[1].x, bRock[1].y = 770, 640
 	bRock[2] = display.newImageRect(objectGroup, "image/jump/bigRock.png", bRock[1].width+100, bRock[1].height+50)
 	bRock[2].xScale = -1
 	bRock[2].x, bRock[2].y = 700, 330
@@ -66,7 +66,7 @@ function scene:create( event )
 	rock[2] = display.newImageRect(objectGroup, "image/jump/rock.png", rock[1].width, rock[1].height)
 	rock[2].x, rock[2].y = 330, 640
 	rock[3] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
-	rock[3].x, rock[3].y = 900, 580
+	rock[3].x, rock[3].y = 880, 580
 	rock[4] = display.newImageRect(objectGroup, "image/jump/rock.png", 260, 90)
 	rock[4].x, rock[4].y = 1150, 200 --1번 goal
 	rock[5] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
@@ -88,7 +88,7 @@ function scene:create( event )
 	sRock[5] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
 	sRock[5].x, sRock[5].y = 470, 350
 	sRock[6] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[6].x, sRock[6].y = 970, 250
+	sRock[6].x, sRock[6].y = 970, 270
 	
 	objectGroup.alpha = 0
 
@@ -157,6 +157,7 @@ function scene:create( event )
 	cat.alpha = 0
 
 	local jumpSound = audio.loadSound("music/bounce.mp3")
+	audio.setVolume(0.2)
 	local home = audio.loadStream( "music/music3.mp3" )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
 
@@ -169,16 +170,15 @@ function scene:create( event )
 		x = cat.x
 		y = cat.y
 		if (event.target.name == "center") then
-			--if(isJumping == false) then	
-				--isJumping = true
+			if(isJumping == false) then	
+				isJumping = true
 				if (arrow[4] == "left") then
 					transition.to(cat, {time=100, x=(x-80), y=(y-80)})
 				else
 				    transition.to(cat, {time=100, x=(x+80), y=(y-80)})
 				end
 				audio.play(jumpSound)
-    			audio.setVolume(0.2)
-		    --end
+		    end
 		else
 			if (event.target.name == arrow[4]) then --왼쪽 클
 			    if (event.target.name == "left") then
@@ -228,8 +228,10 @@ function scene:create( event )
 		volumeButton.alpha = 0
 	end
 
+	local flag = true
 	function onCollision(event)
-		if(event.other.name == "goal") then
+		if(event.other.name == "goal" and flag == true) then
+			flag = false
 			pagemove()
 			composer.setVariable("score1", 1)
 			composer.removeScene("view03_jump_game")
@@ -240,7 +242,7 @@ function scene:create( event )
 	local flag = true
 	function onCollision1(event)	
 		if(isJumping == true and event.other.name == "ground") then
-			print("땅이야")
+			--print("땅이야")
 			if(flag == true) then
 				flag = false
 				timer.performWithDelay(700, function () isJumping = false flag = true end)
@@ -251,7 +253,7 @@ function scene:create( event )
 	local flag1 = false
 	function gameOver(self, event)
 		if(event.phase == "ended" and flag1 == false) then
-			flag = true
+			flag1 = true
 
 			timer.performWithDelay(10, function()
 				pagemove()
@@ -261,11 +263,6 @@ function scene:create( event )
 					flag1 = false
 				end )
 		end
-	end
-
-	function soundEffect(event)	
-    	audio.play(jumpSound)
-    	audio.setVolume(0.2)
 	end
 
     --샘플볼륨함수--

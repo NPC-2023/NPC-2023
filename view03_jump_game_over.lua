@@ -37,22 +37,21 @@ function scene:create( event )
 	end
 	--close 버튼
 	local close = display.newImageRect("image/jump/닫기.png", 80, 80)
-	close.x, close.y = 1200, 80
+	close.x, close.y = 1200, 30
 	close.alpha = 0
 
-	local function gomap(event) -- 게임 pass 후 넘어감
-		if (score1 == 1) then
-			composer.setVariable("successJump", "success")
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "고양이 점프해서 츄르 찾기"
-			loadsave.saveTable(loadedSettings,"settings.json")
-			composer.setVariable("jumpgame_status", "success") --npc 대화용
-			composer.removeScene("view03_jump_game_over")
-			composer.gotoScene("view03_npc_jump_game")
-		else
-			composer.removeScene("view03_jump_game_over")
-			composer.gotoScene("view03_jump_game") --npc로
-		end
+	local function gomap1(event) -- 게임 pass 후 넘어감
+		composer.setVariable("successJump", "success")
+		loadedSettings.toal_success = loadedSettings.toal_success + 1
+		loadedSettings.toal_success_names[loadedSettings.toal_success] = "고양이 점프해서 츄르 찾기"
+		loadsave.saveTable(loadedSettings,"settings.json")
+		composer.removeScene("view03_jump_game_over")
+		--composer.gotoScene("view03_npc_jump_game")
+	end
+
+	local function gomap2(event) -- 게임 fail 후 넘어감
+		composer.removeScene("view03_jump_game_over")
+		composer.gotoScene("view05_main_map") --npc로
 	end
 
 	local backgame1 =display.newImage("image/jump/클리어창.png") --성공할 경우
@@ -73,14 +72,12 @@ function scene:create( event )
 		backgame2.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
-		close:addEventListener("tap", gomap)
+		close:addEventListener("tap", gomap2)
 		backgame2:addEventListener("tap",backtogame)
 	elseif(score1 == 1) then--score1이 1일 때 sucess
 		backgame1.alpha = 1
 		close.alpha = 1
-		lastText.alpha = 1
-		close:addEventListener("tap", gomap)
-		backgame1:addEventListener("tap",backtogame)
+		close:addEventListener("tap", gomap1)
 	end
 
 	sceneGroup:insert(close)
@@ -135,3 +132,4 @@ scene:addEventListener( "destroy", scene )
 -----------------------------------------------------------------------------------------
 
 return scene
+
