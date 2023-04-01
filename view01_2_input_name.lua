@@ -181,8 +181,13 @@ function scene:create( event )
   					date = os.date( "*t" ),
   					days = 0,
   					--커스텀
-  					closed = {true, true, true, true, true, true, true, true, true},
-  					
+  					closed = {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true},
+  					clothes = {false, false, false, false, false, false},
+  					get_clothes = {false, false, false, false, false, false},
+  					clothesCount = 3,
+  					custom1 = "image/custom/cat.png",
+    				custom2 = "image/custom/투명.png",
+    				clothesFlag = 0,
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
 				
