@@ -315,7 +315,7 @@ function scene:create( event )
 			end
 		 end
 
-		 local timeAttack = timer.performWithDelay(1000, counter, 41)
+		 local timeAttack = timer.performWithDelay(1000, counter, 61)
 	
 	 	--코드 끝
 	end
