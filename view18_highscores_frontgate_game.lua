@@ -43,7 +43,7 @@ function scene:create( event )
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
-				composer.removeScene("view18_frontgate_game_highscores")
+				composer.removeScene("view18_highscores_frontgate_game")
 				composer.gotoScene("view18_menu_frontgate_game")--시작화면으로 
 		end
 	end
