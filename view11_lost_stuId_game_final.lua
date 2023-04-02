@@ -304,7 +304,7 @@ function scene:create( event )
 		section.alpha=0
 		script.alpha=0
 		-- Runtime:addEventListener( "touch", bearmove)
-		timeAttack = timer.performWithDelay(1500, counter, 16)
+		timeAttack = timer.performWithDelay(1000, counter, 16)
 
 
 		stuId:addEventListener("touch", dragStuId)
