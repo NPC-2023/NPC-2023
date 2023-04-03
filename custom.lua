@@ -48,7 +48,7 @@ function scene:create( event )
  	local can = display.newImageRect("image/custom/can.png", 200, 200)
  	can.x, can.y = display.contentWidth*0.25, display.contentHeight*0.15
 
- 	local can_cnt_text = display.newText(tostring(can_cnt), can.x + 20, can.y, "font/DOSGothic.ttf") --변수받아와서 쓰기
+ 	local can_cnt_text = display.newText(tostring(can_cnt), can.x + 15, can.y, "font/NanumSquare_acB.ttf") --변수받아와서 쓰기
  	can_cnt_text.size = 40
  	can_cnt_text:setFillColor(1)
 
@@ -61,32 +61,6 @@ function scene:create( event )
  	local expression_name = {"cat_twinkle", "cat_tear", "cat_crank"}
  	local color_name = {"graycat", "pinkcat", "blackcat"}
  	local clothes_name = {"outer1", "outer2", "outer3", "outer4", "outer5", "outer6", "outer7", "outer8", "outer9"}
-
- 	local clothes = {}
- 	clothes[1] = display.newImageRect("image/custom/outer1.png", 80, 80)
- 	clothes[1].x, clothes[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
- 	clothes[2] = display.newImageRect("image/custom/outer2.png", 80, 80)
- 	clothes[2].x, clothes[2].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
-	clothes[3] = display.newImageRect("image/custom/outer3.png", 80, 80)
- 	clothes[3].x, clothes[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
- 	clothes[4] = display.newImageRect("image/custom/outer4.png", 80, 80) --봄옷
- 	clothes[4].x, clothes[4].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
- 	clothes[4].alpha = 0
- 	clothes[5] = display.newImageRect("image/custom/outer5.png", 80, 80) --여름옷1
- 	clothes[5].x, clothes[5].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
- 	clothes[5].alpha = 0
- 	clothes[6] = display.newImageRect("image/custom/outer6.png", 80, 80) --여름옷2
- 	clothes[6].x, clothes[6].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
- 	clothes[6].alpha = 0
- 	clothes[7] = display.newImageRect("image/custom/outer7.png", 80, 80) --가을옷
- 	clothes[7].x, clothes[7].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
- 	clothes[7].alpha = 0
- 	clothes[8] = display.newImageRect("image/custom/outer8.png", 80, 80) --겨울옷1
- 	clothes[8].x, clothes[8].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
- 	clothes[8].alpha = 0
- 	clothes[9] = display.newImageRect("image/custom/outer9.png", 80, 80) --겨울옷2
- 	clothes[9].x, clothes[9].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
- 	clothes[9].alpha = 0
 
  	local panel = {}
  	for i = 1,3 do
@@ -137,16 +111,6 @@ function scene:create( event )
 	expression[3] = display.newImageRect("image/custom/cat_crank.png", 80, 80)
  	expression[3].x, expression[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.3
 
- 	--잠금해제전 투명도 설정
- 	-- local i = 1
-	-- for i = 1,3 do
-	--  		if(loadedSettings.expression[i] == true) then
-	--  			expression[i].alpha = 0.5
-	--  		else
-	--  			expression[i].alpha = 1
-	--  		end
-	--  end
-
  	local paint = {}
  	paint[1] = display.newImageRect("image/custom/graypaint.png", 80, 80)
  	paint[1].x, paint[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.5
@@ -155,26 +119,32 @@ function scene:create( event )
 	paint[3] = display.newImageRect("image/custom/blackpaint.png", 80, 80)
  	paint[3].x, paint[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.5
 
-	 -- for i = 1,3 do
-	 -- 		if(loadedSettings.paint[i] == true) then
-	 -- 			paint[i].alpha = 0.5
-	 -- 		else
-	 -- 			paint[i].alpha = 1
-	 -- 		end
-	 -- end
+ 	local clothes = {}
+ 	clothes[1] = display.newImageRect("image/custom/outer1.png", 80, 80)
+ 	clothes[1].x, clothes[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
+ 	clothes[2] = display.newImageRect("image/custom/outer2.png", 80, 80)
+ 	clothes[2].x, clothes[2].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
+	clothes[3] = display.newImageRect("image/custom/outer3.png", 80, 80)
+ 	clothes[3].x, clothes[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
+ 	clothes[4] = display.newImageRect("image/custom/outer4.png", 80, 80) --봄옷
+ 	clothes[4].x, clothes[4].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
+ 	clothes[5] = display.newImageRect("image/custom/outer5.png", 80, 80) --여름옷1
+ 	clothes[5].x, clothes[5].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
+ 	clothes[6] = display.newImageRect("image/custom/outer6.png", 80, 80) --여름옷2
+ 	clothes[6].x, clothes[6].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
+ 	clothes[7] = display.newImageRect("image/custom/outer7.png", 80, 80) --가을옷
+ 	clothes[7].x, clothes[7].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
+ 	clothes[8] = display.newImageRect("image/custom/outer8.png", 80, 80) --겨울옷1
+ 	clothes[8].x, clothes[8].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
+ 	clothes[9] = display.newImageRect("image/custom/outer9.png", 80, 80) --겨울옷2
+ 	clothes[9].x, clothes[9].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
 
- 	-- for i = 1,3 do
-	--  		if(loadedSettings.clothes[i] == true) then
-	--  			clothes[i].alpha = 0.5
-	--  		else
-	--  			clothes[i].alpha = 1
-	--  		end
-	--  end
 
- 	local function setAlpha()
+ 	--투명도 설정
+ 	local function setAlpha() 
  		print("실행됨")
  		local i = 1
-	 	for i = 1,9 do
+	 	for i = 1,15 do
 	 		if(loadedSettings.closed[i] == true) then
 	 			print("미해제")
 	 			if(i <= 3) then
@@ -202,7 +172,7 @@ function scene:create( event )
  	local reset = display.newImageRect("image/custom/cat_paw.png", 150, 150)
  	reset.x, reset.y = display.contentWidth*0.1, display.contentHeight*0.1
 
- 	local resetText = display.newText("RESET", reset.x, reset.y, "font/DOSGothic.ttf")
+ 	local resetText = display.newText("RESET", reset.x, reset.y, "font/NanumSquare_acB.ttf")
  	resetText.size = 40
  	resetText:setFillColor(1)
 
