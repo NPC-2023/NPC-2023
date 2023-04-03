@@ -226,7 +226,7 @@ function scene:create( event )
 	building[10].name="퀘스트아이콘"
 
 	local postbox = display.newImageRect("image/map/우체통.png", 150, 150)
-	postbox.x, postbox.y = display.contentWidth*0.45, display.contentHeight*0.85
+	postbox.x, postbox.y = display.contentWidth*0.85, display.contentHeight*0.88
 	postbox.name = "우체통"
 
 	local options = {
