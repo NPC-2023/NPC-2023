@@ -151,8 +151,10 @@ function scene:create( event )
 	 				expression[i].alpha = 0.5
 	 			elseif(i <= 6) then
 	 				paint[i-3].alpha = 0.5
-	 			else
+	 			elseif(i <= 9) then
 	 				clothes[i-6].alpha = 0.5
+	 			else
+	 				clothes[i-6].alpha = 0
 	 			end
 	 		else
 	 			print("해제됨")
@@ -160,8 +162,10 @@ function scene:create( event )
 	 				expression[i].alpha = 1
 	 			elseif(i <= 6) then
 	 				paint[i-3].alpha = 1
-	 			else
+	 			elseif(i <= 9) then
 	 				clothes[i-6].alpha = 1
+	 			else
+	 				clothes[i-6].alpha = 0
 	 			end
 	 		end --closed
 		end
