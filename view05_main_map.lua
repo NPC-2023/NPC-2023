@@ -84,14 +84,18 @@ function scene:create( event )
 	local buildingGroup = display.newGroup()
 	local building = {}
 
-
+	print("오늘완료퀘스트수"..loadedSettings.today_success)
+	if(loadedSettings.today_success % 4 == 0 and loadedSettings.today_success ~= 0) then
+		composer.removeScene("view05_main_map")
+		composer.gotoScene("view23_hidden_game")
+	end
 
 	-- 퀘스트 4개를 실행하면 계절 바꾸게 하기
 	local background
 
-	print(loadedSettings.toal_success)
+	print(loadedSettings.total_success)
 	--if(questedListGet == nil or #questedListGet < 2) then
-	if(loadedSettings.toal_success < 5) then
+	if(loadedSettings.total_success < 5) then
 		print("봄")
 		background = display.newImageRect("image/map/봄맵.png", display.contentWidth, display.contentHeight)
 
@@ -100,7 +104,7 @@ function scene:create( event )
 			building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."봄.png", 512/size, 512/size)
  		end
 	else
-		if(loadedSettings.toal_success >= 4 or loadedSettings.toal_success < 8) then
+		if(loadedSettings.total_success >= 4 or loadedSettings.total_success < 8) then
 			print("4개이상 성공 / 계절 바꿈(여름)")
 			-- 백그라운드 변경
 			background = display.newImageRect("image/map/여름맵.png", display.contentWidth, display.contentHeight)
@@ -110,7 +114,7 @@ function scene:create( event )
 				building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."여름.png", 512/size, 512/size)
 	 		end
 
-		elseif(loadedSettings.toal_success >= 8 or loadedSettings.toal_success < 12)then
+		elseif(loadedSettings.total_success >= 8 or loadedSettings.total_success < 12)then
 			print("8개이상 성공 / 계절 바꿈(가을)")
 			background = display.newImageRect("image/map/가을맵.png", display.contentWidth, display.contentHeight)
 
@@ -148,9 +152,9 @@ function scene:create( event )
 	local catSoles_idx = 0
 
 	
-	if (loadedSettings.toal_success ~= 0) then
-		for i = 1, loadedSettings.toal_success do
-			if (loadedSettings.toal_success_names[i] == "떨어지는 참치캔 받기")then
+	if (loadedSettings.total_success ~= 0) then
+		for i = 1, loadedSettings.total_success do
+			if (loadedSettings.total_success_names[i] == "떨어지는 참치캔 받기")then
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.44, display.contentHeight*0.2
@@ -161,23 +165,23 @@ function scene:create( event )
 				-- building[1].fill.effect = "filter.brightness"
 				-- building[1].fill.effect.intensity = 0.25
 
-			elseif (loadedSettings.toal_success_names[i] == "대신 학식 받아주기")then
+			elseif (loadedSettings.total_success_names[i] == "대신 학식 받아주기")then
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.75, display.contentHeight*0.21
 
 				building[2].fill.effect = "filter.desaturate"
 				building[2].fill.effect.intensity = 0.7
-			elseif (loadedSettings.toal_success_names[i] == "학생증 찾기")then
+			elseif (loadedSettings.total_success_names[i] == "학생증 찾기")then
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.86, display.contentHeight*0.45
 
 				building[3].fill.effect = "filter.desaturate"
 				building[3].fill.effect.intensity = 0.7
-			elseif (loadedSettings.toal_success_names[i] == "매점에서 간식 사기")then
-				for j = 1, loadedSettings.toal_success do 
-					if (loadedSettings.toal_success_names[j] == "고양이 점프해서 츄르 찾기") then -- pre_jumpGame이지만 임시로 설정
+			elseif (loadedSettings.total_success_names[i] == "매점에서 간식 사기")then
+				for j = 1, loadedSettings.total_success do 
+					if (loadedSettings.total_success_names[j] == "고양이 점프해서 츄르 찾기") then -- pre_jumpGame이지만 임시로 설정
 						catSoles_idx = catSoles_idx + 1
 						catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 						catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.32
@@ -185,9 +189,9 @@ function scene:create( event )
 						building[4].fill.effect.intensity = 0.7
 					end
 				end
-			elseif (loadedSettings.toal_success_names[i] == "고양이 점프해서 츄르 찾기")then -- pre_jumpGame이지만 임시로 설정
-				for j = 1, loadedSettings.toal_success do 
-					if(loadedSettings.toal_success_names[j] == "매점에서 간식 사기") then
+			elseif (loadedSettings.total_success_names[i] == "고양이 점프해서 츄르 찾기")then -- pre_jumpGame이지만 임시로 설정
+				for j = 1, loadedSettings.total_success do 
+					if(loadedSettings.total_success_names[j] == "매점에서 간식 사기") then
 						catSoles_idx = catSoles_idx + 1
 						catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 						catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.32
@@ -195,21 +199,21 @@ function scene:create( event )
 						building[4].fill.effect.intensity = 0.7
 					end
 				end
-			elseif (loadedSettings.toal_success_names[i] == "나무 올라가기")then
+			elseif (loadedSettings.total_success_names[i] == "나무 올라가기")then
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.1, display.contentHeight*0.85	
 
 				building[7].fill.effect = "filter.desaturate"
 				building[7].fill.effect.intensity = 0.7
-			elseif (loadedSettings.toal_success_names[i] == "Pick Game")then
+			elseif (loadedSettings.total_success_names[i] == "Pick Game")then
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.54, display.contentHeight*0.52
 
 				building[8].fill.effect = "filter.desaturate"
 				building[8].fill.effect.intensity = 0.7
-			elseif (loadedSettings.toal_success_names[i] == "정문 지키기")then
+			elseif (loadedSettings.total_success_names[i] == "정문 지키기")then
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.3, display.contentHeight*0.85

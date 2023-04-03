@@ -75,11 +75,8 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
-				composer.setVariable("successLost", "success")
-				composer.removeScene("view12_lost_stuId_game_over")
-
-				loadedSettings.toal_success = loadedSettings.toal_success + 1
-				loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
+				loadedSettings.total_success = loadedSettings.total_success + 1
+				loadedSettings.total_success_names[loadedSettings.total_success] = "학생증 찾기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
 				-- local questedListGet = composer.getVariable("questedList")
@@ -112,6 +109,7 @@ function scene:create( event )
 				-- end
 				-- composer.setVariable("questedList", questedListGet)
 				composer.setVariable("stuId_status", "success")
+				composer.removeScene("view12_lost_stuId_game_over")
 				composer.gotoScene( "view10_npc_lost_stuId_game" )
 		end
 	end

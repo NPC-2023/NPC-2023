@@ -85,6 +85,7 @@ function scene:create( event )
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
 	if(composer.getVariable("mousegame_status") == "success") then
 		loadedSettings.today_success = loadedSettings.today_success + 1
+		print("오늘완료게임갯수"..loadedSettings.today_success)
 	end
 
 	local function acceptQuest( event )

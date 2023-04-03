@@ -43,7 +43,7 @@ function scene:create( event )
 		if event.phase == "began" then 
 				audio.pause(home)
 				composer.removeScene("view034_mouse_game_over")
-				composer.gotoScene("view03_mouse_game")
+				composer.gotoScene("view034_npc_mouse_game")
 		end
 	end
 
@@ -63,13 +63,13 @@ function scene:create( event )
 				audio.pause(home)
 
 				-- 퀘스트 완료 목록에 저장
-				loadedSettings.toal_success = loadedSettings.toal_success + 1
-				loadedSettings.toal_success_names[loadedSettings.toal_success] = "쥐 잡기"
+				loadedSettings.total_success = loadedSettings.total_success + 1
+				loadedSettings.total_success_names[loadedSettings.total_success] = "쥐 잡기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
 				composer.setVariable("mousegame_status", "success")
 				composer.removeScene("view034_mouse_game_over")
-				composer.gotoScene( "view05_main_map" )
+				composer.gotoScene( "view034_npc_mouse_game" )
 		end
 	end
 
@@ -99,22 +99,11 @@ function scene:create( event )
 		backtomap.alpha = 1
 		backtomap1.alpha = 1
 		clear_close.alpha = 1
+		composer.setVariable("mousegame_status", "success")
 		clear_close:addEventListener("touch",gomap)
 	end
 	sceneGroup:insert(fail_close)
 	sceneGroup:insert(clear_close)
-
-	
--- map으로 돌아가기
-
-	local function gomap(event)
-		if event.phase == "began" then
-				audio.pause(home)
-				composer.removeScene("view034_mouse_game_over")
-				composer.gotoScene( "view05_main_map" )
-		end
-	end
-
 
 	
 -- 점수에 따라 돈 획득/db에 저장
