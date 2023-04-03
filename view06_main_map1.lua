@@ -327,9 +327,15 @@ function scene:create( event )
                 composer.gotoScene("view13_npc_climbingTree")
                 return true
             elseif(name == "학생관")then
-                print("학생관")
-                composer.removeScene("view06_main_map1")
-                composer.gotoScene("view02_npc_pickGame")
+                if(loadedSettings.openHiddenGame == 1) then
+                    print("히든게임_학생관")
+                    composer.removeScene("view06_main_map1")
+                    composer.gotoScene("npc_hiddenGame")
+                else
+                    print("학생관")
+                    composer.removeScene("view06_main_map1")
+                    composer.gotoScene("view02_npc_pickGame")
+                end
                 return true
             end
         end

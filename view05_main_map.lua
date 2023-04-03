@@ -89,6 +89,18 @@ function scene:create( event )
 	-- 퀘스트 4개를 실행하면 계절 바꾸게 하기
 	local background
 
+	local options1={
+		effect = "fade",
+		time = 2000,
+		isModal = true
+	}
+
+	--loadedSettings.toal_success = 3
+	if(loadedSettings.toal_success ~= 0 and loadedSettings.toal_success % 4 == 0) then
+		composer.showOverlay("hiddenQuest", options1)
+	end
+	
+
 	print(loadedSettings.toal_success)
 	--if(questedListGet == nil or #questedListGet < 2) then
 	if(loadedSettings.toal_success < 5) then
@@ -147,7 +159,6 @@ function scene:create( event )
 	local catSoles = {}
 	local catSoles_idx = 0
 
-	
 	if (loadedSettings.toal_success ~= 0) then
 		for i = 1, loadedSettings.toal_success do
 			if (loadedSettings.toal_success_names[i] == "떨어지는 참치캔 받기")then

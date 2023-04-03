@@ -188,6 +188,8 @@ function scene:create( event )
   					custom1 = "image/custom/cat.png",
     				custom2 = "image/custom/투명.png",
     				clothesFlag = 0,
+    				--히든퀘스트
+    				openHiddenGame = 0,
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
 				
