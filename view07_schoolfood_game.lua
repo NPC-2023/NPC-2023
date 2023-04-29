@@ -14,6 +14,24 @@ function scene:create( event )
 	local sceneGroup = self.view
 	
 	---------1차시-------------
+
+	local gametitle = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2)
+	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+	local gameName = display.newText("학식 받기 게임", 0, 0, "ttf/Galmuri7.ttf", 45)
+	gameName:setFillColor(0)
+	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
+
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	section:setFillColor(0.35, 0.35, 0.35, 0.35)
+	section.alpha=0
+
+	local script = display.newText("게임방법\n\n힌트를 보고\n30초 이내에 학식 메뉴를 골라주세요!", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 30
+	script:setFillColor(1)
+	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+	script.alpha=0
+
 	local background = display.newImageRect("image/schoolfood/cafeteria.png", 1280, 720)--배경이미지 display.contentWidth, display.contentHeight
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
@@ -41,7 +59,7 @@ function scene:create( event )
  	score:setFillColor(0)
  	score.alpha = 0.5
 
- 	local time= display.newText(10, display.contentWidth*0.8, display.contentHeight*0.1)
+ 	local time = display.newText(30, display.contentWidth*0.8, display.contentHeight*0.1)
  	time.size = 100
  	time:setFillColor(0)
  	time.alpha = 0.5
@@ -57,17 +75,7 @@ function scene:create( event )
  		composer.showOverlay('view08_schoolfood_setting')
  	end
  	hintButton:addEventListener("tap", hintButton)
-
- 	-----레이어 정리--깔리는 것부터 차례대로 
- 	sceneGroup:insert(background)
- 	sceneGroup:insert(pan)
- 	sceneGroup:insert(foodGroup)
- 	sceneGroup:insert(score)
- 	sceneGroup:insert(time)
- 	sceneGroup:insert(hintBbg)
- 	sceneGroup:insert(hintButton)
-
-
+ 	
  	----------2차시 event-------- 
 
   	local function dragCarrot( event )
@@ -152,7 +160,38 @@ function scene:create( event )
  		end
 	end
 
- 	local timeAttack = timer.performWithDelay(1000, counter, 11)
+	-- by 지륜
+	-- 게임 타이틀 클릭 시, 타이머 시작
+ 	local timeAttack
+
+
+ 	local function scriptremove(event)
+		section.alpha=0
+		script.alpha=0
+		timeAttack = timer.performWithDelay(1000, counter, 31)
+		hintButton:addEventListener("tap", hintButton)
+	end	
+
+	local function titleremove(event)
+		gametitle.alpha=0
+		section.alpha=1
+		script.alpha=1
+		section:addEventListener("tap", scriptremove)
+		display.remove(gameName)
+	end
+
+	gametitle:addEventListener("tap", titleremove)
+
+
+	-----레이어 정리--깔리는 것부터 차례대로 
+ 	sceneGroup:insert(background)
+ 	sceneGroup:insert(pan)
+ 	sceneGroup:insert(foodGroup)
+ 	sceneGroup:insert(score)
+ 	sceneGroup:insert(time)
+ 	sceneGroup:insert(hintBbg)
+ 	sceneGroup:insert(hintButton)
+
 end
 
 function scene:show( event )
