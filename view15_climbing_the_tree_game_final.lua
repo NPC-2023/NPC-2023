@@ -27,7 +27,7 @@ function scene:create( event )
 
 	-- loops=-1 는 반복 재생
 	local bgMusicChannel1 = audio.play(bgMusic1, {loops=-1})
-	audio.setVolume(0.3, {channel=bgMusicChannel1})
+	-- audio.setVolume(0.3, {channel=bgMusicChannel1})
 
   
 
@@ -375,12 +375,33 @@ function scene:create( event )
 	sceneGroup:insert(hintTextScript)
 	sceneGroup:insert(itemFindGroup)
 	sceneGroup:insert(itemGroup)
-	
+	sceneGroup:insert(gametitle)
+	sceneGroup:insert(gameName)
 
 	
 
 	sceneGroup:insert(section)
 	sceneGroup:insert(script)
+
+
+
+	    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
+    
+    sceneGroup:insert(volumeButton)
+
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
 
 end
 
