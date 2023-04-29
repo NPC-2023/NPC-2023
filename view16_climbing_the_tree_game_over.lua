@@ -70,6 +70,9 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 			composer.removeScene("view16_climbing_the_tree_game_over")
 			composer.setVariable("successClimbing", "success")
+			local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
+		    audio.play(bgMusic)
+		    audio.setVolume( 0.5 )
 
 			loadedSettings.toal_success = loadedSettings.toal_success + 1
 			loadedSettings.toal_success_names[loadedSettings.toal_success] = "나무 올라가기"

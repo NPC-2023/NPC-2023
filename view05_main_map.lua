@@ -315,6 +315,7 @@ function scene:create( event )
         	TargetquestedList = questedListGet }
 	    	}	
 
+	local open_paper = audio.loadStream( "soundEffect/snd_use_map.wav" )
 
 -- 리스너 함수 생성
 	local function touch_ui (event)
@@ -328,8 +329,9 @@ function scene:create( event )
 				composer.removeScene("view05_main_map")
 				composer.gotoScene("custom")
 			elseif name == "퀘스트아이콘" then
+
 				composer.setVariable("questedListGet", questedListGet)
-				
+				local openPaperChannel = audio.play(open_paper)
 				composer.showOverlay( "view06_main_map2", options )
 			else
 				composer.setVariable("name", name)
