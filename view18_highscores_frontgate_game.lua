@@ -63,8 +63,8 @@ function scene:create( event )
 		if event.phase == "began" then
 			composer.setVariable("successFront", success)
 
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "정문 지키기"
+			loadedSettings.total_success = loadedSettings.total_success + 1
+			loadedSettings.total_success_names[loadedSettings.total_success] = "정문 지키기"
 			loadsave.saveTable(loadedSettings,"settings.json")
 
 			composer.removeScene("view18_highscores_frontgate_game")

@@ -43,10 +43,10 @@ function scene:create( event )
 
 	local function gomap1(event) -- 게임 pass 후 map으로 넘어감
 		composer.setVariable("successPickGame", "success")
-		loadedSettings.toal_success = loadedSettings.toal_success + 1
+		loadedSettings.total_success = loadedSettings.total_success + 1
 		-- 로드세이브에 저장될 이름 수정
-		--loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
-		loadedSettings.toal_success_names[loadedSettings.toal_success] = "Pick Game"
+		--loadedSettings.total_success_names[loadedSettings.total_success] = "학생증 찾기"
+		loadedSettings.total_success_names[loadedSettings.total_success] = "Pick Game"
 		loadsave.saveTable(loadedSettings,"Pick Game")
 		loadsave.saveTable(loadedSettings,"settings.json")
 		composer.removeScene("view02_pick_game_over")

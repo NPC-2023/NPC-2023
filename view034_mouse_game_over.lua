@@ -63,8 +63,8 @@ function scene:create( event )
 				audio.pause(home)
 
 				-- 퀘스트 완료 목록에 저장
-				loadedSettings.toal_success = loadedSettings.toal_success + 1
-				loadedSettings.toal_success_names[loadedSettings.toal_success] = "쥐 잡기"
+				loadedSettings.total_success = loadedSettings.total_success + 1
+				loadedSettings.total_success_names[loadedSettings.total_success] = "쥐 잡기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
 				composer.setVariable("mousegame_status", "success")

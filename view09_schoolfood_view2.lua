@@ -57,8 +57,8 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 			composer.setVariable("successSchoolFood", "success")
 
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "대신 학식 받아주기"
+			loadedSettings.total_success = loadedSettings.total_success + 1
+			loadedSettings.total_success_names[loadedSettings.total_success] = "대신 학식 받아주기"
 			loadsave.saveTable(loadedSettings,"settings.json")
 
 			composer.setVariable("food_status", "success")

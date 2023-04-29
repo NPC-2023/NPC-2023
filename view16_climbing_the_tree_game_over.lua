@@ -74,8 +74,8 @@ function scene:create( event )
 		    audio.play(bgMusic)
 		    audio.setVolume( 0.5 )
 
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "나무 올라가기"
+			loadedSettings.total_success = loadedSettings.total_success + 1
+			loadedSettings.total_success_names[loadedSettings.total_success] = "나무 올라가기"
 			loadsave.saveTable(loadedSettings,"settings.json")
 
 			composer.setVariable("climb_status", "success")

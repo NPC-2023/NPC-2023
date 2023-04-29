@@ -86,8 +86,8 @@ function scene:create( event )
 			--다시 퀘스트 수락 화면으로 돌아옴
 			timer.performWithDelay( 1000, function() 
 
-				loadedSettings.toal_success = loadedSettings.toal_success + 1
-				loadedSettings.toal_success_names[loadedSettings.toal_success] = "매점에서 간식 사기"
+				loadedSettings.total_success = loadedSettings.total_success + 1
+				loadedSettings.total_success_names[loadedSettings.total_success] = "매점에서 간식 사기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
 				composer.setVariable("moneygame_status", "success")

@@ -69,8 +69,8 @@ function scene:create( event )
 			composer.removeScene("view12_lost_stuId_game_over")
 			audio.stop()
 			
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
+			loadedSettings.total_success = loadedSettings.total_success + 1
+			loadedSettings.total_success_names[loadedSettings.total_success] = "학생증 찾기"
 			loadsave.saveTable(loadedSettings,"settings.json")
 
 			composer.setVariable("stuId_status", "success")
