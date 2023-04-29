@@ -22,6 +22,11 @@ local json = require( "json" )
 function scene:create( event )
 	local sceneGroup = self.view
 
+	local bgMusic = audio.loadStream( "music/lost stu_id music.ogg" )
+    audio.play(bgMusic)
+    audio.setVolume( 0.5 )
+
+
 	local gametitle = display.newImageRect("image/lost_stuId/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
@@ -188,9 +193,11 @@ function scene:create( event )
  	
 
  	local result = 0
+ 	local click = audio.loadStream( "music/스침.wav" )
 
  	local function dragfakeItem( event )
  		if( event.phase == "began" ) then
+ 			local backgroundMusicChannel = audio.play(click)
  			display.getCurrentStage():setFocus( event.target )
  			event.target.isFocus = true
  			-- 드래그 시작할 때
@@ -222,6 +229,7 @@ function scene:create( event )
 
  	local function dragStuId( event )
  		if( event.phase == "began" ) then
+ 			local backgroundMusicChannel = audio.play(click)
  			display.getCurrentStage():setFocus( event.target )
  			event.target.isFocus = true
  			-- 드래그 시작할 때
@@ -251,6 +259,7 @@ function scene:create( event )
  					
  					composer.removeScene("view11_lost_stuId_game_final")
  					composer.setVariable("result", 1)
+ 					audio.stop()
  					composer.gotoScene("view12_lost_stuId_game_over")
 
  				else
@@ -293,6 +302,7 @@ function scene:create( event )
 				-- audio.pause(explosionSound)
 				composer.removeScene("view11_lost_stuId_game_final")
 				composer.setVariable("result", 0)
+				audio.stop()
 				composer.gotoScene("view12_lost_stuId_game_over")
 
  			end

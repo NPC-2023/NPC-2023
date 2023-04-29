@@ -28,18 +28,13 @@ function scene:create( event )
 	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
 	sceneGroup:insert(background1)
 
-	--[[local board =display.newImageRect("이미지/미니게임/미니게임_게임완료창.png",display.contentWidth/3.6294896, display.contentHeight/2.83122739)
-	board.x , board.y = display.contentWidth/2, display.contentHeight/2
-	board.alpha = 0.5
-	transition.to(board,{alpha=1,time=1000})
-	sceneGroup:insert(board)]]
-
 	local result1 = composer.getVariable("result")
 	-- local score3 = composer.getVariable("score")
+
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		if event.phase == "began" then 
-				composer.removeScene("view12_lost_stuId_game_over")
-				composer.gotoScene("view11_lost_stuId_game_final")
+			composer.removeScene("view12_lost_stuId_game_over")
+			composer.gotoScene("view11_lost_stuId_game_final")
 		end
 	end
 
@@ -48,26 +43,17 @@ function scene:create( event )
 	clear_close.x, clear_close.y = display.contentWidth/2, display.contentHeight*0.755
 	clear_close.alpha = 0
 
-	local clear_closeScript = display.newText("돌아가기", 0, 0, "ttf/Galmuri7.ttf", 25)
+	local clear_closeScript = display.newText("돌아가기", 0, 0, "ttf/font.ttf", 25)
 	clear_closeScript:setFillColor(1)
 	clear_closeScript.x, clear_closeScript.y=display.contentWidth/2, display.contentHeight*0.75
 	clear_closeScript.alpha = 0
-
-	-- local clear_close = display.newImageRect("image/lost_stuId/닫기.png", 150, 150)
-	-- clear_close.x, clear_close.y = 950, 400
-	-- clear_close.alpha = 0
-	
-
-	-- local fail_close = display.newImageRect("image/lost_stuId/닫기.png", 150, 150)
-	-- fail_close.x, fail_close.y = 950, 400
-	-- fail_close.alpha = 0
 
 	local fail_close = display.newImageRect("image/lost_stuId/확인,힌트 버튼.png", 768/4, 768/4)
 	fail_close:setFillColor(1)
 	fail_close.x, fail_close.y=display.contentWidth/2, display.contentHeight*0.75
 	fail_close.alpha = 0
 
-	local fail_closeScript = display.newText("다시하기", 0, 0, "ttf/Galmuri7.ttf", 28)
+	local fail_closeScript = display.newText("다시하기", 0, 0, "ttf/font.ttf", 28)
 	fail_closeScript:setFillColor(1)
 	fail_closeScript.x, fail_closeScript.y=display.contentWidth/2, display.contentHeight*0.74
 	fail_closeScript.alpha = 0
@@ -75,74 +61,38 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
-				composer.setVariable("successLost", "success")
-				composer.removeScene("view12_lost_stuId_game_over")
+			local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
+		    audio.play(bgMusic)
+		    audio.setVolume( 0.5 )
 
-				loadedSettings.toal_success = loadedSettings.toal_success + 1
-				loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
-				loadsave.saveTable(loadedSettings,"settings.json")
+			composer.setVariable("successLost", "success")
+			composer.removeScene("view12_lost_stuId_game_over")
+			audio.stop()
+			
+			loadedSettings.toal_success = loadedSettings.toal_success + 1
+			loadedSettings.toal_success_names[loadedSettings.toal_success] = "학생증 찾기"
+			loadsave.saveTable(loadedSettings,"settings.json")
 
-				-- local questedListGet = composer.getVariable("questedList")
-				-- local gameName = "학생증 찾기"
-				
-				-- -- 퀘스트 완료된 퀘스트 리스트
-				-- local addQuest = true
-
-				-- if (questedListGet == nil) then
-				-- 	questedListGet = {}
-				-- 	questedListGet[1] = gameName
-				-- elseif (#questedListGet == 0)then
-				-- 	questedListGet[1] = gameName
-				-- else
-				-- 	if(#questedListGet == 1) then
-				-- 		if (questedListGet[#questedListGet] ~= gameName) then
-				-- 				questedListGet[#questedListGet+1] = gameName
-				-- 		end  
-				-- 	else
-				-- 		for i = 1, #questedListGet do 
-				-- 			if (questedListGet[i] == gameName) then
-				-- 				addQuest = false
-				-- 			end
-				-- 		end
-				-- 		if(addQuest==true)then
-				-- 			questedListGet[#questedListGet+1] = gameName
-				-- 			print("처음이니깐 추가!")
-				-- 		end
-				-- 	end
-				-- end
-				-- composer.setVariable("questedList", questedListGet)
-				composer.setVariable("stuId_status", "success")
-				composer.gotoScene( "view10_npc_lost_stuId_game" )
+			composer.setVariable("stuId_status", "success")
+			composer.gotoScene( "view10_npc_lost_stuId_game" )
 		end
 	end
-
-	-- local backtomap =display.newImageRect("image/lost_stuId/클리어창.png", 970/4, 1187/4) --성공할 경우
-	-- backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
-	-- backtomap.alpha = 0
-	-- sceneGroup:insert(backtomap)
-
 
 	local backtomap = display.newImageRect("image/lost_stuId/미니게임 타이틀.png", 687/1.2, 604/1.2) --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
 
-	local backtomapScript = display.newText("퀘스트 성공!", 0, 0, "ttf/Galmuri7.ttf", 45)
+	local backtomapScript = display.newText("퀘스트 성공!", 0, 0, "ttf/font.ttf", 45)
 	backtomapScript:setFillColor(0)
 	backtomapScript.x, backtomapScript.y=display.contentWidth/2, display.contentHeight*0.65
 	backtomapScript.alpha = 0
 	sceneGroup:insert(backtomapScript)
 
-	-- local backgame =display.newImage("image/lost_stuId/fail.png") --실패할 경우
-	-- backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
-	-- backgame.alpha = 0
-	-- sceneGroup:insert(backgame)
-
 	local backgame =display.newImageRect("image/lost_stuId/우는고ㅇ앵.png", 512/2, 512/2) --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
 	sceneGroup:insert(backgame)
-
 
 
 	print("result: ")
@@ -157,6 +107,9 @@ function scene:create( event )
 		clear_close.alpha = 1
 		clear_closeScript.alpha = 1
 		backtomapScript.alpha = 1
+		local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
+	    audio.play(bgMusic)
+	    audio.setVolume( 0.5 )
 		clear_close:addEventListener("touch",gomap)
 
 	end
