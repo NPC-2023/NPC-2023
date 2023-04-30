@@ -12,7 +12,8 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
-	
+	audio.pause(home)
+
 	local background = display.newImageRect("image/jump/background_water.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)

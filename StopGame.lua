@@ -14,6 +14,8 @@ function scene:create( event )
     }
     local widget = require ("widget")
 
+    audio.pause(home)
+
     --로드
     local loadedEndings = loadsave.loadTable( "endings.json" )
     music = loadedEndings.bgMusic
@@ -149,6 +151,7 @@ function scene:create( event )
     timer.pause("removeTime") --pickGame에서 물건 없애는 타이머
     
     local function continueGame(event)
+        audio.resume(home)
         timer.resume("gameTime")
         timer.resume("generateTime")
         timer.resume("removeTime")

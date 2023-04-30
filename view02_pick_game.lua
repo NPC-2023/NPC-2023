@@ -57,16 +57,20 @@ function scene:create( event )
 
 	local home = audio.loadStream("music/music2.mp3")
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
- 	--sceneGroup:insert(home)
+   	--sceneGroup:insert(home)
 
 
 	local function pagemove()
+		timer.pause("gameTime") --게임 전체 타이머
+   		timer.pause("generateTime") --pickGame에서 물건 생성하는 타이머
+    	timer.pause("removeTime") 
+
 		if (score <= 4) then
-			composer.setVariable("score1", -1)
+			composer.setVariable("pickScore", -1)
 		else
-			composer.setVariable("score1", 5)
+			composer.setVariable("pickScore", 5)
 		end	
-		audio.pause(home)
+
 		composer.removeScene("view02_pick_game")
 		composer.gotoScene("view02_pick_game_over")
 	end
@@ -83,9 +87,9 @@ function scene:create( event )
 			score = score - 1
 			display.remove(event.target)
 			showScore.text = score
-		else
+		elseif (event.target.type == "die") then
 			score = -1
-			display.remove(event.target)
+			--display.remove(event.target)
 			pagemove()--게임오버
 		end
 	end
@@ -109,8 +113,9 @@ function scene:create( event )
 			object[i].type="food"
 		elseif (objIdx == 4) then
 			object[i].type="trash"
-		else
+		elseif (objIdx == 5) then
 			object[i].type="die"
+			print("ㅛYO!")
 		end
 
 		sceneGroup:insert(object[i])
@@ -139,10 +144,10 @@ function scene:create( event )
 
 	--------------게임 시작--------------
 	local function counter( event )
-		audio.resume(home)
  		time.text = time.text - 1
 	 	if(time.text == "-1") then
 	 		time.alpha = 0
+	 		print("헤이!")
 	 		pagemove()
  		end
  	end  
@@ -157,7 +162,7 @@ function scene:create( event )
 		showScore.alpha = 1
 		section.alpha = 0
 		script.alpha = 0
-		timer2 = timer.performWithDelay(880, generate, 30, "generateTime")
+		timer2 = timer.performWithDelay(930, generate, 30, "generateTime")
 	end
 
 
@@ -166,7 +171,6 @@ function scene:create( event )
     }
 
  	local function showStop(event) 
- 		audio.pause(home)
       	composer.showOverlay( "stopGame", options1 )
     end
 

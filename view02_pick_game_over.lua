@@ -12,7 +12,8 @@ function scene:create( event )
 
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
-
+	
+	audio.pause(home)
 	
 	local background = display.newImageRect("image/pick/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -29,7 +30,8 @@ function scene:create( event )
 	transition.to(board,{alpha=1,time=1000})
 	sceneGroup:insert(board)]]
 
-	local score1 = composer.getVariable("score1")
+	local score1 = composer.getVariable("pickScore")
+	print(score1)
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		composer.removeScene("view02_pick_game_over")
@@ -54,6 +56,7 @@ function scene:create( event )
 	end
 
 	local function gomap2(event) -- 게임 fail 후 map으로 넘어감
+
 		composer.removeScene("view02_pick_game_over")
 		composer.gotoScene("view05_main_map") 
 	end

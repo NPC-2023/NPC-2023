@@ -220,7 +220,6 @@ function scene:create( event )
 	sceneGroup:insert(goal)
 
 	function pagemove() 
-		audio.pause(home)
 		objectGroup.alpha = 0
 		arrowGroup.alpha = 0
 		cat.alpha = 0
@@ -260,7 +259,6 @@ function scene:create( event )
 				composer.setVariable("score1", -1)
 				composer.removeScene("view03_jump_game")
 				composer.gotoScene("view03_jump_game_over")
-					flag1 = false
 				end )
 		end
 	end
