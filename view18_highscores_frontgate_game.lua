@@ -50,12 +50,12 @@ function scene:create( event )
 
 	--close 버튼
 	local clear_close = display.newImageRect("image/frontgate/exit.png", 150, 150)--나가기 버튼 
-	clear_close.x, clear_close.y = 500, 500  
+	clear_close.x, clear_close.y = 900, 500  
 	clear_close.alpha = 0
 	
 
 	local fail_close = display.newImageRect("image/frontgate/retry.png", 150, 150)--다시하기 버튼 
-	fail_close.x, fail_close.y = 500, 500 
+	fail_close.x, fail_close.y = 900, 500 
 	fail_close.alpha = 0
 	
 	
@@ -72,12 +72,12 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap = display.newImage("image/custom/cat_twinkle.png") --성공할 경우
-	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
-	backtomap.alpha = 0
+	local backmap = display.newImage("image/custom/cat_twinkle.png") --성공할 경우
+	backmap.x, backmap.y = display.contentWidth/2, display.contentHeight/2
+	backmap.alpha = 0
 
 
-	objectGroup:insert(backtomap)
+	objectGroup:insert(backmap)
 	
 	
 
@@ -91,11 +91,11 @@ function scene:create( event )
 	if score3 < 0 then
 		backgame.alpha = 1
 		fail_close.alpha = 1
-		fail_close:addEventListener("tap", backtogame)--실패 
+		fail_close:addEventListener("touch", backtogame)--실패 
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
-		clear_close:addEventListener("tap", backtomap)--성공 
+		clear_close:addEventListener("touch", backtomap)--성공 
 	end
 	sceneGroup:insert(fail_close)
 	sceneGroup:insert(clear_close)
@@ -130,7 +130,7 @@ function scene:hide( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-		composer.removeScene( "view18_frontgate_game_highscores" )
+		composer.removeScene( "view18_highscores_frontgate_game" )
 	end
 end
 

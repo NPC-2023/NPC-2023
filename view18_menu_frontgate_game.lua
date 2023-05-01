@@ -36,7 +36,7 @@ function scene:create( event )
 
 	local title = display.newImageRect( sceneGroup, "image/frontgate/title.png", 500, 450 ) --300 300
 	title.x = display.contentCenterX
-	title.y = 500
+	title.y = 300
 	--sceneGroup:insert(title)
 
 	local playButton = display.newText( sceneGroup, "Play", display.contentCenterX, 770, native.systemFont, 70 ) --700  44
