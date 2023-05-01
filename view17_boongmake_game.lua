@@ -95,7 +95,9 @@ function scene:create( event )
 	--게임 시작---------------------------------------------------------------------------------------------------------------------------------------------------
 	function gamescene()
 		local background = display.newImage("image/boong/view02_background.png", display.contentWidth/2, display.contentHeight/2)
+		local kettlebg = display.newImage("image/boong/재료배경.png", display.contentWidth*0.9, display.contentHeight*0.75)
 	 	local kettle = display.newImage("image/boong/kettle.png", display.contentWidth*0.9, display.contentHeight*0.75)
+	 	local beansbg = display.newImage("image/boong/재료배경.png", display.contentWidth*0.9, display.contentHeight*0.45)
 	 	local beans = display.newImage("image/boong/beans.png", display.contentWidth*0.9, display.contentHeight*0.45)
 	 	local timerImage = display.newImage("image/boong/timerImage.png", display.contentWidth*0.9-10, display.contentHeight*0.15-20)
 	 	local boongCountBackground = display.newImage("image/boong/boongCountBackground.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
@@ -136,6 +138,8 @@ function scene:create( event )
 		end
 		sceneGroup:insert(kettle)
 		sceneGroup:insert(beans)
+		sceneGroup:insert(kettlebg)
+		sceneGroup:insert(beansbg)
 		sceneGroup:insert(timerImage)
 		sceneGroup:insert(boongCountBackground)
 
@@ -143,8 +147,8 @@ function scene:create( event )
 	 		object[i]:scale(0.6,0.6)
 	 	end
 
-	 	kettle:scale(0.4,0.4)
-	 	beans:scale(0.4,0.4)
+	 	kettle:scale(0.3,0.3)
+	 	beans:scale(0.35,0.35)
 	 	timerImage:scale(0.4,0.4)
 
 		for i = 1, 27, 1 do
@@ -250,7 +254,7 @@ function scene:create( event )
 						local timer = timer.performWithDelay(6000, function()
 						    -- object7이 클릭되지 않았으면 object8 생성
 						    if not clicked then
-						    	transition.to( object[j+7], { time=1000, alpha=1 } )
+						    	transition.to( object[j+7], { time=500, alpha=1 } )
 						        print("넘어감")
 						        turn[j] = 6
 						    end
@@ -271,6 +275,8 @@ function scene:create( event )
 				 	--완성해서 초기화
 				 	elseif( turn[j] == 7 and (event.target == object[j+8] or event.target == object[j+6]))then
 				 		turn[j] = 1
+				 		transition.cancel(object[j+5])
+				 		transition.cancel(object[j+7])
 						for i = j+1,j+8,1 do
 		 					object[i].alpha = 0
 						end
@@ -321,7 +327,6 @@ function scene:create( event )
 	end
 
 	startscene()
-
 
 end
 
