@@ -94,6 +94,19 @@ function scene:create( event )
 	local background
 
 	print(loadedSettings.total_success)
+	
+	local options1={
+		effect = "fade",
+		time = 2000,
+		isModal = true
+	}
+
+	--loadedSettings.toal_success = 3
+	if(loadedSettings.toal_success ~= 0 and loadedSettings.toal_success % 4 == 0) then
+		composer.showOverlay("hiddenQuest", options1)
+	end
+	
+
 	--if(questedListGet == nil or #questedListGet < 2) then
 	if(loadedSettings.total_success < 5) then
 		print("봄")
