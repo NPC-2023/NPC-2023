@@ -347,7 +347,7 @@ function scene:hide( event )
 		physics.stop()---
 		 -- Stop the music!
         audio.stop( 1 )
-		composer.removeScene( "game" )
+		composer.removeScene( "view18_frontgate_game" )
 	end
 end
 
