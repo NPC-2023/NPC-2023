@@ -37,7 +37,7 @@ local function onFirstView( event )
     		audio.play(titleMusic)
     		audio.setVolume( 0.5 )
 			composer.gotoScene( "view01_1_start_game" )
-            -- composer.gotoScene( "view18_npc_frontgate_game" )
+        	-- composer.gotoScene( "view18_npc_frontgate_game" )
             
     else
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
