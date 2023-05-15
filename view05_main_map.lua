@@ -102,7 +102,7 @@ function scene:create( event )
 	}
 
 	--loadedSettings.toal_success = 3
-	if(loadedSettings.toal_success ~= 0 and loadedSettings.toal_success % 4 == 0) then
+	if(loadedSettings.total_success ~= 0 and loadedSettings.total_success % 4 == 0) then
 		composer.showOverlay("hiddenQuest", options1)
 	end
 	
