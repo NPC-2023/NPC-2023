@@ -13,7 +13,6 @@ local json = require( "json" )
 function scene:create( event )
 	local sceneGroup = self.view
 	
-	---------1차시-------------
 	local background = display.newImageRect("image/schoolfood/cafeteria.png", 1280, 720)--배경이미지 display.contentWidth, display.contentHeight
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
@@ -35,14 +34,14 @@ function scene:create( event )
  		food[i].x, food[i].y = display.contentWidth*0.9, display.contentHeight*0.005 + 130*(i - 5)
  	end
 
- 	local score = display.newText(0, display.contentWidth*0.2, display.contentHeight*0.1)--점수 입력 
- 	score.size = 100
+ 	local score = display.newText(0, display.contentWidth*0.2, display.contentHeight*0.14)--점수 입력 
+ 	score.size = 87
 
  	score:setFillColor(0)
  	score.alpha = 0.5
 
- 	local time= display.newText(10, display.contentWidth*0.8, display.contentHeight*0.1)
- 	time.size = 100
+ 	local time= display.newText(10, display.contentWidth*0.8, display.contentHeight*0.14)--0.8, 0.1
+ 	time.size = 87
  	time:setFillColor(0)
  	time.alpha = 0.5
 
@@ -56,16 +55,49 @@ function scene:create( event )
  	function hintButton:tap( event )
  		composer.showOverlay('view08_schoolfood_setting')
  	end
- 	hintButton:addEventListener("tap", hintButton)
+ 	hintBbg:addEventListener("tap", hintBbg)
+
+ 		--timer 객체 
+ 	local timerbg = display.newImageRect("image/timer.png", 230, 230)
+ 	timerbg.x, timerbg.y = display.contentWidth*0.79, display.contentHeight*0.1
+
+ 		-- 고양이 손 객체   
+	local h1 = display.newImageRect("image/punch.png",150, 150)
+	h1.anchorX,h1.anchorY=0.3,0.3
+	h1.x,h1.y = 640,360
+
+		-- 클릭 시 고양이 손 기울어짐
+	function move(event)
+		if (event.phase == "began") then
+			transition.to(h1,{rotation=-45,time=200})
+		end
+
+		if (event.phase == "ended") then
+			transition.to(h1,{rotation=0,time=200})
+		end
+	end
+
+	function move1(event)
+		h1.x,h1.y = event.x,event.y
+	end
+
+	Runtime:addEventListener("mouse",move1)
+	h1:addEventListener("touch",move)
+
+local pick
+local correct
+local incorrect
 
  	-----레이어 정리--깔리는 것부터 차례대로 
  	sceneGroup:insert(background)
  	sceneGroup:insert(pan)
- 	sceneGroup:insert(foodGroup)
+ 	sceneGroup:insert(timerbg)--추가 
  	sceneGroup:insert(score)
  	sceneGroup:insert(time)
+ 	sceneGroup:insert(foodGroup)
  	sceneGroup:insert(hintBbg)
  	sceneGroup:insert(hintButton)
+ 	sceneGroup:insert(h1)
 
 
  	----------2차시 event-------- 
@@ -75,6 +107,7 @@ function scene:create( event )
  			display.getCurrentStage():setFocus( event.target )
  			event.target.isFocus = true
  			-- 드래그 시작할 때
+ 			audio.play( pick )----------ㅅㅈ 
  			event.target.initX = event.target.x
  			event.target.initY = event.target.y
 
@@ -92,13 +125,14 @@ function scene:create( event )
  				event.target.isFocus = false
 
  				-- 드래그 끝났을 때
- 				if ( event.target.x > pan.x - 300 and event.target.x < pan.x + 300 --50 50 
- 					and event.target.y > pan.y - 300 and event.target.y < pan.y + 300) then--- 50 50
+ 				if ( event.target.x > pan.x - 300 and event.target.x < pan.x + 300 
+ 					and event.target.y > pan.y - 300 and event.target.y < pan.y + 300) then
  						if (event.target == food[1] or event.target == food[2] or event.target == food[5] or event.target == food[6] or event.target == food[9]) then
- 							display.remove(event.target) -- 당근 삭제하기
- 							score.text = score.text + 1 -- 점수 올리기
+ 							audio.play( correct )-----------ㅅㅈ 
+ 							display.remove(event.target) 
+ 							score.text = score.text + 1 
 
- 							if(score.text == '5') then
+ 							if(score.text == '5') then --- !성공!했을 때 
  								score.text = '성공!'
  								time.alpha = 0
  								audio.pause(home)
@@ -107,6 +141,7 @@ function scene:create( event )
 								composer.gotoScene( "view09_schoolfood_view2" )---다현님 veiw2가 게임오버창 
  							end
  						else --싫어하는 음식일때는 제자리로 
+ 							audio.play( incorrect )-----ㅅㅈ
  							event.target.x = event.target.initX
  							event.target.y = event.target.initY
  						end
@@ -136,7 +171,7 @@ function scene:create( event )
  		if( time.text == '-1') then
  			time.alpha = 0
 
- 			if( score.text ~= '성공!' ) then
+ 			if( score.text ~= '성공!' ) then --- !실패!했을 때 
  				score.text = '실패!'
  				audio.pause(home)
  				composer.removeScene("view07_schoolfood_game")---다현님코드 
@@ -153,6 +188,11 @@ function scene:create( event )
 	end
 
  	local timeAttack = timer.performWithDelay(1000, counter, 11)
+
+ 	pick = audio.loadSound( "audio/pick.mp3" )--음식집을때  
+    correct = audio.loadSound( "audio/correct.mp3" )--좋아하는 음식 잘 집어넣었을때 
+    incorrect = audio.loadSound("audio/error.mp3") --싫어하는 음식 넣었을때 
+
 end
 
 function scene:show( event )
@@ -186,6 +226,9 @@ end
 function scene:destroy( event )
 	local sceneGroup = self.view
 	
+	audio.dispose( pick )
+    audio.dispose( correct)
+    audio.dispose( incorrect )
 	-- Called prior to the removal of scene's "view" (sceneGroup)
 	-- 
 	-- INSERT code here to cleanup the scene
