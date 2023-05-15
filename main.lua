@@ -40,7 +40,7 @@ local function onFirstView( event )
             -- composer.gotoScene( "view18_npc_frontgate_game" )
             
     end
-	composer.gotoScene( "View01_main" )
+	-- composer.gotoScene( "View01_main" ) //무슨파일이지
 
 end
 
