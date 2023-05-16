@@ -282,58 +282,84 @@ function scene:create( event )
             if(name == "인문관")then
                 print("인문관")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view02_npc_fallgame")
+                if(loadedSettings.hiddenQuest[1] == true) then
+                    composer.gotoScene("view23_hidden_game")
+                else
+                    composer.gotoScene("view02_npc_fallgame")
+                end
                 return true
             elseif(name == "음악관") then
                 print("음악관")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view07_npc_schoolfood_game")
+                if(loadedSettings.hiddenQuest[2] == true) then
+                    composer.gotoScene("view23_hidden_game")
+                else
+                    composer.gotoScene("view07_npc_schoolfood_game")
+                end
                 return true
-            elseif(name == "예지관")then
+            elseif(name == "예지관") then
                 print("예지관")
                 composer.removeScene("view06_main_map1")
-                if(math.random(1, 2) == 1) then
-                    composer.gotoScene("view10_npc_lost_stuId_game")
-                else
-                    composer.gotoScene("view034_npc_mouse_game")
+                if(loadedSettings.hiddenQuest[3] == true) then
+                    composer.gotoScene("view23_hidden_game")
+                else 
+                    if(math.random(1, 2) == 1) then
+                        composer.gotoScene("view10_npc_lost_stuId_game")
+                    else
+                        composer.gotoScene("view034_npc_mouse_game")
+                    end
                 end
                 return true
             elseif(name == "대학원")then
                 print("대학원")
                 composer.removeScene("view06_main_map1")
-                if(math.random(1, 2) == 1) then
-                    composer.gotoScene("view20_npc_moneyGame")
+                if(loadedSettings.hiddenQuest[4] == true) then
+                    composer.gotoScene("view23_hidden_game")
                 else
-                    composer.gotoScene("view03_npc_jump_game")
+                    if(math.random(1, 2) == 1) then
+                        composer.gotoScene("view20_npc_moneyGame")
+                    else
+                        composer.gotoScene("view03_npc_jump_game")
+                    end
                 end
                 return true
             elseif(name == "본관")then
                 print("본관")
                 composer.removeScene("view06_main_map1")
-                if(math.random(1, 2) == 1) then
-                    composer.gotoScene("view21_npc_fishGame")
-                else
-                    composer.gotoScene("view17_npc_boongmake_game")
+                if(loadedSettings.hiddenQuest[5] == true) then
+                    composer.gotoScene("view23_hidden_game")
+                end
+                    if(math.random(1, 2) == 1) then
+                        composer.gotoScene("view21_npc_fishGame")
+                    else
+                        composer.gotoScene("view17_npc_boongmake_game")
+                    end
                 end
                 return true
             elseif(name == "정문")then
                 print("정문")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view18_npc_frontgate_game")
+                if(loadedSettings.hiddenQuest[6] == true) then
+                    composer.gotoScene("view23_hidden_game")
+                else
+                    composer.gotoScene("view18_npc_frontgate_game")
+                end
                 return true
             elseif(name == "백주년")then
                 print("백주년")
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view13_npc_climbingTree")
+                if(loadedSettings.hiddenQuest[7] == true) then
+                    composer.gotoScene("view23_hidden_game")
+                else
+                    composer.gotoScene("view13_npc_climbingTree")
+                end
                 return true
             elseif(name == "학생관")then
-                if(loadedSettings.openHiddenGame == 1) then
-                    print("히든게임_학생관")
-                    composer.removeScene("view06_main_map1")
-                    composer.gotoScene("npc_hiddenGame")
+                print("학생관")
+                composer.removeScene("view06_main_map1")
+                if(loadedSettings.hiddenQuest[8] == true) then
+                    composer.gotoScene("view23_hidden_game")
                 else
-                    print("학생관")
-                    composer.removeScene("view06_main_map1")
                     composer.gotoScene("view02_npc_pickGame")
                 end
                 return true

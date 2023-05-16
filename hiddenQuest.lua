@@ -37,10 +37,12 @@ function scene:create( event )
 
 	local t = {}
 	local tGroup = display.newGroup()
+	local index = math.random(8)
 	t[1] = display.newText(mainName.."! 일일 퀘스트를\n다 클리어했구나 정말 대단하다냥!", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	t[2] = display.newText("열심히 한 "..mainName.."를 위해 보상으로\n히든 퀘스트를 준비했다냥", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("학생관에 가서 히든 퀘스트를 수행하면 선물도 준다냥!", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	--일단 학생관으로 설정. 나중에 인문관, 학생관... 랜덤으로 뜨게 고칠 예정!
+	t[3] = display.newText(loadedSettings.buildings_index[index].."에 가서 히든 퀘스트를 수행하면 선물도 준다냥!", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)	
+	loadedSettings.hiddenQuest[index] = true
+
 	for i =1, 3 do
 		tGroup:insert(t[i])
 	end
@@ -62,12 +64,10 @@ function scene:create( event )
 
 		j = j + 1
 
-
 		if j == 5 then
-			loadedSettings.openHiddenGame = 1
 			composer.removeScene("hiddenQuest")
 			--audio.pause(tutorialMusic)
-			composer.gotoScene("view05_main_map")
+			composer.gotoScene("view06_main_map1")
 			loadsave.saveTable(loadedSettings,"settings.json")
 			
 		end

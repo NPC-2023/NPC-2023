@@ -6,7 +6,7 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/place5.jpg", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/hidden/view03_background.jpg", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
  	local npc = display.newImageRect("image/npc/npc1.png", 200, 200)
@@ -82,8 +82,8 @@ function scene:create( event )
 		timer.performWithDelay( 1000, function() 
 			speechbubble2.alpha = 0
 			speech2.alpha = 0
-			composer.removeScene("npc_hiddenGame")
-			composer.gotoScene("view03_jump_game") --일단 제 jump game으로 연결되도록 설정했습니다.
+			composer.removeScene("view23_npc_hidden_game")
+			composer.gotoScene("view23_hidden_game")
 		end)
 	end
 
@@ -91,7 +91,7 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
-	if(composer.getVariable("successHiddenGame") == "success") then
+	if(composer.getVariable("hiddengame_status") == "success") then
 		-- local tmp = composer.getVariable("can_cnt_global")
 		-- composer.setVariable("can_cnt_global", tmp + 1)
 		speechbubble_exmark.alpha = 0
