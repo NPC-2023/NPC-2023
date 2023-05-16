@@ -115,7 +115,7 @@ function scene:create( event )
 			speechbubble.alpha = 0
 			speech.alpha = 0
 			composer.removeScene("view18_npc_frontgate_game")
-			composer.gotoScene("view18_frontgate_game")
+			composer.gotoScene("view18_menu_frontgate_game")
 		end)
 	end
 
