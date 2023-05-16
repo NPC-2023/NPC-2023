@@ -203,7 +203,7 @@ function scene:create( event )
 	loadsave.saveTable(loadedSettings,"settings.json")
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
-	speechbubble:addEventListener("tap", acceptQuest)
+	game_click:addEventListener("tap", acceptQuest)
 	map:addEventListener("tap", goBackToMap)
 
 

@@ -44,7 +44,7 @@ function scene:create( event )
 
 	--대사
 	local t = {}
-	t[1] = display.newText("어? 귀여운 고양이네 어디서 들어온 거지?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[1] = display.newText("어? 귀여운 고양이네! 안녕? 너 이름이 뭐야?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	t[2] = display.newText("나는 고양이 왕국 일등 기사"..mainName.."이다냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	t[3] = display.newText("일등 기사라니 정말 멋진데? 나도 너희 왕국에 가보고 싶어!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	t[4] = display.newText(" 후후.. 내가 다음에 데려가 주겠다냥! 나만 믿어냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
