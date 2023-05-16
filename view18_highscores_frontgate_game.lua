@@ -93,7 +93,7 @@ function scene:create( event )
 		fail_close.alpha = 1
 		fail_close:addEventListener("touch", backtogame)--실패 
 	else
-		backtomap.alpha = 1
+		backmap.alpha = 1
 		clear_close.alpha = 1
 		clear_close:addEventListener("touch", backtomap)--성공 
 	end
