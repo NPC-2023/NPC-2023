@@ -95,39 +95,41 @@ function scene:create( event )
 	--게임 시작---------------------------------------------------------------------------------------------------------------------------------------------------
 	function gamescene()
 		local background = display.newImage("image/boong/view02_background.png", display.contentWidth/2, display.contentHeight/2)
+		local kettlebg = display.newImage("image/boong/재료배경.png", display.contentWidth*0.9, display.contentHeight*0.75)
 	 	local kettle = display.newImage("image/boong/kettle.png", display.contentWidth*0.9, display.contentHeight*0.75)
+	 	local beansbg = display.newImage("image/boong/재료배경.png", display.contentWidth*0.9, display.contentHeight*0.45)
 	 	local beans = display.newImage("image/boong/beans.png", display.contentWidth*0.9, display.contentHeight*0.45)
-	 	local timerImage = display.newImage("image/boong/timerImage.png", display.contentWidth*0.9-10, display.contentHeight*0.15-20)
-	 	local boongCountBackground = display.newImage("image/boong/boongCountBackground.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
+	 	local timerImage = display.newImage("image/boong/타이머.png", display.contentWidth*0.9-10, display.contentHeight*0.15-20)
+	 	local scorebg = display.newImage("image/boong/스코어.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 
 	 	local object = {}
 		--틀
 		for i = 1,19,9 do
-		 	object[i] = display.newImage("image/boong/object01.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i] = display.newImage("image/boong/object01.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 
 		 	--반죽1
-		 	object[i+1] = display.newImage("image/boong/object02.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+1] = display.newImage("image/boong/object02.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 
 		 	--팥
-		 	object[i+2] = display.newImage("image/boong/object03.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+2] = display.newImage("image/boong/object03.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 
 		 	--반죽2
-		 	object[i+3] = display.newImage("image/boong/object04.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+3] = display.newImage("image/boong/object04.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 
 		 	--틀
-		 	object[i+4] = display.newImage("image/boong/object05.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+4] = display.newImage("image/boong/object05.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 
 		 	--연기
-		 	object[i+5] = display.newImage("image/boong/object06.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+5] = display.newImage("image/boong/object06.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 
 		 	--완성된 붕어빵
-		 	object[i+6] = display.newImage("image/boong/object07.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+6] = display.newImage("image/boong/object07.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 
 		 	--탄 연기
-		 	object[i+7] = display.newImage("image/boong/object08.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+7] = display.newImage("image/boong/object08.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 
 		 	--탄 붕어빵
-		 	object[i+8] = display.newImage("image/boong/object09.png", display.contentWidth*0.1 + i*35 + 20, display.contentHeight*0.6)
+		 	object[i+8] = display.newImage("image/boong/object09.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
 		end
 
 		sceneGroup:insert(background)
@@ -136,16 +138,21 @@ function scene:create( event )
 		end
 		sceneGroup:insert(kettle)
 		sceneGroup:insert(beans)
+		sceneGroup:insert(kettlebg)
+		sceneGroup:insert(beansbg)
 		sceneGroup:insert(timerImage)
-		sceneGroup:insert(boongCountBackground)
+		sceneGroup:insert(scorebg)
 
 	 	for i = 1,27,1 do
 	 		object[i]:scale(0.6,0.6)
 	 	end
 
-	 	kettle:scale(0.4,0.4)
-	 	beans:scale(0.4,0.4)
-	 	timerImage:scale(0.4,0.4)
+	 	kettle:scale(0.3,0.3)
+	 	beans:scale(0.35,0.35)
+	 	kettlebg:scale(0.9,0.9)
+	 	beansbg:scale(0.9,0.9)
+	 	timerImage:scale(0.8,0.8)
+	 	scorebg:scale(0.8,0.8)
 
 		for i = 1, 27, 1 do
 			object[i].alpha = 0
@@ -154,16 +161,19 @@ function scene:create( event )
 			object[i].alpha = 1
 		end
 
+	 	kettlebg:toFront()
+	 	beansbg:toFront()
 		kettle:toFront()
 	 	beans:toFront()
+
 	 	for i = 1, 19, 9 do
 	 		object[i+5]:toFront()
 	 	end
 
-		local score = display.newText(0, display.contentWidth*0.1+50, display.contentHeight*0.15-20)
+		local score = display.newText(0, display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 	 	score.size = 50
 	 	score:setFillColor(0)
-	 	local time= display.newText(50, display.contentWidth*0.9, display.contentHeight*0.15-5)
+	 	local time= display.newText(50, display.contentWidth*0.9-10, display.contentHeight*0.15-10)
 	 	time.size = 40
 	 	time:setFillColor(0)
 
@@ -250,7 +260,7 @@ function scene:create( event )
 						local timer = timer.performWithDelay(6000, function()
 						    -- object7이 클릭되지 않았으면 object8 생성
 						    if not clicked then
-						    	transition.to( object[j+7], { time=1000, alpha=1 } )
+						    	transition.to( object[j+7], { time=500, alpha=1 } )
 						        print("넘어감")
 						        turn[j] = 6
 						    end
@@ -271,6 +281,8 @@ function scene:create( event )
 				 	--완성해서 초기화
 				 	elseif( turn[j] == 7 and (event.target == object[j+8] or event.target == object[j+6]))then
 				 		turn[j] = 1
+				 		transition.cancel(object[j+5])
+				 		transition.cancel(object[j+7])
 						for i = j+1,j+8,1 do
 		 					object[i].alpha = 0
 						end
@@ -321,7 +333,6 @@ function scene:create( event )
 	end
 
 	startscene()
-
 
 end
 
