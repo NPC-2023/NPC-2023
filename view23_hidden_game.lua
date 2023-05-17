@@ -177,10 +177,6 @@ function scene:create( event )
 		 			cat.y = cat.y-10
 		 			winText.text = '이겼습니다. 고양이가 1칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 1칸 올라갑니다.")
-		 			while catmove < 0 do
-		 				cat.y = cat.y-10
-		 				wait(0.5)
-		 			end
 		 		else
 		 			student.y = student.y-50
 		 			AIscissors.y = AIscissors.y-50
