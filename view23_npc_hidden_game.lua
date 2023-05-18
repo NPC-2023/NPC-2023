@@ -116,7 +116,7 @@ function scene:create( event )
 		script:setFillColor(1)
 		script.x, script.y = display.contentWidth*0.2, display.contentHeight*0.789
 
-		loadedSettings.openHiddenGame = 0
+		composer.setVariable("hiddengame_status", "fail")
 
 		objectGroup:insert(section)
 		objectGroup:insert(script)

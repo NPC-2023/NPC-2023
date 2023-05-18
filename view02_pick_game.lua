@@ -59,8 +59,12 @@ function scene:create( event )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
  	--sceneGroup:insert(home)
 
+ 	print(composer.getVariable("score1"))
 
 	local function pagemove()
+		timer.cancel(timer1)
+		timer.cancel(timer2)
+		timer.cancel(timer3)
 		if (score <= 4) then
 			composer.setVariable("score1", -1)
 		else
@@ -83,9 +87,10 @@ function scene:create( event )
 			score = score - 1
 			display.remove(event.target)
 			showScore.text = score
-		else
+		elseif (event.target.type=="die") then
 			score = -1
 			display.remove(event.target)
+			print("엥")
 			pagemove()--게임오버
 		end
 	end
@@ -141,6 +146,7 @@ function scene:create( event )
 	local function counter( event )
 		audio.resume(home)
  		time.text = time.text - 1
+ 			print(time.text)
 	 	if(time.text == "-1") then
 	 		time.alpha = 0
 	 		pagemove()
@@ -157,7 +163,7 @@ function scene:create( event )
 		showScore.alpha = 1
 		section.alpha = 0
 		script.alpha = 0
-		timer2 = timer.performWithDelay(880, generate, 30, "generateTime")
+		timer2 = timer.performWithDelay(890, generate, 30, "generateTime")
 	end
 
 

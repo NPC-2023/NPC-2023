@@ -339,10 +339,27 @@ function scene:create( event )
 				composer.showOverlay( "view06_main_map2", options )
 			else
 				composer.setVariable("name", name)
-				-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
-				--composer.showOverlay( "view06_main_map1", options )
-				composer.removeScene("view05_main_map")
-				composer.gotoScene("view06_main_map1")
+				for i=1,8 do --히든퀘스트가 풀렸다면 해당 건물을 찾음
+                	if(loadedSettings.hiddenQuest[i] == true) then
+                    	hiddenQuest_building = loadedSettings.buildings_index[i]
+                    	loadedSettings.openHiddenQuest = true
+                    	break;
+                	end
+            	end
+            	if(loadedSettings.openHiddenQuest == true) then
+                	print("야호")
+                	--그 건물 버튼만 활성화
+                	if(composer.getVariable("name") == hiddenQuest_building) then
+                    	composer.removeScene("view05_main_map")
+						composer.gotoScene("view06_main_map1")
+                	end
+                else
+                	--히든퀘스트가 안 열렸으면 그대로
+					-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
+					--composer.showOverlay( "view06_main_map1", options )
+					composer.removeScene("view05_main_map")
+					composer.gotoScene("view06_main_map1")
+				end
 			end
 		end
 	end

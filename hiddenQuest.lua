@@ -67,7 +67,7 @@ function scene:create( event )
 		if j == 5 then
 			composer.removeScene("hiddenQuest")
 			--audio.pause(tutorialMusic)
-			composer.gotoScene("view06_main_map1")
+			composer.gotoScene("view05_main_map")
 			loadsave.saveTable(loadedSettings,"settings.json")
 			
 		end
