@@ -190,7 +190,8 @@ function scene:create( event )
     				clothesFlag = 0,
     				--히든퀘스트
        				hiddenQuest = { false, false, false, false, false, false, false, false },
-       				openHiddenQuest = false
+       				openHiddenQuest = false,
+       				hidden_flag = false,
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
 				

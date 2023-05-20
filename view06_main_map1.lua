@@ -280,20 +280,13 @@ function scene:create( event )
     local hiddenQuest_building = nil
     local function gotoChallenge(event)
         if event.phase == "began" then
-            for i=1,8 do
-                if(loadedSettings.hiddenQuest[i] == true) then
-                    hiddenQuest_building = loadedSettings.buildings_index[i] --히든퀘스트를 수행할 빌딩 이름
-                    openHiddenQuest = true
-                    break;
-                end
-            end
-            if(openHiddenQuest == true) then
-                print("야호")
-                if(name == hiddenQuest_building) then
-                    composer.removeScene("view06_main_map1")
-                    composer.gotoScene("view23_hidden_game")
-                end
-            else
+            --if(loadedSettings.openHiddenQuest == true) then
+            --    print("야호")
+            --    if(name == hiddenQuest_building) then
+            --        composer.removeScene("view06_main_map1")
+            --        composer.gotoScene("view23_hidden_game")
+            --    end
+            --else
 
             if(name == "인문관")then
                 print("인문관")
@@ -347,7 +340,7 @@ function scene:create( event )
                 composer.removeScene("view06_main_map1") 
                 composer.gotoScene("view02_npc_pickGame")
                 return true
-            end
+        --    end
         end
         end
     end

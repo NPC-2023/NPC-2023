@@ -84,11 +84,11 @@ function scene:create( event )
 	local buildingGroup = display.newGroup()
 	local building = {}
 
-	print("오늘완료퀘스트수"..loadedSettings.today_success)
-	if(loadedSettings.today_success % 4 == 0 and loadedSettings.today_success ~= 0) then
-		composer.removeScene("view05_main_map")
-		composer.gotoScene("view23_hidden_game")
-	end
+	--print("오늘완료퀘스트수"..loadedSettings.today_success)
+	--if(loadedSettings.today_success % 4 == 0 and loadedSettings.today_success ~= 0) then
+	--	composer.removeScene("view05_main_map")
+	--	composer.gotoScene("view23_hidden_game")
+	--end
 
 	-- 퀘스트 4개를 실행하면 계절 바꾸게 하기
 	local background
@@ -101,8 +101,14 @@ function scene:create( event )
 		isModal = true
 	}
 
+	if(loadedSettings.openHiddenQuest == true) then
+		loadedSettings.hidden_flag = false
+	else
+		loadedSettings.hidden_flag = true
+	end
+
 	--loadedSettings.toal_success = 3
-	if(loadedSettings.total_success ~= 0 and loadedSettings.total_success % 4 == 0) then
+	if(loadedSettings.total_success ~= 0 and loadedSettings.total_success % 4 == 0 and loadedSettings.hidden_flag == true) then
 		composer.showOverlay("hiddenQuest", options1)
 	end
 	
@@ -342,24 +348,23 @@ function scene:create( event )
 				for i=1,8 do --히든퀘스트가 풀렸다면 해당 건물을 찾음
                 	if(loadedSettings.hiddenQuest[i] == true) then
                     	hiddenQuest_building = loadedSettings.buildings_index[i]
-                    	loadedSettings.openHiddenQuest = true
                     	break;
                 	end
             	end
-            	if(loadedSettings.openHiddenQuest == true) then
-                	print("야호")
+                --if(loadedSettings.openHiddenQuest == true) then
+                --	print("야호")
                 	--그 건물 버튼만 활성화
-                	if(composer.getVariable("name") == hiddenQuest_building) then
-                    	composer.removeScene("view05_main_map")
-						composer.gotoScene("view06_main_map1")
-                	end
-                else
+                --	if(composer.getVariable("name") == hiddenQuest_building) then
+                --    	composer.removeScene("view05_main_map")
+			--			composer.gotoScene("view06_main_map1")
+              --  	end
+               -- else
                 	--히든퀘스트가 안 열렸으면 그대로
 					-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
 					--composer.showOverlay( "view06_main_map1", options )
 					composer.removeScene("view05_main_map")
 					composer.gotoScene("view06_main_map1")
-				end
+				--end
 			end
 		end
 	end
