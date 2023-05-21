@@ -219,8 +219,8 @@ function scene:create( event )
 		 			winText.text = '졌습니다. 학생이 2칸 올라갑니다.'
 		 			print("졌습니다. 학생이 2칸 올라갑니다.")
 		 		end
-		 	who_win()
 		 	end
+		 	who_win()
 		end
 		rock:addEventListener("tap", tap)
 	 	scissors:addEventListener("tap", tap)
