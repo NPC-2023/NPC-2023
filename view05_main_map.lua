@@ -101,13 +101,16 @@ function scene:create( event )
 		isModal = true
 	}
 
+	print(loadedSettings.openHiddenQuest)
 	if(loadedSettings.openHiddenQuest == true) then
 		loadedSettings.hidden_flag = false
-	else
+	elseif(loadedSettings.total_success % 4 ~= 0) then
+		print("왓??????????")
 		loadedSettings.hidden_flag = true
 	end
 
-	--loadedSettings.toal_success = 3
+	--loadedSettings.total_success = 3
+	print(loadedSettings.hidden_flag)
 	if(loadedSettings.total_success ~= 0 and loadedSettings.total_success % 4 == 0 and loadedSettings.hidden_flag == true) then
 		composer.showOverlay("hiddenQuest", options1)
 	end
@@ -345,26 +348,20 @@ function scene:create( event )
 				composer.showOverlay( "view06_main_map2", options )
 			else
 				composer.setVariable("name", name)
-				for i=1,8 do --히든퀘스트가 풀렸다면 해당 건물을 찾음
-                	if(loadedSettings.hiddenQuest[i] == true) then
-                    	hiddenQuest_building = loadedSettings.buildings_index[i]
-                    	break;
-                	end
-            	end
-                --if(loadedSettings.openHiddenQuest == true) then
-                --	print("야호")
+                if(loadedSettings.openHiddenQuest == true) then
+                	print("야호")
                 	--그 건물 버튼만 활성화
-                --	if(composer.getVariable("name") == hiddenQuest_building) then
-                --    	composer.removeScene("view05_main_map")
-			--			composer.gotoScene("view06_main_map1")
-              --  	end
-               -- else
+                	if(composer.getVariable("name") == loadedSettings.buildings_index[loadedSettings.hidden_index]) then
+                    	composer.removeScene("view05_main_map")
+						composer.gotoScene("view06_main_map1")
+                	end
+                else
                 	--히든퀘스트가 안 열렸으면 그대로
 					-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
 					--composer.showOverlay( "view06_main_map1", options )
 					composer.removeScene("view05_main_map")
 					composer.gotoScene("view06_main_map1")
-				--end
+				end
 			end
 		end
 	end

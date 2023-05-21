@@ -54,8 +54,8 @@ function scene:create( event )
 			section:addEventListener("tap", scriptremove)
 		end
 		gametitle:addEventListener("tap", titleremove)
-		gametitle:toFront()
-		title:toFront()
+		--gametitle:toFront()
+		--title:toFront()
 	end
 
 	--게임 시작------------------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ function scene:create( event )
 	 	winText.alpha = 0.8
 
 	 	sceneGroup:insert(winText)
-	 	winText:toFront()
+	 	--winText:toFront()
 
 	 	local PlayerScore = 0
 		local AIScore= 0
@@ -254,10 +254,17 @@ function scene:create( event )
 	 			end
 	 		end
 	 	end
+	 	local function toFront(event) 
+	 		if (event.phase == "began") then 
+				composer.setVariable("hiddengame_status", "success")
+				composer.removeScene("view23_hidden_game")
+				composer.gotoScene("view23_npc_hidden_game")
+			end
+		end
 
 	 	replay:addEventListener("touch", touchEventListener)
-	 	endingText:toFront()
-	 	replay:toFront()
+	 	endingText:addEventListener("touch", toFront)
+	 	--replay:toFront()
 	end
 
 	startscene()

@@ -191,6 +191,7 @@ function scene:create( event )
     				--히든퀘스트
        				hiddenQuest = { false, false, false, false, false, false, false, false },
        				openHiddenQuest = false,
+       				hidden_index = 0,
        				hidden_flag = false,
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )

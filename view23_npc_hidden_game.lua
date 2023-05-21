@@ -1,5 +1,6 @@
 local composer = require( "composer" )
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -32,6 +33,8 @@ function scene:create( event )
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
+	
+	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	print("히든 게임 오픈")
 
@@ -94,6 +97,10 @@ function scene:create( event )
 	if(composer.getVariable("hiddengame_status") == "success") then
 		-- local tmp = composer.getVariable("can_cnt_global")
 		-- composer.setVariable("can_cnt_global", tmp + 1)
+
+		loadedSettings.openHiddenQuest = false
+		loadedSettings.buildings_index[loadedSettings.hidden_index] = false
+
 		speechbubble_exmark.alpha = 0
 		speech.alpha = 0
 		accept.alpha = 0
@@ -116,7 +123,6 @@ function scene:create( event )
 		script:setFillColor(1)
 		script.x, script.y = display.contentWidth*0.2, display.contentHeight*0.789
 
-		composer.setVariable("hiddengame_status", "fail")
 
 		objectGroup:insert(section)
 		objectGroup:insert(script)
@@ -151,6 +157,7 @@ function scene:create( event )
 	speechbubble:addEventListener("tap", acceptQuest)
 	map:addEventListener("tap", goBackToMap)
 
+	loadsave.saveTable(loadedSettings,"settings.json")
 
  	objectGroup:insert(npc)
  	objectGroup:insert(cat)

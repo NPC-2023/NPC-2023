@@ -75,7 +75,7 @@ function scene:create( event )
 		composer.gotoScene("view02_pick_game_over")
 	end
 
-	local tapSound = audio.loadSound("music/tap.mp3")
+	local tapSound = audio.loadSound("soundEffect/clickeffect.ogg")
 	local function tapEventListener(event)	
     	audio.play(tapSound)
     	audio.setVolume(0.2)
