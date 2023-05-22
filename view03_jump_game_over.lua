@@ -43,8 +43,8 @@ function scene:create( event )
 	local function gomap1(event) -- 게임 pass 후 넘어감
 		composer.setVariable("successJump", "success")
 		composer.setVariable("successHiddenGame", "success")
-		loadedSettings.toal_success = loadedSettings.toal_success + 1
-		loadedSettings.toal_success_names[loadedSettings.toal_success] = "고양이 점프해서 츄르 찾기"
+		loadedSettings.total_success = loadedSettings.total_success + 1
+		loadedSettings.total_success_names[loadedSettings.total_success] = "고양이 점프해서 츄르 찾기"
 		loadsave.saveTable(loadedSettings,"settings.json")
 		composer.removeScene("view03_jump_game_over")
 		composer.gotoScene("view03_npc_jump_game")
