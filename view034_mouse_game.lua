@@ -77,7 +77,7 @@ function scene:create( event )
 		dudu_hit[i].alpha = 0
 		sceneGroup:insert(dudu_hit[i])
 
-		holl[i] = display.newImageRect("image/mouse/캔.png", 200, 200)
+		holl[i] = display.newImageRect("image/mouse/두더지게임 구덩이.png", 200, 200)
 		holl[i].x, holl[i].y = holl_x[i],holl_y[1]
 		holl[i].anchorX, holl[i].anchorY = 0,0
 		sceneGroup:insert(holl[i])
@@ -95,7 +95,7 @@ function scene:create( event )
 		dudu_hit1[i].alpha = 0
 		sceneGroup:insert(dudu_hit1[i])
 
-		holl1[i] = display.newImageRect("image/mouse/캔.png", 200, 200)
+		holl1[i] = display.newImageRect("image/mouse/두더지게임 구덩이.png", 200, 200)
 		holl1[i].x, holl1[i].y = holl_x[i],holl_y[2]
 		holl1[i].anchorX, holl1[i].anchorY = 0,0
 		sceneGroup:insert(holl1[i])
@@ -113,7 +113,7 @@ function scene:create( event )
 		dudu_hit2[i].alpha = 0
 		sceneGroup:insert(dudu_hit2[i])
 
-		holl2[i] = display.newImageRect("image/mouse/캔.png", 200, 200)
+		holl2[i] = display.newImageRect("image/mouse/두더지게임 구덩이.png", 200, 200)
 		holl2[i].x, holl2[i].y = holl_x[i],holl_y[3]
 		holl2[i].anchorX, holl2[i].anchorY = 0,0
 		sceneGroup:insert(holl2[i])

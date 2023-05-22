@@ -36,7 +36,7 @@ local function onFirstView( event )
     		audio.play(titleMusic)
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
-			composer.gotoScene( "view01_1_start_game" )		
+			composer.gotoScene( "view034_mouse_game" )		
             -- composer.gotoScene( "view18_npc_frontgate_game" )
             
     end
