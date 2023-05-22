@@ -127,10 +127,11 @@ function scene:create( event )
 						if(total_cnt == 4) then
 							local text = display.newText("성공이다냥 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 							text:setFillColor(0)
+							
 							timer.performWithDelay( 1000, function() 
 								text.alpha = 0
 								gametitle.alpha = 0
-								composer.setVariable("fishgame_status", "success")
+	
 								composer.removeScene("view21_fishGame")
 								composer.gotoScene("view21_npc_fishGame")
 							end )

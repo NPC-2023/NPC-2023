@@ -96,6 +96,7 @@ function scene:create( event )
 			display.remove(event.target)
 			timer.performWithDelay( 400, function() pagemove()--게임오버
 		end)
+			pagemove()--게임오버
 		end
 	end
 

@@ -76,7 +76,7 @@ function scene:create( event )
 	--게임 전체 변수(저장됨)
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 	mainName = loadedSettings.name
-	times = loadedSettings.talk[3]
+	-- times = loadedSettings.talk[3]
 
 	if(composer.getVariable("talk3_status") == "fin") then
 		loadedSettings.talk[3] = 0 --0으로 초기화하기 위한 임시 코드
@@ -231,7 +231,7 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
-	loadsave.saveTable(loadedSettings,"settings.jsn")
+	loadsave.saveTable(loadedSettings,"settings.json")
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
 	map:addEventListener("tap", goBackToMap)
