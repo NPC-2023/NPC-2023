@@ -84,38 +84,24 @@ function scene:create( event )
 	local buildingGroup = display.newGroup()
 	local building = {}
 
-	--print("오늘완료퀘스트수"..loadedSettings.today_success)
-	--if(loadedSettings.today_success % 4 == 0 and loadedSettings.today_success ~= 0) then
-	--	composer.removeScene("view05_main_map")
-	--	composer.gotoScene("view23_hidden_game")
-	--end
+
 
 	-- 퀘스트 4개를 실행하면 계절 바꾸게 하기
 	local background
 
-	print(loadedSettings.total_success)
-	
 	local options1={
 		effect = "fade",
 		time = 2000,
 		isModal = true
 	}
 
-	print(loadedSettings.openHiddenQuest)
-	if(loadedSettings.openHiddenQuest == true) then
-		loadedSettings.hidden_flag = false
-	elseif(loadedSettings.total_success % 4 ~= 0) then
-		print("왓??????????")
-		loadedSettings.hidden_flag = true
-	end
-
 	--loadedSettings.total_success = 3
-	print(loadedSettings.hidden_flag)
-	if(loadedSettings.total_success ~= 0 and loadedSettings.total_success % 4 == 0 and loadedSettings.hidden_flag == true) then
+	if(loadedSettings.total_success ~= 0 and loadedSettings.total_success % 4 == 0) then
 		composer.showOverlay("hiddenQuest", options1)
 	end
 	
 
+	print(loadedSettings.total_success)
 	--if(questedListGet == nil or #questedListGet < 2) then
 	if(loadedSettings.total_success < 5) then
 		print("봄")
@@ -173,7 +159,6 @@ function scene:create( event )
 	local catSoles = {}
 	local catSoles_idx = 0
 
-	
 	if (loadedSettings.total_success ~= 0) then
 		for i = 1, loadedSettings.total_success do
 			if (loadedSettings.total_success_names[i] == "떨어지는 참치캔 받기")then
@@ -330,6 +315,7 @@ function scene:create( event )
         	TargetquestedList = questedListGet }
 	    	}	
 
+	local open_paper = audio.loadStream( "soundEffect/snd_use_map.wav" )
 
 -- 리스너 함수 생성
 	local function touch_ui (event)
@@ -343,25 +329,16 @@ function scene:create( event )
 				composer.removeScene("view05_main_map")
 				composer.gotoScene("custom")
 			elseif name == "퀘스트아이콘" then
+
 				composer.setVariable("questedListGet", questedListGet)
-				
+				local openPaperChannel = audio.play(open_paper)
 				composer.showOverlay( "view06_main_map2", options )
 			else
 				composer.setVariable("name", name)
-                if(loadedSettings.openHiddenQuest == true) then
-                	print("야호")
-                	--그 건물 버튼만 활성화
-                	if(composer.getVariable("name") == loadedSettings.buildings_index[loadedSettings.hidden_index]) then
-                    	composer.removeScene("view05_main_map")
-						composer.gotoScene("view06_main_map1")
-                	end
-                else
-                	--히든퀘스트가 안 열렸으면 그대로
-					-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
-					--composer.showOverlay( "view06_main_map1", options )
-					composer.removeScene("view05_main_map")
-					composer.gotoScene("view06_main_map1")
-				end
+				-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
+				--composer.showOverlay( "view06_main_map1", options )
+				composer.removeScene("view05_main_map")
+				composer.gotoScene("view06_main_map1")
 			end
 		end
 	end
