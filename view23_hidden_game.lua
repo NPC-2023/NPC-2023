@@ -5,10 +5,13 @@
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
+local loadsave = require( "loadsave" )
 local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	--게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
 	function startscene()
@@ -259,6 +262,7 @@ function scene:create( event )
 				composer.setVariable("hiddengame_status", "success")
 				composer.removeScene("view23_hidden_game")
 				composer.gotoScene("view23_npc_hidden_game")
+				loadedSettings.total_success = 0
 			end
 		end
 
@@ -266,6 +270,8 @@ function scene:create( event )
 	 	endingText:addEventListener("touch", toFront)
 	 	--replay:toFront()
 	end
+
+	loadsave.saveTable(loadedSettings,"settings.json")
 
 	startscene()
 end
