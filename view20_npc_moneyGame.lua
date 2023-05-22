@@ -80,6 +80,11 @@ function scene:create( event )
 		loadedSettings.talk[5] = loadedSettings.talk[5] + 1
 	end
 
+	--오늘 완수한 게임 개수가 4면 성공플래그 리셋
+	if(loadedSettings.today_success == 4) then
+		composer.setVariable("moneygame_status", "renew")
+	end
+
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
 	if(composer.getVariable("moneygame_status") == "success") then
 		loadedSettings.today_success = loadedSettings.today_success + 1

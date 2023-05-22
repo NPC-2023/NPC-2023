@@ -99,6 +99,11 @@ function scene:create( event )
 	if(loadedSettings.total_success ~= 0 and loadedSettings.total_success % 4 == 0) then
 		composer.showOverlay("hiddenQuest", options1)
 	end
+
+	--오늘 게임 4개가 끝나면 fade되고 발자국, 게임성공횟수 리셋
+	if(loadedSettings.today_success == 4) then
+		composer.gotoScene( "view05_main_map" , options1)
+	end
 	
 
 	print(loadedSettings.total_success)
