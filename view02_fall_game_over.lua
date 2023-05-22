@@ -42,13 +42,14 @@ function scene:create( event )
 	end
 
 	--close 버튼
-	local clear_close = display.newImageRect("image/fall/닫기.png", 150, 150)
-	clear_close.x, clear_close.y = 950, 400
+	
+	local clear_close = display.newImageRect("image/fall/닫기.png", 50, 50)
+	clear_close.x, clear_close.y = display.contentWidth*0.7, display.contentHeight*0.37
 	clear_close.alpha = 0
 	
 
-	local fail_close = display.newImageRect("image/fall/닫기.png", 150, 150)
-	fail_close.x, fail_close.y = 950, 400
+	local fail_close = display.newImageRect("image/fall/닫기.png", 50, 50)
+	fail_close.x, fail_close.y = display.contentWidth*0.7, display.contentHeight*0.37
 	fail_close.alpha = 0
 	
 	
