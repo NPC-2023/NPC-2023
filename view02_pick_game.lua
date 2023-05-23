@@ -76,21 +76,26 @@ function scene:create( event )
 	end
 
 	local tapSound = audio.loadSound("soundEffect/clickeffect.ogg")
+	local bomb = audio.loadSound("soundEffect/bomb.wav")
+	local error = audio.loadSound("soundEffect/error.mp4")
 	local function tapEventListener(event)	
-    	audio.play(tapSound)
     	audio.setVolume(0.2)
 		if (event.target.type == "food") then
+			audio.play(tapSound)
 			score = score + 1
 			display.remove(event.target)
 			showScore.text = score
 		elseif (event.target.type == "trash") then
+			audio.play(error)
 			score = score - 1
 			display.remove(event.target)
 			showScore.text = score
 		elseif (event.target.type=="die") then
+			audio.play(bomb)
 			score = -1
 			display.remove(event.target)
-			print("엥")
+			timer.performWithDelay( 400, function() pagemove()--게임오버
+		end)
 			pagemove()--게임오버
 		end
 	end

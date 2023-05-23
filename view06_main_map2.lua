@@ -102,7 +102,7 @@ function scene:create( event )
     sceneGroup:insert(boardTitle)
 
 
-
+    local close_paper = audio.loadStream( "soundEffect/snd_close_map.wav" )
     -- exit 버튼 눌렀을 때 volumeControl.lua파일에서 벗어나기
     local function goback(event)
         -- if event.phase == "began" then
@@ -111,6 +111,7 @@ function scene:create( event )
         --composer.hideOverlay("view06_main_map1")
         if event.phase == "began" then
             --composer.removeScene("view06_main_map1")
+            local closePaperChannel = audio.play(close_paper)
             --composer.gotoScene("view05_main_map")
             composer.hideOverlay("view06_main_map2")
         end

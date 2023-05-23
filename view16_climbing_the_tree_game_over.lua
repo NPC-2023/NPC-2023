@@ -70,9 +70,12 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 			composer.removeScene("view16_climbing_the_tree_game_over")
 			composer.setVariable("successClimbing", "success")
+			local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
+		    audio.play(bgMusic)
+		    audio.setVolume( 0.5 )
 
-			loadedSettings.toal_success = loadedSettings.toal_success + 1
-			loadedSettings.toal_success_names[loadedSettings.toal_success] = "나무 올라가기"
+			loadedSettings.total_success = loadedSettings.total_success + 1
+			loadedSettings.total_success_names[loadedSettings.total_success] = "나무 올라가기"
 			loadsave.saveTable(loadedSettings,"settings.json")
 
 			composer.setVariable("climb_status", "success")
@@ -109,6 +112,9 @@ function scene:create( event )
 		clear_close.alpha = 1
 		clear_closeScript.alpha = 1
 		backtomapScript.alpha = 1
+		local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
+		audio.play(bgMusic)
+		audio.setVolume( 0.5 )
 		clear_close:addEventListener("touch",gomap)
 	end
 	sceneGroup:insert(fail_close)

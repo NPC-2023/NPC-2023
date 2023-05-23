@@ -23,6 +23,14 @@ function scene:create( event )
 	local sceneGroup = self.view
 	physics.start()
 
+	local bgMusic1 = audio.loadStream( "music/climbing the tree music.mp3" )
+
+	-- loops=-1 는 반복 재생
+	local bgMusicChannel1 = audio.play(bgMusic1, {loops=-1})
+	-- audio.setVolume(0.3, {channel=bgMusicChannel1})
+
+  
+
 	local gametitle = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
@@ -150,6 +158,7 @@ function scene:create( event )
 				display.remove(objectGroup)
 				composer.removeScene("view15_climbing_the_tree_game_final")
  				composer.setVariable("result", 0)
+ 				audio.stop()
  				composer.gotoScene("view16_climbing_the_tree_game_over")
 			end
 		end
@@ -164,6 +173,10 @@ function scene:create( event )
 
  	local score = 0
 
+ 	local swoosh = audio.loadStream( "soundEffect/움직이는 소리.wav" )
+ 	local walk = audio.loadStream( "soundEffect/walk.mp3" )
+ 	local getSom = audio.loadStream( "soundEffect/get som.mp3" )
+
 
 	function arrowTab( event )
 		x_max = 950
@@ -176,6 +189,7 @@ function scene:create( event )
 		print(cat.x)
 
 		if(event.target.name == "left") then
+			local swooshChannel = audio.play(swoosh)
 			if(x > x_min) then
 				cat.x = x-350
 			end
@@ -183,12 +197,14 @@ function scene:create( event )
 		end
 
 		if(event.target.name == "right") then
+			local swooshChannel = audio.play(swoosh)
 			if(x < x_max) then
 				cat.x = x+350
 			end
 		end
 
 		if(event.target.name == "top") then
+			local walkChannel = audio.play(walk)
 			if(y > y_min) then
 				cat.y = y-20
 			end
@@ -196,6 +212,7 @@ function scene:create( event )
 		end
 
 		if(event.target.name == "down") then
+			local walkChannel = audio.play(walk)
 			if(y < y_max) then
 				cat.y = y+20
 			end
@@ -212,6 +229,7 @@ function scene:create( event )
 				display.remove(item[i]) -- 당근 삭제하기
 
 				score = score + 1
+				local getSomChannel = audio.play(getSom)
 
 				if (score == 1) then
 					display.remove(itemFind[1])
@@ -246,6 +264,7 @@ function scene:create( event )
 					display.remove(cat)
 					composer.removeScene("view15_climbing_the_tree_game_final")
  					composer.setVariable("result", 1)
+ 					audio.stop()
  					composer.gotoScene("view16_climbing_the_tree_game_over")
 				end
 			end
@@ -362,6 +381,25 @@ function scene:create( event )
 
 	sceneGroup:insert(section)
 	sceneGroup:insert(script)
+
+
+	-- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    --샘플 볼륨 이미지
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
+
+    sceneGroup:insert(volumeButton)
+
+
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "volumeControl", options )
+    end
+    volumeButton:addEventListener("tap",setVolume)
 
 end
 

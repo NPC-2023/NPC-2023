@@ -58,8 +58,8 @@ function scene:create( event )
 				composer.setVariable("success", "success")
 				audio.pause(home)
 
-				loadedSettings.toal_success = loadedSettings.toal_success + 1
-				loadedSettings.toal_success_names[loadedSettings.toal_success] = "떨어지는 참치캔 받기"
+				loadedSettings.total_success = loadedSettings.total_success + 1
+				loadedSettings.total_success_names[loadedSettings.total_success] = "떨어지는 참치캔 받기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
 				composer.setVariable("fallgame_status", "success")
