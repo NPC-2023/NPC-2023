@@ -139,25 +139,22 @@ function scene:create( event )
     sceneGroup:insert(exit)
     exit.x, exit.y = display.contentWidth*0.70, display.contentHeight*0.37
     exit:addEventListener("touch",goback)
-
-
-
-
-    --게임 타이머 설정--
-    timer.pause("gameTime") --게임 전체 타이머
-    timer.pause("generateTime") --pickGame에서 물건 생성하는 타이머
-    timer.pause("removeTime") --pickGame에서 물건 없애는 타이머
     
+    timer.pauseAll()
+    local gameName = composer.getVariable("gameName")
+    print(gameName)
     local function continueGame(event)
+        --timer.resumeAll() --왜 제대로 실행 안 되는지 모르겠음
         timer.resume("gameTime")
-        timer.resume("generateTime")
         timer.resume("removeTime")
-        composer.removeScene("StopGame")
-        composer.gotoScene("view02_pick_game")
+        timer.resume("generateTime")
+        composer.hideOverlay()
+        composer.gotoScene("gameName")
     end
 
     local function closeGame(event)
-        composer.removeScene("view02_pick_game")
+        audio.pause(bgm_play)
+        composer.removeScene("gameName")
         composer.gotoScene("view05_main_map")
     end
 

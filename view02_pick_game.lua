@@ -15,8 +15,9 @@ function scene:create( event )
 	--physics.start()
 	--physics.setDrawMode("hybrid")
 	loadedEndings = loadsave.loadTable( "endings.json" )
-	audio.pause(titleMusic)
-	
+
+	composer.setVariable("gameName", "view02_pick_game")
+
 	local background = display.newImageRect("image/pick/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 	background.alpha = 0.5
@@ -54,12 +55,17 @@ function scene:create( event )
 	time:setFillColor(1, 0, 0)
 	time.alpha = 0
 	sceneGroup:insert(time)
+	
+	local musicoption = { 
+    	loops = -1
+	}
 
-	local home1 = audio.loadStream("music/music2.mp3")
+	local pickGame_bgm = audio.loadStream("music/music2.flac")
+	local bgm_play = audio.play(pickGame_bgm, musicoption)
+
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
  	--sceneGroup:insert(home)
 
- 	print(composer.getVariable("score1"))
 
 	local function pagemove()
 		timer.cancel(timer1)
@@ -72,7 +78,7 @@ function scene:create( event )
 			composer.setVariable("pickgame_status", "success")
 			print(composer.getVariable("pickgame_status"))
 		end	
-		audio.pause(home1)
+		audio.pause(bgm_play)
 		composer.removeScene("view02_pick_game")
 		composer.gotoScene("view02_pick_game_over")
 	end
@@ -81,7 +87,6 @@ function scene:create( event )
 	local bomb = audio.loadSound("soundEffect/bomb.wav")
 	local error = audio.loadSound("soundEffect/error.mp4")
 	local function tapEventListener(event)	
-    	audio.setVolume(0.2)
 		if (event.target.type == "food") then
 			audio.play(tapSound)
 			score = score + 1
@@ -141,26 +146,28 @@ function scene:create( event )
     volumeButton.x,volumeButton.y = display.contentWidth * 0.9, display.contentHeight * 0.4
     volumeButton.alpha = 0
 	sceneGroup:insert(volumeButton)
-
+   	
+   	local options = {
+        isModal = true
+    }
     --샘플볼륨함수--
     local function setVolume(event)
+    	--audio.pause(bgm_play)
         composer.showOverlay( "StopGame", options )
     end
-    volumeButton:addEventListener("tap",setVolume)
+    volumeButton:addEventListener("tap", setVolume)
 
 
 	--------------게임 시작--------------
 	local function counter( event )
-		audio.resume(home1)
  		time.text = time.text - 1
- 			print(time.text)
+ 		print(time.text)
 	 	if(time.text == "-1") then
 	 		time.alpha = 0
 	 		pagemove()
  		end
  	end  
  	local function playGame(event) 	
- 		audio.play(home1)
  		timer1 = timer.performWithDelay(1000, counter, 21, "gameTime")
  		time.alpha = 1
  		background.alpha = 1
@@ -172,16 +179,6 @@ function scene:create( event )
 		script.alpha = 0
 		timer2 = timer.performWithDelay(900, generate, 30, "generateTime")
 	end
-
-
-	local options1 = {
-        isModal = true
-    }
-
- 	local function showStop(event) 
- 		audio.pause(home1)
-      	composer.showOverlay( "stopGame", options1 )
-    end
 
 	section:addEventListener("tap", playGame)
 end
