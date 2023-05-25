@@ -15,7 +15,7 @@ function scene:create( event )
 	--physics.start()
 	--physics.setDrawMode("hybrid")
 	loadedEndings = loadsave.loadTable( "endings.json" )
-
+	audio.pause(titleMusic)
 	
 	local background = display.newImageRect("image/pick/background.png",display.contentWidth, display.contentHeight) ---배경
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
@@ -55,7 +55,7 @@ function scene:create( event )
 	time.alpha = 0
 	sceneGroup:insert(time)
 
-	local home = audio.loadStream("music/music2.mp3")
+	local home1 = audio.loadStream("music/music2.mp3")
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
  	--sceneGroup:insert(home)
 
@@ -69,8 +69,10 @@ function scene:create( event )
 			composer.setVariable("score1", -1)
 		else
 			composer.setVariable("score1", 5)
+			composer.setVariable("pickgame_status", "success")
+			print(composer.getVariable("pickgame_status"))
 		end	
-		audio.pause(home)
+		audio.pause(home1)
 		composer.removeScene("view02_pick_game")
 		composer.gotoScene("view02_pick_game_over")
 	end
@@ -149,7 +151,7 @@ function scene:create( event )
 
 	--------------게임 시작--------------
 	local function counter( event )
-		audio.resume(home)
+		audio.resume(home1)
  		time.text = time.text - 1
  			print(time.text)
 	 	if(time.text == "-1") then
@@ -158,7 +160,7 @@ function scene:create( event )
  		end
  	end  
  	local function playGame(event) 	
- 		audio.play(home)
+ 		audio.play(home1)
  		timer1 = timer.performWithDelay(1000, counter, 21, "gameTime")
  		time.alpha = 1
  		background.alpha = 1
@@ -168,7 +170,7 @@ function scene:create( event )
 		showScore.alpha = 1
 		section.alpha = 0
 		script.alpha = 0
-		timer2 = timer.performWithDelay(890, generate, 30, "generateTime")
+		timer2 = timer.performWithDelay(900, generate, 30, "generateTime")
 	end
 
 
@@ -177,7 +179,7 @@ function scene:create( event )
     }
 
  	local function showStop(event) 
- 		audio.pause(home)
+ 		audio.pause(home1)
       	composer.showOverlay( "stopGame", options1 )
     end
 

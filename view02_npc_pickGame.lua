@@ -145,6 +145,7 @@ function scene:create( event )
 			scriptGroup:insert(game_click)
 			objectGroup:insert(scriptGroup)
 
+
 			gossip_click:addEventListener("tap", function() --대화 클릭 시 페이지 이동
 				if(composer.getVariable("talk4_status") == "fin") then
 					script.text = "이미 대화를 끝냈습니다."
@@ -155,6 +156,7 @@ function scene:create( event )
 			end)
 
 			game_click:addEventListener("tap", function() 
+				print(composer.getVariable("pickgame_status"))
 				if(composer.getVariable("pickgame_status") == "success") then
 					script.text = "이미 게임을 끝냈습니다."
 				else 
@@ -195,6 +197,8 @@ function scene:create( event )
 		speech.size = 20
 		speech:setFillColor(0)
 
+		print(composer.getVariable("pickgame_status"))
+		print(composer.getVariable("talk4_status"))
 		if(composer.getVariable("pickgame_status") ~= "success" or composer.getVariable("talk4_status") ~= "fin") then
 			gossipOrGame()
 		end
@@ -208,7 +212,6 @@ function scene:create( event )
 	loadsave.saveTable(loadedSettings,"settings.json")
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
-	game_click:addEventListener("tap", acceptQuest)
 	map:addEventListener("tap", goBackToMap)
 
 
