@@ -64,7 +64,6 @@ function scene:create( event )
 		j = j + 1
 
 		if j == 5 then
-			loadedSettings.hiddenQuest[loadedSettings.hidden_index] = true
 			loadedSettings.openHiddenQuest = true
 			composer.removeScene("hiddenQuest")
 			--audio.pause(tutorialMusic)

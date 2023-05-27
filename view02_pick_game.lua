@@ -75,8 +75,6 @@ function scene:create( event )
 			composer.setVariable("score1", -1)
 		else
 			composer.setVariable("score1", 5)
-			composer.setVariable("pickgame_status", "success")
-			print(composer.getVariable("pickgame_status"))
 		end	
 		audio.pause(bgm_play)
 		composer.removeScene("view02_pick_game")

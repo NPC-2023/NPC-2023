@@ -96,20 +96,28 @@ function scene:create( event )
 	}
 
 	--loadedSettings.total_success = 3
+	--print(loadedSettings.today_success)
 	if(loadedSettings.total_success ~= 0 and loadedSettings.total_success % 4 == 0) then
-		composer.showOverlay("hiddenQuest", options1)
+		if(loadedSettings.openHiddenQuest == false and loadedSettings.hiddenQuest_flag == true) then
+			composer.showOverlay("hiddenQuest", options1)
+		end
+	else
+		loadedSettings.hiddenQuest_flag = true
 	end
 
 	--오늘 게임 4개가 끝나면 fade되고 발자국, 게임성공횟수 리셋
-	if(loadedSettings.today_success == 4) then
-		composer.gotoScene( "view05_main_map" , options1)
-	end
+	--if(loadedSettings.today_success == 4) then
+	--	composer.gotoScene( "view05_main_map" , options1)
+	---end
 	
 
 	print(loadedSettings.total_success)
 	--if(questedListGet == nil or #questedListGet < 2) then
 	if(loadedSettings.total_success < 5) then
 		print("봄")
+		if(loadedSettings.get_clothes[1] ~= true) then
+			loadedSettings.clothes[1] = true
+		end
 		background = display.newImageRect("image/map/봄맵.png", display.contentWidth, display.contentHeight)
 
 		for i = 1, 8 do 
@@ -119,6 +127,12 @@ function scene:create( event )
 	else
 		if(loadedSettings.total_success >= 4 or loadedSettings.total_success < 8) then
 			print("4개이상 성공 / 계절 바꿈(여름)")
+			if(loadedSettings.get_clothes[2] ~= true) then
+				loadedSettings.clothes[2] = true
+			end
+			if(loadedSettings.get_clothes[3] ~= true) then
+				loadedSettings.clothes[3] = true
+			end
 			-- 백그라운드 변경
 			background = display.newImageRect("image/map/여름맵.png", display.contentWidth, display.contentHeight)
 
@@ -129,6 +143,12 @@ function scene:create( event )
 
 		elseif(loadedSettings.total_success >= 8 or loadedSettings.total_success < 12)then
 			print("8개이상 성공 / 계절 바꿈(가을)")
+			if(loadedSettings.get_clothes[4] ~= true) then
+				loadedSettings.clothes[4] = true
+			end
+			if(loadedSettings.get_clothes[5] ~= true) then
+				loadedSettings.clothes[5] = true
+			end
 			background = display.newImageRect("image/map/가을맵.png", display.contentWidth, display.contentHeight)
 
 			for i = 1, 8 do 
@@ -137,6 +157,9 @@ function scene:create( event )
 	 		end
 		else
 			print("12개이상 성공 / 계절 바꿈(겨울)")
+			if(loadedSettings.get_clothes[6] ~= true) then
+				loadedSettings.clothes[6] = true
+			end
 			background = display.newImageRect("image/map/겨울맵.png", display.contentWidth, display.contentHeight)
 
 			for i = 1, 8 do 
@@ -241,19 +264,9 @@ function scene:create( event )
 	building[10].x, building[10].y=display.contentWidth*0.94, display.contentHeight*0.9
 	building[10].name="퀘스트아이콘"
 
-	local postbox = display.newImageRect("image/map/우체통.png", 150, 150)
-	postbox.x, postbox.y = display.contentWidth*0.85, display.contentHeight*0.88
-	postbox.name = "우체통"
-
-	local options = {
-        isModal = true
-    }
-
- 	local function showPostBox(event)
-        composer.showOverlay( "openPostbox", options)
-    end
-	postbox:addEventListener("tap", showPostBox)
-
+	building[11] = display.newImageRect(buildingGroup, "image/map/우체통.png", 150, 150)
+	building[11].x, building[11].y = display.contentWidth*0.85, display.contentHeight*0.88
+	building[11].name = "우체통"
 
 
 	--[[local function gotoCheckMsg( event )
@@ -322,6 +335,10 @@ function scene:create( event )
 
 	local open_paper = audio.loadStream( "soundEffect/snd_use_map.wav" )
 
+	local options1 = {
+        isModal = true
+    }
+
 -- 리스너 함수 생성
 	local function touch_ui (event)
 		if event.phase == "began" then
@@ -338,23 +355,33 @@ function scene:create( event )
 				composer.setVariable("questedListGet", questedListGet)
 				local openPaperChannel = audio.play(open_paper)
 				composer.showOverlay( "view06_main_map2", options )
+			elseif name == "우체통" then
+				composer.showOverlay( "openPostbox", options1)
 			else
+				print("엥?")
+				print(loadedSettings.hidden_index)
 				composer.setVariable("name", name)
-				-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
-				--composer.showOverlay( "view06_main_map1", options )
-				composer.removeScene("view05_main_map")
-				composer.gotoScene("view06_main_map1")
+				if(loadedSettings.openHiddenQuest == true) then 
+					if(loadedSettings.buildings_index[loadedSettings.hidden_index] == name) then
+						composer.removeScene("view05_main_map")
+						composer.gotoScene("view06_main_map1")
+					end
+				else
+					-- showOverlay로 하면 view05_main_map 처음부터 실행시킬 수 X
+					--composer.showOverlay( "view06_main_map1", options )
+					composer.removeScene("view05_main_map")
+					composer.gotoScene("view06_main_map1")
+				end
 			end
 		end
 	end
 
 	sceneGroup:insert(background)
-	sceneGroup:insert(postbox)
 	sceneGroup:insert(buildingGroup)
 	sceneGroup:insert(catSolesGroup)
 
 -- 리스너 추가
-	for i=1, 10 do
+	for i=1, 11 do
 		building[i]:addEventListener("mouse",bigbig)
 		building[i]:addEventListener("touch",touch_ui)
 		--building[i]:addEventListener("tap", gotoCheckMsg)

@@ -189,10 +189,9 @@ function scene:create( event )
     				custom2 = "image/custom/투명.png",
     				clothesFlag = 0,
     				--히든퀘스트
-       				hiddenQuest = { false, false, false, false, false, false, false, false },
        				openHiddenQuest = false,
        				hidden_index = 0,
-       				hidden_flag = false,
+       				hiddenQuest_flag = true
 				}
 				loadsave.saveTable( gameSettings, "settings.json" )
 				

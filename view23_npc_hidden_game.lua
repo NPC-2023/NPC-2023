@@ -99,7 +99,7 @@ function scene:create( event )
 		-- composer.setVariable("can_cnt_global", tmp + 1)
 
 		loadedSettings.openHiddenQuest = false
-		loadedSettings.buildings_index[loadedSettings.hidden_index] = false
+		loadedSettings.hiddenQuest_flag = false
 
 		speechbubble_exmark.alpha = 0
 		speech.alpha = 0
