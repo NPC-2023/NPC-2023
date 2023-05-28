@@ -86,9 +86,10 @@ function scene:create( event )
 		loadedSettings.talk[7] = loadedSettings.talk[7] + 1
 	end
 
-			--오늘 완수한 게임 개수가 4면 성공플래그 리셋
-	if(loadedSettings.today_success == 4) then
+	--오늘 완수한 게임 개수가 4면 성공플래그 리셋
+	if(loadedSettings.total_success % 4 == 0) then
 		composer.setVariable("food_status", "renew")
+		composer.setVariable("talk7_status", "renew")
 	end
 
 

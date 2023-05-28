@@ -38,6 +38,11 @@ function scene:create( event )
 
 	print("히든 게임 오픈")
 
+	--성공플래그리셋
+	if(loadedSettings.total_success % 5 == 0) then
+		composer.setVariable("hiddengame_status", "renew")
+	end
+
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
 		speechbubble_exmark.alpha = 0

@@ -79,14 +79,16 @@ function scene:create( event )
 	-- times = loadedSettings.talk[3]
 
 	if(composer.getVariable("talk3_status") == "fin") then
-		loadedSettings.talk[3] = 0 --0으로 초기화하기 위한 임시 코드
+		-- loadedSettings.talk[3] = 0 --0으로 초기화하기 위한 임시 코드
 		loadedSettings.talk[3] = loadedSettings.talk[3] + 1
 	end
 
 	
 	--오늘 완수한 게임 개수가 4면 성공플래그 리셋
-	if(loadedSettings.today_success == 4) then
+	if(loadedSettings.total_success % 4 == 0) then
 		composer.setVariable("fishgame_status", "renew")
+		print(composer.getVariable("fishgame_status").. "성공플래그확인")
+		composer.setVariable("talk3_status", "renew")
 	end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)

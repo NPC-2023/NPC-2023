@@ -40,6 +40,10 @@ function scene:create( event )
 	-- background.x, background.y=display.contentWidth/2, display.contentHeight/2
 	-- sceneGroup:insert(background)
 
+	for k, v in pairs(loadedSettings.talk) do
+		print(k, v)
+	end
+
 	-- 리스너 함수 (시간)
 	function getDate(date)
 		--print("설정 파일에 저장된 일: ", date.day, "일")
@@ -282,22 +286,6 @@ function scene:create( event )
     	print(options.params.targetName)
 		composer.showOverlay("showGotoCheckMsg", options)
 	end]]
-
-    print("@@@@@test.." .. loadedSettings.days)
-
-    -- 화면전환 이펙트
-	local options={
-		effect = "fade",
-		time = 4000
-	}
-
-    if(loadedSettings.days == 16) then --1일째에 엔딩. day는 히든퀘 깨면 플러스. (0부터 시작)
-        composer.removeScene("view06_main_map1")
-        composer.gotoScene("ending", options)
-    end
-
-     loadsave.saveTable(loadedSettings,"settings.json")
-
 
 -- 마을 맵 마을 객체 생성.
 	local click1 = audio.loadStream( "music/스침.wav" )

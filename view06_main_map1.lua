@@ -40,6 +40,20 @@ function scene:create( event )
     -- background.x, background.y=display.contentWidth/2, display.contentHeight/2
     -- sceneGroup:insert(background)
 
+    -- 화면전환 이펙트
+    local options={
+        effect = "fade",
+        time = 4000
+    }
+
+    if(loadedSettings.total_success == 3) then --1일째에 엔딩. day는 히든퀘 깨면 플러스. (0부터 시작)
+        composer.removeScene("view06_main_map1")
+        composer.gotoScene("ending", options)
+    end
+
+     loadsave.saveTable(loadedSettings,"settings.json")
+
+
     -- 리스너 함수 (시간)
     function getDate(date)
         --print("설정 파일에 저장된 일: ", date.day, "일")
@@ -90,8 +104,52 @@ function scene:create( event )
     local background
     --loadedSettings.total_success = 4
     --loadedSettings.total_success = 4
-    print(loadedSettings.total_success)
+    print(loadedSettings.total_success .. "total_success print")
     --if(questedListGet == nil or #questedListGet < 2) then
+    if(loadedSettings.total_success % 4 == 0) then
+        --4번 게임 진행시 게임진행도 리셋
+        composer.setVariable("food_status", "renew")
+        composer.setVariable("fallgame_status", "renew")
+        composer.setVariable("pickgame_status", "renew")
+        composer.setVariable("mousegame_status", "renew")
+        composer.setVariable("jumpgame_status", "renew")
+        composer.setVariable("stuId_status", "renew")
+        composer.setVariable("climb_status", "renew")
+        composer.setVariable("boongmake_status", "renew")
+        composer.setVariable("frontgategame_status", "renew")
+        composer.setVariable("moneygame_status", "renew")
+        composer.setVariable("fishgame_status", "renew")
+        --4번 게임 진행시 대화여부 리셋
+        for i = 1,8 do
+        composer.setVariable("talk"..i.."_status", "renew")
+        end
+    end
+
+    --한 건물당 게임 두개일 경우 대화 여부 겹치지 않게함
+    --예지관
+    if(composer.getVariable("mousegame_status") == "success" and composer.getVariable("stuId_status") ~= "success") then
+        composer.setVariable("talk8_status", "renew")
+    end
+    if(composer.getVariable("stuId_status") == "success" and composer.getVariable("mousegame_status") ~= "success") then
+        composer.setVariable("talk8_status", "renew")
+    end
+    --대학원
+    if(composer.getVariable("moneygame_status") == "success" and composer.getVariable("jumpgame_status") ~= "success") then
+        composer.setVariable("talk5_status", "renew")
+    end
+    if(composer.getVariable("jumpgame_status") == "success" and composer.getVariable("moneygame_status") ~= "success") then
+        composer.setVariable("talk5_status", "renew")
+    end
+    --본관
+    if(composer.getVariable("boongmake_status") == "success" and composer.getVariable("fishgame_status") ~= "success") then
+        composer.setVariable("talk3_status", "renew")
+    end
+    if(composer.getVariable("fishgame_status") == "success" and composer.getVariable("boongmake_status") ~= "success") then
+        composer.setVariable("talk3_status", "renew")
+    end
+
+
+
     if(loadedSettings.total_success < 5) then
         print("봄")
         background = display.newImageRect("image/map/봄맵.png", display.contentWidth, display.contentHeight)
@@ -285,7 +343,6 @@ function scene:create( event )
                 composer.removeScene("view06_main_map1")
                 composer.gotoScene("view23_npc_hidden_game")
             else
-
                 if(name == "인문관")then
                     print("인문관")
                     composer.removeScene("view06_main_map1")
