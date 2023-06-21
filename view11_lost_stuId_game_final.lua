@@ -26,6 +26,7 @@ function scene:create( event )
     audio.play(bgMusic)
     -- audio.setVolume( 0.5 )
 
+	composer.setVariable("gameName", "view11_lost_stuId_game_final")
 
 	local gametitle = display.newImageRect("image/lost_stuId/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
@@ -314,7 +315,7 @@ function scene:create( event )
 		section.alpha=0
 		script.alpha=0
 		-- Runtime:addEventListener( "touch", bearmove)
-		timeAttack = timer.performWithDelay(1000, counter, 16)
+		timeAttack = timer.performWithDelay(1000, counter, 16, "gameTime")
 
 
 		stuId:addEventListener("touch", dragStuId)
@@ -431,11 +432,12 @@ function scene:create( event )
     sceneGroup:insert(volumeButton)
 
 
-    --샘플볼륨함수--
+        --샘플볼륨함수--
     local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
+    	--audio.pause(bgm_play)
+        composer.showOverlay( "StopGame", options )
     end
-    volumeButton:addEventListener("tap",setVolume)
+    volumeButton:addEventListener("tap", setVolume)
 	
 end
 

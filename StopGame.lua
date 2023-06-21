@@ -142,19 +142,19 @@ function scene:create( event )
     
     timer.pauseAll()
     local gameName = composer.getVariable("gameName")
-    print(gameName)
     local function continueGame(event)
         --timer.resumeAll() --왜 제대로 실행 안 되는지 모르겠음
         timer.resume("gameTime")
         timer.resume("removeTime")
         timer.resume("generateTime")
-        composer.hideOverlay()
-        composer.gotoScene("gameName")
+        physics.resume()
+        composer.hideOverlay("stopGame")
+        composer.gotoScene(gameName)
     end
 
     local function closeGame(event)
         audio.pause(bgm_play)
-        composer.removeScene("gameName")
+        composer.removeScene(gameName)
         composer.gotoScene("view05_main_map")
     end
 

@@ -29,7 +29,7 @@ local function onFirstView( event )
     		audio.play(titleMusic)
     		audio.setVolume( 0.5 )
 			composer.gotoScene( "view01_1_start_game" )
-        	-- composer.gotoScene( "view06_main_map1" )
+        	-- composer.gotoScene( "view18_npc_frontgate_game" )
             
     else
         	local titleMusic = audio.loadStream( "music/Trust.mp3" )
@@ -37,7 +37,7 @@ local function onFirstView( event )
     		audio.setVolume( loadedEndings.logValue )
     		--audio.setVolume( 0.5 )
 			composer.gotoScene( "view01_1_start_game" )		
-            -- composer.gotoScene( "view06_main_map1" )
+            -- composer.gotoScene( "view18_npc_frontgate_game" )
             
     end
 	-- composer.gotoScene( "View01_main" ) //무슨파일이지

@@ -14,13 +14,15 @@ function scene:create( event )
 	local sceneGroup = self.view
 	
 	---------1차시-------------
+
+	composer.setVariable("gameName", "view07_schoolfood_game")
 	
 	local gametitle = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
-	local gameName = display.newText("학식 받기 게임", 0, 0, "ttf/Galmuri7.ttf", 45)
-	gameName:setFillColor(0)
-	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
+	local foodGameName = display.newText("학식 받기 게임", 0, 0, "ttf/Galmuri7.ttf", 45)
+	foodGameName:setFillColor(0)
+	foodGameName.x, foodGameName.y=display.contentWidth/2, display.contentHeight*0.65
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
@@ -166,13 +168,27 @@ function scene:create( event )
 
  	-- by 지륜
 	-- 게임 타이틀 클릭 시, 타이머 시작
- 	local timeAttack
+ 	--local timeAttack
+
+ 	local volumeButton = display.newImageRect("image/설정/설정.png", 80, 80)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.08
+   	
+   	local options = {
+        isModal = true
+    }
+    --샘플볼륨함수--
+    local function setVolume(event)
+    	--audio.pause(bgm_play)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap", setVolume)
+
 
 
  	local function scriptremove(event)
 		section.alpha=0
 		script.alpha=0
-		timeAttack = timer.performWithDelay(1000, counter, 31)
+		timeAttack = timer.performWithDelay(1000, counter, 31, "gameTime")
 		hintButton:addEventListener("tap", hintButton)
 	end	
 
@@ -181,7 +197,7 @@ function scene:create( event )
 		section.alpha=1
 		script.alpha=1
 		section:addEventListener("tap", scriptremove)
-		display.remove(gameName)
+		display.remove(foodGameName)
 	end
 
 	gametitle:addEventListener("tap", titleremove)
@@ -195,6 +211,7 @@ function scene:create( event )
  	sceneGroup:insert(time)
  	sceneGroup:insert(hintBbg)
  	sceneGroup:insert(hintButton)
+ 	sceneGroup:insert(volumeButton)
 
 end
 

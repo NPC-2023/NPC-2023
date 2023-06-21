@@ -13,7 +13,8 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-
+	
+	composer.setVariable("gameName", "view03_jump_game")
 	physics.start()
 	--physics.setDrawMode( "hybrid" )
 
