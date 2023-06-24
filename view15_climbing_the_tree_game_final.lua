@@ -29,6 +29,7 @@ function scene:create( event )
 	local bgMusicChannel1 = audio.play(bgMusic1, {loops=-1})
 	-- audio.setVolume(0.3, {channel=bgMusicChannel1})
 
+	composer.setVariable("gameName", "view15_climbing_the_tree_game_final")
   
 
 	local gametitle = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2)
@@ -277,7 +278,7 @@ function scene:create( event )
 
 
 	local function scriptremove(event)
-		timer1=timer.performWithDelay(3500, spawn, 0)
+		timer1=timer.performWithDelay(3500, spawn, 0, "gameTime")
 		section.alpha=0
 		script.alpha=0
 		pagecheck = 1
@@ -383,6 +384,11 @@ function scene:create( event )
 	sceneGroup:insert(script)
 
 
+	local function stopGame(event)
+		physics.start()
+	end
+
+	timer2=timer.performWithDelay(500, stopGame, 0, "gameTime")
 	-- showoverlay 함수 사용 option
     local options = {
         isModal = true
@@ -395,11 +401,14 @@ function scene:create( event )
     sceneGroup:insert(volumeButton)
 
 
-    --샘플볼륨함수--
+        --샘플볼륨함수--
     local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
+    	--audio.pause(bgm_play)
+  		physics.pause()
+        composer.showOverlay( "StopGame", options )
     end
-    volumeButton:addEventListener("tap",setVolume)
+    volumeButton:addEventListener("tap", setVolume)
+
 
 end
 

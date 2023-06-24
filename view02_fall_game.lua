@@ -14,6 +14,8 @@ function scene:create( event )
 	local sceneGroup = self.view
 	physics.start()
 	loadedEndings = loadsave.loadTable( "endings.json" )
+
+	composer.setVariable("gameName", "view02_fall_game")
 	
 	local gametitle = display.newImageRect("image/fall/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
@@ -71,25 +73,30 @@ function scene:create( event )
 	script.alpha=0
 	sceneGroup:insert(script)
 
+	local function stopGame(event)
+		physics.start()
+	end
+	
+	timer2=timer.performWithDelay(500, stopGame, 0, "gameTime")
 
 	-----음악
-
     -- showoverlay 함수 사용 option
     local options = {
         isModal = true
     }
 
-    --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
-    sceneGroup:insert(volumeButton)
-
-
+	sceneGroup:insert(volumeButton)
+   	
     --샘플볼륨함수--
     local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
+    	--audio.pause(bgm_play)
+    	physics.pause()
+        composer.showOverlay( "StopGame", options )
     end
-    volumeButton:addEventListener("tap",setVolume)
+    volumeButton:addEventListener("tap", setVolume)
+
 
     local home = audio.loadStream( "music/music1.mp3" )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
@@ -97,9 +104,6 @@ function scene:create( event )
 
 
     -------------
-
-
-
 
 
 	local objects = {"1", "2", "3", "4", "5"}
@@ -110,6 +114,7 @@ function scene:create( event )
 
 
 	local function spawn()
+		physics.start()
 		local objIdx = math.random(#objects)
 		local objName = objects[objIdx]
 		object[i]= display.newImageRect(objectGroup,"image/fall/can" .. objName .. ".png", 80, 80)
@@ -137,7 +142,7 @@ function scene:create( event )
 	end
 
 	local function scriptremove(event)
-		timer1=timer.performWithDelay(500, spawn, 0)
+		timer1=timer.performWithDelay(500, spawn, 0, "gameTime")
 		section.alpha=0
 		script.alpha=0
 		Runtime:addEventListener( "touch", bearmove)

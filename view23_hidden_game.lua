@@ -12,9 +12,14 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	local loadedSettings = loadsave.loadTable( "settings.json" )
+	local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    	volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
 
 	--게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
 	function startscene()
+
+		composer.setVariable("gameName", "view23_hidden_game")
+
 		local gametitle = display.newImage("image/hidden/title.png")
 		gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
@@ -35,13 +40,23 @@ function scene:create( event )
 		script.x, script.y = display.contentWidth/2, display.contentHeight*0.7
 		script.alpha=0
 
+   	
+   		local options = {
+    	    isModal = true
+   		 }
+   		 --샘플볼륨함수--
+    	local function setVolume(event)
+    		--audio.pause(bgm_play)
+      		composer.showOverlay( "StopGame", options )
+   	 	end
+   		 volumeButton:addEventListener("tap", setVolume)
 		
 		sceneGroup:insert(gametitle)
 		sceneGroup:insert(title)
 		sceneGroup:insert(titleBackground)
 		sceneGroup:insert(section)
 		sceneGroup:insert(script)
-
+		
 		local function scriptremove(event)
 			timer1=timer.performWithDelay(500, spawn, 0)
 			section.alpha=0
@@ -109,6 +124,7 @@ function scene:create( event )
 	 	sceneGroup:insert(AIpaper)
 	 	sceneGroup:insert(AIscissors)
 	 	sceneGroup:insert(AIscissors)
+	 	sceneGroup:insert(volumeButton)
 
 	 	local winText = display.newText('바위 가위 보 중 하나를 선택해주세요', display.contentCenterX, display.contentCenterY-300)
 	 	winText.size = 50

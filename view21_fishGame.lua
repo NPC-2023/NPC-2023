@@ -4,6 +4,8 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
+	composer.setVariable("gameName", "view21_fishGame")
+
 	local background = display.newImageRect("image/fishing/mainbd_back.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
@@ -44,6 +46,19 @@ function scene:create( event )
  	splash.alpha = 0
 
 	local objectGroup = display.newGroup()
+
+	local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
+   	
+   	local options = {
+        isModal = true
+    }
+    --샘플볼륨함수--
+    local function setVolume(event)
+    	--audio.pause(bgm_play)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap", setVolume)
 
 	local function scriptremove(event)
 		timer1=timer.performWithDelay(500, 0)
@@ -151,6 +166,7 @@ function scene:create( event )
 
 	sceneGroup:insert(background)
 	sceneGroup:insert(objectGroup)
+	sceneGroup:insert(volumeButton)
 
 	gametitle:addEventListener("tap", titleremove)
 	fish[1]:addEventListener("tap", tapEventListener)		

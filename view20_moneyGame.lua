@@ -15,6 +15,8 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
+	composer.setVariable("gameName", "view20_moneyGame")
+
 	local background = display.newImageRect("image/cafeteria/store.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
@@ -68,6 +70,20 @@ function scene:create( event )
 	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.7, "font/DOSGothic.ttf", 50)
 	buy:setFillColor(1)
 
+
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
+   	
+   	local options = {
+        isModal = true
+    }
+    --샘플볼륨함수--
+    local function setVolume(event)
+    	--audio.pause(bgm_play)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap", setVolume)
+
 	local function resetTotalListener( event )
 		totalScript.text = "0"
 		total = 0
@@ -117,6 +133,7 @@ function scene:create( event )
 
 	sceneGroup:insert(background)
  	sceneGroup:insert(objectGroup)
+ 	sceneGroup:insert(volumeButton)
 end
 
 function scene:show( event )
