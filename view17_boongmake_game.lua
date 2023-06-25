@@ -194,6 +194,13 @@ function scene:create( event )
 	 	time.size = 40
 	 	time:setFillColor(0)
 
+	 	local home = audio.loadStream( "music/music11.mp3" )
+    	audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
+    	local musicOption = { 
+    		loops = -1
+		}
+		audio.play(home, musicOption)
 	 	local tapSound = audio.loadSound("music/tapSound.wav")
 	 	local success = audio.loadSound("music/success.wav")
 	 	local fail = audio.loadSound("music/fail.mp3")

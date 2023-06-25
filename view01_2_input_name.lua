@@ -69,6 +69,9 @@ function scene:create( event )
 	sceneGroup:insert(showText1)
 
 
+    local musicOption = { 
+    	loops = -1
+	}
 
 	--이름 입력을 위한 텍스트상자 생성--
 	local defaultField
@@ -232,8 +235,8 @@ function scene:create( event )
 				--composer.gotoScene( "tutorial00",options)
 				audio.pause( titleMusic )
 
-				tutorialMusic = audio.loadStream( "music/music4.mp3" )
-	    		audio.play(tutorialMusic)
+				tutorialMusic = audio.loadStream( "music/music4_1.wav" )
+	    		audio.play(tutorialMusic, musicOption)
 	    		--audio.setVolume( loadedEndings.logValue )
 				composer.gotoScene( "tutorial00" ,options)
 			end

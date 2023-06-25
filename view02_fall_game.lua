@@ -96,11 +96,15 @@ function scene:create( event )
         composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap", setVolume)
+	
 
+	local musicoption = { 
+    	loops = -1
+	}
 
     local home = audio.loadStream( "music/music1.mp3" )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
-    audio.play(home)
+    audio.play(home, musicoption)
 
 
     -------------

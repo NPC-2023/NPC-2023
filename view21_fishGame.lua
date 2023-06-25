@@ -47,6 +47,15 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
+ 	local home = audio.loadStream( "music/music15.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
+    local musicOption = { 
+    	loops = -1
+	}
+	
+	audio.play(home, musicOption)
+	
 	local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
    	
@@ -144,9 +153,10 @@ function scene:create( event )
 							text:setFillColor(0)
 							
 							timer.performWithDelay( 1000, function() 
+								audio.pause(home)
 								text.alpha = 0
 								gametitle.alpha = 0
-	
+				
 								composer.removeScene("view21_fishGame")
 								composer.gotoScene("view21_npc_fishGame")
 							end )

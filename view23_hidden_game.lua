@@ -40,6 +40,14 @@ function scene:create( event )
 		script.x, script.y = display.contentWidth/2, display.contentHeight*0.7
 		script.alpha=0
 
+		local home = audio.loadStream( "music/music8.ogg" )
+    	audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
+    	local musicOption = { 
+    		loops = -1
+		}
+	
+		audio.play(home, musicOption)
    	
    		local options = {
     	    isModal = true
@@ -248,6 +256,7 @@ function scene:create( event )
 
 	--게임 엔딩---------------------------------------------------------------------------------------------------------------------------------------------------
 	function endingscene()
+		audio.pause(home)
 		local endingBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
 		endingBackground:setFillColor(0)
 

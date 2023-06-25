@@ -67,6 +67,9 @@ function scene:create( event )
  	time:setFillColor(0)
  	time.alpha = 0.5
 
+ 	local home = audio.loadStream( "music/music13.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
     ----힌트 버튼 
     local hintBbg = display.newImageRect("image/schoolfood/hintButton.png", 250, 250)--힌트버튼 배경  
  	hintBbg.x, hintBbg.y = display.contentWidth*0.07, display.contentHeight*0.05 
@@ -178,14 +181,16 @@ function scene:create( event )
     }
     --샘플볼륨함수--
     local function setVolume(event)
-    	--audio.pause(bgm_play)
         composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap", setVolume)
-
-
+	
+	local musicOption = { 
+    	loops = -1
+	}
 
  	local function scriptremove(event)
+ 		audio.play(home, musicOption)
 		section.alpha=0
 		script.alpha=0
 		timeAttack = timer.performWithDelay(1000, counter, 31, "gameTime")

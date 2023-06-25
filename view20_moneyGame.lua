@@ -70,6 +70,13 @@ function scene:create( event )
 	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.7, "font/DOSGothic.ttf", 50)
 	buy:setFillColor(1)
 
+ 	local home = audio.loadStream( "music/music14.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
+    local musicOption = { 
+    	loops = -1
+	}
+	audio.play(home, musicOption)
 
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
@@ -79,7 +86,6 @@ function scene:create( event )
     }
     --샘플볼륨함수--
     local function setVolume(event)
-    	--audio.pause(bgm_play)
         composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap", setVolume)
@@ -101,7 +107,7 @@ function scene:create( event )
 			objectGroup:insert(text)
 			--다시 퀘스트 수락 화면으로 돌아옴
 			timer.performWithDelay( 1000, function() 
-
+				audio.pause(home)
 				loadedSettings.total_success = loadedSettings.total_success + 1
 				loadedSettings.total_success_names[loadedSettings.total_success] = "매점에서 간식 사기"
 				loadsave.saveTable(loadedSettings,"settings.json")
