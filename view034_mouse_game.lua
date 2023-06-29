@@ -11,6 +11,7 @@ function scene:create( event )
 	
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
+	composer.setVariable("gameName", "view034_mouse_game")
 	
 	local background = display.newImageRect("image/mouse/background.png",display.contentWidth, display.contentHeight)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -131,32 +132,6 @@ function scene:create( event )
 	sceneGroup:insert(h1)
 
 
-	-----음악
-
-    -- showoverlay 함수 사용 option
-    local options = {
-        isModal = true
-    }
-
-    --샘플 볼륨 이미지
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.4
-    sceneGroup:insert(volumeButton)
-
-    --샘플볼륨함수--
-    local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
-    end
-    volumeButton:addEventListener("tap",setVolume)
-
-    local home = audio.loadStream( "music/Trust.mp3" )
-    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
-    audio.play(home)
-
-
-    -------------
-
-
 	-- 클릭 시 해머가 기울어짐
 	function move(event)
 		if (event.phase == "began") then
@@ -203,19 +178,23 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.35
     sceneGroup:insert(volumeButton)
 
 
     --샘플볼륨함수--
     local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
+        composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap",setVolume)
 
-    local home = audio.loadStream( "music/music5.mp3" )
+	local musicOption = { 
+    	loops = -1
+	}
+
+    local home = audio.loadStream( "music/music11.mp3" )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
-    audio.play(home)
+    audio.play(home, musicOption)
 
 
     -------------
@@ -420,13 +399,13 @@ function scene:create( event )
 				dudu_hit1[i] = nil
 				dudu_hit2[i] =nil
 			end
-
+			audio.pause(home)
 			composer.removeScene("view034_mouse_game")
 			composer.gotoScene("view034_mouse_game_over")
 		end
 	end
 	 
-	timer.performWithDelay( 1000, timeAttack, 0 ,"attack")
+	timer.performWithDelay( 1000, timeAttack, 0 ,"gameTime")
 
 end
 

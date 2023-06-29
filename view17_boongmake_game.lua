@@ -194,7 +194,7 @@ function scene:create( event )
 	 	time.size = 40
 	 	time:setFillColor(0)
 
-	 	local home = audio.loadStream( "music/music11.mp3" )
+	 	local home = audio.loadStream( "music/music3.ogg" )
     	audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
 
     	local musicOption = { 
