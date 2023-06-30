@@ -284,8 +284,8 @@ function scene:create( event )
                 catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
                 catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.35, display.contentHeight*0.52
 
-                building[6].fill.effect = "filter.desaturate"
-                building[6].fill.effect.intensity = 0.7
+                building[5].fill.effect = "filter.desaturate"
+                building[5].fill.effect.intensity = 0.7
             end
         end
     end
