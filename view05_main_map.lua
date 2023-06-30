@@ -390,13 +390,21 @@ function scene:create( event )
     
     sceneGroup:insert(volumeButton)
 
+    -- 2023.06.30 edit by jiruen // 샘플 볼륨 bgm
+    local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
+
+    local function volumeButtonBgm (event)
+        if event.phase == "began" then
+            audio.play(volumeBgm)
+        end
+    end
 
     --샘플볼륨함수--
     local function setVolume(event)
         composer.showOverlay( "volumeControl", options )
     end
     volumeButton:addEventListener("tap",setVolume)
-
+    volumeButton:addEventListener("touch",volumeButtonBgm)
     --[[local home = audio.loadStream( "음악/음악샘플.mp3" )
     audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
     audio.play(home)

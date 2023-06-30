@@ -20,12 +20,18 @@ function scene:create( event )
 	sceneGroup:insert(background)
 
 	local newgame = display.newImageRect("image/게임시작/새로시작.png", 250, 100)
+    newgame.name ="new"
     newgame.x,newgame.y = display.contentWidth * 0.4, display.contentHeight * 0.89
     sceneGroup:insert(newgame)
 
     local loadgame = display.newImageRect("image/게임시작/이어하기.png", 250, 100)
+    loadgame.name ="load"
     loadgame.x,loadgame.y = display.contentWidth * 0.63, display.contentHeight * 0.89
     sceneGroup:insert(loadgame)
+
+    -- 2023.06.30 edit by jiruen // 시작하기, 이어하기 버튼 클릭 시 bgm 
+    local newBtnBgm = audio.loadStream( "soundEffect/619832_시작하기 클릭 시 효과음.wav" )
+    local loadBtnBgm = audio.loadStream( "soundEffect/528862_이어하기 클릭 시 효과음(2).wav" )
 
 
 	-- 엔딩 제이쓴 파일 생성
@@ -58,7 +64,13 @@ function scene:create( event )
         if ((event.target.x-event.x)^2 < 13000) and ((event.target.y-event.y)^2<1700) then
             -- i값을 지정해 놓는 이유는 범위 안에서는 크기가 더 늘어나거나 줄어들지 않고, 소리가 연이어 나오지 않음.
             if i == 0 then
-               -- local backgroundMusicChannel = audio.play(click1)
+                -- 2023.06.30 edit by jiruen // 시작하기, 이어하기 버튼 클릭 시 bgm 추가
+                if (event.target.name == "new") then
+                    audio.play(newBtnBgm)
+                else
+                    audio.play(loadBtnBgm)
+                end
+                -- local backgroundMusicChannel = audio.play(newBtnBgm)
                 event.target.width = event.target.width*1.1
                 event.target.height = event.target.height*1.1
                 i = i + 1
@@ -81,18 +93,27 @@ function scene:create( event )
 
 
 
-
     --샘플 볼륨 이미지
     --volumeButton:addEventListener("mouse",bigbig)
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
     sceneGroup:insert(volumeButton)
 
+    -- 2023.06.30 edit by jiruen // 샘플 볼륨 bgm
+    local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
+
+    local function volumeButtonBgm (event)
+        if event.phase == "began" then
+            audio.play(volumeBgm)
+        end
+    end
+
     --샘플볼륨함수--
     local function setVolume(event)
         composer.showOverlay( "volumeControl", options1 )
     end
     volumeButton:addEventListener("tap",setVolume)
+    volumeButton:addEventListener("touch",volumeButtonBgm)
     --[[audio.pause( titleMusic )
     local home = audio.loadStream( "music/Trust.mp3" )
     audio.setVolume( loadedEnding.logValue )--loadedEndings.logValue
