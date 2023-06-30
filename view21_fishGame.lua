@@ -155,16 +155,19 @@ function scene:create( event )
 						if(total_cnt == 4) then
 							local text = display.newText("성공이다냥 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 							text:setFillColor(0)
-								
+							
+							-- 2023.06.30 edit by jiruen // total_success_names에 추가 및 fishgame_status 변수 넘겨주기
 							loadedSettings.total_success = loadedSettings.total_success + 1
 							loadedSettings.total_success_names[loadedSettings.total_success] = "물고기 사냥"
 							loadsave.saveTable(loadedSettings,"settings.json")
+							composer.setVariable("fishgame_status", "success")
 
 							timer.performWithDelay( 1000, function() 
 								audio.pause(home)
 								text.alpha = 0
 								gametitle.alpha = 0
-				
+								
+
 								composer.removeScene("view21_fishGame")
 								composer.gotoScene("view21_npc_fishGame")
 							end )
