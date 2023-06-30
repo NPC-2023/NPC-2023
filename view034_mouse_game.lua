@@ -193,9 +193,15 @@ function scene:create( event )
 	}
 
     local home = audio.loadStream( "music/music11.mp3" )
+    local hammerO1 = audio.loadStream( "soundEffect/망치_O.mp3" )---1~3째줄 쥐 잡았을 때 
+    local hammerO2 = audio.loadStream( "soundEffect/망치_O.mp3" )---4~6째줄 쥐 잡았을 때 
+    local hammerO3 = audio.loadStream( "soundEffect/망치_O.mp3" )---7~9째줄 쥐 잡았을 때 
+    local hammerX1 = audio.loadStream( "soundEffect/망치_X.mp3" )---쥐 못잡았을 때 
+    local hammerX2 = audio.loadStream( "soundEffect/망치_X.mp3" )---쥐 못잡았을 때 
+    local hammerX3 = audio.loadStream( "soundEffect/망치_X.mp3" )---쥐 못잡았을 때 
+	
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
     audio.play(home, musicOption)
-
 
     -------------
 
@@ -206,11 +212,13 @@ function scene:create( event )
 		local i
 		function popout(event)
 			transition.to(dudu[i],{time=300,y=display.contentHeight/2.78565901-80,tag="down",onComplete=function() interval() end})
+			audio.play( hammerX1 )
 		end
 
 		-- 두더지 때렸을 때
 		function hit_dudu(event)
 			if event.phase == "ended" then
+				audio.play( hammerO1 )
 				score_num = score_num + 1
 				--[[if score_num == 6 then
 					score1 = 10
@@ -260,11 +268,13 @@ function scene:create( event )
 		local i 
 		function popout1(event)
 			transition.to(dudu1[i],{time=300,y=display.contentHeight/1.62738834-80,tag="down1",onComplete=function() interval1() end})
+			audio.play( hammerX2 )
 		end
 
 		-- 두더지 때렸을 때
 		function hit_dudu1(event)
 			if event.phase == "ended" then
+				audio.play( hammerO2 )
 				score_num = score_num + 1
 				--[[if score_num == 6 then
 					score1 = 10
@@ -317,11 +327,13 @@ function scene:create( event )
 		local i 
 		function popout2(event)
 			transition.to(dudu2[i],{time=300,y=display.contentHeight/1.12738834-80,tag="down2",onComplete=function() interval2() end})
+			audio.play( hammerX3 )
 		end
 
 		-- 두더지 때렸을 때
 		function hit_dudu2(event)
 			if event.phase == "ended" then
+				audio.play( hammerO3 ) 
 				score_num = score_num + 1
 				--[[if score_num == 6 then
 					score1 = 10
