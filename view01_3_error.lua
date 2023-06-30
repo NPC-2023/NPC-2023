@@ -41,9 +41,13 @@ function scene:create( event )
 	titleButton.alpha = 0
 	sceneGroup:insert(titleButton)
 
+	-- 2023.06.30 edit by jiruen // bgm 추가
+    local exitBgm = audio.loadStream("soundEffect/388047_설정 닫기 버튼 클릭시 나오는 효과음.wav")
 
 	local function gohome(event)
 		if event.phase == "ended" then
+				-- 2023.06.30 edit by jiruen // 효과음 추가
+				audio.play(exitBgm)
 				composer.removeScene("view01_3_error")
 				exit.alpha=0
 				composer.gotoScene("view01_2_input_name")

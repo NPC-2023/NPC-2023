@@ -121,9 +121,14 @@ function scene:create( event )
 		time = 2000
 	}
 
+	-- 2023.06.30 edit by jiruen // bgm 추가
+    local exitBgm = audio.loadStream("soundEffect/388047_설정 닫기 버튼 클릭시 나오는 효과음.wav")
+
 	local function gotomap(event)
 		if event.phase == "began" then 
 			--event.target.width,event.target.height = 68.82,68.82
+			-- 2023.06.30 edit by jiruen // 효과음 추가
+			audio.play(exitBgm)
 		elseif event.phase == "cancelled" then 
 			event.target.width,event.target.height = 68.82,68.82
 		elseif event.phase == "ended" then
@@ -145,9 +150,16 @@ function scene:create( event )
 
 	local can = 20
 	
+	-- 2023.06.30 edit by jiruen // 확인 버튼 bgm 추가
+    local startNewBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
+
 	local function startNew(event)
 		--색깔 또는 이름을 선택하지 않았을 시 에러 팝업창으로 넘어간다
+
 		if defaultField.text == "" then
+			-- 2023.06.30 edit by jiruen // 효과음 추가
+			audio.play(startNewBgm)
+
 			defaultField:removeSelf()
 			defaultField = 'nil'
 			composer.removeScene("view01_2_input_name")
@@ -241,7 +253,8 @@ function scene:create( event )
 				composer.gotoScene( "tutorial00" ,options)
 			end
 	end
-	titleButton:addEventListener("tap",startNew)	
+	titleButton:addEventListener("tap",startNew)
+
 end
 
 function scene:show( event )
