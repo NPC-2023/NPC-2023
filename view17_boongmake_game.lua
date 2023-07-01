@@ -198,9 +198,11 @@ function scene:create( event )
 		local score = display.newText(0, display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 	 	score.size = 50
 	 	score:setFillColor(0)
+	 	sceneGroup:insert(score)
 	 	local time= display.newText(50, display.contentWidth*0.9-10, display.contentHeight*0.15-10)
 	 	time.size = 40
 	 	time:setFillColor(0)
+	 	sceneGroup:insert(time)
 
 	 	local home = audio.loadStream( "music/music3.ogg" )
     	audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue

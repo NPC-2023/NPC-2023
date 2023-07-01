@@ -119,6 +119,7 @@ function scene:create( event )
 		else
 			text = display.newText("실패다냥", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 			text:setFillColor(1)
+			objectGroup:insert(text)
 		end
 		
 		timer.performWithDelay( 1500, function() 
