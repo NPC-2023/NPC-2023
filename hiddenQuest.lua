@@ -11,6 +11,10 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
+	local background = display.newImage( "image/hiddenQuest/타이틀 배경.png")
+	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	sceneGroup:insert(background)
+
 	local b = {}
 	local bGroup = display.newGroup()
 	local loadedSettings = loadsave.loadTable( "settings.json" )

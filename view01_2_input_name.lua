@@ -192,7 +192,7 @@ function scene:create( event )
   					total_success_names = {}, -- 총 성공한 게임 이름 {}, 
   					today_success = 0, --오늘 성공한 게임 갯수
   					today_talk = 0, --오늘 대화한 횟수
-  					buildings_index = { "백주년", "정문", "본관", "학생관", "대학원", "인문관", "음악관", "예지관" },
+  					buildings_index = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관"},
   					date = os.date( "*t" ),
   					days = 0,
   					--커스텀
