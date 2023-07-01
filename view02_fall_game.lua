@@ -103,6 +103,8 @@ function scene:create( event )
 	}
 
     local home = audio.loadStream( "music/music1.mp3" )
+    local tunaCorrect = audio.loadStream( "soundEffect/참치캔_O.mp3" )
+    local tunaIncorrect = audio.loadStream( "soundEffect/참치캔_X.mp3" )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
     audio.play(home, musicoption)
 
@@ -171,10 +173,12 @@ function scene:create( event )
 	local function onCollision(e)
 		if e.other.name == 'object' then
 			if e.other.type == 'food' then
+				audio.play( tunaCorrect )
 				score = score + 1
 				display.remove(e.other)
 				showScore.text = score
 			else
+				audio.play( tunaIncorrect )
 				score = score-1
 				display.remove(e.other)
 				showScore.text=score

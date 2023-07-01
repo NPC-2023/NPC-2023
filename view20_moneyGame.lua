@@ -70,7 +70,7 @@ function scene:create( event )
 	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.7, "font/DOSGothic.ttf", 50)
 	buy:setFillColor(1)
 
- 	local home = audio.loadStream( "music/music14.mp3" )
+ 	local home = audio.loadStream( "music/music14.wav" )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
 
     local musicOption = { 
@@ -119,6 +119,7 @@ function scene:create( event )
 		else
 			text = display.newText("실패다냥", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 			text:setFillColor(1)
+			objectGroup:insert(text)
 		end
 		
 		timer.performWithDelay( 1500, function() 

@@ -6,9 +6,13 @@
 
 local composer = require( "composer" )
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	composer.setVariable("gameName", "view17_boongmake_game")
 
@@ -39,6 +43,10 @@ function scene:create( event )
 	 			end
 	 		end
 	 	end
+
+	 	loadedSettings.total_success = loadedSettings.total_success + 1
+		loadedSettings.total_success_names[loadedSettings.total_success] = "붕어빵 만들기"
+		loadsave.saveTable(loadedSettings,"settings.json")
 
 	 	composer.setVariable("boongmake_status", "success")
 	 	replay:addEventListener("touch", touchEventListener)
@@ -190,9 +198,11 @@ function scene:create( event )
 		local score = display.newText(0, display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 	 	score.size = 50
 	 	score:setFillColor(0)
+	 	sceneGroup:insert(score)
 	 	local time= display.newText(50, display.contentWidth*0.9-10, display.contentHeight*0.15-10)
 	 	time.size = 40
 	 	time:setFillColor(0)
+	 	sceneGroup:insert(time)
 
 	 	local home = audio.loadStream( "music/music3.ogg" )
     	audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
