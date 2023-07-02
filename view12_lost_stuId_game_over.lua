@@ -72,6 +72,7 @@ function scene:create( event )
 		    -- audio.play(clearBgm)
 		    -- audio.setVolume( 0.5 )
 
+			loadedSettings.money = loadedSettings.money + 3
 			composer.setVariable("successLost", "success")
 			composer.removeScene("view12_lost_stuId_game_over")
 			audio.stop()

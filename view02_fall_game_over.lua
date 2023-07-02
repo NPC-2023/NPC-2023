@@ -56,6 +56,7 @@ function scene:create( event )
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
 				composer.setVariable("success", "success")
+				loadedSettings.money = loadedSettings.money + 3
 				audio.pause(home)
 
 				loadedSettings.total_success = loadedSettings.total_success + 1

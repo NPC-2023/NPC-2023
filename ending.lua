@@ -24,7 +24,7 @@ function scene:create( event )
 	local i, j = 1, 1
 	
 	--가장 대화를 많이한 건물 찾는 코드
-	local biggest = 0
+	local biggest = 1 --biggest = 0 일 경우 대화를 하나도 하지않았을때 오류발생
 	for i = 1, 8 do
 		if(loadedSettings.talk[i] > biggest) then
 			biggest = i

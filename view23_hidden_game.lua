@@ -15,6 +15,14 @@ function scene:create( event )
 	local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     	volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
 
+    local function pagemove()
+		display.remove(sceneGroup)
+		-- display.remove(floor)
+		-- Runtime:removeEventListener("touch", bearmove)
+		-- timer.cancel( timer1 )
+		-- display.remove(cat)
+	end
+
 	--게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
 	function startscene()
 
@@ -169,14 +177,22 @@ function scene:create( event )
 		 		if student.y <= student_yStart - 140 then
 		 			winText.text = '게임에 졌습니다.'
 			 		print("게임에 졌습니다.")
-			 		endingscene()
+			 		pagemove()
+			 		composer.setVariable("hidden_game_status", "fail")
+					audio.pause(explosionSound)
+					composer.removeScene("view23_hidden_game")
+					composer.gotoScene("view23_hidden_game_over")
 			 	elseif cat.y <= cat_yStart - 140 then
 			 		winText.text = '게임에 이겼습니다.'
 			 		print("게임에 이겼습니다.")
 			 		AIrock.alpha = 0
 	 				AIscissors.alpha = 0
 	 				AIpaper.alpha = 0
-			 		endingscene()
+	 				pagemove()
+	 				composer.setVariable("hidden_game_status", "success")
+	 				audio.pause(explosionSound)
+					composer.removeScene("view23_hidden_game")
+					composer.gotoScene("view23_hidden_game_over")		 		
 			 	end
 		 	end
 
@@ -255,46 +271,48 @@ function scene:create( event )
 	end
 
 	--게임 엔딩---------------------------------------------------------------------------------------------------------------------------------------------------
-	function endingscene()
-		audio.pause(home)
-		local endingBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
-		endingBackground:setFillColor(0)
+	--view23_hidden_game_over로 대체
+	-- function endingscene()
+	-- 	audio.pause(home)
+	-- 	local endingBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+	-- 	endingBackground:setFillColor(0)
 
-		local endingText = display.newText("엔딩", display.contentWidth/2, display.contentHeight*0.4)
-	 	endingText.size = 200
-	 	endingText:setFillColor(1)
+	-- 	local endingText = display.newText("엔딩", display.contentWidth/2, display.contentHeight*0.4)
+	--  	endingText.size = 200
+	--  	endingText:setFillColor(1)
 
-	 	local replay = display.newText("다시 하기", display.contentWidth/2, display.contentHeight*0.7)
-		replay.size = 100
-		replay:setFillColor(1)
+	--  	local replay = display.newText("다시 하기", display.contentWidth/2, display.contentHeight*0.7)
+	-- 	replay.size = 100
+	-- 	replay:setFillColor(1)
 
-		sceneGroup:insert(endingBackground)
-		sceneGroup:insert(endingText)
-		sceneGroup:insert(replay)
+	-- 	sceneGroup:insert(endingBackground)
+	-- 	sceneGroup:insert(endingText)
+	-- 	sceneGroup:insert(replay)
 
-	 	local function touchEventListener( event )
-	 		if (event.phase == "began") then 
-	 			if event.target == replay then
-	 				endingBackground.alpha=0
-					endingText.alpha=0
-					replay.alpha=0
-	 				gamescene()
-	 			end
-	 		end
-	 	end
-	 	local function toFront(event) 
-	 		if (event.phase == "began") then 
-				composer.setVariable("hiddengame_status", "success")
-				composer.removeScene("view23_hidden_game")
-				composer.gotoScene("view23_npc_hidden_game")
-				loadedSettings.total_success = 0
-			end
-		end
+	--  	local function touchEventListener( event )
+	--  		if (event.phase == "began") then 
+	--  			if event.target == replay then
+	--  				endingBackground.alpha=0
+	-- 				endingText.alpha=0
+	-- 				replay.alpha=0
+	--  				gamescene()
+	--  			end
+	--  		end
+	--  	end
+	--  	local function toFront(event) 
+	--  		if (event.phase == "began") then 
+	--  			loadedSettings.money = loadedSettings.money + 3
+	-- 			composer.setVariable("hiddengame_status", "success")
+	-- 			composer.removeScene("view23_hidden_game")
+	-- 			composer.gotoScene("view23_npc_hidden_game")
+	-- 			loadedSettings.total_success = 0
+	-- 		end
+	-- 	end
 
-	 	replay:addEventListener("touch", touchEventListener)
-	 	endingText:addEventListener("touch", toFront)
-	 	--replay:toFront()
-	end
+	--  	replay:addEventListener("touch", touchEventListener)
+	--  	endingText:addEventListener("touch", toFront)
+	--  	--replay:toFront()
+	-- end
 
 	loadsave.saveTable(loadedSettings,"settings.json")
 

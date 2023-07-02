@@ -13,18 +13,41 @@ function scene:create( event )
 	local background = display.newImageRect("image/fishing/mainbd_back.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
- 	local gametitle = display.newText("물고기 사냥", display.contentWidth, display.contentHeight, "font/DOSGothic.ttf", 80)
+ 	local gametitle = display.newImageRect("image/fall/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
+	local gameName = display.newText("물고기 사냥", 0, 0, "ttf/Galmuri7.ttf", 45)
+	gameName.align = "center"
+	gameName:setFillColor(0)
+	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
+	
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0
+	sceneGroup:insert(section)
 
 	local script = display.newText("게임방법\n\n도망다니는 물고기를 모두 잡으세요!", section.x+30, section.y-100, "font/DOSGothic.ttf", 80)
 	script.size = 30
 	script:setFillColor(1)
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
 	script.alpha=0
+	sceneGroup:insert(script)
+
+
+	local function scriptremove(event)
+		-- timer1=timer.performWithDelay(500, spawn, 0, "gameTime")
+		section.alpha=0
+		script.alpha=0
+		-- Runtime:addEventListener( "touch", bearmove)
+	end	
+
+	local function titleremove(event)
+		gametitle.alpha=0
+		section.alpha=1
+		script.alpha=1
+		display.remove(gameName)
+		section:addEventListener("tap", scriptremove)
+	end
 
  	local fish = {}
 
@@ -85,6 +108,15 @@ function scene:create( event )
 		script.alpha=1
 		section:addEventListener("tap", scriptremove)
 	end
+
+	local function pagemove()
+		display.remove(objectGroup)
+		-- display.remove(floor)
+		-- Runtime:removeEventListener("touch", bearmove)
+		-- timer.cancel( timer1 )
+		display.remove(cat)
+	end
+
 
 	local fish1_cnt, fish2_cnt, fish3_cnt, fish4_cnt = 0, 0, 0, 0
 
@@ -153,9 +185,10 @@ function scene:create( event )
 						total_cnt = total_cnt + 1	
 						--물고기 다 잡은 경우										
 						if(total_cnt == 4) then
-							local text = display.newText("성공이다냥 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
-							text:setFillColor(0)
+							-- local text = display.newText("성공이다냥 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
+							-- text:setFillColor(0)
 							
+							loadedSettings.money = loadedSettings.money + 3
 							-- 2023.06.30 edit by jiruen // total_success_names에 추가 및 fishgame_status 변수 넘겨주기
 							loadedSettings.total_success = loadedSettings.total_success + 1
 							loadedSettings.total_success_names[loadedSettings.total_success] = "물고기 사냥"
@@ -163,13 +196,14 @@ function scene:create( event )
 							composer.setVariable("fishgame_status", "success")
 
 							timer.performWithDelay( 1000, function() 
+								pagemove()
 								audio.pause(home)
 								text.alpha = 0
 								gametitle.alpha = 0
 								
-
+								
 								composer.removeScene("view21_fishGame")
-								composer.gotoScene("view21_npc_fishGame")
+								composer.gotoScene("view21_fishGame_over")
 							end )
 						end	
 					end )				

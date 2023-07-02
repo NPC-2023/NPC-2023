@@ -62,6 +62,7 @@ function scene:create( event )
 		if event.phase == "began" then--view20ring
 				audio.pause(home)
 
+				loadedSettings.money = loadedSettings.money + 3
 				-- 퀘스트 완료 목록에 저장
 				loadedSettings.total_success = loadedSettings.total_success + 1
 				loadedSettings.total_success_names[loadedSettings.total_success] = "쥐 잡기"

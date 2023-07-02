@@ -1,7 +1,5 @@
---fallgame 통과하는 게임 종료된 화면
 
 local composer = require( "composer" )
-local physics = require("physics")
 local scene = composer.newScene()
 local loadsave = require( "loadsave" )
 local json = require( "json" )
@@ -12,80 +10,87 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
-	
-	local background = display.newImageRect("image/jump/background_water.png",display.contentWidth, display.contentHeight) ---배경
+
+	local background = display.newImageRect("image/fishing/mainbd_back.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
 	sceneGroup:insert(background)
 
-	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
-	background1:setFillColor(0)
-	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
-	sceneGroup:insert(background1)
 
+
+	-- 배경 어둡게
+	
+	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+	
+	background1:setFillColor(0)
+	transition.to(background1,{alpha=0.5,time=1000})
+	sceneGroup:insert(background1)
 	--[[local board =display.newImageRect("이미지/미니게임/미니게임_게임완료창.png",display.contentWidth/3.6294896, display.contentHeight/2.83122739)
 	board.x , board.y = display.contentWidth/2, display.contentHeight/2
 	board.alpha = 0.5
 	transition.to(board,{alpha=1,time=1000})
 	sceneGroup:insert(board)]]
-
-	local score1 = composer.getVariable("score1")
-	print(score1)
+	
+	local status = composer.getVariable("fishgame_status")
 
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
-		composer.removeScene("view03_jump_game_over")
-		composer.gotoScene("view03_jump_game")
+		if event.phase == "began" then 
+				audio.pause(home)
+				composer.removeScene("view21_fishGame_over")
+				composer.gotoScene("view21_fishGame")
+		end
 	end
+
 	--close 버튼
-	local close = display.newImageRect("image/jump/닫기.png", 80, 80)
-	close.x, close.y = 1200, 30
-	close.alpha = 0
+	
+	local clear_close = display.newImageRect("image/fall/닫기.png", 50, 50)
+	clear_close.x, clear_close.y = display.contentWidth*0.7, display.contentHeight*0.37
+	clear_close.alpha = 0
+	
 
-	local function gomap1(event) -- 게임 pass 후 넘어감
-		loadedSettings.money = loadedSettings.money + 3
-		composer.setVariable("successJump", "success")
-		composer.setVariable("successHiddenGame", "success")
-		loadedSettings.total_success = loadedSettings.total_success + 1
-		loadedSettings.total_success_names[loadedSettings.total_success] = "고양이 점프해서 츄르 찾기"
-		loadsave.saveTable(loadedSettings,"settings.json")
-		composer.removeScene("view03_jump_game_over")
-		composer.gotoScene("view03_npc_jump_game")
+	local fail_close = display.newImageRect("image/fall/닫기.png", 50, 50)
+	fail_close.x, fail_close.y = display.contentWidth*0.7, display.contentHeight*0.37
+	fail_close.alpha = 0
+	
+	
+	local function gomap(event) -- 게임 pass 후 넘어감
+		if event.phase == "began" then--view20ring
+				-- composer.setVariable("success", "success")
+				audio.pause(home)
+				composer.removeScene("view21_fishGame_over")
+				composer.gotoScene( "view21_npc_fishGame" )
+		end
 	end
 
-	local function gomap2(event) -- 게임 fail 후 넘어감
-		composer.removeScene("view03_jump_game_over")
-		composer.gotoScene("view05_main_map") --npc로
+	local backtomap =display.newImageRect("image/custom/cat_twinkle.png", 200, 200) --성공할 경우
+	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
+	backtomap.alpha = 0
+	sceneGroup:insert(backtomap)
+
+	local backtomap_text = display.newText("성공!", display.contentWidth*0.5, display.contentHeight*0.3, "font/DOSGothic.ttf")
+	backtomap_text:setFillColor(1)
+	backtomap_text.size = 60
+	sceneGroup:insert(backtomap_text)
+
+	local backgame =display.newImage("image/fall/fail.png") --실패할 경우
+	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
+	backgame.alpha = 0
+	sceneGroup:insert(backgame)
+
+	if status ~= 'success' then
+		backgame.alpha = 1
+		fail_close.alpha = 1
+		fail_close:addEventListener("touch",backtogame)
+	else
+		backtomap.alpha = 1
+		clear_close.alpha = 1
+		clear_close:addEventListener("touch",gomap)
 	end
+	sceneGroup:insert(fail_close)
+	sceneGroup:insert(clear_close)
 
-	local backgame1 =display.newImage("image/jump/클리어창.png") --성공할 경우
-	backgame1.x, backgame1.y = display.contentWidth/2, display.contentHeight/2
-	backgame1.alpha = 0
-	sceneGroup:insert(backgame1)
-
-	local backgame2 =display.newImage("image/jump/실패창.png") --실패할 경우
-	backgame2.x, backgame2.y = display.contentWidth/2, display.contentHeight/2
-	backgame2.alpha = 0
-	sceneGroup:insert(backgame2)
-
-	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", 600, 80)
-	lastText.size = 40
-	lastText.alpha = 0
-
-	if (score1 == -1) then --score1이 -1일 때 fail
-		backgame2.alpha = 1
-		close.alpha = 1
-		lastText.alpha = 1
-		close:addEventListener("tap", gomap2)
-		backgame2:addEventListener("tap",backtogame)
-	elseif(score1 == 1) then--score1이 1일 때 sucess
-		backgame1.alpha = 1
-		close.alpha = 1
-		close:addEventListener("tap", gomap1)
-	end
-
-	sceneGroup:insert(close)
-	sceneGroup:insert(lastText)
 
 end
+
 function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
@@ -110,7 +115,7 @@ function scene:hide( event )
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
-		composer.removeScene("view03_jump_game_over")
+		composer.removeScene("view21_fishGame_over")
 	end
 end
 
@@ -134,4 +139,3 @@ scene:addEventListener( "destroy", scene )
 -----------------------------------------------------------------------------------------
 
 return scene
-

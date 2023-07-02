@@ -43,6 +43,7 @@ function scene:create( event )
 
 	local function gomap1(event) -- 게임 pass 후 map으로 넘어감
 		composer.setVariable("pickgame_status", "success")
+		loadedSettings.money = loadedSettings.money + 3
 		loadedSettings.total_success = loadedSettings.total_success + 1
 		loadedSettings.total_success_names[loadedSettings.total_success] = "Pick Game"
 		loadsave.saveTable(loadedSettings,"settings.json")

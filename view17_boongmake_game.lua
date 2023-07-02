@@ -17,43 +17,51 @@ function scene:create( event )
 	composer.setVariable("gameName", "view17_boongmake_game")
 
 	--게임 엔딩---
-	function endingscene()
-		local endingBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
-		endingBackground:setFillColor(0)
+	-- function endingscene()
+	-- 	local endingBackground = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+	-- 	endingBackground:setFillColor(0)
 
-		local endingText = display.newText("엔딩", display.contentWidth/2, display.contentHeight*0.4)
-	 	endingText.size = 200
-	 	endingText:setFillColor(1)
+	-- 	local endingText = display.newText("엔딩", display.contentWidth/2, display.contentHeight*0.4)
+	--  	endingText.size = 200
+	--  	endingText:setFillColor(1)
 
-	 	local replay = display.newText("다시 하기", display.contentWidth/2, display.contentHeight*0.7)
-		replay.size = 100
-		replay:setFillColor(1)
+	--  	local replay = display.newText("다시 하기", display.contentWidth/2, display.contentHeight*0.7)
+	-- 	replay.size = 100
+	-- 	replay:setFillColor(1)
 
-		sceneGroup:insert(endingBackground)
-		sceneGroup:insert(endingText)
-		sceneGroup:insert(replay)
+	-- 	sceneGroup:insert(endingBackground)
+	-- 	sceneGroup:insert(endingText)
+	-- 	sceneGroup:insert(replay)
 
-	 	local function touchEventListener( event )
-	 		if (event.phase == "began") then 
-	 			if event.target == replay then
-	 				endingBackground.alpha=0
-					endingText.alpha=0
-					replay.alpha=0
-	 				gamescene()
-	 			end
-	 		end
-	 	end
+	--  	local function touchEventListener( event )
+	--  		if (event.phase == "began") then 
+	--  			if event.target == replay then
+	--  				endingBackground.alpha=0
+	-- 				endingText.alpha=0
+	-- 				replay.alpha=0
+	--  				gamescene()
+	--  			end
+	--  		end
+	--  	end
 
-	 	loadedSettings.total_success = loadedSettings.total_success + 1
-		loadedSettings.total_success_names[loadedSettings.total_success] = "붕어빵 만들기"
-		loadsave.saveTable(loadedSettings,"settings.json")
+	--  	loadedSettings.money = loadedSettings.money + 3
+	 	
+	--  	loadedSettings.total_success = loadedSettings.total_success + 1
+	-- 	loadedSettings.total_success_names[loadedSettings.total_success] = "붕어빵 만들기"
+	-- 	loadsave.saveTable(loadedSettings,"settings.json")
 
-	 	composer.setVariable("boongmake_status", "success")
-	 	replay:addEventListener("touch", touchEventListener)
-	 	endingText:toFront()
-	 	replay:toFront()
+	--  	composer.setVariable("boongmake_status", "success")
+	--  	replay:addEventListener("touch", touchEventListener)
+	--  	endingText:toFront()
+	--  	replay:toFront()
+	-- end
+
+
+	local function pagemove()
+		display.remove(sceneGroup)
+		display.remove(floor)
+		timer.cancel( timer1 )
 	end
-
 --게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
 
 	function startscene()
@@ -334,7 +342,7 @@ function scene:create( event )
 							 time.alpha = 0
 							 score.alpha = 0
 							 score.text = '성공'
-							 endingscene()
+							 composer.setVariable("boongmake_status", "success")
 				 		end
 				 	end
 	 			end
@@ -357,7 +365,7 @@ function scene:create( event )
 		 		score.alpha = 0
 		 		score.text = '실패'
 		 	--게임 실패 판별 기준 time.text == '-1'이되면 ending으로 이동------------------------------------------------------------------------
-				endingscene()
+				composer.setVariable("boongmake_status", "fail")
 			end
 		 end
 

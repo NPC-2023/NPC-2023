@@ -177,7 +177,7 @@ function scene:create( event )
 				end
 
 				local gameSettings = {
-    				money = 20,
+    				money = 0,
     				can = 33, 
     				hobby = 20,
     				study = 0,

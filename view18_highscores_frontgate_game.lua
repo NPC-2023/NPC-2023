@@ -61,7 +61,10 @@ function scene:create( event )
 	
 	local function backtomap(event) -- 게임 pass 후 메인화면(맵)으로 넘어가기 
 		if event.phase == "began" then
-			composer.setVariable("successFront", success)
+			composer.setVariable("successFront", "success")
+			composer.setVariable("frontgate_status", "success")
+
+			loadedSettings.money = loadedSettings.money + 3
 
 			loadedSettings.total_success = loadedSettings.total_success + 1
 			loadedSettings.total_success_names[loadedSettings.total_success] = "정문 지키기"

@@ -17,6 +17,43 @@ function scene:create( event )
 
 	composer.setVariable("gameName", "view20_moneyGame")
 
+	local gametitle = display.newImageRect("image/fall/미니게임 타이틀.png", 687/1.2, 604/1.2)
+	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+	local gameName = display.newText("간식 사기", 0, 0, "ttf/Galmuri7.ttf", 45)
+	gameName.align = "center"
+	gameName:setFillColor(0)
+	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
+
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	section:setFillColor(0.35, 0.35, 0.35, 0.35)
+	section.alpha=0
+	sceneGroup:insert(section)
+
+
+	local script = display.newText("게임방법\n\n주어진 금액에 맞춰 간식을 사세요.", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 30
+	script:setFillColor(1)
+	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+	script.alpha=0
+	sceneGroup:insert(script)
+
+	local function scriptremove(event)
+		-- timer1=timer.performWithDelay(500, spawn, 0, "gameTime")
+		section.alpha=0
+		script.alpha=0
+		-- Runtime:addEventListener( "touch", bearmove)
+	end	
+
+	local function titleremove(event)
+		gametitle.alpha=0
+		section.alpha=1
+		script.alpha=1
+		display.remove(gameName)
+		section:addEventListener("tap", scriptremove)
+	end
+
+
 	local background = display.newImageRect("image/cafeteria/store.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
@@ -95,26 +132,37 @@ function scene:create( event )
 		total = 0
 	end
 
+	local function pagemove()
+		display.remove(objectGroup)
+		-- display.remove(floor)
+		-- Runtime:removeEventListener("touch", bearmove)
+		-- timer.cancel( timer1 )
+		-- display.remove(cat)
+	end
+
 	local text = ""
 	local function buyListener( event )
 		local soundEffect = audio.loadSound( "soundEffect/coin.8.ogg" )
 		audio.play( soundEffect )
 
 		if(total == errand) then
-			text = display.newText("성공 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
-			text:setFillColor(1)
+			-- text = display.newText("성공 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
+			-- text:setFillColor(1)
 			buy.alpha = 0
-			objectGroup:insert(text)
-			--다시 퀘스트 수락 화면으로 돌아옴
+			-- objectGroup:insert(text)
+
 			timer.performWithDelay( 1000, function() 
+				pagemove()
 				audio.pause(home)
+				loadedSettings.money = loadedSettings.money + 3
 				loadedSettings.total_success = loadedSettings.total_success + 1
 				loadedSettings.total_success_names[loadedSettings.total_success] = "매점에서 간식 사기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
+
 				composer.setVariable("moneygame_status", "success")
 				composer.removeScene("view20_moneyGame")
-				composer.gotoScene("view20_npc_moneyGame")
+				composer.gotoScene("view20_moneyGame_over")
 			end)
 		else
 			text = display.newText("실패다냥", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
@@ -131,6 +179,7 @@ function scene:create( event )
 		object[i]:addEventListener("tap", tapEventListener)
 	end
 
+	gametitle:addEventListener("tap", titleremove)
 	reset:addEventListener("tap", resetTotalListener)
 	buy:addEventListener("tap", buyListener)
 

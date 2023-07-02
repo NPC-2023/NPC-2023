@@ -68,6 +68,8 @@ function scene:create( event )
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
+
+			loadedSettings.money = loadedSettings.money + 3
 			composer.removeScene("view16_climbing_the_tree_game_over")
 			composer.setVariable("successClimbing", "success")
 			local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
