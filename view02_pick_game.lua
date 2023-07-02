@@ -56,12 +56,12 @@ function scene:create( event )
 	time.alpha = 0
 	sceneGroup:insert(time)
 	
-	local musicoption = { 
+	local musicOption = { 
     	loops = -1
 	}
 
 	local pickGame_bgm = audio.loadStream("music/music2.flac")
-	local bgm_play = audio.play(pickGame_bgm, musicoption)
+	audio.play(pickGame_bgm, musicOption)
 
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
  	--sceneGroup:insert(home)
@@ -119,7 +119,7 @@ function scene:create( event )
 		local function remove(event)
 			display.remove(obj)
 		end
-		timer3 = timer.performWithDelay(900, remove, 30, "removeTime")
+		timer3 = timer.performWithDelay(900, remove, 30, "gameTime")
 		if (objIdx < 4) then
 			object[i].type="food"
 		elseif (objIdx == 4) then
@@ -150,7 +150,6 @@ function scene:create( event )
     }
     --샘플볼륨함수--
     local function setVolume(event)
-    	--audio.pause(bgm_play)
         composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap", setVolume)
@@ -175,7 +174,7 @@ function scene:create( event )
 		showScore.alpha = 1
 		section.alpha = 0
 		script.alpha = 0
-		timer2 = timer.performWithDelay(900, generate, 30, "generateTime")
+		timer2 = timer.performWithDelay(900, generate, 30, "gameTime")
 	end
 
 	section:addEventListener("tap", playGame)

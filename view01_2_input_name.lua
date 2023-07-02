@@ -69,6 +69,9 @@ function scene:create( event )
 	sceneGroup:insert(showText1)
 
 
+    local musicOption = { 
+    	loops = -1
+	}
 
 	--이름 입력을 위한 텍스트상자 생성--
 	local defaultField
@@ -118,9 +121,14 @@ function scene:create( event )
 		time = 2000
 	}
 
+	-- 2023.06.30 edit by jiruen // bgm 추가
+    local exitBgm = audio.loadStream("soundEffect/388047_설정 닫기 버튼 클릭시 나오는 효과음.wav")
+
 	local function gotomap(event)
 		if event.phase == "began" then 
 			--event.target.width,event.target.height = 68.82,68.82
+			-- 2023.06.30 edit by jiruen // 효과음 추가
+			audio.play(exitBgm)
 		elseif event.phase == "cancelled" then 
 			event.target.width,event.target.height = 68.82,68.82
 		elseif event.phase == "ended" then
@@ -142,9 +150,16 @@ function scene:create( event )
 
 	local can = 20
 	
+	-- 2023.06.30 edit by jiruen // 확인 버튼 bgm 추가
+    local startNewBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
+
 	local function startNew(event)
 		--색깔 또는 이름을 선택하지 않았을 시 에러 팝업창으로 넘어간다
+
 		if defaultField.text == "" then
+			-- 2023.06.30 edit by jiruen // 효과음 추가
+			audio.play(startNewBgm)
+
 			defaultField:removeSelf()
 			defaultField = 'nil'
 			composer.removeScene("view01_2_input_name")
@@ -177,7 +192,7 @@ function scene:create( event )
   					total_success_names = {}, -- 총 성공한 게임 이름 {}, 
   					today_success = 0, --오늘 성공한 게임 갯수
   					today_talk = 0, --오늘 대화한 횟수
-  					buildings_index = { "백주년", "정문", "본관", "학생관", "대학원", "인문관", "음악관", "예지관" },
+  					buildings_index = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관"},
   					date = os.date( "*t" ),
   					days = 0,
   					--커스텀
@@ -232,13 +247,14 @@ function scene:create( event )
 				--composer.gotoScene( "tutorial00",options)
 				audio.pause( titleMusic )
 
-				tutorialMusic = audio.loadStream( "music/music4.mp3" )
-	    		audio.play(tutorialMusic)
+				tutorialMusic = audio.loadStream( "music/music4_1.wav" )
+	    		audio.play(tutorialMusic, musicOption)
 	    		--audio.setVolume( loadedEndings.logValue )
 				composer.gotoScene( "tutorial00" ,options)
 			end
 	end
-	titleButton:addEventListener("tap",startNew)	
+	titleButton:addEventListener("tap",startNew)
+
 end
 
 function scene:show( event )

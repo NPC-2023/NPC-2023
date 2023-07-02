@@ -126,35 +126,19 @@ function scene:create( event )
         listener = bgSliderListener
     }
     sceneGroup:insert( bgSlider )
-
-    -- exit 버튼 눌렀을 때 volumeControl.lua파일에서 벗어나기
-    local function goback(event)
-        if event.phase == "began" then
-            composer.hideOverlay("volumeControl")
-        end
-    end
-
-    -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
-    local exit = display.newImageRect("image/설정/닫기.png", 50, 50)
-    sceneGroup:insert(exit)
-    exit.x, exit.y = display.contentWidth*0.70, display.contentHeight*0.37
-    exit:addEventListener("touch",goback)
     
     timer.pauseAll()
     local gameName = composer.getVariable("gameName")
-    print(gameName)
     local function continueGame(event)
         --timer.resumeAll() --왜 제대로 실행 안 되는지 모르겠음
         timer.resume("gameTime")
-        timer.resume("removeTime")
-        timer.resume("generateTime")
-        composer.hideOverlay()
-        composer.gotoScene("gameName")
+        composer.hideOverlay("stopGame")
+        composer.gotoScene(gameName)
     end
 
     local function closeGame(event)
         audio.pause(bgm_play)
-        composer.removeScene("gameName")
+        composer.removeScene(gameName)
         composer.gotoScene("view05_main_map")
     end
 

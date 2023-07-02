@@ -31,8 +31,13 @@ function scene:create( event )
 	local result1 = composer.getVariable("result")
 	-- local score3 = composer.getVariable("score")
 
+	-- 2023.06.30 edit by jiruen // 게임 성공 & 실패 bgm
+	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
+	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
+
+
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
-		if event.phase == "began" then 
+		if event.phase == "began" then
 			composer.removeScene("view12_lost_stuId_game_over")
 			composer.gotoScene("view11_lost_stuId_game_final")
 		end
@@ -48,6 +53,7 @@ function scene:create( event )
 	clear_closeScript.x, clear_closeScript.y=display.contentWidth/2, display.contentHeight*0.75
 	clear_closeScript.alpha = 0
 
+	
 	local fail_close = display.newImageRect("image/lost_stuId/확인,힌트 버튼.png", 768/4, 768/4)
 	fail_close:setFillColor(1)
 	fail_close.x, fail_close.y=display.contentWidth/2, display.contentHeight*0.75
@@ -59,11 +65,12 @@ function scene:create( event )
 	fail_closeScript.alpha = 0
 
 	
+	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then--view20ring
-			local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
-		    audio.play(bgMusic)
-		    audio.setVolume( 0.5 )
+			-- local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
+		    -- audio.play(clearBgm)
+		    -- audio.setVolume( 0.5 )
 
 			composer.setVariable("successLost", "success")
 			composer.removeScene("view12_lost_stuId_game_over")
@@ -101,15 +108,17 @@ function scene:create( event )
 		backgame.alpha = 1
 		fail_close.alpha = 1
 		fail_closeScript.alpha = 1
+		audio.play(failBgm) 
 		fail_close:addEventListener("touch",backtogame)
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
 		clear_closeScript.alpha = 1
 		backtomapScript.alpha = 1
-		local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
-	    audio.play(bgMusic)
-	    audio.setVolume( 0.5 )
+		-- local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
+	    -- audio.play(bgMusic)
+	    -- audio.setVolume( 0.5 )
+	    audio.play(clearBgm)
 		clear_close:addEventListener("touch",gomap)
 
 	end

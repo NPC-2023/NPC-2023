@@ -13,7 +13,8 @@ local json = require( "json" )
 
 function scene:create( event )
 	local sceneGroup = self.view
-
+	
+	composer.setVariable("gameName", "view03_jump_game")
 	physics.start()
 	--physics.setDrawMode( "hybrid" )
 
@@ -158,7 +159,8 @@ function scene:create( event )
 
 	local jumpSound = audio.loadSound("music/bounce.mp3")
 	audio.setVolume(0.2)
-	local home = audio.loadStream( "music/music3.mp3" )
+
+	local home = audio.loadStream( "music/music5.mp3" )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
 
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
@@ -220,7 +222,7 @@ function scene:create( event )
 	sceneGroup:insert(goal)
 
 	function pagemove() 
-		audio.pause(home)
+		audio.stop(home)
 		objectGroup.alpha = 0
 		arrowGroup.alpha = 0
 		cat.alpha = 0
@@ -265,6 +267,10 @@ function scene:create( event )
 		end
 	end
 
+	local musicOption = { 
+    	loops = -1
+	}
+
     --샘플볼륨함수--
     local function setVolume(event)
         composer.showOverlay( "StopGame", options )
@@ -272,7 +278,7 @@ function scene:create( event )
     volumeButton:addEventListener("tap",setVolume)
 
 	local function playGame(event)
-		audio.play(home)
+		audio.play(home, musicOption)
 		objectGroup.alpha = 1
 		background.alpha = 1
 		arrowGroup.alpha = 1

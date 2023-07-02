@@ -99,9 +99,14 @@ function scene:create( event )
     }
     sceneGroup:insert( bgSlider )
 
+    -- 2023.06.30 edit by jiruen // bgm 추가
+    local exitBgm = audio.loadStream("soundEffect/388047_설정 닫기 버튼 클릭시 나오는 효과음.wav")
+
     -- exit 버튼 눌렀을 때 volumeControl.lua파일에서 벗어나기
     local function goback(event)
         if event.phase == "began" then
+            -- 2023.06.30 edit by jiruen // 설정 닫기 버튼 클릭 시 효과음 추가
+            audio.play(exitBgm)
             composer.hideOverlay("volumeControl")
         end
     end

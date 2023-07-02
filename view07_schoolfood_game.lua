@@ -14,13 +14,15 @@ function scene:create( event )
 	local sceneGroup = self.view
 	
 	---------1차시-------------
+
+	composer.setVariable("gameName", "view07_schoolfood_game")
 	
 	local gametitle = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
-	local gameName = display.newText("학식 받기 게임", 0, 0, "ttf/Galmuri7.ttf", 45)
-	gameName:setFillColor(0)
-	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
+	local foodGameName = display.newText("학식 받기 게임", 0, 0, "ttf/Galmuri7.ttf", 45)
+	foodGameName:setFillColor(0)
+	foodGameName.x, foodGameName.y=display.contentWidth/2, display.contentHeight*0.65
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
@@ -65,6 +67,9 @@ function scene:create( event )
  	time:setFillColor(0)
  	time.alpha = 0.5
 
+ 	local home = audio.loadStream( "music/music13.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
     ----힌트 버튼 
     local hintBbg = display.newImageRect("image/schoolfood/hintButton.png", 250, 250)--힌트버튼 배경  
  	hintBbg.x, hintBbg.y = display.contentWidth*0.07, display.contentHeight*0.05 
@@ -77,8 +82,9 @@ function scene:create( event )
  	end
  	hintButton:addEventListener("tap", hintButton)
 
- 
-
+  	local pick
+ 	local correct
+ 	local incorrect
 
  	----------2차시 event-------- 
 
@@ -94,6 +100,7 @@ function scene:create( event )
 
  			if ( event.target.isFocus ) then
  				-- 드래그 중일 때
+			 	audio.play( pick )----------오디오 변경 
  				event.target.x = event.xStart + event.xDelta
  				event.target.y = event.yStart + event.yDelta
  			end
@@ -107,7 +114,8 @@ function scene:create( event )
  				if ( event.target.x > pan.x - 300 and event.target.x < pan.x + 300 --50 50 
  					and event.target.y > pan.y - 300 and event.target.y < pan.y + 300) then--- 50 50
  						if (event.target == food[1] or event.target == food[2] or event.target == food[5] or event.target == food[6] or event.target == food[9]) then
- 							display.remove(event.target) -- 당근 삭제하기
+ 							audio.play( correct )-----------오디오 변경 
+							display.remove(event.target) -- 당근 삭제하기
  							score.text = score.text + 1 -- 점수 올리기
 
  							if(score.text == '5') then
@@ -118,7 +126,8 @@ function scene:create( event )
 								composer.setVariable("score", 5)---다현님
 								composer.gotoScene( "view09_schoolfood_view2" )---다현님 veiw2가 게임오버창 
  							end
- 						else --싫어하는 음식일때는 제자리로 
+ 						else --싫어하는 음식일때는 제자리로
+					 		audio.play( incorrect )-----오디오 변경 
  							event.target.x = event.target.initX
  							event.target.y = event.target.initY
  						end
@@ -164,15 +173,35 @@ function scene:create( event )
  		end
 	end
 
+	pick = audio.loadSound( "soundEffect/pop.ogg" )--음식집을때  
+        correct = audio.loadSound( "soundEffect/correct.wav" )--좋아하는 음식 잘 집어넣었을때 
+        incorrect = audio.loadSound("soundEffect/incorrect.mp3") --싫어하는 음식 넣었을때 
+
  	-- by 지륜
 	-- 게임 타이틀 클릭 시, 타이머 시작
- 	local timeAttack
+ 	--local timeAttack
 
+ 	local volumeButton = display.newImageRect("image/설정/설정.png", 80, 80)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.08
+   	
+   	local options = {
+        isModal = true
+    }
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap", setVolume)
+	
+	local musicOption = { 
+    	loops = -1
+	}
 
  	local function scriptremove(event)
+ 		audio.play(home, musicOption)
 		section.alpha=0
 		script.alpha=0
-		timeAttack = timer.performWithDelay(1000, counter, 31)
+		timeAttack = timer.performWithDelay(1000, counter, 31, "gameTime")
 		hintButton:addEventListener("tap", hintButton)
 	end	
 
@@ -181,7 +210,7 @@ function scene:create( event )
 		section.alpha=1
 		script.alpha=1
 		section:addEventListener("tap", scriptremove)
-		display.remove(gameName)
+		display.remove(foodGameName)
 	end
 
 	gametitle:addEventListener("tap", titleremove)
@@ -195,6 +224,7 @@ function scene:create( event )
  	sceneGroup:insert(time)
  	sceneGroup:insert(hintBbg)
  	sceneGroup:insert(hintButton)
+ 	sceneGroup:insert(volumeButton)
 
 end
 

@@ -15,6 +15,8 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
+	composer.setVariable("gameName", "view20_moneyGame")
+
 	local background = display.newImageRect("image/cafeteria/store.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
@@ -68,6 +70,26 @@ function scene:create( event )
 	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.7, "font/DOSGothic.ttf", 50)
 	buy:setFillColor(1)
 
+ 	local home = audio.loadStream( "music/music14.wav" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
+    local musicOption = { 
+    	loops = -1
+	}
+	audio.play(home, musicOption)
+
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
+   	
+   	local options = {
+        isModal = true
+    }
+    --샘플볼륨함수--
+    local function setVolume(event)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap", setVolume)
+
 	local function resetTotalListener( event )
 		totalScript.text = "0"
 		total = 0
@@ -85,7 +107,7 @@ function scene:create( event )
 			objectGroup:insert(text)
 			--다시 퀘스트 수락 화면으로 돌아옴
 			timer.performWithDelay( 1000, function() 
-
+				audio.pause(home)
 				loadedSettings.total_success = loadedSettings.total_success + 1
 				loadedSettings.total_success_names[loadedSettings.total_success] = "매점에서 간식 사기"
 				loadsave.saveTable(loadedSettings,"settings.json")
@@ -97,6 +119,7 @@ function scene:create( event )
 		else
 			text = display.newText("실패다냥", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 			text:setFillColor(1)
+			objectGroup:insert(text)
 		end
 		
 		timer.performWithDelay( 1500, function() 
@@ -117,6 +140,7 @@ function scene:create( event )
 
 	sceneGroup:insert(background)
  	sceneGroup:insert(objectGroup)
+ 	sceneGroup:insert(volumeButton)
 end
 
 function scene:show( event )

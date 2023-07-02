@@ -1,8 +1,14 @@
 local composer = require("composer")
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
+
+	composer.setVariable("gameName", "view21_fishGame")
 
 	local background = display.newImageRect("image/fishing/mainbd_back.png", display.contentWidth, display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
@@ -44,6 +50,28 @@ function scene:create( event )
  	splash.alpha = 0
 
 	local objectGroup = display.newGroup()
+
+ 	local home = audio.loadStream( "music/music15.mp3" )
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
+    local musicOption = { 
+    	loops = -1
+	}
+	
+	audio.play(home, musicOption)
+	
+	local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
+   	
+   	local options = {
+        isModal = true
+    }
+    --샘플볼륨함수--
+    local function setVolume(event)
+    	--audio.pause(bgm_play)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap", setVolume)
 
 	local function scriptremove(event)
 		timer1=timer.performWithDelay(500, 0)
@@ -128,10 +156,18 @@ function scene:create( event )
 							local text = display.newText("성공이다냥 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
 							text:setFillColor(0)
 							
+							-- 2023.06.30 edit by jiruen // total_success_names에 추가 및 fishgame_status 변수 넘겨주기
+							loadedSettings.total_success = loadedSettings.total_success + 1
+							loadedSettings.total_success_names[loadedSettings.total_success] = "물고기 사냥"
+							loadsave.saveTable(loadedSettings,"settings.json")
+							composer.setVariable("fishgame_status", "success")
+
 							timer.performWithDelay( 1000, function() 
+								audio.pause(home)
 								text.alpha = 0
 								gametitle.alpha = 0
-	
+								
+
 								composer.removeScene("view21_fishGame")
 								composer.gotoScene("view21_npc_fishGame")
 							end )
@@ -151,6 +187,7 @@ function scene:create( event )
 
 	sceneGroup:insert(background)
 	sceneGroup:insert(objectGroup)
+	sceneGroup:insert(volumeButton)
 
 	gametitle:addEventListener("tap", titleremove)
 	fish[1]:addEventListener("tap", tapEventListener)		

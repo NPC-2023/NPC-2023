@@ -6,9 +6,15 @@
 
 local composer = require( "composer" )
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
 
 function scene:create( event )
 	local sceneGroup = self.view
+
+	local loadedEndings = loadsave.loadTable( "endings.json" )
+	local loadedSettings = loadsave.loadTable( "settings.json" )
+
+	composer.setVariable("gameName", "view17_boongmake_game")
 
 	--게임 엔딩---
 	function endingscene()
@@ -37,6 +43,10 @@ function scene:create( event )
 	 			end
 	 		end
 	 	end
+
+	 	loadedSettings.total_success = loadedSettings.total_success + 1
+		loadedSettings.total_success_names[loadedSettings.total_success] = "붕어빵 만들기"
+		loadsave.saveTable(loadedSettings,"settings.json")
 
 	 	composer.setVariable("boongmake_status", "success")
 	 	replay:addEventListener("touch", touchEventListener)
@@ -136,13 +146,28 @@ function scene:create( event )
 		for i = 1, 27, 1 do
 			sceneGroup:insert(object[i])
 		end
+
+		local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    	volumeButton.x,volumeButton.y = display.contentWidth * 0.98, display.contentHeight * 0.1
+		
+   	
+   		local options = {
+        	isModal = true
+    	}
+    	--샘플볼륨함수--
+    	local function setVolume(event)
+    		--audio.pause(bgm_play)
+        	composer.showOverlay( "StopGame", options )
+    	end
+    	volumeButton:addEventListener("tap", setVolume)
+
 		sceneGroup:insert(kettle)
 		sceneGroup:insert(beans)
 		sceneGroup:insert(kettlebg)
 		sceneGroup:insert(beansbg)
 		sceneGroup:insert(timerImage)
 		sceneGroup:insert(scorebg)
-
+		sceneGroup:insert(volumeButton)
 	 	for i = 1,27,1 do
 	 		object[i]:scale(0.6,0.6)
 	 	end
@@ -173,10 +198,19 @@ function scene:create( event )
 		local score = display.newText(0, display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 	 	score.size = 50
 	 	score:setFillColor(0)
+	 	sceneGroup:insert(score)
 	 	local time= display.newText(50, display.contentWidth*0.9-10, display.contentHeight*0.15-10)
 	 	time.size = 40
 	 	time:setFillColor(0)
+	 	sceneGroup:insert(time)
 
+	 	local home = audio.loadStream( "music/music3.ogg" )
+    	audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+
+    	local musicOption = { 
+    		loops = -1
+		}
+		audio.play(home, musicOption)
 	 	local tapSound = audio.loadSound("music/tapSound.wav")
 	 	local success = audio.loadSound("music/success.wav")
 	 	local fail = audio.loadSound("music/fail.mp3")
@@ -327,7 +361,7 @@ function scene:create( event )
 			end
 		 end
 
-		 local timeAttack = timer.performWithDelay(1000, counter, 51)
+		 local timeAttack = timer.performWithDelay(1000, counter, 51, "gameTime")
 	
 	 	--코드 끝
 	end

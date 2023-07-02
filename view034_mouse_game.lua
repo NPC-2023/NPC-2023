@@ -11,6 +11,7 @@ function scene:create( event )
 	
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
+	composer.setVariable("gameName", "view034_mouse_game")
 	
 	local background = display.newImageRect("image/mouse/background.png",display.contentWidth, display.contentHeight)
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -131,32 +132,6 @@ function scene:create( event )
 	sceneGroup:insert(h1)
 
 
-	-----음악
-
-    -- showoverlay 함수 사용 option
-    local options = {
-        isModal = true
-    }
-
-    --샘플 볼륨 이미지
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.4
-    sceneGroup:insert(volumeButton)
-
-    --샘플볼륨함수--
-    local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
-    end
-    volumeButton:addEventListener("tap",setVolume)
-
-    local home = audio.loadStream( "music/Trust.mp3" )
-    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
-    audio.play(home)
-
-
-    -------------
-
-
 	-- 클릭 시 해머가 기울어짐
 	function move(event)
 		if (event.phase == "began") then
@@ -203,20 +178,30 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.35
     sceneGroup:insert(volumeButton)
 
 
     --샘플볼륨함수--
     local function setVolume(event)
-        composer.showOverlay( "volumeControl", options )
+        composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap",setVolume)
 
-    local home = audio.loadStream( "music/music5.mp3" )
-    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
-    audio.play(home)
+	local musicOption = { 
+    	loops = -1
+	}
 
+    local home = audio.loadStream( "music/music11.mp3" )
+    local hammerO1 = audio.loadStream( "soundEffect/망치_O.mp3" )---1~3째줄 쥐 잡았을 때 
+    local hammerO2 = audio.loadStream( "soundEffect/망치_O.mp3" )---4~6째줄 쥐 잡았을 때 
+    local hammerO3 = audio.loadStream( "soundEffect/망치_O.mp3" )---7~9째줄 쥐 잡았을 때 
+    local hammerX1 = audio.loadStream( "soundEffect/망치_X.mp3" )---쥐 못잡았을 때 
+    local hammerX2 = audio.loadStream( "soundEffect/망치_X.mp3" )---쥐 못잡았을 때 
+    local hammerX3 = audio.loadStream( "soundEffect/망치_X.mp3" )---쥐 못잡았을 때 
+	
+    audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+    audio.play(home, musicOption)
 
     -------------
 
@@ -227,11 +212,13 @@ function scene:create( event )
 		local i
 		function popout(event)
 			transition.to(dudu[i],{time=300,y=display.contentHeight/2.78565901-80,tag="down",onComplete=function() interval() end})
+			audio.play( hammerX1 )
 		end
 
 		-- 두더지 때렸을 때
 		function hit_dudu(event)
 			if event.phase == "ended" then
+				audio.play( hammerO1 )
 				score_num = score_num + 1
 				--[[if score_num == 6 then
 					score1 = 10
@@ -281,11 +268,13 @@ function scene:create( event )
 		local i 
 		function popout1(event)
 			transition.to(dudu1[i],{time=300,y=display.contentHeight/1.62738834-80,tag="down1",onComplete=function() interval1() end})
+			audio.play( hammerX2 )
 		end
 
 		-- 두더지 때렸을 때
 		function hit_dudu1(event)
 			if event.phase == "ended" then
+				audio.play( hammerO2 )
 				score_num = score_num + 1
 				--[[if score_num == 6 then
 					score1 = 10
@@ -338,11 +327,13 @@ function scene:create( event )
 		local i 
 		function popout2(event)
 			transition.to(dudu2[i],{time=300,y=display.contentHeight/1.12738834-80,tag="down2",onComplete=function() interval2() end})
+			audio.play( hammerX3 )
 		end
 
 		-- 두더지 때렸을 때
 		function hit_dudu2(event)
 			if event.phase == "ended" then
+				audio.play( hammerO3 ) 
 				score_num = score_num + 1
 				--[[if score_num == 6 then
 					score1 = 10
@@ -420,13 +411,13 @@ function scene:create( event )
 				dudu_hit1[i] = nil
 				dudu_hit2[i] =nil
 			end
-
+			audio.pause(home)
 			composer.removeScene("view034_mouse_game")
 			composer.gotoScene("view034_mouse_game_over")
 		end
 	end
 	 
-	timer.performWithDelay( 1000, timeAttack, 0 ,"attack")
+	timer.performWithDelay( 1000, timeAttack, 0 ,"gameTime")
 
 end
 
