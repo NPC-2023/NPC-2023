@@ -77,7 +77,6 @@ function scene:create( event )
 			timer1=timer.performWithDelay(500, spawn, 0)
 			section.alpha=0
 			script.alpha=0
-			gamescene()
 		end
 
 		local function titleremove(event)
@@ -86,6 +85,7 @@ function scene:create( event )
 			section.alpha=1
 			script.alpha=1
 			section:addEventListener("tap", scriptremove)
+			gamescene()
 		end
 		gametitle:addEventListener("tap", titleremove)
 		--gametitle:toFront()

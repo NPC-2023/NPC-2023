@@ -167,6 +167,44 @@ function scene:create( event )
 	showScore.size = 60
 	sceneGroup:insert(showScore)
 
+	local gametitle = display.newImageRect("image/fall/미니게임 타이틀.png", 687/1.2, 604/1.2)
+	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+
+	local gameName = display.newText("쥐 잡기", 0, 0, "ttf/Galmuri7.ttf", 45)
+	gameName.align = "center"
+	gameName:setFillColor(0)
+	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
+
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	section:setFillColor(0.35, 0.35, 0.35, 0.35)
+	section.alpha=0
+	sceneGroup:insert(section)
+
+
+	local script = display.newText("게임방법\n\n학교에 돌아다니는 쥐를 잡아주세요.\n\n 제한 시간은 15초, 쥐는 10마리 이상 잡으세요", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 30
+	script:setFillColor(1)
+	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+	script.alpha=0
+	sceneGroup:insert(script)
+
+	local function scriptremove(event)
+		-- timer1=timer.performWithDelay(500, spawn, 0, "gameTime")
+		section.alpha=0
+		script.alpha=0
+		-- Runtime:addEventListener( "touch", bearmove)
+	end	
+
+	local function titleremove(event)
+		gametitle.alpha=0
+		gameName.alpha=0
+		section.alpha=1
+		script.alpha=1
+		display.remove(gameName)
+		section:addEventListener("tap", scriptremove)
+		-- Runtime:addEventListener("mouse",move1)
+	end
+
 
 
 	-----음악
@@ -417,6 +455,7 @@ function scene:create( event )
 		end
 	end
 	 
+	gametitle:addEventListener("tap", titleremove)
 	timer.performWithDelay( 1000, timeAttack, 0 ,"gameTime")
 
 end

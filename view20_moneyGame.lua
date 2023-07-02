@@ -47,6 +47,7 @@ function scene:create( event )
 
 	local function titleremove(event)
 		gametitle.alpha=0
+		gameName.alpha=0
 		section.alpha=1
 		script.alpha=1
 		display.remove(gameName)
@@ -104,7 +105,7 @@ function scene:create( event )
 	reset.size = 50
 	reset:setFillColor(1)
 
-	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.7, "font/DOSGothic.ttf", 50)
+	local buy = display.newText("계산하기", display.contentWidth*0.5, display.contentHeight*0.9, "font/DOSGothic.ttf", 50)
 	buy:setFillColor(1)
 
  	local home = audio.loadStream( "music/music14.wav" )
@@ -171,7 +172,7 @@ function scene:create( event )
 		end
 		
 		timer.performWithDelay( 1500, function() 
-			text.alpha = 0
+			-- text.alpha = 0
 		end )	
 	end
 	

@@ -20,7 +20,7 @@ function scene:create( event )
 	gameName.align = "center"
 	gameName:setFillColor(0)
 	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
-	
+
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0
@@ -43,6 +43,7 @@ function scene:create( event )
 
 	local function titleremove(event)
 		gametitle.alpha=0
+		gameName.alpha=0
 		section.alpha=1
 		script.alpha=1
 		display.remove(gameName)
@@ -95,19 +96,6 @@ function scene:create( event )
         composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap", setVolume)
-
-	local function scriptremove(event)
-		timer1=timer.performWithDelay(500, 0)
-		section.alpha=0
-		script.alpha=0
-	end	
-
-	local function titleremove(event)
-		gametitle.alpha=0
-		section.alpha=1
-		script.alpha=1
-		section:addEventListener("tap", scriptremove)
-	end
 
 	local function pagemove()
 		display.remove(objectGroup)
@@ -177,6 +165,7 @@ function scene:create( event )
 					splash.alpha = 1
 					fish[tag].alpha = 1
 					fish[tag]:scale(1.5, 1.5) 
+					-- Mouse(LBUTTON, CLICK, event.target.x, event.target.y, MESSAGE)
 					event.target.y = event.target.y + 10
 					timer.performWithDelay( 1500, function() 
 						event.target.x = display.contentWidth*(tag * 0.1)
@@ -198,7 +187,7 @@ function scene:create( event )
 							timer.performWithDelay( 1000, function() 
 								pagemove()
 								audio.pause(home)
-								text.alpha = 0
+								-- text.alpha = 0
 								gametitle.alpha = 0
 								
 								
