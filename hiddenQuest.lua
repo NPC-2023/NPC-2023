@@ -37,10 +37,10 @@ function scene:create( event )
 
 	local t = {}
 	local tGroup = display.newGroup()
-	loadedSettings.hidden_index = math.random(8)
+	local temp = math.random(8)
 	t[1] = display.newText(mainName.."! 일일 퀘스트를\n다 클리어했구나 정말 대단하다냥!", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	t[2] = display.newText("열심히 한 "..mainName.."를 위해 보상으로\n히든 퀘스트를 준비했다냥", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText(loadedSettings.buildings_index[loadedSettings.hidden_index].."에 가서 히든 퀘스트를 수행하면 선물도 준다냥!", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)	
+	t[3] = display.newText(loadedSettings.buildings_index[temp].."에 가서 히든 퀘스트를 수행하면 선물도 준다냥!", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)	
 
 	for i =1, 3 do
 		tGroup:insert(t[i])

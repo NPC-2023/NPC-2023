@@ -46,7 +46,7 @@ function scene:create( event )
         time = 4000
     }
 
-    if(loadedSettings.total_success == 3) then --1일째에 엔딩. day는 히든퀘 깨면 플러스. (0부터 시작)
+    if(loadedSettings.total_success == 16) then --1일째에 엔딩. day는 히든퀘 깨면 플러스. (0부터 시작)
         composer.removeScene("view06_main_map1")
         composer.gotoScene("ending", options)
     end

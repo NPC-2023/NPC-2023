@@ -141,7 +141,7 @@ function scene:create( event )
 	 		AIpaper.alpha = 0
 
 	 		--게임 성공 판별 기준 student_yStart - 140을 넘어가면 ending으로 이동------------------------------------------------------------------------
-	 		local function who_win( )
+	 		local function who_win()
 		 		if student.y <= student_yStart - 140 then
 		 			winText.text = '게임에 졌습니다.'
 			 		print("게임에 졌습니다.")
