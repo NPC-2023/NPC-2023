@@ -65,14 +65,17 @@ function scene:create( event )
             if(loadedSettings.total_success % 4 == 0) then
 
             elseif (loadedSettings.total_success % 4 == 1) then
-                questShow[loadedSettings.total_success % 4] = display.newText("- "..loadedSettings.total_success_names[loadedSettings.total_success % 4].."", 0, 30, "ttf/Galmuri7.ttf", 30)
-                questShow[loadedSettings.total_success % 4]:setFillColor(0, 0, 0)
-                questShow[loadedSettings.total_success % 4].x = display.contentWidth * 0.5
-                questShow[loadedSettings.total_success % 4].y = display.contentHeight * 0.35
-                sceneGroup:insert(questShow[loadedSettings.total_success % 4])
+                local index = 4 * math.floor((loadedSettings.total_success / 4)) + (loadedSettings.total_success % 4)
+                print(index)
+                print("test",loadedSettings.total_success_names[index])
+                questShow[1] = display.newText("- "..loadedSettings.total_success_names[index].."", 0, 30, "ttf/Galmuri7.ttf", 30)
+                questShow[1]:setFillColor(0, 0, 0)
+                questShow[1].x = display.contentWidth * 0.5
+                questShow[1].y = display.contentHeight * 0.35
+                sceneGroup:insert(questShow[1])
             else
-                for i = loadedSettings.total_success - 4 + 1, loadedSettings.total_success do 
-                    questShow[i] = display.newText("- "..loadedSettings.total_success_names[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
+                for i = 1, loadedSettings.total_success % 4 do 
+                    questShow[i] = display.newText("- "..loadedSettings.total_success_names[i + math.floor((loadedSettings.total_success / 4)) * 4 ].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
                     print(questShow[i].y)
                     questShow[i].align="left"
                     questShow[i]:setFillColor(0, 0, 0)
@@ -165,6 +168,7 @@ function scene:create( event )
     exit:addEventListener("touch",goback)
     sceneGroup:insert(exit)
 
+    print("#questShow",#questShow)
     for i = 1, #questShow do 
         sceneGroup:insert(questShow[i])
     end
