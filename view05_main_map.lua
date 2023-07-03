@@ -127,7 +127,7 @@ function scene:create( event )
 			building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."봄.png", 512/size, 512/size)
  		end
 	else
-		if(loadedSettings.total_success >= 4 or loadedSettings.total_success < 8) then
+		if(loadedSettings.total_success >= 4 and loadedSettings.total_success < 8) then
 			print("4개이상 성공 / 계절 바꿈(여름)")
 			
 			-- 2023.07.03 edit by jiruen // 게임 4개 성공 시, 게임 성공 리스트 reset
@@ -149,7 +149,7 @@ function scene:create( event )
 				building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."여름.png", 512/size, 512/size)
 	 		end
 
-		elseif(loadedSettings.total_success >= 8 or loadedSettings.total_success < 12)then
+		elseif(loadedSettings.total_success >= 8 and loadedSettings.total_success < 12)then
 			print("8개이상 성공 / 계절 바꿈(가을)")
 
 			-- 2023.07.03 edit by jiruen // 게임 8개 성공 시, 게임 성공 리스트 reset
