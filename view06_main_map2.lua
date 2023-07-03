@@ -58,23 +58,62 @@ function scene:create( event )
     --     end
     -- end
 
-     if (loadedSettings.total_success ~= 0)then
+    if (loadedSettings.total_success ~= 0)then
 
-        if (loadedSettings.total_success == 1) then
+        if(loadedSettings.total_success >= 4) then
+
+            if(loadedSettings.total_success % 4 == 0) then
+
+            elseif (loadedSettings.total_success % 4 == 1) then
+                questShow[loadedSettings.total_success % 4] = display.newText("- "..loadedSettings.total_success_names[loadedSettings.total_success % 4].."", 0, 30, "ttf/Galmuri7.ttf", 30)
+                questShow[loadedSettings.total_success % 4]:setFillColor(0, 0, 0)
+                questShow[loadedSettings.total_success % 4].x = display.contentWidth * 0.5
+                questShow[loadedSettings.total_success % 4].y = display.contentHeight * 0.35
+                sceneGroup:insert(questShow[loadedSettings.total_success % 4])
+            else
+                for i = loadedSettings.total_success - 4 + 1, loadedSettings.total_success do 
+                    questShow[i] = display.newText("- "..loadedSettings.total_success_names[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
+                    print(questShow[i].y)
+                    questShow[i].align="left"
+                    questShow[i]:setFillColor(0, 0, 0)
+                end
+            end
+        else
+            if (loadedSettings.total_success == 1) then
             questShow[1] = display.newText("- "..loadedSettings.total_success_names[1].."", 0, 30, "ttf/Galmuri7.ttf", 30)
             questShow[1]:setFillColor(0, 0, 0)
             questShow[1].x = display.contentWidth * 0.5
             questShow[1].y = display.contentHeight * 0.35
             sceneGroup:insert(questShow[1])
-        else
-            for i = 1, loadedSettings.total_success do 
-                questShow[i] = display.newText("- "..loadedSettings.total_success_names[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
-                print(questShow[i].y)
-                questShow[i].align="left"
-                questShow[i]:setFillColor(0, 0, 0)
+            else
+                for i = 1, loadedSettings.total_success do 
+                    questShow[i] = display.newText("- "..loadedSettings.total_success_names[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
+                    print(questShow[i].y)
+                    questShow[i].align="left"
+                    questShow[i]:setFillColor(0, 0, 0)
+                end
             end
         end
     end
+
+
+    -- if (loadedSettings.total_success ~= 0)then
+
+    --     if (loadedSettings.total_success == 1) then
+    --         questShow[1] = display.newText("- "..loadedSettings.total_success_names[1].."", 0, 30, "ttf/Galmuri7.ttf", 30)
+    --         questShow[1]:setFillColor(0, 0, 0)
+    --         questShow[1].x = display.contentWidth * 0.5
+    --         questShow[1].y = display.contentHeight * 0.35
+    --         sceneGroup:insert(questShow[1])
+    --     else
+    --         for i = 1, loadedSettings.total_success do 
+    --             questShow[i] = display.newText("- "..loadedSettings.total_success_names[i].."", display.contentWidth * 0.5, display.contentHeight * 0.35 + (i-1)*40, 400, 0, "ttf/DungGeunMo.ttf", 30)
+    --             print(questShow[i].y)
+    --             questShow[i].align="left"
+    --             questShow[i]:setFillColor(0, 0, 0)
+    --         end
+    --     end
+    -- end
 
 
     name = composer.getVariable("name")

@@ -54,39 +54,6 @@ function scene:create( event )
      loadsave.saveTable(loadedSettings,"settings.json")
 
 
-    -- 리스너 함수 (시간)
-    function getDate(date)
-        --print("설정 파일에 저장된 일: ", date.day, "일")
-        local now = os.date( "*t" )   
-
-        if(now.year > date.year) then
-            print("몇 년이 흐름...")
-            return 1
-        else
-            if(now.month > date.month) then
-                print("몇 달이 흐름...")
-                return 1
-            else
-                if(now.day > date.day)then
-                    print(now.day - date.day,"이 지남...")
-                    return 1
-                else
-                    print("하루도 안 지남")
-                    return 2
-                end
-            end
-        end
-    end
-
-    -- 설정 파일에서 저장된 시간 가져오기
-    -- local time = loadsave.loadTable( "..." )
-    --local saveTime = os.date( "*t" )
-    --saveTime.day = 20
-    print("설정 파일에 저장된 날짜: ", saveTime.month,"월", saveTime.day, "일")
-
-    -- 현재 시간 가져오기
-    local compareTime = getDate(saveTime)
-
     -- 건물 배치 코드
     local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
     local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
@@ -98,6 +65,7 @@ function scene:create( event )
     local buildingGroup = display.newGroup()
     local building = {}
 
+    print("test")
 
 
     -- 퀘스트 4개를 실행하면 계절 바꾸게 하기
@@ -108,6 +76,7 @@ function scene:create( event )
     --if(questedListGet == nil or #questedListGet < 2) then
     if(loadedSettings.total_success % 4 == 0) then
         --4번 게임 진행시 게임진행도 리셋
+
         composer.setVariable("food_status", "renew")
         composer.setVariable("fallgame_status", "renew")
         composer.setVariable("pickgame_status", "renew")
@@ -150,9 +119,10 @@ function scene:create( event )
 
 
 
-    if(loadedSettings.total_success < 5) then
+    if(loadedSettings.total_success < 4) then
         print("봄")
         background = display.newImageRect("image/map/봄맵.png", display.contentWidth, display.contentHeight)
+
 
         for i = 1, 8 do 
             local size = building_size[i]
@@ -161,6 +131,12 @@ function scene:create( event )
     else
         if(loadedSettings.total_success >= 4 or loadedSettings.total_success < 8) then
             print("4개이상 성공 / 계절 바꿈(여름)")
+
+            -- 2023.07.03 edit by jiruen // 게임 4개 성공 시, 게임 성공 리스트 reset
+            if(loadedSettings.total_success == 4) then
+                loadedSettings.total_success_names = {} 
+            end
+
             -- 백그라운드 변경
             background = display.newImageRect("image/map/여름맵.png", display.contentWidth, display.contentHeight)
 
@@ -171,6 +147,12 @@ function scene:create( event )
 
         elseif(loadedSettings.total_success >= 8 or loadedSettings.total_success < 12)then
             print("8개이상 성공 / 계절 바꿈(가을)")
+
+            -- 2023.07.03 edit by jiruen // 게임 8개 성공 시, 게임 성공 리스트 reset
+            if(loadedSettings.total_success == 8) then
+                loadedSettings.total_success_names = {} 
+            end
+
             background = display.newImageRect("image/map/가을맵.png", display.contentWidth, display.contentHeight)
 
             for i = 1, 8 do 
@@ -179,6 +161,12 @@ function scene:create( event )
             end
         else
             print("12개이상 성공 / 계절 바꿈(겨울)")
+
+            -- 2023.07.03 edit by jiruen // 게임 12개 성공 시, 게임 성공 리스트 reset
+            if(loadedSettings.total_success == 12) then
+                loadedSettings.total_success_names = {} 
+            end
+
             background = display.newImageRect("image/map/겨울맵.png", display.contentWidth, display.contentHeight)
 
             for i = 1, 8 do 

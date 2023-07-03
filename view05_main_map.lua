@@ -114,7 +114,8 @@ function scene:create( event )
 
 	print(loadedSettings.total_success)
 	--if(questedListGet == nil or #questedListGet < 2) then
-	if(loadedSettings.total_success < 5) then
+	-- 2023.07.03 edit by jiruen // loadedSettings.total_success < 5 에서 4로 변경
+	if(loadedSettings.total_success < 4) then
 		print("봄")
 		if(loadedSettings.get_clothes[1] ~= true) then
 			loadedSettings.clothes[1] = true
@@ -128,6 +129,12 @@ function scene:create( event )
 	else
 		if(loadedSettings.total_success >= 4 or loadedSettings.total_success < 8) then
 			print("4개이상 성공 / 계절 바꿈(여름)")
+			
+			-- 2023.07.03 edit by jiruen // 게임 4개 성공 시, 게임 성공 리스트 reset
+			if(loadedSettings.total_success == 4) then
+				loadedSettings.total_success_names = {} 
+			end
+
 			if(loadedSettings.get_clothes[2] ~= true) then
 				loadedSettings.clothes[2] = true
 			end
@@ -144,6 +151,12 @@ function scene:create( event )
 
 		elseif(loadedSettings.total_success >= 8 or loadedSettings.total_success < 12)then
 			print("8개이상 성공 / 계절 바꿈(가을)")
+
+			-- 2023.07.03 edit by jiruen // 게임 8개 성공 시, 게임 성공 리스트 reset
+			if(loadedSettings.total_success == 8) then
+				loadedSettings.total_success_names = {} 
+			end
+
 			if(loadedSettings.get_clothes[4] ~= true) then
 				loadedSettings.clothes[4] = true
 			end
@@ -158,6 +171,12 @@ function scene:create( event )
 	 		end
 		else
 			print("12개이상 성공 / 계절 바꿈(겨울)")
+
+			-- 2023.07.03 edit by jiruen // 게임 12개 성공 시, 게임 성공 리스트 reset
+			if(loadedSettings.total_success == 12) then
+				loadedSettings.total_success_names = {} 
+			end
+
 			if(loadedSettings.get_clothes[6] ~= true) then
 				loadedSettings.clothes[6] = true
 			end
