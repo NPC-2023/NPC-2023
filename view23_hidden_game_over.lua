@@ -60,7 +60,9 @@ function scene:create( event )
 				-- loadedSettings.total_success_names[loadedSettings.total_success] = "떨어지는 참치캔 받기"
 				loadsave.saveTable(loadedSettings,"settings.json")
 
-				composer.setVariable("hidden_game_status", "success")
+				-- 2023.07.03 edit by jiruen // 변수 불일치로 수정
+				composer.setVariable("hiddengame_status", "success")
+
 				composer.removeScene("view23_hidden_game_over")
 				composer.gotoScene( "view23_npc_hidden_game" )
 		end
@@ -84,14 +86,16 @@ function scene:create( event )
 	if score3 < 0 then
 		backgame.alpha = 1
 		fail_close.alpha = 1
+		sceneGroup:insert(fail_close)
 		fail_close:addEventListener("touch",backtogame)
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
+		sceneGroup:insert(clear_close)
 		clear_close:addEventListener("touch",gomap)
 	end
-	sceneGroup:insert(fail_close)
-	sceneGroup:insert(clear_close)
+	
+	
 
 
 end

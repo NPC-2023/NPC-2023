@@ -180,6 +180,10 @@ function scene:create( event )
 			 		pagemove()
 			 		composer.setVariable("hidden_game_status", "fail")
 					audio.pause(explosionSound)
+
+					-- 2023.07.03 edit by jiruen // 게임 over 파일에 넘겨줄 변수 추가
+					composer.setVariable("score", -1)
+
 					composer.removeScene("view23_hidden_game")
 					composer.gotoScene("view23_hidden_game_over")
 			 	elseif cat.y <= cat_yStart - 140 then
@@ -190,6 +194,10 @@ function scene:create( event )
 	 				AIpaper.alpha = 0
 	 				pagemove()
 	 				composer.setVariable("hidden_game_status", "success")
+	 				
+	 				-- 2023.07.03 edit by jiruen // 게임 over 파일에 넘겨줄 변수 추가
+	 				composer.setVariable("score", 1)
+
 	 				audio.pause(explosionSound)
 					composer.removeScene("view23_hidden_game")
 					composer.gotoScene("view23_hidden_game_over")		 		
