@@ -163,8 +163,9 @@ local function gameLoop()
 
 
 	-- Remove asteroids which have drifted off screen
+	local thisAsteroid
 	for i = #asteroidsTable, 1, -1 do
-		local thisAsteroid = asteroidsTable[i]
+		thisAsteroid = asteroidsTable[i]
 		print(#asteroidsTable)
 	print(thisAsteroid.x)
 	print(thisAsteroid.y)
