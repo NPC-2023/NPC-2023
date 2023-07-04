@@ -277,7 +277,7 @@ function scene:create( event )
 
 
 
- 	local timebg = display.newImageRect("image/lost_stuId/알람, 타임.png", 384/2.2, 384/2.2 )
+ 	local timebg = display.newImageRect("image/lost_stuId/타이머.png", 384/2.2, 384/2.2 )
 	timebg.x, timebg.y=display.contentWidth*0.9, display.contentHeight*0.12
 
  	local time= display.newText(15, display.contentWidth*0.905, display.contentHeight*0.15)
