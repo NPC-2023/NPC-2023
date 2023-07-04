@@ -15,6 +15,7 @@ local physics = require( "physics" )
 physics.start()
 physics.setGravity( 0, 0 )
 
+composer.setVariable("gameName", "view18_frontgate_game")
 -- Configure image sheet
 local sheetOptions =
 {
@@ -84,6 +85,7 @@ end
 local function createAsteroid()
 
 	local newAsteroid = display.newImageRect( mainGroup, "image/frontgate/outsider.png", 102, 85 )--외부인 사진 
+	print(newAsteroid)
 	table.insert( asteroidsTable, newAsteroid )
 	physics.addBody( newAsteroid, "dynamic", { radius=40, bounce=0.8 } )
 	newAsteroid.myName = "asteroid"
@@ -156,14 +158,16 @@ end
 
 
 local function gameLoop()
-
 	-- Create new asteroid
 	createAsteroid()
+
 
 	-- Remove asteroids which have drifted off screen
 	for i = #asteroidsTable, 1, -1 do
 		local thisAsteroid = asteroidsTable[i]
-
+		print(#asteroidsTable)
+	print(thisAsteroid.x)
+	print(thisAsteroid.y)
 		if ( thisAsteroid.x < -100 or
 			 thisAsteroid.x > display.contentWidth + 100 or
 			 thisAsteroid.y < -100 or
@@ -200,6 +204,16 @@ local function endGame() --게임 실패 (처음 play화면으로)
 end
 
 
+local function stopGame(event)
+	print("짜증")
+
+		--gameLoopTimer = timer.performWithDelay( 500, gameLoop, 0 )
+	end
+	--timer2=timer.performWithDelay(0, gameLoop, "gameTime")
+
+
+
+print(composer.getVariable("gamestart"))
 local function onCollision( event )
 
 	if ( event.phase == "began" ) then
@@ -304,6 +318,32 @@ function scene:create( event )
 	ship:addEventListener( "tap", fireLaser )
 	ship:addEventListener( "touch", dragShip )
 
+		-----음악
+    -- showoverlay 함수 사용 option
+    local options = {
+        isModal = true
+    }
+
+    -- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
+    local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
+
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+	sceneGroup:insert(volumeButton)
+   	
+    --샘플볼륨함수--
+    local function setVolume(event)
+    	--audio.pause(bgm_play)
+    	-- mainGroup = display.newGroup()
+    	-- asteroidsTable = {}
+    	physics.pause()
+    	--timer.cancel(gameLoopTimer)
+    	--physics.pause()
+    	audio.play(volumeBgm)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap", setVolume)
+
 	explosionSound = audio.loadSound( "music/Meow 2.wav" ) --고양이 맞았을때 
     fireSound = audio.loadSound( "music/Mew 1.wav" )--고양이 펀치쏠때
     screamSound = audio.loadSound("music/No.wav") --펀치가 적중했을때 
@@ -324,7 +364,7 @@ function scene:show( event )
 		-- Code here runs when the scene is entirely on screen
 		physics.start()
 		Runtime:addEventListener( "collision", onCollision )
-		gameLoopTimer = timer.performWithDelay( 500, gameLoop, 0 )
+		gameLoopTimer = timer.performWithDelay( 500, gameLoop, 0 , "gameTime")
 		-- Start the music!
         audio.play( musicTrack, { channel=1, loops=-1 } )
 	end
