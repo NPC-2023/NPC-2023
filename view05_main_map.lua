@@ -148,6 +148,7 @@ function scene:create( event )
 				local size = building_size[i]
 				building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."여름.png", 512/size, 512/size)
 	 		end
+	 		
 
 		elseif(loadedSettings.total_success >= 8 and loadedSettings.total_success < 12)then
 			print("8개이상 성공 / 계절 바꿈(가을)")
@@ -188,7 +189,7 @@ function scene:create( event )
 			end
 		end
 	end
-
+	
 	background.x, background.y=display.contentWidth/2, display.contentHeight/2
 
 
@@ -206,6 +207,7 @@ function scene:create( event )
 	local catSolesGroup = display.newGroup()
 	local catSoles = {}
 	local catSoles_idx = 0
+
 
 	if (loadedSettings.total_success ~= 0) then
 		for i = 1, loadedSettings.total_success do
@@ -319,7 +321,9 @@ function scene:create( event )
 	end]]
 
 -- 마을 맵 마을 객체 생성.
-	local click1 = audio.loadStream( "music/스침.wav" )
+-- 2023.07.04 edit by jiruen // 건물 아이콘 클릭 시 bgm 변경
+	local click1 = audio.loadStream( "soundEffect/171697_main map 지도에서 아이콘 클릭시 나는 소리.wav" )
+	-- local click1 = audio.loadStream( "music/스침.wav" )
 	
 -- 마을 객체 커서 범위 설정. 범위 밖으로 나가면 마을 크기 작아지고 안으로 들어가면 마을 크기 커짐.
 	local i = 0

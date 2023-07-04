@@ -23,8 +23,14 @@ function scene:create( event )
 	local cloth_count = loadedSettings.clothesCount
 	print(loadedSettings.custom2)
 	print(cloth_count)
-	--------------
+	
+	----bgm 관련 기능------
 
+	-- 2023.07.04 edit by jiruen // custom 창에 들어오면 짧게 실행된 옷장 bgm 추가
+	local openCustomBgm = audio.loadStream( "soundEffect/15419_커스텀 창 클릭시 나오는 효과음.wav" )
+	audio.play(openCustomBgm)
+	
+	--------------
 
 	--local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.1, display.contentHeight*1.1)
  	--background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
@@ -415,11 +421,15 @@ function scene:create( event )
  		objectGroup:insert(cat_cloth)
  	end 
 
+ 	-- 2023.07.04 edit by jiruen // 맵 보기 클릭 시 옷장 닫는 bgm 추가
+	local closeCustomBgm = audio.loadStream( "soundEffect/15418_커스텀 창에서 맵 클릭시 나오는 효과음.wav" )
+
  	local function goBackToMap(event)
  		if event.phase == "began" then
  			resetText.alpha = 0 
 	 		composer.removeScene("custom")
 	 		audio.pause(home)
+	 		audio.play(closeCustomBgm)
 			composer.gotoScene("view05_main_map")
 		end
 	end
