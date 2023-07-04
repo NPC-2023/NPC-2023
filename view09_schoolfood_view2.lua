@@ -16,6 +16,10 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
+	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
+	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
+	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
+
 
 	local background = display.newImageRect("image/schoolfood/cafeteria.png",display.contentWidth, display.contentHeight) ---배경
 	background.x,background.y = display.contentWidth/2,display.contentHeight/2
@@ -83,10 +87,14 @@ function scene:create( event )
 	if score3 < 0 then
 		backgame.alpha = 1
 		fail_close.alpha = 1
+		-- 2023.07.04 edit by jiruen // 게임 실패 bgm 추가
+		audio.play(failBgm) 
 		fail_close:addEventListener("touch",backtogame)
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
+		-- 2023.07.04 edit by jiruen // 게임 성공 bgm 추가
+		audio.play(clearBgm)
 		clear_close:addEventListener("touch",gomap)
 	end
 	sceneGroup:insert(fail_close)

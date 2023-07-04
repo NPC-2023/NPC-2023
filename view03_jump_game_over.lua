@@ -31,6 +31,10 @@ function scene:create( event )
 	local score1 = composer.getVariable("score1")
 	print(score1)
 
+	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
+	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
+	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
+
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		composer.removeScene("view03_jump_game_over")
 		composer.gotoScene("view03_jump_game")
@@ -74,11 +78,15 @@ function scene:create( event )
 		backgame2.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
+		-- 2023.07.04 edit by jiruen // 게임 실패 bgm 추가
+		audio.play(failBgm) 
 		close:addEventListener("tap", gomap2)
 		backgame2:addEventListener("tap",backtogame)
 	elseif(score1 == 1) then--score1이 1일 때 sucess
 		backgame1.alpha = 1
 		close.alpha = 1
+		-- 2023.07.04 edit by jiruen // 게임 성공 bgm 추가
+		audio.play(clearBgm)
 		close:addEventListener("tap", gomap1)
 	end
 

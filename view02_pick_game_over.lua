@@ -31,6 +31,10 @@ function scene:create( event )
 
 	local score1 = composer.getVariable("score1")
 
+	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
+	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
+	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
+
 	local function backtogame(event) --실패할 경우 다시 게임으로 돌아가기
 		composer.removeScene("view02_pick_game_over")
 		composer.gotoScene("view02_pick_game")
@@ -102,11 +106,15 @@ function scene:create( event )
 		backgame2.alpha = 1
 		close.alpha = 1
 		lastText.alpha = 1
+		-- 2023.07.04 edit by jiruen // 게임 실패 bgm 추가
+		audio.play(failBgm) 
 		close:addEventListener("tap", gomap2) --close버튼을 눌렀을 때 gomap
 		backgame2:addEventListener("tap",backtogame) --우는고양이를 눌렀을 때 다시하기
 	elseif (score1 == 5) then---score1이 5일 때 sucess
 		backgame1.alpha = 1
 		close.alpha = 1
+		-- 2023.07.04 edit by jiruen // 게임 성공 bgm 추가
+		audio.play(clearBgm)
 		close:addEventListener("tap",gomap1)
 	end
 	sceneGroup:insert(close)

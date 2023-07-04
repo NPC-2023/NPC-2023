@@ -187,8 +187,14 @@ function scene:create( event )
    	local options = {
         isModal = true
     }
+
+    -- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
+    local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
+
+
     --샘플볼륨함수--
     local function setVolume(event)
+    	audio.play(volumeBgm)
         composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap", setVolume)

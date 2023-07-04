@@ -23,6 +23,10 @@ function scene:create( event )
 
 	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
 	
+	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
+	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
+	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
+	
 	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
 	sceneGroup:insert(background1)
@@ -108,15 +112,21 @@ function scene:create( event )
 		backgame.alpha = 1
 		fail_close.alpha = 1
 		fail_closeScript.alpha = 1
+
+		-- 2023.07.04 edit by jiruen // 게임 실패 bgm 추가
+		audio.play(failBgm) 
 		fail_close:addEventListener("touch",backtogame)
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
 		clear_closeScript.alpha = 1
 		backtomapScript.alpha = 1
-		local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
-		audio.play(bgMusic)
-		audio.setVolume( 0.5 )
+		-- local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
+		-- audio.play(bgMusic)
+		-- audio.setVolume( 0.5 )
+
+		-- 2023.07.04 edit by jiruen // 게임 성공 bgm 추가
+		audio.play(clearBgm)
 		clear_close:addEventListener("touch",gomap)
 	end
 	sceneGroup:insert(fail_close)

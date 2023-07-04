@@ -214,6 +214,9 @@ function scene:create( event )
         isModal = true
     }
 
+    -- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
+    local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
+
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
     volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.35
@@ -222,6 +225,7 @@ function scene:create( event )
 
     --샘플볼륨함수--
     local function setVolume(event)
+    	audio.play(volumeBgm)
         composer.showOverlay( "StopGame", options )
     end
     volumeButton:addEventListener("tap",setVolume)

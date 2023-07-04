@@ -20,6 +20,11 @@ function scene:create( event )
 	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
 	sceneGroup:insert(background1)
 
+	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
+	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
+	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
+
+
 	--[[local board =display.newImageRect("이미지/미니게임/미니게임_게임완료창.png",display.contentWidth/3.6294896, display.contentHeight/2.83122739)
 	board.x , board.y = display.contentWidth/2, display.contentHeight/2
 	board.alpha = 0.5
@@ -68,10 +73,14 @@ function scene:create( event )
 	if score3 < 0 then 
 		backgame.alpha = 1
 		fail_close.alpha = 1
+		-- 2023.07.04 edit by jiruen // 게임 실패 bgm 추가
+		audio.play(failBgm) 
 		fail_close:addEventListener("touch",backtogame)-- 실패할 경우
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
+		-- 2023.07.04 edit by jiruen // 게임 성공 bgm 추가
+		audio.play(clearBgm)
 		clear_close:addEventListener("touch",gomap)-- 성공할 경우
 	end
 	sceneGroup:insert(fail_close)
