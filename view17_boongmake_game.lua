@@ -223,9 +223,9 @@ function scene:create( event )
     		loops = -1
 		}
 		audio.play(home, musicOption)
-	 	local tapSound = audio.loadSound("music/tapSound.wav")
-	 	local success = audio.loadSound("music/success.wav")
-	 	local fail = audio.loadSound("music/fail.mp3")
+	 	local tapSound = audio.loadSound("music/boong_tapSound.wav")
+	 	local success = audio.loadSound("music/boong_success.wav")
+	 	local fail = audio.loadSound("music/boong_fail.mp3")
 
 	 	----------------------코드 시작------------------------------------------
 
