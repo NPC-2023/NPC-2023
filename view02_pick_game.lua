@@ -34,7 +34,7 @@ function scene:create( event )
 	sceneGroup:insert(script)
 
 	local score = 0 
-	local scoreImage = display.newImageRect("image/pick/score.png", 130, 130)
+	local scoreImage = display.newImageRect("image/pick/스코어.png", 130, 130)
 	scoreImage.x,scoreImage.y = display.contentWidth/11, display.contentHeight/5.5
 	scoreImage.alpha = 0
 	sceneGroup:insert(scoreImage)
@@ -45,7 +45,7 @@ function scene:create( event )
 	showScore.alpha = 0
 	sceneGroup:insert(showScore)
 
-	local alarm = display.newImageRect("image/pick/alarm.png", 150, 150)
+	local alarm = display.newImageRect("image/pick/타이머.png", 150, 150)
 	alarm.x, alarm.y = display.contentWidth*0.9, display.contentHeight*0.2
 	alarm.alpha = 0
 	sceneGroup:insert(alarm)

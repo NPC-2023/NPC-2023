@@ -152,12 +152,12 @@ function scene:create( event )
 	h1:addEventListener("touch",move)
 
 	--시간과 점수
-	local time = display.newImageRect("image/mouse/미니게임_시간타이머.png", 180, 180)
+	local time = display.newImageRect("image/mouse/타이머.png", 180, 180)
 	time.anchorX, time.anchorY =0,0
 	time.x,time.y = display.contentWidth*0.83, display.contentHeight*0.02
 	sceneGroup:insert(time)
 
-	local score = display.newImageRect("image/mouse/score.png", 150, 150)
+	local score = display.newImageRect("image/mouse/스코어.png", 150, 150)
 	score.anchorX, score.anchorY =0,0
 	score.x,score.y = display.contentWidth/34, display.contentHeight/13.2482826
 	sceneGroup:insert(score)
