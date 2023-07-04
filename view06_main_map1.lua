@@ -340,7 +340,11 @@ function scene:create( event )
         if event.phase == "began" then
             if(loadedSettings.openHiddenQuest == true) then
                 composer.removeScene("view06_main_map1")
-                composer.gotoScene("view23_npc_hidden_game")
+                if(math.random(1, 2) == 1) then
+                    composer.gotoScene("view23_npc_hidden_game")
+                else
+                    composer.gotoScene("view24_performance_game")
+                end
             else
                 if(name == "인문관")then
                     print("인문관")
