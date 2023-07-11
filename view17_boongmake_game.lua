@@ -117,7 +117,7 @@ function scene:create( event )
 	 	local kettle = display.newImage("image/boong/kettle.png", display.contentWidth*0.9, display.contentHeight*0.75)
 	 	local beansbg = display.newImage("image/boong/재료배경.png", display.contentWidth*0.9, display.contentHeight*0.45)
 	 	local beans = display.newImage("image/boong/beans.png", display.contentWidth*0.9, display.contentHeight*0.45)
-	 	local timerImage = display.newImage("image/boong/타이머.png", display.contentWidth*0.9-10, display.contentHeight*0.15-20)
+	 	local timerImage = display.newImage("image/boong/타이머.png", display.contentWidth*0.9-50, display.contentHeight*0.15-20)
 	 	local scorebg = display.newImage("image/boong/스코어.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 
 	 	local object = {}
@@ -156,7 +156,7 @@ function scene:create( event )
 		end
 
 		local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    	volumeButton.x,volumeButton.y = display.contentWidth * 0.98, display.contentHeight * 0.1
+    	volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
 		
 		-- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
     	local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
@@ -211,7 +211,7 @@ function scene:create( event )
 	 	score.size = 50
 	 	score:setFillColor(0)
 	 	sceneGroup:insert(score)
-	 	local time= display.newText(50, display.contentWidth*0.9-10, display.contentHeight*0.15-10)
+	 	local time= display.newText(50, display.contentWidth*0.9-50, display.contentHeight*0.15-10)
 	 	time.size = 40
 	 	time:setFillColor(0)
 	 	sceneGroup:insert(time)
