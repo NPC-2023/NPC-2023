@@ -37,6 +37,7 @@ function scene:create( event )
 	-- background.x, background.y=display.contentWidth/2, display.contentHeight/2
 	-- sceneGroup:insert(background)
 
+	print("건물당 대화 횟수")
 	for k, v in pairs(loadedSettings.talk) do
 		print(k, v)
 	end
@@ -112,6 +113,8 @@ function scene:create( event )
 	---end
 	
 
+	composer.setVariable("hiddengame_status", "none")
+	print("hiddengame_status ---->" .. composer.getVariable("hiddengame_status"))
 	print(loadedSettings.total_success)
 	--if(questedListGet == nil or #questedListGet < 2) then
 	-- 2023.07.03 edit by jiruen // loadedSettings.total_success < 5 에서 4로 변경
@@ -274,14 +277,14 @@ function scene:create( event )
 
 				building[8].fill.effect = "filter.desaturate"
 				building[8].fill.effect.intensity = 0.7
-			elseif (loadedSettings.total_success_names[i] == "정문 지키기" )then -- 정문
+			elseif (loadedSettings.total_success_names[i] == "붕어빵 만들기" )then -- 정문
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.3, display.contentHeight*0.85
 
 				building[6].fill.effect = "filter.desaturate"
 				building[6].fill.effect.intensity = 0.7
-			elseif (loadedSettings.total_success_names[i] == "물고기 사냥" or loadedSettings.total_success_names[i] == "붕어빵 만들기" )then -- 본관 
+			elseif (loadedSettings.total_success_names[i] == "물고기 사냥")then -- 본관 
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
 				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.35, display.contentHeight*0.52

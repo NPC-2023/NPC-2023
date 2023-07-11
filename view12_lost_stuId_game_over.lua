@@ -86,16 +86,15 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap = display.newImageRect("image/lost_stuId/미니게임 타이틀.png", 687/1.2, 604/1.2) --성공할 경우
+	local backtomap =display.newImage("image/custom/cat_twinkle.png") --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
 
-	local backtomapScript = display.newText("퀘스트 성공!", 0, 0, "ttf/font.ttf", 45)
-	backtomapScript:setFillColor(0)
-	backtomapScript.x, backtomapScript.y=display.contentWidth/2, display.contentHeight*0.65
-	backtomapScript.alpha = 0
-	sceneGroup:insert(backtomapScript)
+	local backtomap_text = display.newText("성공!", backtomap.x, backtomap.y - 300, "font/DOSGothic.ttf")
+	backtomap_text:setFillColor(1)
+	backtomap_text.size = 60
+	sceneGroup:insert(backtomap_text)
 
 	local backgame =display.newImageRect("image/lost_stuId/우는고ㅇ앵.png", 512/2, 512/2) --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
@@ -107,6 +106,7 @@ function scene:create( event )
 	print(result1)
 	if result1 == 0 then
 		backgame.alpha = 1
+		backtomap_text.alpha=0
 		fail_close.alpha = 1
 		fail_closeScript.alpha = 1
 		audio.play(failBgm) 
@@ -115,7 +115,7 @@ function scene:create( event )
 		backtomap.alpha = 1
 		clear_close.alpha = 1
 		clear_closeScript.alpha = 1
-		backtomapScript.alpha = 1
+		backtomap_text.alpha = 1
 		-- local bgMusic = audio.loadStream( "soundEffect/게임 성공.wav" )
 	    -- audio.play(bgMusic)
 	    -- audio.setVolume( 0.5 )

@@ -74,7 +74,7 @@ function scene:create( event )
     --loadedSettings.total_success = 4
     print(loadedSettings.total_success .. "total_success print")
     --if(questedListGet == nil or #questedListGet < 2) then
-    if(loadedSettings.total_success % 4 == 0) then
+    if(loadedSettings.total_success % 4 == 0 and loadedSettings.total_success ~= 0) then
         --4번 게임 진행시 게임진행도 리셋
 
         composer.setVariable("food_status", "renew")
@@ -93,6 +93,10 @@ function scene:create( event )
         composer.setVariable("talk"..i.."_status", "renew")
         end
     end
+    --히든게임 리셋
+    if(loadedSettings.total_success % 4 == 1 and loadedSettings.total_success ~= 0) then
+        composer.setVariable("hiddengame_status", "renew")
+    end
 
     --한 건물당 게임 두개일 경우 대화 여부 겹치지 않게함
     --예지관
@@ -109,20 +113,11 @@ function scene:create( event )
     if(composer.getVariable("jumpgame_status") == "success" and composer.getVariable("moneygame_status") ~= "success") then
         composer.setVariable("talk5_status", "renew")
     end
-    --본관
-    if(composer.getVariable("boongmake_status") == "success" and composer.getVariable("fishgame_status") ~= "success") then
-        composer.setVariable("talk3_status", "renew")
-    end
-    if(composer.getVariable("fishgame_status") == "success" and composer.getVariable("boongmake_status") ~= "success") then
-        composer.setVariable("talk3_status", "renew")
-    end
-
 
 
     if(loadedSettings.total_success < 4) then
         print("봄")
         background = display.newImageRect("image/map/봄맵.png", display.contentWidth, display.contentHeight)
-
 
         for i = 1, 8 do 
             local size = building_size[i]
@@ -260,14 +255,14 @@ function scene:create( event )
 
                 building[8].fill.effect = "filter.desaturate"
                 building[8].fill.effect.intensity = 0.7
-            elseif (loadedSettings.total_success_names[i] == "정문 지키기" )then -- 정문
+            elseif (loadedSettings.total_success_names[i] == "붕어빵 만들기" )then -- 정문
                 catSoles_idx = catSoles_idx + 1
                 catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
                 catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.3, display.contentHeight*0.85
 
                 building[6].fill.effect = "filter.desaturate"
                 building[6].fill.effect.intensity = 0.7
-            elseif (loadedSettings.total_success_names[i] == "물고기 사냥" or loadedSettings.total_success_names[i] == "붕어빵 만들기" )then -- 본관 
+            elseif (loadedSettings.total_success_names[i] == "물고기 사냥")then -- 본관 
                 catSoles_idx = catSoles_idx + 1
                 catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
                 catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.35, display.contentHeight*0.52
@@ -340,11 +335,12 @@ function scene:create( event )
         if event.phase == "began" then
             if(loadedSettings.openHiddenQuest == true) then
                 composer.removeScene("view06_main_map1")
-                if(math.random(1, 2) == 1) then
-                    composer.gotoScene("view23_npc_hidden_game")
-                else
-                    composer.gotoScene("view24_performance_game")
-                end
+                composer.gotoScene("view23_npc_hidden_game")
+                -- if(math.random(1, 2) == 1) then
+                --     composer.gotoScene("view23_npc_hidden_game")
+                -- else
+                --     composer.gotoScene("view24_performance_game")
+                -- end
             else
                 if(name == "인문관")then
                     print("인문관")
@@ -377,16 +373,17 @@ function scene:create( event )
                 elseif(name == "본관")then
                     print("본관")
                     composer.removeScene("view06_main_map1")
-                    if(math.random(1, 2) == 1) then
+                    -- if(math.random(1, 2) == 1) then
                          composer.gotoScene("view21_npc_fishGame")
-                    else
-                        composer.gotoScene("view17_npc_boongmake_game")
-                    end
+                    -- else
+                        -- composer.gotoScene("view17_npc_boongmake_game") 
+                    -- end
                     return true
                 elseif(name == "정문")then
                     print("정문")
                     composer.removeScene("view06_main_map1")
-                    composer.gotoScene("view18_npc_frontgate_game")
+                    -- composer.gotoScene("view18_npc_frontgate_game") --정문 게임 오류로 붕어빵 게임으로 대체
+                    composer.gotoScene("view17_npc_boongmake_game")
                     return true
                 elseif(name == "백주년")then
                     print("백주년")

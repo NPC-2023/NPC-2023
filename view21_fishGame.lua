@@ -73,6 +73,7 @@ function scene:create( event )
  	local splash = display.newImageRect("image/fishing/splash.png", 120, 120)
  	splash.alpha = 0
 
+ 	local fishGroup = display.newGroup()
 	local objectGroup = display.newGroup()
 
  	local home = audio.loadStream( "music/music15.mp3" )
@@ -170,13 +171,26 @@ function scene:create( event )
 					splash.alpha = 1
 					fish[tag].alpha = 1
 					fish[tag]:scale(1.5, 1.5) 
-					-- Mouse(LBUTTON, CLICK, event.target.x, event.target.y, MESSAGE)
+					--230712 손수연 : 어획후 클릭방지를 위해 노력한 코드
+					-- fishGroup:insert(fish[tag])
+					-- fishGroup.inisHitTestable = false
+					-- local function onTouch(event)
+					--     return true
+					-- end
+					-- fish[tag]:addEventListener("touch", onTouch)
+
 					event.target.y = event.target.y + 10
 					timer.performWithDelay( 1500, function() 
 						event.target.x = display.contentWidth*(tag * 0.1)
 						event.target.y = display.contentHeight*0.1 
 						splash.alpha = 0
 						total_cnt = total_cnt + 1	
+
+						--230712 손수연 : 클릭방지 구현못해서 그냥 사라지게 해놓음
+						timer.performWithDelay( 1000, function()
+							event.target.alpha = 0
+						end
+						)
 						--물고기 다 잡은 경우										
 						if(total_cnt == 4) then
 							-- local text = display.newText("성공이다냥 !", display.contentWidth*0.5, display.contentHeight*0.85, "font/DOSGothic.ttf", 80)
@@ -204,10 +218,12 @@ function scene:create( event )
 			end
 	end	
 
-	objectGroup:insert(fish[1])
-	objectGroup:insert(fish[2])
-	objectGroup:insert(fish[3])
-	objectGroup:insert(fish[4])
+	fishGroup:insert(fish[1])
+	fishGroup:insert(fish[2])
+	fishGroup:insert(fish[3])
+	fishGroup:insert(fish[4])
+
+	objectGroup:insert(fishGroup)
 	objectGroup:insert(cat)
 	objectGroup:insert(splash)
 	objectGroup:insert(section)

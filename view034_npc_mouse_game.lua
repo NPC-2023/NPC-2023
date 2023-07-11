@@ -21,7 +21,7 @@ function scene:create( event )
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
  	local npc = display.newImageRect("image/npc/npc2.png", 200, 200)
-	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.6
+	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.65
 	npc.xScale = -1
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
@@ -82,11 +82,12 @@ function scene:create( event )
 		loadedSettings.talk[8] = loadedSettings.talk[8] + 1
 	end
 
-		--오늘 완수한 게임 개수가 4면 성공플래그 리셋
-	if(loadedSettings.total_success % 4 == 0) then
-		composer.setVariable("mousegame_status", "renew")
-		composer.setVariable("talk8_status", "renew")
-	end
+	-- mainmap1의 77번째 코드로 대체
+	-- 	--오늘 완수한 게임 개수가 4면 성공플래그 리셋
+	-- if(loadedSettings.total_success % 4 == 0 and loadedSettings.total_success ~= 0) then
+	-- 	composer.setVariable("mousegame_status", "renew")
+	-- 	composer.setVariable("talk8_status", "renew")
+	-- end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
 	if(composer.getVariable("mousegame_status") == "success") then
@@ -109,7 +110,7 @@ function scene:create( event )
 		--수락(말풍선)누르면 고양이가 말함
 		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 200, 75)
 		speechbubble.x, speechbubble.y = cat.x, cat.y-100
-		local speech = display.newText("쥐..?!\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
+		local speech = display.newText("저건.. 쥐..?!\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
 		speech.size = 20
 		speech:setFillColor(0)
 

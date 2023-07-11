@@ -144,7 +144,7 @@ function scene:create( event )
 	 	sceneGroup:insert(rock)
 	 	sceneGroup:insert(AIpaper)
 	 	sceneGroup:insert(AIscissors)
-	 	sceneGroup:insert(AIscissors)
+	 	sceneGroup:insert(AIrock)
 	 	sceneGroup:insert(volumeButton)
 
 	 	local winText = display.newText('바위 가위 보 중 하나를 선택해주세요', display.contentCenterX, display.contentCenterY-300)
@@ -170,7 +170,39 @@ function scene:create( event )
 		local function tap( event )
 			--AI가위바위보
 			math.randomseed(os.time())        
-	 		AIDO = math.random(3)
+	 		-- AIDO = math.random(3)
+	 		--ai가 내는 패가 오늘의 날짜를 반영하도록 하여 게임 난이도를 하향조정
+	 		local today = os.date("*t")  -- Get today's date and time
+			local remainder = today.day % 3  -- Calculate remainder of today's date divided by 3
+
+			local AIDO
+			local randN = math.random(6)
+			if remainder == 0 then
+				if randN <= 3 then
+			  		AIDO = 3
+			  	elseif randN <= 5 then
+			  		AIDO = 1
+			  	else
+			  		AIDO = 2
+			  	end
+			elseif remainder == 1 then
+				if randN <= 3 then
+			  		AIDO = 1
+			  	elseif randN <= 5 then
+			  		AIDO = 2
+			  	else
+			  		AIDO = 3
+			  	end
+			else
+				if randN <= 3 then
+			  		AIDO = 2
+			  	elseif randN <= 5 then
+			  		AIDO = 3
+			  	else
+			  		AIDO = 1
+			  	end
+			end
+			
 	 		print("AIDO:"..AIDO)
 
 	 		AIrock.alpha = 0

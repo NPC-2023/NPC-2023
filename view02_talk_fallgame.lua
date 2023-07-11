@@ -44,11 +44,11 @@ function scene:create( event )
 
 	--대사
 	local t = {}
-	t[1] = display.newText("tttt 어디서 들어온 거지?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("나는 고tt왕국 일등 기사"..mainName.."이다냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("일등 기사라니 tt내가 다음에 데려가 주겠다냥! 나만 믿어냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("빨리 가 보고 싶다!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
-	t[5] = display.newText("빨리ttttt고 싶다!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[1] = display.newText("(처음 보는 고양이 인데..?)", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("뭘 그렇게 빤히 보는거냥?! 나는 "..mainName.."이다냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("우리 대화한 횟수가.. " ..loadedSettings.talk[6].."번 이구나!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("응! 앞으로 더 친해지자냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[5] = display.newText("인문관 자주 놀러와~", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
 	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 
 	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
@@ -73,7 +73,7 @@ function scene:create( event )
 
 		j = j + 1
 
-		if j == 8 then
+		if j == 7 then
 			composer.setVariable("talk6_status", "fin")
 			composer.removeScene("view02_talk_fallgame")
 			composer.gotoScene("view02_npc_fallgame")

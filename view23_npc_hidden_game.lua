@@ -17,8 +17,8 @@ function scene:create( event )
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
 	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.88
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 300, 130)
-	speechbubble.x, speechbubble.y = npc.x, npc.y-120
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 320, 110)
+	speechbubble.x, speechbubble.y = npc.x, npc.y-100
 
 	speechbubble.alpha = 0
 
@@ -47,7 +47,7 @@ function scene:create( event )
 	local function talkWithNPC( event )
 		speechbubble_exmark.alpha = 0
 		speechbubble.alpha = 1
-		speech.text = "히든 퀘스트를\n수행하러 왔구나! \n"
+		speech.text = "힌트를 주자면..\n오늘의 날짜가 행운의 숫자야!"
 		speech.size = 20
 		speech:setFillColor(0)
 
@@ -80,9 +80,9 @@ function scene:create( event )
 		objectGroup:insert(script) 				
 
 		--수락(말풍선)누르면 고양이가 말함
-		local speechbubble2 = display.newImageRect("image/npc/speechbubble.png", 200, 75)
+		local speechbubble2 = display.newImageRect("image/npc/speechbubble.png", 220, 75)
 		speechbubble2.x, speechbubble2.y = cat.x, cat.y-100
-		local speech2 = display.newText("맞아냥!!\n", 
+		local speech2 = display.newText("날짜..! 잘 기억하자냥!\n", 
 			speechbubble2.x, speechbubble2.y, "font/DOSGothic.ttf")
 		speech2.size = 20
 		speech2:setFillColor(0)

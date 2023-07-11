@@ -156,29 +156,59 @@ local function dragShip( event )
 	return true  -- Prevents touch propagation to underlying objects
 end
 
-
 local function gameLoop()
 	-- Create new asteroid
 	createAsteroid()
 
+	local asteroidsToRemove = {}  -- Create an empty table to store the indices of asteroids to remove
 
-	-- Remove asteroids which have drifted off screen
-	local thisAsteroid
 	for i = #asteroidsTable, 1, -1 do
-		thisAsteroid = asteroidsTable[i]
-		print(#asteroidsTable)
-	print(thisAsteroid.x)
-	print(thisAsteroid.y)
-		if ( thisAsteroid.x < -100 or
-			 thisAsteroid.x > display.contentWidth + 100 or
-			 thisAsteroid.y < -100 or
-			 thisAsteroid.y > display.contentHeight + 100 )
-		then
-			display.remove( thisAsteroid )
-			table.remove( asteroidsTable, i )
-		end
+	    local thisAsteroid = asteroidsTable[i]  -- Declare thisAsteroid as a local variable
+	    print(#asteroidsTable .. " asteroidtable")
+	    print(thisAsteroid.x .. " thisAsteroid.x")
+	    print(thisAsteroid.y .. " thisAsteroid.y")
+	    
+	    if thisAsteroid.x < -100 or
+	       thisAsteroid.x > display.contentWidth + 100 or
+	       thisAsteroid.y < -100 or
+	       thisAsteroid.y > display.contentHeight + 100
+	    then
+	        display.remove(thisAsteroid)
+	        table.insert(asteroidsToRemove, i)  -- Store the index of the asteroid to remove
+	    end
 	end
+
+	-- Remove the asteroids after the loop has finished iterating
+	for i = #asteroidsToRemove, 1, -1 do
+	    table.remove(asteroidsTable, asteroidsToRemove[i])
+	end
+
 end
+
+
+-- local function gameLoop()
+-- 	-- Create new asteroid
+-- 	createAsteroid()
+
+
+-- 	-- Remove asteroids which have drifted off screen
+-- 	local thisAsteroid
+-- 	for i = #asteroidsTable, 1, -1 do
+-- 		thisAsteroid = asteroidsTable[i]
+-- 		print(#asteroidsTable .. "asteroidtable")
+-- 		print(thisAsteroid.x .. "thisAsteroid.x")
+-- 		print(thisAsteroid.y .. "thisAsteroid.y")
+-- 		if ( thisAsteroid.x < -100 or
+-- 			 thisAsteroid.x > display.contentWidth + 100 or
+-- 			 thisAsteroid.y < -100 or
+-- 			 thisAsteroid.y > display.contentHeight + 100 )
+-- 		then
+-- 			display.remove( thisAsteroid )
+-- 			table.remove( asteroidsTable, i )
+-- 		end
+-- 	end
+
+-- end
 
 
 local function restoreShip()

@@ -16,29 +16,29 @@ function scene:create( event )
 	local objectGroup = display.newGroup()
 	local scriptGroup = display.newGroup()
 
+	-- Load the background
+	local background = display.newImageRect("image/frontgate/gate.jpg", 1280, 720 )--배경이미지 
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
 
-	local background = display.newImageRect("image/npc/place3.jpg", display.contentWidth, display.contentHeight)
- 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
-
- 	local npc = display.newImageRect("image/npc/npc2.png", 200, 200)
-	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
-	npc.xScale = -1
-
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
-	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
-	cat.xScale = -1
+	local npc = display.newImageRect("image/frontgate/security.png", 200, 200)--경비원 이미지 
+	npc.x = display.contentCenterX*1.7
+	npc.y = display.contentCenterY*1.2
+	
+	local cat = display.newImageRect("image/frontgate/cat1.png", 200, 191)--고양이 이미지 108 99
+	cat.x = display.contentCenterX
+	cat.y = display.contentHeight - 100
 	objectGroup:insert(cat)
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
-	speechbubble.x, speechbubble.y = npc.x, npc.y - 150
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 350, 120)
+	speechbubble.x, speechbubble.y = npc.x, npc.y-140
 	speechbubble.alpha = 0
 
 	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
-	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, display.contentHeight*0.35
+	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-140
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
-	speech.size = 20
-	speech:setFillColor(0)
+	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 60, "font/DOSGothic.ttf")
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
@@ -78,17 +78,18 @@ function scene:create( event )
 	mainName = loadedSettings.name
 	times = loadedSettings.talk[3]
 
-	if(composer.getVariable("talk3_status") == "fin") then
+	if(composer.getVariable("talk2_status") == "fin") then
 		-- loadedSettings.talk[3] = 0 --0으로 초기화하기 위한 임시 코드
-		loadedSettings.talk[3] = loadedSettings.talk[3] + 1
+		loadedSettings.talk[2] = loadedSettings.talk[2] + 1
 	end
 
+	-- mainmap1의 77번째 코드로 대체
 	--오늘 완수한 게임 개수가 4면 성공플래그 리셋
-	if(loadedSettings.total_success % 4 == 0) then
-		composer.setVariable("boongmake_status", "renew")
-		print(composer.getVariable("boongmake_status").. "성공플래그확인")
-		composer.setVariable("talk3_status", "renew")
-	end
+	-- if(loadedSettings.total_success % 4 == 0 and loadedSettings.total_success ~= 0) then
+	-- 	composer.setVariable("boongmake_status", "renew")
+	-- 	print(composer.getVariable("boongmake_status").. "성공플래그확인")
+	-- 	composer.setVariable("talk2_status", "renew")
+	-- end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
 	if(composer.getVariable("boongmake_status") == "success") then
@@ -149,11 +150,13 @@ function scene:create( event )
 			objectGroup:insert(scriptGroup)
 
 			gossip_click:addEventListener("tap", function() --대화 클릭 시 페이지 이동
-				if(composer.getVariable("talk3_status") == "fin") then
+				if(composer.getVariable("talk2_status") == "fin") then
 					script.text = "이미 대화를 끝냈습니다."
+					print("대화 끝", composer.getVariable("talk2_status"))
 				else
 					composer.removeScene("view17_npc_boongmake_game")
 					composer.gotoScene("view17_talk_boongmake_game")
+					print("대화 안끝남", composer.getVariable("talk2_status"))
 				end
 			end)
 
@@ -170,7 +173,7 @@ function scene:create( event )
 
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
-		if(composer.getVariable("boongmake_status") == "success" and composer.getVariable("talk3_status") == "fin") then
+		if(composer.getVariable("boongmake_status") == "success" and composer.getVariable("talk2_status") == "fin") then
 			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 				section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
@@ -192,14 +195,14 @@ function scene:create( event )
 		scriptGroup.alpha = 1
 
 		if(composer.getVariable("boongmake_status") ~= "success") then			
-			speech.text = "붕어빵 먹고싶다.."
+			speech.text = "정문 앞에서 붕어빵 냄새가 나네.."
 		else
-			speech.text = "노릇노릇하게 잘 됐다!\n너도 먹을래?"
+			speech.text = "팥붕줄까 슈붕줄까?"
 		end
 		speech.size = 20
 		speech:setFillColor(0)
 
-		if(composer.getVariable("boongmake_status") ~= "success" or composer.getVariable("talk3_status") ~= "fin") then
+		if(composer.getVariable("boongmake_status") ~= "success" or composer.getVariable("talk2_status") ~= "fin") then
 			gossipOrGame()
 		end
 	end
@@ -212,12 +215,13 @@ function scene:create( event )
 
 		speechbubble_exmark.alpha = 0
 		speechbubble.alpha = 1
-		speech.text = "고마워! 맛있겠다!\n너도 맛있는거 먹을래?"
+		speechbubble.width = 250
+		speech.text = "너도 붕어빵 먹을래?"
 		speech.alpha = 1
 		speech:setFillColor(black)
-		coin.alpha = 0
+		-- coin.alpha = 0
 
-		gift = display.newImageRect("image/boong/붕어빵 완성.png", 100, 100)
+		gift = display.newImageRect("image/boong/object07.png", 100, 100)
  		gift.x, gift.y = npc.x-120, npc.y+10
 
  		objectGroup:insert(gift)

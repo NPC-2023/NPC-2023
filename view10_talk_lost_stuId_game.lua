@@ -73,7 +73,7 @@ function scene:create( event )
 
 		j = j + 1
 
-		if j == 8 then
+		if j == 7 then
 			composer.setVariable("talk8_status", "fin")
 			composer.removeScene("view10_talk_lost_stuId_game")
 			composer.gotoScene("view10_npc_lost_stuId_game")

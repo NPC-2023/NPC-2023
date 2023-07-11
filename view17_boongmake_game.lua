@@ -347,6 +347,8 @@ function scene:create( event )
 							 score.alpha = 0
 							 score.text = '성공'
 							 composer.setVariable("boongmake_status", "success")
+							 composer.removeScene("view17_boongmake_game")
+							composer.gotoScene("view17_boongmake_game_over")
 				 		end
 				 	end
 	 			end
@@ -370,6 +372,8 @@ function scene:create( event )
 		 		score.text = '실패'
 		 	--게임 실패 판별 기준 time.text == '-1'이되면 ending으로 이동------------------------------------------------------------------------
 				composer.setVariable("boongmake_status", "fail")
+				composer.removeScene("view17_boongmake_game")
+				composer.gotoScene("view17_boongmake_game_over")
 			end
 		 end
 

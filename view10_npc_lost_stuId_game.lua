@@ -82,7 +82,7 @@ function scene:create( event )
 		loadedSettings.talk[8] = loadedSettings.talk[8] + 1
 	end
 
-	
+	-- mainmap1의 77번째 코드로 대체	
 	-- --오늘 완수한 게임 개수가 4면 성공플래그 리셋
 	-- if(loadedSettings.total_success % 4 == 0) then
 	-- 	composer.setVariable("stuId_status", "renew")
@@ -110,7 +110,7 @@ function scene:create( event )
 		--수락(말풍선)누르면 고양이가 말함
 		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 200, 75)
 		speechbubble.x, speechbubble.y = cat.x, cat.y-100
-		local speech = display.newText("알았다냥!\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
+		local speech = display.newText("찾아줄게냥!\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
 		speech.size = 20
 		speech:setFillColor(0)
 

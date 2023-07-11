@@ -64,12 +64,12 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap =display.newImageRect("image/custom/cat_twinkle.png", 200, 200) --성공할 경우
+	local backtomap =display.newImage("image/custom/cat_twinkle.png") --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
 
-	local backtomap_text = display.newText("성공!", display.contentWidth*0.5, display.contentHeight*0.3, "font/DOSGothic.ttf")
+	local backtomap_text = display.newText("성공!", backtomap.x, backtomap.y - 300, "font/DOSGothic.ttf")
 	backtomap_text:setFillColor(1)
 	backtomap_text.size = 60
 	sceneGroup:insert(backtomap_text)

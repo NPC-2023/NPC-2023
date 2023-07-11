@@ -82,12 +82,13 @@ function scene:create( event )
 		loadedSettings.talk[1] = loadedSettings.talk[1] + 1
 	end
 
-	--오늘 완수한 게임 개수가 4면 성공플래그 리셋
-	if(loadedSettings.total_success % 4 == 0) then
-		composer.setVariable("frontgategame_status", "renew")
-		print(composer.getVariable("frontgategame_status").. "성공플래그확인")
-		composer.setVariable("talk2_status", "renew")
-	end
+	-- mainmap1의 77번째 코드로 대체
+	-- --오늘 완수한 게임 개수가 4면 성공플래그 리셋
+	-- if(loadedSettings.total_success % 4 == 0) then
+	-- 	composer.setVariable("frontgategame_status", "renew")
+	-- 	print(composer.getVariable("frontgategame_status").. "성공플래그확인")
+	-- 	composer.setVariable("talk2_status", "renew")
+	-- end
 
 	--오늘 완수한 게임 개수(4면 히든게임 등장)
 	if(composer.getVariable("frontgategame_status") == "success") then

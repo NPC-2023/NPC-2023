@@ -17,7 +17,7 @@ function scene:create( event )
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
  	local npc = display.newImageRect("image/npc/npc2.png", 200, 200)
-	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.6
+	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.65
 	npc.xScale = -1
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
@@ -44,11 +44,11 @@ function scene:create( event )
 
 	--대사
 	local t = {}
-	t[1] = display.newText("ttttt고 있냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("풀숲에 뭐가 tttemp 있어서 보고 있었어.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("흠.. 잘 안 보이네? 저게 뭘까? ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("우와 저건 내가 좋아하는 츄르다냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("정말? 원한다면 네가 가져도 돼!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[1] = display.newText("뭐하고 있냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("계단 밑에 뭔가 있어서 보고 있었어.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("흠.. 잘 안 보이네? 저게 뭐다냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("으악!!! 생쥐다!!!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[5] = display.newText("생쥐? 내가 잡아줄게냥!!!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
 	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 
 	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
@@ -73,7 +73,7 @@ function scene:create( event )
 
 		j = j + 1
 
-		if j == 8 then
+		if j == 7 then
 			composer.setVariable("talk8_status", "fin")
 			composer.removeScene("view034_talk_mouse_game")
 			composer.gotoScene("view034_npc_mouse_game")

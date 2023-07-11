@@ -72,12 +72,12 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap =display.newImageRect("image/custom/cat_twinkle.png", 200, 200) --성공할 경우
+	local backtomap =display.newImage("image/custom/cat_twinkle.png") --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
 
-	local backtomap_text = display.newText("성공!", display.contentWidth*0.5, display.contentHeight*0.3, "font/DOSGothic.ttf")
+	local backtomap_text = display.newText("성공!", backtomap.x, backtomap.y - 300, "font/DOSGothic.ttf")
 	backtomap_text:setFillColor(1)
 	backtomap_text.size = 60
 	sceneGroup:insert(backtomap_text)
@@ -90,12 +90,14 @@ function scene:create( event )
 	if score3 < 0 then
 		backgame.alpha = 1
 		fail_close.alpha = 1
+		backtomap_text.alpha=0
 		-- 2023.07.04 edit by jiruen // 게임 실패 bgm 추가
 		audio.play(failBgm) 
 		fail_close:addEventListener("touch",backtogame)
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
+		backtomap_text.alpha=1
 		-- 2023.07.04 edit by jiruen // 게임 성공 bgm 추가
 		audio.play(clearBgm)
 		clear_close:addEventListener("touch",gomap)

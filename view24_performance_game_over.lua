@@ -6,6 +6,7 @@
 
 local composer = require( "composer" )
 local scene = composer.newScene()
+local loadsave = require( "loadsave" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -49,13 +50,16 @@ function scene:create( event )
 	local fail_close = display.newImageRect("image/performance/retry.png", 150, 150)
 	fail_close.x, fail_close.y = 950, 400
 	fail_close.alpha = 0
+
+	local loadedSettings = loadsave.loadTable( "settings.json" )
 	
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then
 				loadedSettings.money = loadedSettings.money + 3
+				composer.setVariable("hiddengame_status", "success")
 				composer.removeScene("view24_performance_game_over")
-				composer.gotoScene( "view24_npc_performance_game" )--view1은 exit버튼 누르면 나오는 메인화면 
+				composer.gotoScene( "view05_main_map" )--view1은 exit버튼 누르면 나오는 메인화면 
 		end
 	end
 
