@@ -70,7 +70,7 @@ function scene:create( event )
 	gossip_click:setFillColor(1)
 	gossip_click.alpha = 0
 
-	local game_click = display.newText("▼게임", display.contentWidth*0.15, display.contentHeight*0.88, "font/DOSGothic.ttf", 80)
+	local game_click = display.newText("▼게임", display.contentWidth*0.5, display.contentHeight*0.8, "font/DOSGothic.ttf", 80)
 	game_click.size = 30
 	game_click:setFillColor(1)
 	game_click.alpha = 0

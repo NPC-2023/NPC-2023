@@ -12,16 +12,17 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/place3.jpg", display.contentWidth, display.contentHeight)
- 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/frontgate/gate.jpg", 1280, 720 )--배경이미지 
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
 
- 	local npc = display.newImageRect("image/npc/npc2.png", 200, 200)
-	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
-	npc.xScale = -1
-
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
-	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
-	cat.xScale = -1
+	local npc = display.newImageRect("image/frontgate/security.png", 200, 200)--경비원 이미지 
+	npc.x = display.contentCenterX*1.7
+	npc.y = display.contentCenterY*1.2
+	
+	local cat = display.newImageRect("image/frontgate/cat1.png", 200, 191)--고양이 이미지 108 99
+	cat.x = display.contentCenterX
+	cat.y = display.contentHeight - 100
 	objectGroup:insert(cat)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)

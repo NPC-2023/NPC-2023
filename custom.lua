@@ -275,6 +275,7 @@ function scene:create( event )
 	 			popup_text:setFillColor(0)
 	 			btn_ok.x = display.contentWidth*0.5
 	 			btn_ok_text.text, btn_ok_text.x = "확인", btn_ok.x
+	 			btn_ok_text.size = 30;
 	 			btn_no.alpha, btn_no_text.alpha = 0, 0
 	 			
 	 			btn_ok:addEventListener("tap", function() 
@@ -313,6 +314,7 @@ function scene:create( event )
 				popup_text.text = "캔 수가 모자랍니다."
 				btn_ok.x = display.contentWidth*0.5
 	 			btn_ok_text.text, btn_ok_text.x = "확인", btn_ok.x
+	 			btn_ok_text.size = 30;
 	 			btn_no.alpha, btn_no_text.alpha = 0, 0
 	 			btn_ok:addEventListener("tap", function() popupGroup.alpha = 0 popup_text.alpha = 0 end) 
 			else
@@ -339,6 +341,9 @@ function scene:create( event )
 
 		 		btn_ok_text =display.newText("네", btn_ok.x, btn_ok.y, "font/DOSGothic.ttf")
 		 		btn_no_text =display.newText("아니오", btn_no.x, btn_no.y, "font/DOSGothic.ttf")
+
+		 		btn_ok_text.size = 30;
+		 		btn_no_text.size = 30;
 
 		 		popupGroup:insert(popup)
 		 		popupGroup:insert(popup_text)
