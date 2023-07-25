@@ -22,7 +22,7 @@ function scene:create( event )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 
-	local npc = display.newImageRect("image/frontgate/security.png", 200, 200)--경비원 이미지 
+	local npc = display.newImageRect("image/npc/npc3.png", 200, 200)
 	npc.x = display.contentCenterX*1.7
 	npc.y = display.contentCenterY*1.2
 	
@@ -31,7 +31,7 @@ function scene:create( event )
 	cat.y = display.contentHeight - 100
 	objectGroup:insert(cat)
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 330, 200)
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 280, 130)
 	speechbubble.x, speechbubble.y = npc.x, npc.y-140
 	speechbubble.alpha = 0
 
@@ -191,7 +191,7 @@ function scene:create( event )
 		scriptGroup.alpha = 1
 
 		if(composer.getVariable("climb_status") ~= "success") then			
-			speech.text = "과제를 하려면 목화솜이 필요한데..\n너무 높이 있어"
+			speech.text = "과제를 하려면\n목화솜이 필요한데.."
 		else
 			speech.text = "그거 알아?\n 목화가 바로 교화야."
 		end
