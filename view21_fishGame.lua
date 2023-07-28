@@ -10,8 +10,9 @@ function scene:create( event )
 
 	composer.setVariable("gameName", "view21_fishGame")
 
-	local background = display.newImageRect("image/fishing/mainbd_back.png", display.contentWidth, display.contentHeight)
- 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/fishing/mainbd_back.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 
  	local gametitle = display.newImageRect("image/fall/미니게임 타이틀.png", 687/1.2, 604/1.2)
 	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2

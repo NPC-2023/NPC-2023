@@ -21,8 +21,9 @@ function scene:create( event )
 	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
 
 
-	local background = display.newImageRect("image/schoolfood/cafeteria.png",display.contentWidth, display.contentHeight) ---배경
-	background.x,background.y = display.contentWidth/2,display.contentHeight/2
+	local background = display.newImageRect("image/schoolfood/cafeteria.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
 	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)

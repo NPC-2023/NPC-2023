@@ -49,8 +49,9 @@ function scene:create( event )
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
 	script.alpha=0
 
-	local background = display.newImage("image/climbing_the_tree/배경.png")
-	background.x, background.y=display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/climbing_the_tree/배경.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 
 
 	-- 힌트 버튼

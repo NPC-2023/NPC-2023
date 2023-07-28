@@ -18,8 +18,9 @@ function scene:create( event )
 
 	composer.setVariable("gameName", "view02_pick_game")
 
-	local background = display.newImageRect("image/pick/background.png",display.contentWidth, display.contentHeight) ---배경
-	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/pick/background.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 	background.alpha = 0.5
 	sceneGroup:insert(background)
 	

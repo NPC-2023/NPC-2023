@@ -13,8 +13,9 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/store_entry.png", display.contentWidth, display.contentHeight)
- 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/npc/store_entry.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 
  	local npc = display.newImageRect("image/npc/npc1.png", 250, 220)
 	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.72

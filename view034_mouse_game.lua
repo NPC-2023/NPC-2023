@@ -13,8 +13,9 @@ function scene:create( event )
 
 	composer.setVariable("gameName", "view034_mouse_game")
 	
-	local background = display.newImageRect("image/mouse/background.png",display.contentWidth, display.contentHeight)
-	background.x,background.y = display.contentWidth/2,display.contentHeight/2
+	local background = display.newImageRect("image/mouse/background.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
 	-- 변수 설정

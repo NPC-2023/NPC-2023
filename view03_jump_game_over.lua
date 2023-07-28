@@ -13,8 +13,9 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	
-	local background = display.newImageRect("image/jump/background_water.png",display.contentWidth, display.contentHeight) ---배경
-	background.x,background.y = display.contentWidth/2,display.contentHeight/2
+	local background = display.newImageRect("image/jump/background_water.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
 	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)

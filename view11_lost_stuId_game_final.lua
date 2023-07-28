@@ -45,8 +45,9 @@ function scene:create( event )
 	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
 	script.alpha=0
 
-	local background = display.newImageRect("image/lost_stuId/background.png", display.contentWidth, display.contentHeight)
-	background.x, background.y=display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/lost_stuId/background.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 
 	-- 힌트 버튼
 	local hint = display.newImageRect("image/lost_stuId/확인,힌트 버튼.png", 768/3, 768/3)

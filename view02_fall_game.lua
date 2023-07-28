@@ -26,8 +26,9 @@ function scene:create( event )
 	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
 
 	
-	local background = display.newImageRect("image/fall/background_final.png", display.contentWidth, display.contentHeight)
-	background.x, background.y=display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/fall/background_final.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
 

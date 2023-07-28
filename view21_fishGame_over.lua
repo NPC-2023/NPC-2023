@@ -11,8 +11,9 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 
-	local background = display.newImageRect("image/fishing/mainbd_back.png",display.contentWidth, display.contentHeight) ---배경
-	background.x,background.y = display.contentWidth/2,display.contentHeight/2
+	local background = display.newImageRect("image/fishing/mainbd_back.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
 	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가

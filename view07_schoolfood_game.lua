@@ -35,8 +35,9 @@ function scene:create( event )
 	script.alpha=0
 
 
-	local background = display.newImageRect("image/schoolfood/cafeteria.png", 1280, 720)--배경이미지 display.contentWidth, display.contentHeight
-	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/schoolfood/cafeteria.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 
 	local pan = display.newImageRect("image/schoolfood/pan.png", 900, 900)--식판 이미지 
  	pan.x, pan.y = display.contentWidth/2, display.contentHeight/2

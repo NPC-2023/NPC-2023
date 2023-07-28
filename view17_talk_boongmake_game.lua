@@ -12,7 +12,7 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/frontgate/gate.jpg", 1280, 720 )--배경이미지 
+	local background = display.newImageRect("image/frontgate/gate.jpg", 960, 640 )--배경이미지 
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 

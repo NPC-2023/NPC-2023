@@ -72,7 +72,9 @@ function scene:create( event )
 		title.size = 50
 		title:setFillColor(0)
 
-		local titleBackground = display.newImage("image/boong/view02_background.png", display.contentWidth/2, display.contentHeight/2)
+		local titleBackground = display.newImage("image/boong/view02_background.png", 960, 640)
+		titleBackground.x = display.contentCenterX
+    	titleBackground.y = display.contentCenterY
 
 		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 		section:setFillColor(0.35, 0.35, 0.35, 0.35)

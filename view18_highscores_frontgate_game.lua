@@ -27,8 +27,9 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
-	local background = display.newImageRect("image/frontgate/gate.jpg",1280, 720) --엔딩화면 배경
-	background.x,background.y = display.contentWidth/2,display.contentHeight/2
+	local background = display.newImageRect("image/frontgate/gate.jpg", 960, 640) --엔딩화면 배경
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
 	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, 1280, 720) --display.contentWidth, display.contentHeight

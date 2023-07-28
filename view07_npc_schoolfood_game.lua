@@ -19,9 +19,9 @@ function scene:create( event )
 
 
 	-- Load the background
-	local background = display.newImageRect("image/npc/place1.jpg", 1280, 720 )--배경이미지 
+	local background = display.newImageRect("image/npc/place1.jpg", 960, 640)
 	background.x = display.contentCenterX
-	background.y = display.contentCenterY
+    background.y = display.contentCenterY
 
 	local npc = display.newImageRect("image/npc/npc1.png", 200, 200)
 	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55

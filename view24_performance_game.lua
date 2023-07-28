@@ -11,8 +11,9 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	composer.setVariable("gameName", "view24_performance_game")
-	local background = display.newImageRect("image/performance/background.png", display.contentWidth, display.contentHeight)
-	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/performance/background.png", 960, 640)
+	background.x = display.contentCenterX
+    background.y = display.contentCenterY
 
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)

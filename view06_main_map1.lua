@@ -117,8 +117,8 @@ function scene:create( event )
 
     if(loadedSettings.total_success < 4) then
         print("봄")
-        background = display.newImageRect("image/map/봄맵.png", display.contentWidth, display.contentHeight)
-
+        background = display.newImageRect("image/map/봄맵.png", 960, 640)
+        
         for i = 1, 8 do 
             local size = building_size[i]
             building[i] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[i] .."봄.png", 512/size, 512/size)
@@ -133,7 +133,7 @@ function scene:create( event )
             end
 
             -- 백그라운드 변경
-            background = display.newImageRect("image/map/여름맵.png", display.contentWidth, display.contentHeight)
+            background = display.newImageRect("image/map/여름맵.png", 960, 640)
 
             for i = 1, 8 do 
                 local size = building_size[i]
@@ -148,7 +148,7 @@ function scene:create( event )
                 loadedSettings.total_success_names = {} 
             end
 
-            background = display.newImageRect("image/map/가을맵.png", display.contentWidth, display.contentHeight)
+            background = display.newImageRect("image/map/가을맵.png", 960, 640)
 
             for i = 1, 8 do 
                 local size = building_size[i]
@@ -162,7 +162,7 @@ function scene:create( event )
                 loadedSettings.total_success_names = {} 
             end
 
-            background = display.newImageRect("image/map/겨울맵.png", display.contentWidth, display.contentHeight)
+            background = display.newImageRect("image/map/겨울맵.png", 960, 640)
 
             for i = 1, 8 do 
                 local size = building_size[i]
@@ -171,7 +171,8 @@ function scene:create( event )
         end
     end
 
-    background.x, background.y=display.contentWidth/2, display.contentHeight/2
+    background.x = display.contentCenterX
+    background.y = display.contentCenterY
 
 
     for i = 1, 8 do 
