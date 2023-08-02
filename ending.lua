@@ -12,11 +12,12 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/게임시작/5.png", display.contentWidth, display.contentHeight)
-	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/게임시작/5.png", 960, 640)
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
 
 	--대화창
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentHeight*0.9)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	objectGroup:insert(section)
 
@@ -36,13 +37,13 @@ function scene:create( event )
 	--대화창
  	--대사
 	local t = {}
-	t[1] = display.newText("인간 세계에 내려온지 벌써 16일..", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("그동안 여러 곳에서 수 많은 학생들을 만났지.", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("그 결과 나," ..loadedSettings.name.. "는.. ", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText(ending_building.. "을 수호하는 고양이가 되었어.\n 특히 이 곳에서 많은 학생들을 만났었지.", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("난 다시 왕국으로 돌아갈 시간이야. 학교는 나 덕분에 안전해졌으니 걱정말라냥!",display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[6] = display.newText("다음에 또 만나자. \n 안녕! 솜솜이들!",display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[7] = display.newText("게임이 종료되었습니다.",display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[1] = display.newText("인간 세계에 내려온지 벌써 16일..", display.contentWidth * 0.2, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("그동안 여러 곳에서 수 많은 학생들을 만났지.", display.contentWidth * 0.2, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("그 결과 나," ..loadedSettings.name.. "는.. ", display.contentWidth * 0.2, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText(ending_building.. "을 수호하는 고양이가 되었어.\n 특히 이 곳에서 많은 학생들을 만났었지.", display.contentWidth * 0.2, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[5] = display.newText("난 다시 왕국으로 돌아갈 시간이야. 학교는 나 덕분에 안전해졌으니 걱정말라냥!",display.contentWidth * 0.2, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[6] = display.newText("다음에 또 만나자. \n 안녕! 솜솜이들!",display.contentWidth * 0.2, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[7] = display.newText("게임이 종료되었습니다.",display.contentWidth * 0.2, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 
 	loadsave.saveTable(loadedSettings,"settings.json")
 

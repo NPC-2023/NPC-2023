@@ -18,12 +18,13 @@ function scene:create( event )
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
- 	local npc = display.newImageRect("image/npc/npc1.png", 250, 220)
-	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.72
+ 	local npc = display.newImageRect("image/npc/npc1.png", 200, 180)
+	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.78
 	npc.xScale = -1
+	objectGroup:insert(npc)
 
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 180)
-	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.88
+	local cat = display.newImageRect("image/npc/cat_back.png", 180, 180)
+	cat.x, cat.y = display.contentWidth*0.1, display.contentHeight*0.88
 	objectGroup:insert(cat)
 
 	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 250, 150)
@@ -34,7 +35,7 @@ function scene:create( event )
 	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-130
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
-	local accept = display.newText("", speechbubble.x, speechbubble.y-50, "font/DOSGothic.ttf")
+	local accept = display.newText("", speechbubble.x, speechbubble.y-80, "font/DOSGothic.ttf")
 	local money = math.random(1, 10) * 1000 --고양이가 받을 심부름 돈
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
@@ -47,7 +48,7 @@ function scene:create( event )
 	coin.alpha = 0
 
 	--스크립트
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*4, display.contentWidth*0.9)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha = 0
 
@@ -107,7 +108,7 @@ function scene:create( event )
 
 		--수락(말풍선)누르면 고양이가 말함
 		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 200, 75)
-		speechbubble.x, speechbubble.y = cat.x, cat.y-100
+		speechbubble.x, speechbubble.y = cat.x, cat.y-150
 		local speech = display.newText("알았다냥!\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
 		speech.size = 20
 		speech:setFillColor(0)
@@ -130,10 +131,10 @@ function scene:create( event )
 		timer.performWithDelay( 1500, function() 
 			scriptGroup.alpha = 1
 			--스크립트
-			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*4, display.contentWidth*0.9)
 			section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
-			local script = display.newText("어떤 것을 할까?", display.contentWidth*0.2, display.contentHeight*0.7, "font/DOSGothic.ttf", 80)
+			local script = display.newText("어떤 것을 할까?", display.contentWidth*0.1, display.contentHeight*0.7, "font/DOSGothic.ttf", 80)
 			script.size = 30
 			script:setFillColor(1)
 
@@ -175,8 +176,8 @@ function scene:create( event )
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
 		if(composer.getVariable("moneygame_status") == "success" and composer.getVariable("talk5_status") == "fin") then
-			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
-				section:setFillColor(0.35, 0.35, 0.35, 0.35)
+			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*4, display.contentWidth*0.9)
+			section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
 			local script = display.newText("퀘스트를 완료하였습니다. ", display.contentWidth/2, display.contentHeight*0.789, "font/DOSGothic.ttf", 80)
 				script.size = 30
@@ -241,9 +242,7 @@ function scene:create( event )
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
 	coin:addEventListener("tap", acceptQuest)
 	map:addEventListener("tap", goBackToMap)
-
-
- 	objectGroup:insert(npc)
+ 
  	objectGroup:insert(speechbubble)
  	objectGroup:insert(speechbubble_exmark)
  	objectGroup:insert(speech)

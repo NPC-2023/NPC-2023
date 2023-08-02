@@ -18,14 +18,14 @@ function scene:create( event )
 	composer.setVariable("gameName", "view20_moneyGame")
 
 	local gametitle = display.newImageRect("image/fall/미니게임 타이틀.png", 687/1.2, 604/1.2)
-	gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
+	gametitle.x, gametitle.y = display.contentCenterX, display.contentCenterY
 
 	local gameName = display.newText("간식 사기", 0, 0, "ttf/Galmuri7.ttf", 45)
 	gameName.align = "center"
 	gameName:setFillColor(0)
 	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
 
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth*4, display.contentHeight*0.9)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0
 	sceneGroup:insert(section)
@@ -72,8 +72,14 @@ function scene:create( event )
 
 	local money = {"1000", "1000", "2000", "2500", "1500", "1000"}
 
-	for i = 1, 6 do
-		object[i].x, object[i].y = display.contentWidth*0.1*(i+1), display.contentHeight*0.5
+	for i = 1, 3 do
+		object[i].x, object[i].y = display.contentWidth*0.1*i*i, display.contentHeight*0.3
+		object[i].money = money[i]
+ 		objectGroup:insert(object[i])
+ 	end
+
+	for i = 4, 6 do
+		object[i].x, object[i].y = display.contentWidth*0.1*(i-3)*(i-3), display.contentHeight*0.6
 		object[i].money = money[i]
  		objectGroup:insert(object[i])
  	end
@@ -88,7 +94,7 @@ function scene:create( event )
 		objectGroup:insert(script[i])
 	end
 
-	local totalScript = display.newText("0", display.contentWidth*0.1, display.contentHeight*0.1, "font/DOSGothic.ttf")
+	local totalScript = display.newText("0", display.contentWidth/2, display.contentHeight*0.1, "font/DOSGothic.ttf")
 	totalScript.size = 50
 	totalScript:setFillColor(1)
 
@@ -102,7 +108,7 @@ function scene:create( event )
 
 	local errand = composer.getVariable("money")
 
-	local reset = display.newText("reset", display.contentWidth*0.2, display.contentHeight*0.1, "font/DOSGothic.ttf")
+	local reset = display.newText("reset", display.contentWidth*0.1, display.contentHeight*0.1, "font/DOSGothic.ttf")
 	reset.size = 50
 	reset:setFillColor(1)
 

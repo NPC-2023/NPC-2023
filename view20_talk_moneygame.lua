@@ -17,16 +17,17 @@ function scene:create( event )
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
- 	local npc = display.newImageRect("image/npc/npc1.png", 250, 220)
-	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.72
+ 	local npc = display.newImageRect("image/npc/npc1.png", 200, 180)
+	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.78
 	npc.xScale = -1
+	objectGroup:insert(npc)
 
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 180)
-	cat.x, cat.y = display.contentWidth*0.4, display.contentHeight*0.88
+	local cat = display.newImageRect("image/npc/cat_back.png", 180, 180)
+	cat.x, cat.y = display.contentWidth*0.1, display.contentHeight*0.88
 	objectGroup:insert(cat)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
+	map.x, map.y = display.contentWidth*0.88*2, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
@@ -40,20 +41,20 @@ function scene:create( event )
 
 
 	 --대화창
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*4, display.contentWidth*0.9)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	objectGroup:insert(section)
 
 	--대사
 	local t = {}
-	t[1] = display.newText("뭘 먹을지 고민돼.. \n 간메추 해주라.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("통조림캔 어떠냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("사람은 이거 못먹어!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("그럼 고등어는 먹을 수 있냥?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("이대론 못 먹어...", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
-	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[1] = display.newText("뭘 먹을지 고민돼.. \n 간메추 해주라.", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("통조림캔 어떠냥?", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("사람은 이거 못먹어!", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("그럼 고등어는 먹을 수 있냥?", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[5] = display.newText("이대론 못 먹어...", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 	
-	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
+	local next_text = display.newText("다음 ▶", display.contentWidth*0.8*2, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
 	
 	local i, j = 1, 1
 	for i = 2, 6 do
@@ -86,7 +87,6 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
- 	objectGroup:insert(npc)
  	objectGroup:insert(map)
  	objectGroup:insert(map_text)
  	objectGroup:insert(next_text)

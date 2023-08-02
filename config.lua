@@ -11,6 +11,10 @@ application =
 		height = 320, 
 		scale = "letterbox",
 		fps = 60,
+		  antialias = true,
+        xalign = "center",
+        yalign = "center",
+
 		
 		--[[
 		imageSuffix =

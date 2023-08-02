@@ -10,7 +10,7 @@ function scene:create( event )
 
 	composer.setVariable("gameName", "view21_fishGame")
 
-	local background = display.newImageRect("image/fishing/mainbd_back.png", 960, 640)
+	local background = display.newImageRect("image/fishing/mainbd_back.png", 1080, 590)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
@@ -22,7 +22,7 @@ function scene:create( event )
 	gameName:setFillColor(0)
 	gameName.x, gameName.y=display.contentWidth/2, display.contentHeight*0.65
 
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth*3, display.contentHeight*0.9)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0
 	sceneGroup:insert(section)
@@ -54,13 +54,13 @@ function scene:create( event )
  	local fish = {}
 
  	fish[1] = display.newImageRect("image/fishing/fish1.png", 80, 80)
-	fish[1].x, fish[1].y = display.contentWidth*0.8, display.contentHeight*0.9
+	fish[1].x, fish[1].y = display.contentWidth*0.3, display.contentHeight*0.9
 	fish[2] = display.newImageRect("image/fishing/fish2.png", 80, 80)
-	fish[2].x, fish[2].y = display.contentWidth*0.3, display.contentHeight*0.9
+	fish[2].x, fish[2].y = display.contentWidth*0.1, display.contentHeight*0.9
 	fish[3] = display.newImageRect("image/fishing/fish3.png", 50, 50)
-	fish[3].x, fish[3].y = display.contentWidth*0.85, display.contentHeight*0.4
+	fish[3].x, fish[3].y = display.contentWidth*0.85*2, display.contentHeight*0.4
 	fish[4] = display.newImageRect("image/fishing/fish4.png", 80, 80)
-	fish[4].x, fish[4].y = display.contentWidth*0.5, display.contentHeight*0.9
+	fish[4].x, fish[4].y = display.contentWidth*0.7, display.contentHeight*0.9
 
 	-- code minimize
 	for i = 1, 4 do
@@ -87,7 +87,7 @@ function scene:create( event )
 	audio.play(home, musicOption)
 	
 	local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
+    volumeButton.x,volumeButton.y = display.contentWidth * 0.91*0.8, display.contentHeight * 0.1
    	
    	local options = {
         isModal = true
@@ -155,7 +155,7 @@ function scene:create( event )
 				end
 			else
 				cat.xScale = -1
-				event.target.x = display.contentWidth*(0.8+(ranX/4.5))
+				event.target.x = display.contentWidth*(0.8*2+(ranX/4.5))
 				event.target.y = display.contentHeight*(0.4+(ranY/3))
 				cat.y = display.contentHeight*0.25
 				fish3_cnt = fish3_cnt + 1
@@ -182,13 +182,13 @@ function scene:create( event )
 
 					event.target.y = event.target.y + 10
 					timer.performWithDelay( 1500, function() 
-						event.target.x = display.contentWidth*(tag * 0.1)
-						event.target.y = display.contentHeight*0.1 
+						-- event.target.x = display.contentWidth*(tag * 0.1)
+						-- event.target.y = display.contentHeight*0.1 
 						splash.alpha = 0
 						total_cnt = total_cnt + 1	
 
 						--230712 손수연 : 클릭방지 구현못해서 그냥 사라지게 해놓음
-						timer.performWithDelay( 1000, function()
+						timer.performWithDelay( 200, function()
 							event.target.alpha = 0
 						end
 						)

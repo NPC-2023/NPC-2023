@@ -13,13 +13,14 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/place3.jpg", 960, 640)
+	local background = display.newImageRect("image/npc/place3.jpg", 1080, 720)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
  	local npc = display.newImageRect("image/npc/npc3.png", 200, 200)
 	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
 	npc.xScale = -1
+	objectGroup:insert(npc)
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
 	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
@@ -27,7 +28,7 @@ function scene:create( event )
 	objectGroup:insert(cat)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
+	map.x, map.y = display.contentWidth*0.88*2, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
@@ -40,7 +41,7 @@ function scene:create( event )
 	loadsave.saveTable(loadedSettings,"settings.json")
 
 	--대화창
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth*4, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	objectGroup:insert(section)
 
@@ -53,7 +54,7 @@ function scene:create( event )
 	t[5] = display.newText("앞으로 만나면 " ..string.sub(mainName, 1, 3).."라고 부를게! 헤헤. ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
 	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 
-	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
+	local next_text = display.newText("다음 ▶", display.contentWidth*0.8*2, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
 	
 	local i, j = 1, 1
 	for i = 2, 6 do
@@ -86,7 +87,6 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
- 	objectGroup:insert(npc)
  	objectGroup:insert(map)
  	objectGroup:insert(map_text)
  	objectGroup:insert(next_text)

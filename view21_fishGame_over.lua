@@ -23,7 +23,7 @@ function scene:create( event )
 
 	-- 배경 어둡게
 	
-	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth*3, display.contentHeight*3)
 	
 	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000})
