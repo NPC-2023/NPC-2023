@@ -42,18 +42,17 @@ function scene:create( event )
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 60, "font/DOSGothic.ttf")
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
+	map.x, map.y = display.contentWidth*1.6, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
 
-
 	--스크립트
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha = 0
 
-	local script = display.newText("", display.contentWidth*0.2, display.contentHeight*0.789, "font/DOSGothic.ttf", 80)
+	local script = display.newText("", display.contentWidth*0.1, display.contentHeight*0.73, "font/DOSGothic.ttf", 80)
 	script.size = 30
 	script:setFillColor(1)
 	script.alpha = 0
@@ -62,12 +61,12 @@ function scene:create( event )
 	objectGroup:insert(script) 
 
 	--스크립트 속 선택지
-	local gossip_click = display.newText("▼대화", display.contentWidth*0.15, display.contentHeight*0.8, "font/DOSGothic.ttf", 80)
+	local gossip_click = display.newText("▶대화", display.contentWidth*0.6*2, display.contentHeight*0.9, "font/DOSGothic.ttf", 80)
 	gossip_click.size = 30
 	gossip_click:setFillColor(1)
 	gossip_click.alpha = 0
 
-	local game_click = display.newText("▼게임", display.contentWidth*0.5, display.contentHeight*0.8, "font/DOSGothic.ttf", 80)
+	local game_click = display.newText("▶게임", display.contentWidth*0.8*2, display.contentHeight*0.9, "font/DOSGothic.ttf", 80)
 	game_click.size = 30
 	game_click:setFillColor(1)
 	game_click.alpha = 0
@@ -132,10 +131,10 @@ function scene:create( event )
 		timer.performWithDelay( 1500, function() 
 			scriptGroup.alpha = 1
 			--스크립트
-			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
 			section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
-			local script = display.newText("어떤 것을 할까?", display.contentWidth*0.2, display.contentHeight*0.7, "font/DOSGothic.ttf", 80)
+			local script = display.newText("어떤 것을 할까?", display.contentWidth*0.1, display.contentHeight*0.73, "font/DOSGothic.ttf", 80)
 			script.size = 30
 			script:setFillColor(1)
 
@@ -170,10 +169,10 @@ function scene:create( event )
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
 		if(composer.getVariable("fallgame_status") == "success" and composer.getVariable("talk6_status") == "fin") then
-			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
 				section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
-			local script = display.newText("퀘스트를 완료하였습니다. ", display.contentWidth/2, display.contentHeight*0.789, "font/DOSGothic.ttf", 80)
+			local script = display.newText("퀘스트를 완료하였습니다. ", display.contentWidth*0.1, display.contentHeight*0.73, "font/DOSGothic.ttf", 80)
 				script.size = 30
 				script:setFillColor(1)
 			local scriptGroup = display.newGroup()

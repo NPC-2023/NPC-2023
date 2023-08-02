@@ -30,7 +30,7 @@ function scene:create( event )
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 60, "font/DOSGothic.ttf")
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
+	map.x, map.y = display.contentWidth*0.88*2, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40

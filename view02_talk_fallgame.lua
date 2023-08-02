@@ -20,13 +20,14 @@ function scene:create( event )
  	local npc = display.newImageRect("image/npc/npc3.png", 200, 200)
 	npc.x, npc.y = display.contentWidth*0.9, display.contentHeight*0.75
 	npc.xScale = -1
+	objectGroup:insert(npc)
 
 	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
 	cat.x, cat.y = display.contentWidth*0.5, display.contentHeight*0.88
 	objectGroup:insert(cat)
 
 	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.88, display.contentHeight*0.15
+	map.x, map.y = display.contentWidth*1.6, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 40
@@ -39,20 +40,21 @@ function scene:create( event )
 	loadsave.saveTable(loadedSettings,"settings.json")
 
 	--대화창
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+		--스크립트
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	objectGroup:insert(section)
 
 	--대사
 	local t = {}
-	t[1] = display.newText("(처음 보는 고양이 인데..?)", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("뭘 그렇게 빤히 보는거냥?! 나는 "..mainName.."이다냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("우리 대화한 횟수가.. " ..loadedSettings.talk[6].."번 이구나!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("응! 앞으로 더 친해지자냥!", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
-	t[5] = display.newText("인문관 자주 놀러와~", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
-	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[1] = display.newText("(처음 보는 고양이 인데..?)", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("뭘 그렇게 빤히 보는거냥?! 나는 "..mainName.."이다냥!", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("우리 대화한 횟수가.. " ..loadedSettings.talk[6].."번 이구나!", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("응! 앞으로 더 친해지자냥!", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[5] = display.newText("인문관 자주 놀러와~", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
+	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
 
-	local next_text = display.newText("다음 ▶", display.contentWidth*0.8, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
+	local next_text = display.newText("다음 ▶", display.contentWidth*1.5, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
 	
 	local i, j = 1, 1
 	for i = 2, 6 do
@@ -85,7 +87,6 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map")
 	end
 
- 	objectGroup:insert(npc)
  	objectGroup:insert(map)
  	objectGroup:insert(map_text)
  	objectGroup:insert(next_text)
