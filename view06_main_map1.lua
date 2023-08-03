@@ -305,28 +305,27 @@ function scene:create( event )
 
 
   -- 배경 어둡게
-    local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
+    local black = display.newRect(display.contentCenterX,display.contentCenterY, 960, 480)
     black.alpha = 0.5
     black:setFillColor(0)
     sceneGroup:insert(black)
     
 
-    local gotoScript = display.newImageRect("image/설정/창.png", 700, 700)
-    gotoScript.x, gotoScript.y = display.contentWidth/2, display.contentHeight*0.6
+    local gotoScript = display.newImageRect("image/설정/창.png", 500, 500)
+    gotoScript.x, gotoScript.y = display.contentCenterX, display.contentCenterY*1.2; 
     sceneGroup:insert(gotoScript)
 
-    local gotoContentScript = display.newText(name.."으로 이동하시겠습니까?", display.contentWidth/2, display.contentHeight/2, native.systemFontBold)
-    gotoContentScript.size = 42
+    local gotoContentScript = display.newText(name.."으로 이동하시겠습니까?", display.contentCenterX, display.contentCenterY-10, native.systemFontBold)
+    gotoContentScript.size = 28
     gotoContentScript:setFillColor(0, 0, 0)
-    gotoContentScript.x, gotoContentScript.y = display.contentWidth/2, display.contentHeight*0.4 +50
     sceneGroup:insert(gotoContentScript)
 
-    local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", 768/4, 768/4)
-    gotoButton.x, gotoButton.y = display.contentWidth/2, display.contentHeight*0.66
+    local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", 200, 150)
+    gotoButton.x, gotoButton.y = display.contentCenterX, display.contentCenterY+70
     sceneGroup:insert(gotoButton)
 
-    local gotoButtonText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.65, native.systemFont, 40 )
-    gotoButtonText:setFillColor( 1, 1, 1 )  -- black
+    local gotoButtonText = display.newText( "확인", gotoButton.x, gotoButton.y-5, native.systemFont, 28 )
+    gotoButtonText:setFillColor(0)  -- black
     sceneGroup:insert(gotoButtonText)
 
     --showoverlay 함수 사용 option
@@ -418,9 +417,9 @@ function scene:create( event )
     loadsave.saveTable(loadedSettings,"settings.json")
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
-    local exit = display.newImageRect("image/설정/닫기.png", 50, 50)
 
-    exit.x, exit.y = display.contentWidth*0.7, display.contentHeight*0.37
+    local exit = display.newImageRect("image/설정/닫기.png", 40, 40)
+    exit.x, exit.y = display.contentCenterX*2.2, display.contentCenterY*0.5
     exit:addEventListener("touch",goback)
     sceneGroup:insert(exit)
 
