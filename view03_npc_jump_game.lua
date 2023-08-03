@@ -194,10 +194,13 @@ function scene:create( event )
 		if(composer.getVariable("jumpgame_status") ~= "success") then			
 			speech.text = "저기 츄르가 있다는 소문이.."
 		else
-			speech.text = "노릇노릇하게 잘 됐다!\n너도 먹을래?"
+			speech.text = "츄르 맛있어?"
 		end
 		speech.size = 20
 		speech:setFillColor(0)
+
+				print(composer.getVariable("jumpgame_status"))
+		print(composer.getVariable("talk5_status"))
 
 		if(composer.getVariable("jumpgame_status") ~= "success" or composer.getVariable("talk5_status") ~= "fin") then
 			gossipOrGame()
@@ -212,7 +215,6 @@ function scene:create( event )
 	loadsave.saveTable(loadedSettings,"settings.json")
 
 	speechbubble_exmark:addEventListener("tap", talkWithNPC)
-	speechbubble:addEventListener("tap", acceptQuest)
 	map:addEventListener("tap", goBackToMap)
 
 

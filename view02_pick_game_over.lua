@@ -14,24 +14,23 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	
-	local background = display.newImageRect("image/pick/background.png", 960, 640)
+	local background = display.newImageRect("image/pick/background.png", 960, 480)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
-	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+	local background1 = display.newRect(display.contentCenterX, display.contentCenterY, background.width, background.height)
 	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
 	sceneGroup:insert(background1)
 
-	--[[local board =display.newImageRect("이미지/미니게임/미니게임_게임완료창.png",display.contentWidth/3.6294896, display.contentHeight/2.83122739)
-	board.x , board.y = display.contentWidth/2, display.contentHeight/2
+	--[[local board =display.newImageRect("이미지/미니게임/미니게임_게임완료창.png",display.contentCenterX/3.6294896, display.contentCenterY/2.83122739)
+	board.x , board.y = display.contentCenterX/2, display.contentCenterY/2
 	board.alpha = 0.5
 	transition.to(board,{alpha=1,time=1000})
 	sceneGroup:insert(board)]]
 
 	local score1 = composer.getVariable("score1")
-
 	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
 	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
 	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
@@ -41,9 +40,9 @@ function scene:create( event )
 		composer.gotoScene("view02_pick_game")
 	end
 	--close 버튼
-	local close = display.newImageRect("image/pick/닫기.png", 80, 80)
+	local close = display.newImageRect("image/pick/닫기.png", 50, 50)
 	-- close.x, close.y = 1200, 80 -> 맵보기 아이콘이랑 겹쳐있어 닫기 버튼을 누르면 맵보기 아이콘도 같이 눌러짐
-	close.x, close.y = 1200, 30
+	close.x, close.y = display.contentCenterX*3.7, display.contentCenterY*0.2
 	close.alpha = 0
 
 	local function gomap1(event) -- 게임 pass 후 map으로 넘어감
@@ -61,20 +60,19 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map") 
 	end
 
-	local backgame1 =display.newImage("image/pick/클리어창.png") --성공할 경우
-	backgame1.x, backgame1.y = display.contentWidth/2, display.contentHeight/2
+	local backgame1 =display.newImageRect("image/pick/클리어창.png", 300, 300) --성공할 경우
+	backgame1.x, backgame1.y = display.contentCenterX, display.contentCenterY
 	backgame1.alpha = 0
 	sceneGroup:insert(backgame1)
 
-	local backgame2 =display.newImage("image/pick/실패창.png") --실패할 경우
-	backgame2.x, backgame2.y = display.contentWidth/2, display.contentHeight/2
+	local backgame2 =display.newImageRect("image/pick/실패창.png", 300, 300) --실패할 경우
+	backgame2.x, backgame2.y = display.contentCenterX, display.contentCenterY
 	backgame2.alpha = 0
 	sceneGroup:insert(backgame2)
 
-	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", 600, 80)
-	lastText.size = 40
+	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", display.contentCenterX, display.contentCenterY*0.2)
+	lastText.size = 30
 	lastText.alpha = 0
-
 
 	--[[-----음악
 
@@ -85,7 +83,7 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    volumeButton.x,volumeButton.y = display.contentCenterX * 0.95, display.contentCenterY * 0.12
     sceneGroup:insert(volumeButton)
 
 

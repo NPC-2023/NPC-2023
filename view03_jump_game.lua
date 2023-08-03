@@ -23,83 +23,100 @@ function scene:create( event )
     background.y = display.contentCenterY
 	background.alpha = 0.5
 	
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentCenterX, display.contentCenterY*1.5, background.width, background.y*0.8)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
-	local script = display.newText("게임방법\n방향키와 점프키를 이용해 고양이이에게 츄르를 가져다주세요!\n\n고양이가 왼쪽, 오른쪽, 아래 벽면에 닿으면 GAMEOVER!", section.x+30, section.y-100, native.systemFontBold)
-	script.size = 30
+	local script = display.newText("게임방법\n\n방향키와 점프키를 이용해 고양이이에게 츄르를 가져다주세요!\n\n고양이가 벽면에 닿으면 GAMEOVER!", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 20
 	script:setFillColor(1)
-	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+	script.x, script.y = section.x-200, section.y
 
 	local bRock_outline = graphics.newOutline(1, "image/jump/bigRock.png")
-	local leaf_outline = graphics.newOutline(1, "image/jump/leaf.png")
+	local leaf1_outline = graphics.newOutline(1, "image/jump/leaf1.png")
+	local leaf2_outline = graphics.newOutline(1, "image/jump/leaf2.png")
 	local sRock_outline = graphics.newOutline(1, "image/jump/smallRock.png")
 	local plant1_outline = graphics.newOutline(1, "image/jump/plant1.png")
 	local plant2_outline = graphics.newOutline(1, "image/jump/plant2.png")
 	local rock_outline = graphics.newOutline(1, "image/jump/rock.png")
 
 	local objectGroup = display.newGroup()
-	local leaf = {}
-	leaf[1] = display.newImageRect(objectGroup, "image/jump/leaf.png", 250, 150)
-	leaf[1].x, leaf[1].y = 1150, 480
-	leaf[2] = display.newImageRect(objectGroup, "image/jump/leaf.png", 300, 180)
-	leaf[2].x, leaf[2].y = 630, 120
+	local leaf1 = {}
+	leaf1[1] = display.newImageRect(objectGroup, "image/jump/leaf1.png", 200, 80)
+	leaf1[1].x, leaf1[1].y = display.contentCenterX-380, display.contentCenterY*0.3
+	leaf1[2] = display.newImageRect(objectGroup, "image/jump/leaf1.png", 180, 100)
+	leaf1[2].x, leaf1[2].y = display.contentCenterX-50, display.contentCenterY*1.8
+
+	local leaf2 = {}
+	leaf2[1] = display.newImageRect(objectGroup, "image/jump/leaf2.png", 170, 80)
+	leaf2[1].x, leaf2[1].y = display.contentCenterX*3.4, display.contentCenterY-100
 
 	local plant1 = {}
-	plant1[1] = display.newImageRect(objectGroup, "image/jump/plant1.png", 150, 100)
-	plant1[1].x, plant1[1].y = 600, 610
-	plant1[2] = display.newImageRect(objectGroup, "image/jump/plant1.png", 200, 80)
-	plant1[2].x, plant1[2].y = 150, 300
+	plant1[1] = display.newImageRect(objectGroup, "image/jump/plant1.png", 80, 60)
+	plant1[1].x, plant1[1].y = display.contentCenterX-400, display.contentCenterY*1.8
+	plant1[2] = display.newImageRect(objectGroup, "image/jump/plant1.png", 70, 40)
+	plant1[2].x, plant1[2].y = display.contentCenterX*2, display.contentCenterY-20
 
 	local plant2 = {}
-	plant2[1] = display.newImageRect(objectGroup, "image/jump/plant2.png", 130, 90)
-	plant2[1].x, plant2[1].y = 240, 550
+	plant2[1] = display.newImageRect(objectGroup, "image/jump/plant2.png", 100, 50)
+	plant2[1].x, plant2[1].y = display.contentCenterX*3, display.contentCenterY*1.55
+	plant2[2] = display.newImageRect(objectGroup, "image/jump/plant2.png", 70, 40)
+	plant2[2].x, plant2[2].y = display.contentCenterX-310, display.contentCenterY+35
 	
 	local bRock = {}
 	bRock[1] = display.newImageRect(objectGroup, "image/jump/bigRock.png", 130, 96)
-	bRock[1].x, bRock[1].y = 770, 640
-	bRock[2] = display.newImageRect(objectGroup, "image/jump/bigRock.png", bRock[1].width+100, bRock[1].height+50)
-	bRock[2].xScale = -1
-	bRock[2].x, bRock[2].y = 700, 330
-
-	local rock = {}
-	rock[1] = display.newImageRect(objectGroup, "image/jump/rock.png", 130, 96)
-	rock[1].x, rock[1].y = 110, 610
-	rock[2] = display.newImageRect(objectGroup, "image/jump/rock.png", rock[1].width, rock[1].height)
-	rock[2].x, rock[2].y = 330, 640
-	rock[3] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
-	rock[3].x, rock[3].y = 880, 580
-	rock[4] = display.newImageRect(objectGroup, "image/jump/rock.png", 260, 90)
-	rock[4].x, rock[4].y = 1150, 200 --1번 goal
-	rock[5] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
-	rock[5].x, rock[5].y = 900, 340 
-	rock[6] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
-	rock[6].x, rock[6].y = 300, 210
-	rock[7] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
-	rock[7].x, rock[7].y = 1000, 400
+	bRock[1].x, bRock[1].y = display.contentCenterX, display.contentCenterY
 
 	local sRock = {}
-	sRock[1] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[1].x, sRock[1].y = 460, 580
-	sRock[2] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[2].x, sRock[2].y =  980, 540
-	sRock[3] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[3].x, sRock[3].y = 360, 300
-	sRock[4] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[4].x, sRock[4].y = 430, 170
-	sRock[5] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[5].x, sRock[5].y = 470, 350
-	sRock[6] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 130, 96)
-	sRock[6].x, sRock[6].y = 970, 270
+	sRock[1] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 90, 80)
+	sRock[1].x, sRock[1].y = display.contentCenterX-320, display.contentCenterY*1.6
+	sRock[2] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 90, 80)
+	sRock[2].x, sRock[2].y = sRock[1].x+150, sRock[1].y+10
+	sRock[3] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 100, 90)
+	sRock[3].x, sRock[3].y = display.contentCenterX*1.5, display.contentCenterY*1.8
+	sRock[4] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 90, 80)
+	sRock[4].x, sRock[4].y = sRock[3].x+70, display.contentCenterY*1.65
+	sRock[5] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 100, 90)
+	sRock[5].x, sRock[5].y = sRock[3].x+150, display.contentCenterY*1.8
+	sRock[6] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 90, 80)
+	sRock[6].x, sRock[6].y = display.contentCenterX*3.1, display.contentCenterY+50
+	sRock[7] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 90, 80)
+	sRock[7].x, sRock[7].y = display.contentCenterX*2.6, display.contentCenterY-55
+	sRock[8] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 100, 90)
+	sRock[8].x, sRock[8].y = display.contentCenterX-130, display.contentCenterY-30
+	sRock[9] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 80, 80)
+	sRock[9].x, sRock[9].y = display.contentCenterX-220, display.contentCenterY
+	sRock[10] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 80, 70)
+	sRock[10].x, sRock[10].y = display.contentCenterX-390, display.contentCenterY+5
+	sRock[11] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 80, 80)
+	sRock[11].x, sRock[11].y = display.contentCenterX-440, display.contentCenterY-40
+	sRock[12] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 80, 80)
+	sRock[12].x, sRock[12].y = display.contentCenterX-250, display.contentCenterY-110
+
+	local rock = {}
+	rock[1] = display.newImageRect(objectGroup, "image/jump/rock2.png", 70, 60)
+	rock[1].x, rock[1].y = display.contentCenterX-250, display.contentCenterY*1.75
+	rock[2] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
+	rock[2].x, rock[2].y = display.contentCenterX*3.7, display.contentCenterY*1.4
+	rock[3] = display.newImageRect(objectGroup, "image/jump/rock2.png", 80, 40)
+	rock[3].x, rock[3].y = display.contentCenterX*2.5, display.contentCenterY*1.1
+	rock[4] = display.newImageRect(objectGroup, "image/jump/rock2.png", 70, 40)
+	rock[4].x, rock[4].y = display.contentCenterX-150, display.contentCenterY-130
+	rock[5] = display.newImageRect(objectGroup, "image/jump/rock.png", 140, 60)
+	rock[5].x, rock[5].y =  display.contentCenterX, display.contentCenterY-130
+	rock[6] = display.newImageRect(objectGroup, "image/jump/rock.png", 70, 40)
+	rock[6].x, rock[6].y = display.contentCenterX-340, display.contentCenterY-80
+
 	
 	objectGroup.alpha = 0
 
 	local wall = {}
 	local wallGroup = display.newGroup()
-	wall[1] = display.newRect(wallGroup, 0, background.y, 30, background.height) --왼
-	wall[2] = display.newRect(wallGroup, background.width, background.y, 30, background.height) --오
-	wall[3] = display.newRect(wallGroup, background.x, 0, background.width, 30) --위
-	wall[4] = display.newRect(wallGroup, background.x, background.height, background.width, 30)--아래
+	wall[1] = display.newRect(wallGroup, background.x-480, background.y, 15, background.height) --왼
+	wall[2] = display.newRect(wallGroup, background.x*4, background.y, 15, background.height) --오
+	wall[3] = display.newRect(wallGroup, background.x, 0, background.width, 3) --위
+	wall[4] = display.newRect(wallGroup, background.x, background.y*2, background.width, 15)--아래
+
+	wallGroup.alpha = 0
 
 	for i = 1, #bRock do 
 		physics.addBody(bRock[i], "static", {outline=bRock_outline})
@@ -117,9 +134,13 @@ function scene:create( event )
 		physics.addBody(wall[i], "static")
 		wall[i].name = "wall"
 	end
-	for i = 1, #leaf do
-		physics.addBody(leaf[i], "static", {outline=leaf_outline})
-		leaf[i].name = "ground"
+	for i = 1, #leaf1 do
+		physics.addBody(leaf1[i], "static", {outline=leaf1_outline})
+		leaf1[i].name = "ground"
+	end
+	for i = 1, #leaf2 do
+		physics.addBody(leaf2[i], "static", {outline=leaf2_outline})
+		leaf2[i].name = "ground"
 	end
 	for i = 1, #plant1 do 
 		physics.addBody(plant1[i], "static", {outline=plant1_outline})
@@ -130,43 +151,48 @@ function scene:create( event )
 		plant2[i].name = "ground"
 	end
 	
-	wallGroup.alpha = 0
 
 	local arrow = {}
 	local arrowGroup = display.newGroup()
-	arrow[1] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 70, 70)
-	arrow[1].x, arrow[1].y = 1010, 630
+	arrow[1] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 50, 50)
+	arrow[1].x, arrow[1].y = display.contentCenterX*2.8, display.contentCenterY*1.8
 	arrow[1].xScale = -1
 	arrow[1].name = "left"
-	arrow[2] = display.newImageRect(arrowGroup, "image/jump/jump.png", 80, 80)
-	arrow[2].x, arrow[2].y = arrow[1].x+86, 630
+	arrow[2] = display.newImageRect(arrowGroup, "image/jump/jump.png", 50, 50)
+	arrow[2].x, arrow[2].y = arrow[1].x+65, arrow[1].y
 	arrow[2].name = "center"
-	arrow[3] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 70, 70)
-	arrow[3].x, arrow[3].y = arrow[2].x+86, 630
+	arrow[3] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 50, 50)
+	arrow[3].x, arrow[3].y = arrow[2].x+65, arrow[1].y
 	arrow[3].name = "right"
 	arrow[4] = "right"
 
 	arrowGroup.alpha = 0
 
-	local cat = display.newImageRect("image/jump/cat.png", 65, 50)
+	local cat = display.newImageRect("image/jump/cat.png", 50, 40)
 	local cat_outline_none = graphics.newOutline(1, "image/jump/cat.png")
 	local cat_outline_flip = graphics.newOutline(1, "image/jump/cat_flip.png")
-	cat.x, cat.y = 110, 550
+	cat.x, cat.y = plant1[1].x, plant1[1].y-50
+	--cat.x, cat.y = plant1[1].x, plant1[1].y-80
 	cat.name = "cat"
 
 	physics.addBody(cat, {friction=1, outline = cat_outline_none})
 	cat.isFixedRotation = true 
 	cat.alpha = 0
 
-	local jumpSound = audio.loadSound("music/bounce.mp3")
-	audio.setVolume(0.2)
+	local jumpSound = audio.loadSound("soundEffect/jump.wav")
+	audio.setVolume(0.1)
+
+	local musicOption = { 
+    	loops = -1
+	}
+
 
 	local home = audio.loadStream( "music/music5.mp3" )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
+    audio.play(home, musicOption)
 
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.9, display.contentHeight * 0.1
-    volumeButton.alpha = 0
+    local volumeButton = display.newImageRect("image/설정/설정.png", 60, 60)
+    volumeButton.x,volumeButton.y = display.contentCenterX*3.6, display.contentCenterY*0.25
 
 	local isJumping = false
 	function arrowTab(event)
@@ -176,18 +202,18 @@ function scene:create( event )
 			if(isJumping == false) then	
 				isJumping = true
 				if (arrow[4] == "left") then
-					transition.to(cat, {time=100, x=(x-80), y=(y-80)})
+					transition.to(cat, {time=100, x=(x-50), y=(y-50)})
 				else
-				    transition.to(cat, {time=100, x=(x+80), y=(y-80)})
+				    transition.to(cat, {time=100, x=(x+50), y=(y-50)})
 				end
 				audio.play(jumpSound)
 		    end
 		else
 			if (event.target.name == arrow[4]) then --왼쪽 클
 			    if (event.target.name == "left") then
-			       transition.to(cat, {time=100, x=(x-30)})
+			       transition.to(cat, {time=100, x=(x-20)})
 			    else
-			       transition.to(cat, {time=100, x=(x+30)})
+			       transition.to(cat, {time=100, x=(x+20)})
 			    end
 			 else
 			    arrow[4] = event.target.name
@@ -196,34 +222,34 @@ function scene:create( event )
 
 			    if (event.target.name == "left") then
 			       physics.addBody(cat, {friction=1, outline=cat_outline_flip})
-			       transition.to(cat, {time=100, x=(x-10)})
+			       transition.to(cat, {time=100, x=(x-20)})
 			    else
 			       physics.addBody(cat, {friction=1, outline=cat_outline_flip})
-			       transition.to(cat, {time=100, x=(x+10)})
+			       transition.to(cat, {time=100, x=(x+20)})
 			    end
 			    cat.isFixedRotation = true
 			end
 		end
 	end
 
-	local goal = display.newImageRect("image/jump/goal.png", 80, 80)
+	local goal = display.newImageRect("image/jump/goal.png", 50, 50)
 	local goal_outline = graphics.newOutline(1, "image/jump/goal.png")
 	goal.alpha = 0
 
 	local num = math.random(1,3)
 	if(num == 1) then
-		goal.x, goal.y = 1200, 170
+		goal.x, goal.y = leaf2[1].x, leaf2[1].y-10
 	elseif(num == 2) then
-		goal.x, goal.y = 120, 270
+		goal.x, goal.y = leaf1[1].x-10, leaf1[1].y-15
 	else
-		goal.x, goal.y = 650, 90
+		goal.x, goal.y = rock[5].x+10, rock[5].y-15
 	end
 	goal.name="goal"
 	physics.addBody(goal, "static", {outline=goal_outline})
 	sceneGroup:insert(goal)
 
 	function pagemove() 
-		audio.stop(home)
+		audio.pause(home)
 		objectGroup.alpha = 0
 		arrowGroup.alpha = 0
 		cat.alpha = 0
@@ -257,20 +283,15 @@ function scene:create( event )
 	function gameOver(self, event)
 		if(event.phase == "ended" and flag1 == false) then
 			flag1 = true
-
+			print(event.name)
 			timer.performWithDelay(10, function()
 				pagemove()
 				composer.setVariable("score1", -1)
 				composer.removeScene("view03_jump_game")
 				composer.gotoScene("view03_jump_game_over")
-					flag1 = false
 				end )
 		end
 	end
-
-	local musicOption = { 
-    	loops = -1
-	}
 
 	-- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
     local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
@@ -283,7 +304,6 @@ function scene:create( event )
     volumeButton:addEventListener("tap",setVolume)
 
 	local function playGame(event)
-		audio.play(home, musicOption)
 		objectGroup.alpha = 1
 		background.alpha = 1
 		arrowGroup.alpha = 1
@@ -299,12 +319,10 @@ function scene:create( event )
 	for i=1,3 do 
 		arrow[i]:addEventListener("tap", arrowTab)
 	end
-	wall[1].collision = gameOver
-	wall[1]:addEventListener("collision")
-	wall[2].collision = gameOver
-	wall[2]:addEventListener("collision")
-	wall[4].collision = gameOver
-	wall[4]:addEventListener("collision")
+	for i=1,4 do 
+		wall[i].collision = gameOver
+		wall[i]:addEventListener("collision")
+	end
 	cat:addEventListener("collision", onCollision)
 	cat:addEventListener("collision", onCollision1)
 	

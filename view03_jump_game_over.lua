@@ -18,8 +18,7 @@ function scene:create( event )
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
-	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
-	background1:setFillColor(0)
+	local background1 = display.newRect(display.contentCenterX, display.contentCenterY, background.width, background.height)	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
 	sceneGroup:insert(background1)
 
@@ -30,9 +29,8 @@ function scene:create( event )
 	sceneGroup:insert(board)]]
 
 	local score1 = composer.getVariable("score1")
-	print(score1)
 
-	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
+	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추
 	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
 	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
 
@@ -41,17 +39,19 @@ function scene:create( event )
 		composer.gotoScene("view03_jump_game")
 	end
 	--close 버튼
-	local close = display.newImageRect("image/jump/닫기.png", 80, 80)
-	close.x, close.y = 1200, 30
+	local close = display.newImageRect("image/jump/닫기.png", 50, 50)
+	close.x, close.y = display.contentCenterX*3.5, display.contentCenterY*0.2
 	close.alpha = 0
 
 	local function gomap1(event) -- 게임 pass 후 넘어감
 		loadedSettings.money = loadedSettings.money + 3
+		composer.setVariable("jumpgame_status", "success")
 		composer.setVariable("successJump", "success")
 		composer.setVariable("successHiddenGame", "success")
 		loadedSettings.total_success = loadedSettings.total_success + 1
 		loadedSettings.total_success_names[loadedSettings.total_success] = "고양이 점프해서 츄르 찾기"
 		loadsave.saveTable(loadedSettings,"settings.json")
+
 		composer.removeScene("view03_jump_game_over")
 		composer.gotoScene("view03_npc_jump_game")
 	end
@@ -61,18 +61,18 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map") --npc로
 	end
 
-	local backgame1 =display.newImage("image/jump/클리어창.png") --성공할 경우
-	backgame1.x, backgame1.y = display.contentWidth/2, display.contentHeight/2
+	local backgame1 =display.newImageRect("image/jump/클리어창.png", 300, 300) --성공할 경우
+	backgame1.x, backgame1.y = display.contentCenterX, display.contentCenterY
 	backgame1.alpha = 0
 	sceneGroup:insert(backgame1)
 
-	local backgame2 =display.newImage("image/jump/실패창.png") --실패할 경우
-	backgame2.x, backgame2.y = display.contentWidth/2, display.contentHeight/2
+	local backgame2 =display.newImageRect("image/jump/실패창.png", 300, 300) --실패할 경우
+	backgame2.x, backgame2.y = display.contentCenterX, display.contentCenterY
 	backgame2.alpha = 0
 	sceneGroup:insert(backgame2)
 
-	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", 600, 80)
-	lastText.size = 40
+	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", display.contentCenterX, display.contentCenterY*0.2)
+	lastText.size = 30
 	lastText.alpha = 0
 
 	if (score1 == -1) then --score1이 -1일 때 fail

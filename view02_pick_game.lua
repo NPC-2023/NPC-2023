@@ -18,41 +18,41 @@ function scene:create( event )
 
 	composer.setVariable("gameName", "view02_pick_game")
 
-	local background = display.newImageRect("image/pick/background.png", 960, 640)
+	local background = display.newImageRect("image/pick/background.png", 960, 480)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	background.alpha = 0.5
 	sceneGroup:insert(background)
 	
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentCenterX, display.contentCenterY*1.5, background.width, background.y*0.8)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	sceneGroup:insert(section)
 	
-	local script = display.newText("게임방법\n제한 시간 이내에 물건을 클릭해서 주우세요!\n5점 이상 획득하면 CLEAR!\n\n생선뼈: -1점  폭타: GameOver  나머지 물건: +1점", section.x+30, section.y-100, native.systemFontBold)
-	script.size = 30
+	local script = display.newText("게임방법\n\n제한 시간 이내에 물건을 클릭해서 주우세요!\n5점 이상 획득하면 CLEAR!\n\n생선뼈: -1점  폭탄: GameOver  나머지 물건: +1점", section.x+30, section.y-100, native.systemFontBold)
+	script.size = 20
 	script:setFillColor(1)
-	script.x, script.y = display.contentWidth/2, display.contentHeight*0.789
+	script.x, script.y = section.x-200, section.y
 	sceneGroup:insert(script)
 
 	local score = 0 
-	local scoreImage = display.newImageRect("image/pick/스코어.png", 130, 130)
-	scoreImage.x,scoreImage.y = display.contentWidth/11, display.contentHeight/5.5
+	local scoreImage = display.newImageRect("image/pick/스코어.png", 100, 120)
+	scoreImage.x,scoreImage.y = display.contentCenterX-400, display.contentCenterY*0.25
 	scoreImage.alpha = 0
 	sceneGroup:insert(scoreImage)
 
- 	local showScore = display.newText(score, display.contentWidth/11,display.contentHeight/5.555) 
+ 	local showScore = display.newText(score, scoreImage.x, scoreImage.y-5) 
 	showScore:setFillColor(1,0,0) 
-	showScore.size = 60
+	showScore.size = 30
 	showScore.alpha = 0
 	sceneGroup:insert(showScore)
 
-	local alarm = display.newImageRect("image/pick/타이머.png", 150, 150)
-	alarm.x, alarm.y = display.contentWidth*0.9, display.contentHeight*0.2
+	local alarm = display.newImageRect("image/pick/타이머.png", 110, 120)
+	alarm.x, alarm.y = display.contentCenterX*3.6, display.contentCenterY*0.25
 	alarm.alpha = 0
 	sceneGroup:insert(alarm)
 
-	local time = display.newText(20, alarm.x+5, alarm.y+15)
-	time.size = 50
+	local time = display.newText(20, alarm.x, alarm.y+5)
+	time.size = 30
 	time:setFillColor(1, 0, 0)
 	time.alpha = 0
 	sceneGroup:insert(time)
@@ -115,12 +115,12 @@ function scene:create( event )
 		local objIdx = math.random(#objects)
 		local objName = objects[objIdx]
 		object[i] = display.newImageRect(objectGroup, "image/pick/obj".. objName..".png", 110, 110)
-		object[i].x, object[i].y = math.random(250, 1000), math.random(150, 600) 
+		object[i].x, object[i].y = math.random(-130, 450), math.random(100, 400) 
 		local obj = object[i] 
 		local function remove(event)
 			display.remove(obj)
 		end
-		timer3 = timer.performWithDelay(900, remove, 30, "gameTime")
+		timer3 = timer.performWithDelay(800, remove, 30, "gameTime")
 		if (objIdx < 4) then
 			object[i].type="food"
 		elseif (objIdx == 4) then
@@ -138,13 +138,13 @@ function scene:create( event )
 
 	--샘플 볼륨 이미지
     -- local volumeButton = display.newImage("image/설정/설정.png")
-    -- volumeButton.x,volumeButton.y = display.contentWidth * 0.87, display.contentHeight * 0.9
+    -- volumeButton.x,volumeButton.y = display.contentCenterX * 0.87, display.contentCenterY * 0.9
     
     -- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
     local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
 
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.9, display.contentHeight * 0.4
+    local volumeButton = display.newImageRect("image/설정/설정.png", 60, 60)
+    volumeButton.x,volumeButton.y = alarm.x, alarm.y*2.5
     volumeButton.alpha = 0
 	sceneGroup:insert(volumeButton)
    	

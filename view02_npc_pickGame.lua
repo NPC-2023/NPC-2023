@@ -168,7 +168,7 @@ function scene:create( event )
 			end)
 		end) --가상함수
 	end 
-
+	print(pickgame_status)
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
 		if(composer.getVariable("pickgame_status") == "success" and composer.getVariable("talk4_status") == "fin") then
