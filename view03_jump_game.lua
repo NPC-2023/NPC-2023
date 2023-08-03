@@ -18,7 +18,7 @@ function scene:create( event )
 	physics.start()
 	--physics.setDrawMode( "hybrid" )
 
-	local background = display.newImageRect("image/jump/background_water.png", 960, 640)
+	local background = display.newImageRect("image/jump/background_water.png", 960, 480)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	background.alpha = 0.5
