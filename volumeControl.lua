@@ -21,7 +21,7 @@ function scene:create( event )
     music = loadedEndings.bgMusic
 
     -- 배경 어둡게
-    local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
+    local black = display.newRect(display.contentCenterX,display.contentCenterY, 960, 480)
     black.alpha = 0.5
     black:setFillColor(0)
     sceneGroup:insert(black)
@@ -34,15 +34,15 @@ function scene:create( event )
     audio.reserveChannels(1)
     local backgroundSound = audio.loadStream(music)
 
-    local bgImage = display.newImageRect("image/volume/창.png", 700, 700)
-    bgImage.x = display.contentWidth / 2; 
-    bgImage.y = display.contentHeight  *0.6; 
+    local bgImage = display.newImageRect("image/volume/창.png", 500, 500)
+    bgImage.x = display.contentCenterX
+    bgImage.y = display.contentCenterY*1.2; 
     sceneGroup:insert(bgImage)
     
     local text = "배경음"
-    local showtext = display.newText(text, display.contentWidth*0.37, display.contentHeight*0.515)
+    local showtext = display.newText(text, display.contentCenterX*0.1, display.contentCenterY+20)
     showtext:setFillColor(0)
-    showtext.size = 30
+    showtext.size = 25
     sceneGroup:insert(showtext)
 
 
@@ -63,8 +63,8 @@ function scene:create( event )
         audio.setVolume( settings["bgvolume"]  )
     end
 
-    local background_image = display.newImageRect("image/volume/소리조절칸.png", 325, 70)
-    background_image.x, background_image.y = display.contentWidth*0.38 + 210,display.contentHeight*0.53
+    local background_image = display.newImageRect("image/volume/소리조절칸.png", 300, 70)
+    background_image.x, background_image.y = showtext.x+190, showtext.y+10
     sceneGroup:insert(background_image)
 
     local options = {
@@ -75,8 +75,8 @@ function scene:create( event )
         { x=123, y=0, width=41, height=41 },
         { x=164, y=0, width=41, height=41 }
     },
-    sheetContentWidth = 205,
-    sheetContentHeight = 41
+    sheetcontentCenterX = 205,
+    sheetcontentCenterY = 41
     }
     local sliderSheet = graphics.newImageSheet( "image/volume/sound1.png", options )
     
@@ -92,8 +92,8 @@ function scene:create( event )
         handleFrame = 5,
         handleWidth = 41,
         handleHeight = 41,
-        top = 380,    x = display.contentCenterX*0.78 + 190,      
-        width=380,  y=display.contentCenterY*1.04,      
+        top = 380,    x = background_image.x,    
+        width=380,  y = background_image.y+10,      
         value=loadedEndings.slider,
         listener = bgSliderListener
     }
@@ -112,9 +112,9 @@ function scene:create( event )
     end
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
-    local exit = display.newImageRect("image/설정/닫기.png", 50, 50)
+    local exit = display.newImageRect("image/설정/닫기.png", 40, 40)
     sceneGroup:insert(exit)
-    exit.x, exit.y = display.contentWidth*0.70, display.contentHeight*0.37
+    exit.x, exit.y = display.contentCenterX*2.2, display.contentCenterY*0.5
     exit:addEventListener("touch",goback)
 end
 
