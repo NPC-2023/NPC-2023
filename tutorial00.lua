@@ -35,8 +35,8 @@ function scene:create( event )
 	loadedEndings = loadsave.loadTable( "endings.json" )
 
 	
-	local background = display.newImage( "image/게임시작/background.png")
-	background.x, background.y = display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect( "image/게임시작/background.png",1000, 1000)
+	background.x, background.y = display.contentCenterX/2, display.contentCenterY/2
 	sceneGroup:insert(background)
 	
 
@@ -51,7 +51,7 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.4
+    volumeButton.x,volumeButton.y = display.contentCenterX * 0.91, display.contentCenterY * 0.4
     
 
 
@@ -82,7 +82,7 @@ function scene:create( event )
 	for i = 1, 5 do
 		b[i] = display.newImage(bGroup, "image/게임시작/" .. i .. ".png")
 	end
-	bGroup.x,bGroup.y = display.contentWidth/2,display.contentHeight/2
+	bGroup.x,bGroup.y = display.contentCenterX/2,display.contentCenterY/2
 	sceneGroup:insert(bGroup)
 
 	composer.setVariable("find1", 0)	
@@ -94,7 +94,7 @@ function scene:create( event )
 	loadsave.saveTable(loadedSettings,"settings.json")
 
 
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentCenterX/2, display.contentCenterY*0.8, display.contentCenterX, display.contentCenterY*0.3)
 	section:setFillColor(0.8, 0.8, 0.8, 0.8)
 	sceneGroup:insert(section)
 	--local speakerImg = display.newRect(section.x, section.y - 700, 900, 900)
@@ -104,11 +104,11 @@ function scene:create( event )
     --대화창
  	--대사
 	local t = {}
-	t[1] = display.newText("나는 고양이 왕국의 일등 기사도 ".. mainName .."! 좋은 아침이다냥!\n오늘도 힘차게 왕국을 지켜볼까?", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("어.. 그런데 여기가 어디지?\n꿈을 꾸고 있나..? 여기는 왕국이 아니잖아!", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("예지관... A? 여기가 어디지?\n응? 그런데 이 쪽지는 뭐지?", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("쪽지를 읽어볼까?", display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("학교? 학생?\n뭐가 뭔지 모르겠지만 나는 용기있는 기사니까!\n어서 학생이라는 인간을 만나러 나가볼까냥! ",display.contentWidth * 0.5, display.contentHeight * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[1] = display.newText("나는 고양이 왕국의 일등 기사도 ".. mainName .."! 좋은 아침이다냥!\n오늘도 힘차게 왕국을 지켜볼까?", display.contentCenterX * 0.5, display.contentCenterY * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[2] = display.newText("어.. 그런데 여기가 어디지?\n꿈을 꾸고 있나..? 여기는 왕국이 아니잖아!", display.contentCenterX * 0.5, display.contentCenterY * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[3] = display.newText("예지관... A? 여기가 어디지?\n응? 그런데 이 쪽지는 뭐지?", display.contentCenterX * 0.5, display.contentCenterY * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[4] = display.newText("쪽지를 읽어볼까?", display.contentCenterX * 0.5, display.contentCenterY * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
+	t[5] = display.newText("학교? 학생?\n뭐가 뭔지 모르겠지만 나는 용기있는 기사니까!\n어서 학생이라는 인간을 만나러 나가볼까냥! ",display.contentCenterX * 0.5, display.contentCenterY * 0.93 - 100, "font/NanumSquareRoundR.ttf", 30)
 	
 
     for i = 2, 5 do
@@ -155,13 +155,13 @@ function scene:create( event )
 	end
 
 	local skipButton = display.newImageRect("image/게임시작/이름결정.png", 250, 200) -- 스킵 버튼
-    skipButton.x, skipButton.y = display.contentWidth * 0.90, display.contentHeight * 0.1
+    skipButton.x, skipButton.y = display.contentCenterX * 0.90, display.contentCenterY * 0.1
     skipButton.alpha = 1
     sceneGroup:insert(skipButton)
     	
 
     local text = "스킵"
-	local showText = display.newText(text, display.contentWidth*0.90, display.contentHeight*0.09)
+	local showText = display.newText(text, display.contentCenterX*0.90, display.contentCenterY*0.09)
 	showText:setFillColor(0)
 	showText.size = 30
 	showText.alpha = 1
