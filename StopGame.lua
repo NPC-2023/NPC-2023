@@ -19,31 +19,31 @@ function scene:create( event )
     music = loadedEndings.bgMusic
 
     -- 배경 어둡게
-    local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
+    local black = display.newRect(display.contentCenterX,display.contentCenterY,display.contentCenterX,display.contentCenterY)
     black.alpha = 0.5
     black:setFillColor(0)
     sceneGroup:insert(black)
     
 
-    local bgImage = display.newImageRect("image/volume/창.png", 700, 700)
-    bgImage.x = display.contentWidth / 2; 
-    bgImage.y = display.contentHeight  *0.6; 
+    local bgImage = display.newImageRect("image/volume/창.png", 500, 500)
+    bgImage.x = display.contentCenterX
+    bgImage.y = display.contentCenterY*1.2; 
     sceneGroup:insert(bgImage)
 
 
-    --[[local stopText = display.newText("일시정지", display.contentWidth/2, display.contentHeight*0.33, native.systemFontBold, 50)
+    --[[local stopText = display.newText("일시정지", display.contentCenterX/2, display.contentCenterY*0.33, native.systemFontBold, 50)
     stopText:setFillColor( 1, 0.8, 0 )
     sceneGroup:insert(stopText)]]
-    local continueButton = display.newImageRect("image/stop/노란버튼.png", 300, 100)
-    continueButton.x, continueButton.y = display.contentWidth/2, display.contentHeight*0.42
+    local continueButton = display.newImageRect("image/stop/노란버튼.png", 250, 80)
+    continueButton.x, continueButton.y = display.contentCenterX, display.contentCenterY-50
     sceneGroup:insert(continueButton)
-    local continueText = display.newText("계속하기", continueButton.x, continueButton.y, native.systemFontBold, 40)
+    local continueText = display.newText("계속하기", continueButton.x, continueButton.y, native.systemFontBold, 30)
     continueText:setFillColor(0, 0, 0)
     sceneGroup:insert(continueText)
-    local closeButton = display.newImageRect("image/stop/노란버튼.png", 300, 100)
-    closeButton.x, closeButton.y = display.contentWidth/2, display.contentHeight*0.58
+    local closeButton = display.newImageRect("image/stop/노란버튼.png", 250, 80)
+    closeButton.x, closeButton.y = continueButton.x, continueButton.y+80
     sceneGroup:insert(closeButton)
-    local closeText = display.newText("그만하기", closeButton.x, closeButton.y, native.systemFontBold, 40)
+    local closeText = display.newText("그만하기", closeButton.x, closeButton.y, native.systemFontBold, 30)
     closeText:setFillColor(0, 0, 0)
     sceneGroup:insert(closeText)
 
@@ -63,14 +63,14 @@ function scene:create( event )
     local backgroundSound = audio.loadStream(music)
 
     --[[local bgImage = display.newImageRect("image/volume/창.png", 700, 700)
-    bgImage.x = display.contentWidth / 2; 
-    bgImage.y = display.contentHeight  *0.6; 
+    bgImage.x = display.contentCenterX / 2; 
+    bgImage.y = display.contentCenterY  *0.6; 
     sceneGroup:insert(bgImage)]]
     
     local text = "배경음"
-    local showtext = display.newText(text, display.contentWidth*0.37, display.contentHeight*0.68)
+    local showtext = display.newText(text, display.contentCenterX*0.1, display.contentCenterY*1.4)
     showtext:setFillColor(0)
-    showtext.size = 30
+    showtext.size = 25
     sceneGroup:insert(showtext)
 
 
@@ -91,8 +91,8 @@ function scene:create( event )
         audio.setVolume( settings["bgvolume"]  )
     end
 
-    local background_image = display.newImageRect("image/volume/소리조절칸.png", 325, 70)
-    background_image.x, background_image.y = display.contentWidth*0.38 + 210,display.contentHeight*0.7
+    local background_image = display.newImageRect("image/volume/소리조절칸.png", 300, 70)
+    background_image.x, background_image.y = showtext.x+190, showtext.y+10
     sceneGroup:insert(background_image)
 
     local options = {
@@ -103,8 +103,8 @@ function scene:create( event )
         { x=123, y=0, width=41, height=41 },
         { x=164, y=0, width=41, height=41 }
     },
-    sheetContentWidth = 205,
-    sheetContentHeight = 41
+    sheetcontentCenterX = 10,
+    sheetcontentCenterY = 41
     }
     local sliderSheet = graphics.newImageSheet( "image/volume/sound1.png", options )
     
@@ -120,8 +120,8 @@ function scene:create( event )
         handleFrame = 5,
         handleWidth = 41,
         handleHeight = 41,
-        top = 380,    x = display.contentCenterX*0.78 + 190,      
-        width=380,  y=display.contentCenterY*1.38,      
+        top = 380,    x = background_image.x,
+        width=380,  y=background_image.y+10,
         value=loadedEndings.slider,
         listener = bgSliderListener
     }
