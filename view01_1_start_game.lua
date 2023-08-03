@@ -15,19 +15,19 @@ local json = require( "json" )
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newImageRect("image/게임시작/background.png", 960, 640)
+	local background = display.newImageRect("image/게임시작/background.png", 960, 480)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
-	local newgame = display.newImageRect("image/게임시작/새로시작.png", 250, 100)
+	local newgame = display.newImageRect("image/게임시작/새로시작.png", 190, 70)
     newgame.name ="new"
-    newgame.x,newgame.y = display.contentWidth * 0.4, display.contentHeight * 0.89
+    newgame.x,newgame.y = display.contentCenterX * 0.4, display.contentCenterY * 1.83
     sceneGroup:insert(newgame)
 
-    local loadgame = display.newImageRect("image/게임시작/이어하기.png", 250, 100)
+    local loadgame = display.newImageRect("image/게임시작/이어하기.png", 190, 70)
     loadgame.name ="load"
-    loadgame.x,loadgame.y = display.contentWidth * 0.63, display.contentHeight * 0.89
+    loadgame.x,loadgame.y = newgame.x+200, newgame.y
     sceneGroup:insert(loadgame)
 
     -- 2023.06.30 edit by jiruen // 시작하기, 이어하기 버튼 클릭 시 bgm 
@@ -96,8 +96,8 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     --volumeButton:addEventListener("mouse",bigbig)
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    local volumeButton = display.newImageRect("image/설정/설정.png", 60, 60)
+    volumeButton.x,volumeButton.y = display.contentCenterX*3.6, display.contentCenterY*0.25
     sceneGroup:insert(volumeButton)
 
     -- 2023.06.30 edit by jiruen // 샘플 볼륨 bgm
