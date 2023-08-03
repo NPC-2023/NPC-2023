@@ -19,7 +19,7 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 
 
-	local background = display.newImageRect("image/게임시작/background.png", 960, 640)
+	local background = display.newImageRect("image/게임시작/background.png", 960, 480)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
@@ -28,7 +28,7 @@ function scene:create( event )
 --[[
 	--샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.5, display.contentHeight * 0.5
+    volumeButton.x,volumeButton.y = display.contentCenterX * 0.5, display.contentCenterY * 0.5
     sceneGroup:insert(volumeButton)
 
  	--샘플볼륨함수--
@@ -40,32 +40,32 @@ function scene:create( event )
 
 
 
-	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 700, 700)
-	titlePopup.x,titlePopup.y = display.contentWidth/2,display.contentHeight*0.6
+	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 500, 500)
+	titlePopup.x,titlePopup.y = display.contentCenterX,display.contentCenterY*1.2
 	titlePopup.alpha = 0
 	sceneGroup:insert(titlePopup)
 
 
 
-    local text = "입장하기 전, 이름을 입력해주세요."
-	local showText = display.newText(text, display.contentWidth*0.5, display.contentHeight*0.46)
+    local text = "입장하기 전, 이름을 입력해 주세요."
+	local showText = display.newText(text, display.contentCenterX, display.contentCenterY*0.9)
 	showText:setFillColor(0)
-	showText.size = 38
+	showText.size = 28
 	--showText.alpha = 0
 	sceneGroup:insert(showText)
 
 
 
-	local titleButton = display.newImageRect("image/게임시작/이름결정.png", 250, 200)
-	titleButton.x,titleButton.y = display.contentWidth/2,display.contentHeight * 0.68
+	local titleButton = display.newImageRect("image/게임시작/이름결정.png", 200, 150)
+	titleButton.x,titleButton.y = display.contentCenterX, display.contentCenterY+100
 	titleButton.alpha = 0
 	sceneGroup:insert(titleButton)
 
 
 	local text1 = "확인"
-	local showText1 = display.newText(text1, display.contentWidth*0.5, display.contentHeight*0.67)
+	local showText1 = display.newText(text1, titleButton.x, titleButton.y-5)
 	showText1:setFillColor(0)
-	showText1.size = 45
+	showText1.size = 28
 	showText1.alpha = 1
 	sceneGroup:insert(showText1)
 
@@ -100,7 +100,7 @@ function scene:create( event )
 		-- Create text field
 
 	local function make_text()
-		defaultField = native.newTextField( display.contentWidth/2,display.contentHeight * 0.56, 370, 60 )
+		defaultField = native.newTextField( display.contentCenterX,display.contentCenterY+30, 370, 40 )
 		defaultField:addEventListener( "userInput", textListener )
 		defaultField.font = native.newFont( "font/font.ttf", 40)
 		defaultFied = ""
@@ -111,7 +111,7 @@ function scene:create( event )
 
 
 	-- 검은 화면
-	local back = display.newRect(display.contentWidth/2,display.contentHeight/2, display.contentWidth,display.contentHeight)
+	local back = display.newRect(display.contentCenterX/2,display.contentCenterY/2, display.contentCenterX,display.contentCenterY)
 	back:setFillColor(0)
 	sceneGroup:insert(back)
 	back.alpha = 0
@@ -143,10 +143,9 @@ function scene:create( event )
 		end
 	end
 
-
-	local exit1 = display.newImageRect("image/설정/닫기.png", 50, 50)
+	local exit1 = display.newImageRect("image/설정/닫기.png", 40, 40)
 	sceneGroup:insert(exit1)
-	exit1.x, exit1.y = display.contentWidth*0.70, display.contentHeight*0.37
+	exit1.x, exit1.y = display.contentCenterX*2.2, display.contentCenterY*0.5
 	exit1:addEventListener("touch",gotomap)
 
 	local can = 20

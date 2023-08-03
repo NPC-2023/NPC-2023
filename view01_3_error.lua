@@ -9,7 +9,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	print("title2_1")
-	local background = display.newImageRect("image/게임시작/background.png", 960, 640)
+	local background = display.newImageRect("image/게임시작/background.png", 960, 480)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
@@ -32,15 +32,10 @@ function scene:create( event )
     sceneGroup:insert(newgame)]]
 
 
-	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 700, 700)
-	titlePopup.x,titlePopup.y = display.contentWidth/2,display.contentHeight*0.6
+	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 500, 500)
+	titlePopup.x,titlePopup.y = display.contentCenterX,display.contentCenterY*1.2
 	titlePopup.alpha = 0
 	sceneGroup:insert(titlePopup)
-
-	local titleButton = display.newImage("image/게임시작/이름결정.png")
-	titleButton.x,titleButton.y = display.contentWidth/2,display.contentHeight * 0.65
-	titleButton.alpha = 0
-	sceneGroup:insert(titleButton)
 
 	-- 2023.06.30 edit by jiruen // bgm 추가
     local exitBgm = audio.loadStream("soundEffect/388047_설정 닫기 버튼 클릭시 나오는 효과음.wav")
@@ -56,7 +51,7 @@ function scene:create( event )
 		end
 	end	
 
-	newError = display.newImageRect("image/게임시작/이름설정팝업.png", 700, 700)
+	newError = display.newImageRect("image/게임시작/이름설정팝업.png", 500, 500)
 	sceneGroup:insert(newError)
 	newError.x, newError.y = display.contentWidth/2,display.contentHeight*0.6
 
@@ -70,12 +65,11 @@ function scene:create( event )
 	sceneGroup:insert(showText)
 
 
-	exit = display.newImageRect("image/설정/닫기.png", 50, 50)
+	exit = display.newImageRect("image/설정/닫기.png", 40, 40)
 	sceneGroup:insert(exit)
-	exit.x, exit.y = display.contentWidth*0.70, display.contentHeight*0.37
+	exit.x, exit.y = display.contentCenterX*2.2, display.contentCenterY*0.5
 	exit:addEventListener("touch",gohome)
 	
-
 end
 
 function scene:show( event )
