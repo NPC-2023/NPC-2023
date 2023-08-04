@@ -58,9 +58,9 @@ function scene:create( event )
     local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
     local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
     
-    local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.85}
-    local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54, 0.1}
-    local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 3.5}
+    local building_x = {90, -170, -270, 290, 160, 150, 370, -10, -320}
+    local building_y = {0.25, 0.28, 0.8, 0.5, 0.95, 1.52, 1.6, 1.1, 0.25}
+    local building_size = {3.2, 3.5, 3.2, 3, 3, 3.3, 3.3, 3.2 , 4}
 
     local buildingGroup = display.newGroup()
     local building = {}
@@ -176,13 +176,13 @@ function scene:create( event )
 
 
     for i = 1, 8 do 
-        building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
+        building[i].x, building[i].y = display.contentCenterX-building_x[i], display.contentCenterY*building_y[i]
         building[i].name = buildingNames[i]
     end
 
     local size = building_size[9]
     building[9] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[9] ..".png", 512/size, 512/size)
-    building[9].x, building[9].y = display.contentWidth*building_x[9], display.contentHeight*building_y[9]
+    building[9].x, building[9].y = display.contentCenterX-building_x[9], display.contentCenterY*building_y[9]
     building[9].name = buildingNames[9]
 
 
@@ -275,9 +275,13 @@ function scene:create( event )
     end
 
 
-    building[10] = display.newImageRect(buildingGroup, "image/map/맵아이콘.png", 384/3, 384/3)
-    building[10].x, building[10].y=display.contentWidth*0.94, display.contentHeight*0.9
+    building[10] = display.newImageRect(buildingGroup, "image/map/맵아이콘.png", 384/3.5, 384/3.5)
+    building[10].x, building[10].y=display.contentCenterX+420, display.contentCenterY*1.7
     building[10].name="퀘스트아이콘"
+
+    building[11] = display.newImageRect(buildingGroup, "image/map/우체통.png", 150/1.2, 150/1.2)
+    building[11].x, building[11].y = display.contentCenterX+330, display.contentCenterY*1.7
+    building[11].name = "우체통"
 
 
     sceneGroup:insert(background)
@@ -285,8 +289,8 @@ function scene:create( event )
     sceneGroup:insert(catSolesGroup)
 
     --샘플 볼륨 이미지
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    local volumeButton = display.newImageRect("image/설정/설정.png", 100/1.2, 100/1.2)
+    volumeButton.x,volumeButton.y = display.contentCenterX+420, display.contentCenterY * 0.25
     
     sceneGroup:insert(volumeButton)
 
