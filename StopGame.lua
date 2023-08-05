@@ -25,25 +25,24 @@ function scene:create( event )
     sceneGroup:insert(black)
     
 
-    local bgImage = display.newImageRect("image/volume/창.png", 500, 500)
-    bgImage.x = display.contentCenterX
-    bgImage.y = display.contentCenterY*1.2; 
+    local bgImage = display.newImageRect("image/volume/창.png", display.contentWidth*1.6, display.contentHeight*1.05)
+    bgImage.x,bgImage.y = display.contentCenterX, display.contentCenterY*1.2
     sceneGroup:insert(bgImage)
 
 
     --[[local stopText = display.newText("일시정지", display.contentCenterX/2, display.contentCenterY*0.33, native.systemFontBold, 50)
     stopText:setFillColor( 1, 0.8, 0 )
     sceneGroup:insert(stopText)]]
-    local continueButton = display.newImageRect("image/stop/노란버튼.png", 250, 80)
-    continueButton.x, continueButton.y = display.contentCenterX, display.contentCenterY-50
+    local continueButton = display.newImageRect("image/stop/노란버튼.png", display.contentWidth/1.4, display.contentHeight/6.5)
+    continueButton.x, continueButton.y = display.contentCenterX*1.05, display.contentCenterY-50
     sceneGroup:insert(continueButton)
-    local continueText = display.newText("계속하기", continueButton.x, continueButton.y, native.systemFontBold, 30)
+    local continueText = display.newText("계속하기", continueButton.x, continueButton.y, native.systemFontBold, 28)
     continueText:setFillColor(0, 0, 0)
     sceneGroup:insert(continueText)
-    local closeButton = display.newImageRect("image/stop/노란버튼.png", 250, 80)
+    local closeButton = display.newImageRect("image/stop/노란버튼.png", display.contentWidth/1.4, display.contentHeight/6.5)
     closeButton.x, closeButton.y = continueButton.x, continueButton.y+80
     sceneGroup:insert(closeButton)
-    local closeText = display.newText("그만하기", closeButton.x, closeButton.y, native.systemFontBold, 30)
+    local closeText = display.newText("그만하기", closeButton.x, closeButton.y, native.systemFontBold, 28)
     closeText:setFillColor(0, 0, 0)
     sceneGroup:insert(closeText)
 
@@ -68,9 +67,9 @@ function scene:create( event )
     sceneGroup:insert(bgImage)]]
     
     local text = "배경음"
-    local showtext = display.newText(text, display.contentCenterX*0.1, display.contentCenterY*1.4)
+    local showtext = display.newText(text, display.contentCenterX*0.01, display.contentCenterY*1.4)
     showtext:setFillColor(0)
-    showtext.size = 25
+    showtext.size = 23
     sceneGroup:insert(showtext)
 
 
