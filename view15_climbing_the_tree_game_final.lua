@@ -139,7 +139,7 @@ function scene:create( event )
 		local objName = objects[objIdx]
 		
 		object[i]= display.newImageRect(objectGroup,"image/climbing_the_tree/장애물(" .. objName .. ").png", 768/7, 768/7)
-		object[i].x = display.contentWidth*0.5 + math.random(-490, 490)
+		object[i].x = display.contentWidth/2 + math.random(-490, 490)
 		object[i].y = 0
 
 		object[i].type="obstacle"
@@ -179,21 +179,21 @@ function scene:create( event )
  	local walk = audio.loadStream( "soundEffect/walk.mp3" )
  	local getSom = audio.loadStream( "soundEffect/get som.mp3" )
 
-
 	function arrowTab( event )
-		x_max = 950
-		x_min = 370
-		y_max = 640
-		y_min = 100
+		x_max = 430
+		x_min = -149
+		y_max = 432
+		y_min =55
 		x = cat.x
 		y = cat.y
 
-		print(cat.x)
+		print("고양이 위치", cat.x)
+		print("고양이 위치", cat.y)
 
 		if(event.target.name == "left") then
 			local swooshChannel = audio.play(swoosh)
 			if(x > x_min) then
-				cat.x = x-350
+				cat.x = x-300
 			end
 
 		end
@@ -201,7 +201,7 @@ function scene:create( event )
 		if(event.target.name == "right") then
 			local swooshChannel = audio.play(swoosh)
 			if(x < x_max) then
-				cat.x = x+350
+				cat.x = x+300
 			end
 		end
 
@@ -236,7 +236,7 @@ function scene:create( event )
 				if (score == 1) then
 					display.remove(itemFind[1])
 					itemFind[1] = display.newImageRect(itemFindGroup, "image/climbing_the_tree/꽃.png", 512/6, 512/6)
-					itemFind[1].x, itemFind[1].y = display.contentWidth*0.26, display.contentHeight*0.1
+					itemFind[1].x, itemFind[1].y = display.contentWidth*-0.4, display.contentHeight*0.1
 					itemFindGroup:insert(itemFind[1])
 				end
 
@@ -244,21 +244,21 @@ function scene:create( event )
 				if(score == 2) then
 					display.remove(itemFind[2])
 					itemFind[2] = display.newImageRect(itemFindGroup, "image/climbing_the_tree/꽃.png", 512/6, 512/6)
-					itemFind[2].x, itemFind[2].y = display.contentWidth*0.26 + 60, display.contentHeight*0.1
+					itemFind[2].x, itemFind[2].y = display.contentWidth*-0.4 + 60, display.contentHeight*0.1
 					itemFindGroup:insert(itemFind[2])
 				end
 
 				if(score == 3) then
 					display.remove(itemFind[3])
 					itemFind[3] = display.newImageRect(itemFindGroup, "image/climbing_the_tree/꽃.png", 512/6, 512/6)
-					itemFind[3].x, itemFind[3].y = display.contentWidth*0.26 + 120, display.contentHeight*0.1
+					itemFind[3].x, itemFind[3].y = display.contentWidth*-0.4 + 120, display.contentHeight*0.1
 					itemFindGroup:insert(itemFind[3])
 				end
 
 				if (score == 4) then
 					display.remove(itemFind[4])
 					itemFind[4] = display.newImageRect(itemFindGroup, "image/climbing_the_tree/꽃.png", 512/6, 512/6)
-					itemFind[4].x, itemFind[4].y = display.contentWidth*0.26 + 180, display.contentHeight*0.1
+					itemFind[4].x, itemFind[4].y = display.contentWidth*-0.4 + 180, display.contentHeight*0.1
 					itemFindGroup:insert(itemFind[4])
 
 					timer.cancelAll()
