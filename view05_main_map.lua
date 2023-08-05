@@ -218,8 +218,6 @@ function scene:create( event )
 	local catSoles = {}
 	local catSoles_idx = 0
 
-	test = display.newImageRect("image/map/6.png", 268/1.5, 275/1.5)
-	test.x, test.y = display.contentWidth*0.13, display.contentHeight*0.5
 
 	if (loadedSettings.total_success ~= 0) then
 		for i = 1, loadedSettings.total_success do
@@ -296,7 +294,7 @@ function scene:create( event )
 			elseif (loadedSettings.total_success_names[i] == "물고기 사냥")then -- 본관 
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.35, display.contentHeight*0.52
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.13, display.contentHeight*0.5
 
 				building[5].fill.effect = "filter.desaturate"
 				building[5].fill.effect.intensity = 0.7
