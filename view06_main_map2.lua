@@ -126,20 +126,20 @@ function scene:create( event )
 
 
   -- 배경 어둡게
-    local black = display.newRect(display.contentCenterX, display.contentCenterY, 960, 640)
+    local black = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth*3, display.contentHeight)
     black.alpha = 0.8
     black:setFillColor(0)
     sceneGroup:insert(black)
     
 
-    local questScript = display.newImageRect("image/map/퀘스트.png", 900, 900)
+    local questScript = display.newImageRect("image/map/퀘스트.png", 900, 900/1.4)
     questScript.x, questScript.y = display.contentWidth/2, display.contentHeight/2
     sceneGroup:insert(questScript)
 
     local boardTitle = display.newText("📌 퀘스트 완료 목록 📌", 0, 0, "font/DOSGothic.ttf", 22)
     boardTitle:setFillColor(0)
     boardTitle.size = 42
-    boardTitle.x = display.contentWidth * 0.5
+    boardTitle.x = display.contentWidth/2
     boardTitle.y = display.contentHeight * 0.25
     sceneGroup:insert(boardTitle)
 
@@ -164,7 +164,7 @@ function scene:create( event )
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
     local exit = display.newImageRect("image/설정/닫기.png", 50, 50)
 
-    exit.x, exit.y = display.contentWidth*0.75, display.contentHeight*0.15
+    exit.x, exit.y = display.contentWidth*1.4, display.contentHeight*0.25
     exit:addEventListener("touch",goback)
     sceneGroup:insert(exit)
 

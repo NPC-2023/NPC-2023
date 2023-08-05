@@ -218,13 +218,15 @@ function scene:create( event )
 	local catSoles = {}
 	local catSoles_idx = 0
 
+	test = display.newImageRect("image/map/6.png", 268/1.5, 275/1.5)
+	test.x, test.y = display.contentWidth*0.13, display.contentHeight*0.5
 
 	if (loadedSettings.total_success ~= 0) then
 		for i = 1, loadedSettings.total_success do
 			if (loadedSettings.total_success_names[i] == "떨어지는 참치캔 받기")then  -- 인문관
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentCenterX*0.44, display.contentCenterY*0.2
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.25, display.contentHeight*0.15
 
 				building[1].fill.effect = "filter.desaturate"
 				building[1].fill.effect.intensity = 0.9
@@ -232,21 +234,21 @@ function scene:create( event )
 			elseif (loadedSettings.total_success_names[i] == "대신 학식 받아주기")then -- 음악관
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentCenterX*0.75, display.contentCenterY*0.21
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*1, display.contentHeight*0.2
 
 				building[2].fill.effect = "filter.desaturate"
 				building[2].fill.effect.intensity = 0.7
 			elseif (loadedSettings.total_success_names[i] == "학생증 찾기" or loadedSettings.total_success_names[i] == "쥐 잡기")then -- 예지관
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentCenterX*0.86, display.contentCenterY*0.45
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*1.55, display.contentHeight*0.45
 
 				building[3].fill.effect = "filter.desaturate"
 				building[3].fill.effect.intensity = 0.7
 			elseif (loadedSettings.total_success_names[i] == "매점에서 간식 사기"  or loadedSettings.total_success_names[i] == "고양이 점프해서 츄르 찾기")then -- 대학원
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentCenterX*0.25, display.contentCenterY*0.32
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*-0.45, display.contentHeight*0.32
 
 				building[4].fill.effect = "filter.desaturate"
 				building[4].fill.effect.intensity = 0.7
@@ -273,28 +275,28 @@ function scene:create( event )
 			elseif (loadedSettings.total_success_names[i] == "나무 올라가기")then -- 백주년
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentCenterX*0.1, display.contentCenterY*0.85	
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*-0.65, display.contentHeight*0.83
 
 				building[7].fill.effect = "filter.desaturate"
 				building[7].fill.effect.intensity = 0.7
 			elseif (loadedSettings.total_success_names[i] == "Pick Game" )then -- 학생관
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentCenterX*0.54, display.contentCenterY*0.52
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.65, display.contentHeight*0.52
 
 				building[8].fill.effect = "filter.desaturate"
 				building[8].fill.effect.intensity = 0.7
 			elseif (loadedSettings.total_success_names[i] == "붕어빵 만들기" )then -- 정문
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentCenterX*0.3, display.contentCenterY*0.85
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*-0.1, display.contentHeight*0.82
 
 				building[6].fill.effect = "filter.desaturate"
 				building[6].fill.effect.intensity = 0.7
 			elseif (loadedSettings.total_success_names[i] == "물고기 사냥")then -- 본관 
 				catSoles_idx = catSoles_idx + 1
 				catSoles[catSoles_idx] = display.newImageRect(catSolesGroup, "image/map/6.png", 268/1.5, 275/1.5)
-				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentCenterX*0.35, display.contentCenterY*0.52
+				catSoles[catSoles_idx].x, catSoles[catSoles_idx].y = display.contentWidth*0.35, display.contentHeight*0.52
 
 				building[5].fill.effect = "filter.desaturate"
 				building[5].fill.effect.intensity = 0.7
