@@ -19,7 +19,7 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 
 
-	local background = display.newImageRect("image/게임시작/background.png", 960, 480)
+	local background = display.newImageRect("image/게임시작/background.png", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
@@ -40,24 +40,24 @@ function scene:create( event )
 
 
 
-	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 500, 500)
-	titlePopup.x,titlePopup.y = display.contentCenterX,display.contentCenterY*1.2
+	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", display.contentWidth*1.6, display.contentHeight*1.05)
+	titlePopup.x,titlePopup.y = display.contentCenterX, display.contentCenterY*1.2
 	titlePopup.alpha = 0
 	sceneGroup:insert(titlePopup)
 
 
 
     local text = "입장하기 전, 이름을 입력해 주세요."
-	local showText = display.newText(text, display.contentCenterX, display.contentCenterY*0.9)
+	local showText = display.newText(text, display.contentCenterX*1.03, display.contentCenterY*0.9)
 	showText:setFillColor(0)
-	showText.size = 28
+	showText.size = 27
 	--showText.alpha = 0
 	sceneGroup:insert(showText)
 
 
 
-	local titleButton = display.newImageRect("image/게임시작/이름결정.png", 200, 150)
-	titleButton.x,titleButton.y = display.contentCenterX, display.contentCenterY+100
+	local titleButton = display.newImageRect("image/게임시작/이름결정.png", display.contentWidth/2, display.contentHeight/2.8)
+	titleButton.x,titleButton.y = display.contentCenterX, display.contentCenterY+95
 	titleButton.alpha = 0
 	sceneGroup:insert(titleButton)
 
@@ -65,7 +65,7 @@ function scene:create( event )
 	local text1 = "확인"
 	local showText1 = display.newText(text1, titleButton.x, titleButton.y-5)
 	showText1:setFillColor(0)
-	showText1.size = 28
+	showText1.size = 25
 	showText1.alpha = 1
 	sceneGroup:insert(showText1)
 
@@ -100,7 +100,7 @@ function scene:create( event )
 		-- Create text field
 
 	local function make_text()
-		defaultField = native.newTextField( display.contentCenterX,display.contentCenterY+30, 370, 40 )
+		defaultField = native.newTextField( display.contentCenterX,display.contentCenterY+30, display.contentWidth, display.contentHeight/13)
 		defaultField:addEventListener( "userInput", textListener )
 		defaultField.font = native.newFont( "font/font.ttf", 40)
 		defaultFied = ""
@@ -143,9 +143,9 @@ function scene:create( event )
 		end
 	end
 
-	local exit1 = display.newImageRect("image/설정/닫기.png", 40, 40)
+	local exit1 = display.newImageRect("image/설정/닫기.png", display.contentWidth/7.5, display.contentHeight/13)
 	sceneGroup:insert(exit1)
-	exit1.x, exit1.y = display.contentCenterX*2.2, display.contentCenterY*0.5
+	exit1.x, exit1.y = display.contentCenterX*2.25, display.contentCenterY*0.5
 	exit1:addEventListener("touch",gotomap)
 
 	local can = 20

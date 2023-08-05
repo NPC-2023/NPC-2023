@@ -32,8 +32,8 @@ function scene:create( event )
     sceneGroup:insert(newgame)]]
 
 
-	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", 500, 500)
-	titlePopup.x,titlePopup.y = display.contentCenterX,display.contentCenterY*1.2
+	local titlePopup = display.newImageRect("image/게임시작/이름설정팝업.png", display.contentWidth*1.5, display.contentHeight*1.05)
+	titlePopup.x,titlePopup.y = display.contentCenterX, display.contentCenterY*1.2
 	titlePopup.alpha = 0
 	sceneGroup:insert(titlePopup)
 
@@ -51,7 +51,7 @@ function scene:create( event )
 		end
 	end	
 
-	newError = display.newImageRect("image/게임시작/이름설정팝업.png", 500, 500)
+	newError = display.newImageRect("image/게임시작/이름설정팝업.png",  display.contentWidth*1.6, display.contentHeight*1.05)
 	sceneGroup:insert(newError)
 	newError.x, newError.y = display.contentWidth/2,display.contentHeight*0.6
 
@@ -65,9 +65,9 @@ function scene:create( event )
 	sceneGroup:insert(showText)
 
 
-	exit = display.newImageRect("image/설정/닫기.png", 40, 40)
+	exit = display.newImageRect("image/설정/닫기.png", display.contentWidth/7.5, display.contentHeight/13)
 	sceneGroup:insert(exit)
-	exit.x, exit.y = display.contentCenterX*2.2, display.contentCenterY*0.5
+	exit.x, exit.y = display.contentCenterX*2.25, display.contentCenterY*0.5
 	exit:addEventListener("touch",gohome)
 	
 end
