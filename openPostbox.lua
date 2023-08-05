@@ -63,10 +63,7 @@ function scene:create( event )
     local p_cnt = 1
 
     for i=1, 6 do
-        print(loadedSettings.clothes[i])
-        loadedSettings.clothes[i] = true
         if(loadedSettings.clothes[i] == true) then --히든 퀘스트 4개 완. 옷을 받았다 = true로 바꿈
-            print("요"..i.."!")
             c_box[i].alpha = 1
             c_box[i].x , c_box[i].y = (p_cnt-1)*67, p.y/1.5
             clothes[i].alpha = 1

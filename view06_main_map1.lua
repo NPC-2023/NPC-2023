@@ -288,7 +288,7 @@ function scene:create( event )
     sceneGroup:insert(catSolesGroup)
 
     --샘플 볼륨 이미지
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100/1.2, 100/1.2)
+    local volumeButton = display.newImageRect("image/설정/설정.png", display.contentWidth/5, display.contentHeight/8)
     volumeButton.x,volumeButton.y = display.contentWidth*1.8, display.contentHeight * 0.12
     
     sceneGroup:insert(volumeButton)
@@ -314,20 +314,20 @@ function scene:create( event )
     sceneGroup:insert(black)
     
 
-    local gotoScript = display.newImageRect("image/설정/창.png", 500, 500)
+    local gotoScript = display.newImageRect("image/설정/창.png", display.contentWidth*1.6, display.contentHeight*1.05)
     gotoScript.x, gotoScript.y = display.contentCenterX, display.contentCenterY*1.2; 
     sceneGroup:insert(gotoScript)
 
     local gotoContentScript = display.newText(name.."으로 이동하시겠습니까?", display.contentCenterX, display.contentCenterY-10, native.systemFontBold)
-    gotoContentScript.size = 28
+    gotoContentScript.size = 27
     gotoContentScript:setFillColor(0, 0, 0)
     sceneGroup:insert(gotoContentScript)
 
-    local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", 200, 150)
-    gotoButton.x, gotoButton.y = display.contentCenterX, display.contentCenterY+70
+    local gotoButton = display.newImageRect("image/설정/확인,힌트 버튼.png", display.contentWidth/2, display.contentHeight/2.8)
+    gotoButton.x, gotoButton.y = display.contentCenterX, display.contentCenterY+75
     sceneGroup:insert(gotoButton)
 
-    local gotoButtonText = display.newText( "확인", gotoButton.x, gotoButton.y-5, native.systemFont, 28 )
+    local gotoButtonText = display.newText( "확인", gotoButton.x, gotoButton.y-5, native.systemFont, 25 )
     gotoButtonText:setFillColor(0)  -- black
     sceneGroup:insert(gotoButtonText)
 
@@ -421,8 +421,8 @@ function scene:create( event )
 
     -- exit 버튼 생성 및 버튼에 이벤트 리스너 추가
 
-    local exit = display.newImageRect("image/설정/닫기.png", 40, 40)
-    exit.x, exit.y = display.contentCenterX*2.2, display.contentCenterY*0.5
+    local exit = display.newImageRect("image/설정/닫기.png", display.contentWidth/7.5, display.contentHeight/13)
+    exit.x, exit.y = display.contentCenterX*2.25, display.contentCenterY*0.5
     exit:addEventListener("touch",goback)
     sceneGroup:insert(exit)
 
