@@ -11,7 +11,7 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
-	local background = display.newImageRect( "image/hiddenQuest/타이틀 배경.png", 960, 480)
+	local background = display.newImageRect( "image/hiddenQuest/타이틀 배경.png", display.contentWidth*3, display.contentHeight)
 	background.x, background.y = display.contentCenterX, display.contentCenterY
 	sceneGroup:insert(background)
 
@@ -21,7 +21,7 @@ function scene:create( event )
 	mainName = loadedSettings.name
 	--배경
 	for i = 1, 3 do
-		b[i] = display.newImageRect(bGroup, "image/hiddenQuest/" .. i .. ".png", 400, 400)
+		b[i] = display.newImageRect(bGroup, "image/hiddenQuest/" .. i .. ".png", display.contentWidth*1.2, display.contentHeight/1.2)
 	end
 	bGroup.x,bGroup.y = display.contentCenterX, display.contentCenterY*1.2
 	sceneGroup:insert(bGroup)
@@ -33,7 +33,7 @@ function scene:create( event )
 	--composer.setVariable("find5", 0)	
 
 
-	local section = display.newRect(display.contentCenterX, display.contentCenterY*1.75, background.width, background.y*0.5)
+	local section = display.newRect(display.contentCenterX, display.contentCenterY*1.75, background.width, background.y*0.7)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	sceneGroup:insert(section)
 	--local speakerImg = display.newRect(section.x, section.y - 700, 900, 900)
@@ -42,9 +42,9 @@ function scene:create( event )
 	local t = {}
 	local tGroup = display.newGroup()
 	local temp = math.random(8)
-	t[1] = display.newText(mainName.."! 일일 퀘스트를 다 클리어했구나 정말 대단하다냥!", section.x, section.y, "font/NanumSquareRoundR.ttf", 20)
-	t[2] = display.newText("열심히 한 "..mainName.."를 위해 보상으로 히든 퀘스트를 준비했다냥", section.x, section.y, "font/NanumSquareRoundR.ttf", 20)
-	t[3] = display.newText(loadedSettings.buildings_index[temp].."에 가서 히든 퀘스트를 수행하면 선물을 준다냥!", section.x, section.y, "font/NanumSquareRoundR.ttf", 20)	
+	t[1] = display.newText(mainName.."! 일일 퀘스트를 다 클리어했구나 정말 대단하다냥!", section.x, section.y-10, "font/NanumSquareRoundR.ttf", 20)
+	t[2] = display.newText("열심히 한 "..mainName.."를 위해 보상으로 히든 퀘스트를 준비했다냥", section.x, section.y-10, "font/NanumSquareRoundR.ttf", 20)
+	t[3] = display.newText(loadedSettings.buildings_index[temp].."에 가서 히든 퀘스트를 수행하면 선물을 준다냥!", section.x, section.y-10, "font/NanumSquareRoundR.ttf", 20)	
 
 	for i =1, 3 do
 		tGroup:insert(t[i])
