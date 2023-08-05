@@ -328,21 +328,21 @@ function scene:create( event )
 			timer.pauseAll()
 			display.remove(objectGroup)
 		end
-		hintScript = display.newImageRect("image/lost_stuId/메뉴바.png", 1024/1.5, 1024/1.5)
-		hintScript.x, hintScript.y = display.contentWidth/2, display.contentHeight/2
+		hintScript = display.newImageRect("image/lost_stuId/메뉴바.png", 1024/1.5, 1024/2)
+		hintScript.x, hintScript.y = display.contentWidth/2, display.contentHeight/2+40
 		sceneGroup:insert(hintScript)
 
 		hintContentScript = display.newText("힌트\n1. 방향키를 클릭해서 나무를 올라가봐!\n2. 내려오는 새와 구름, 나뭇잎을 피해야 해!", section.x+30, section.y-100, native.systemFontBold)
 		hintContentScript.size = 30
 		hintContentScript:setFillColor(0, 0, 0)
-		hintContentScript.x, hintContentScript.y = display.contentWidth/2, display.contentHeight*0.4
+		hintContentScript.x, hintContentScript.y = display.contentWidth/2, display.contentHeight*0.4+40
 		sceneGroup:insert(hintContentScript)
 
 		hintClose = display.newImageRect("image/lost_stuId/확인,힌트 버튼.png", 768/4, 768/4)
-		hintClose.x, hintClose.y = display.contentWidth/2, display.contentHeight*0.6
+		hintClose.x, hintClose.y = display.contentWidth/2, display.contentHeight*0.6+40
 		sceneGroup:insert(hintClose)
 
-		hintCloseText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.59, native.systemFont, 30 )
+		hintCloseText = display.newText( "확 인", display.contentWidth/2, display.contentHeight*0.59+40, native.systemFont, 30 )
 		hintCloseText:setFillColor( 1, 1, 1 )	-- black
 		sceneGroup:insert(hintCloseText)
 
