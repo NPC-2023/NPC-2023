@@ -16,8 +16,8 @@ function scene:create( event )
 	local loadedEndings = loadsave.loadTable( "endings.json" )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
-	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*1.15, display.contentHeight*1.15)
-	background.x, background.y = display.contentWidth/2.3, display.contentHeight/2.3
+	local background = display.newImageRect("image/custom/catroom.png", display.contentWidth*3, display.contentHeight)
+	background.x, background.y = display.contentCenterX, display.contentCenterY
 
 	local can_cnt = loadedSettings.money
 	local cloth_count = loadedSettings.clothesCount
@@ -41,28 +41,28 @@ function scene:create( event )
 	audio.play( backgroundMusic )]]
 
 	
-	local cat = display.newImageRect(loadedSettings.custom1, 300, 300)
- 	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
+	local cat = display.newImageRect(loadedSettings.custom1, display.contentWidth/1.5, display.contentHeight/2.5)
+ 	cat.x, cat.y = display.contentWidth*0.15, display.contentHeight*0.6
  	cat.xScale = -1
 
- 	local cat_cloth = display.newImageRect(loadedSettings.custom2, 300, 300) --고양이의 몸, 옷 따로 구현
- 	cat_cloth.x, cat_cloth.y = display.contentWidth*0.3, display.contentHeight*0.6
+ 	local cat_cloth = display.newImageRect(loadedSettings.custom2, display.contentWidth/1.5, display.contentHeight/2.5) --고양이의 몸, 옷 따로 구현
+ 	cat_cloth.x, cat_cloth.y = display.contentWidth*0.17, display.contentHeight*0.6
  	cat_cloth.xScale = -1
 
  	local objectGroup = display.newGroup()
 
- 	local can = display.newImageRect("image/custom/can.png", 200, 200)
- 	can.x, can.y = display.contentWidth*0.25, display.contentHeight*0.15
+ 	local can = display.newImageRect("image/custom/can.png", display.contentWidth/3.7, display.contentHeight/6)
+ 	can.x, can.y = display.contentCenterX-310, display.contentHeight*0.13
 
- 	local can_cnt_text = display.newText(tostring(can_cnt), can.x + 15, can.y, "font/NanumSquare_acB.ttf") --변수받아와서 쓰기
- 	can_cnt_text.size = 40
+ 	local can_cnt_text = display.newText(tostring(can_cnt), can.x, can.y, "font/DOSGothic.ttf") --변수받아와서 쓰기
+ 	can_cnt_text.size = 30
  	can_cnt_text:setFillColor(1)
 
-	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.83, display.contentHeight*0.12
+	local map = display.newImageRect("image/npc/map_goback.png", display.contentWidth/2.5, display.contentHeight/4)
+	map.x, map.y = display.contentWidth*1.45, display.contentHeight*0.12
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
-	map_text.size = 40
+	map_text.size = 30
 
  	local expression_name = {"cat_twinkle", "cat_tear", "cat_crank"}
  	local color_name = {"graycat", "pinkcat", "blackcat"}
@@ -70,38 +70,38 @@ function scene:create( event )
 
  	local panel = {}
  	for i = 1,3 do
-	 	panel[i] = display.newImageRect("image/custom/glassPanel_tab.png", 100, 100)
-	 	panel[i].x, panel[i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.3
+	 	panel[i] = display.newImageRect("image/custom/glassPanel_tab.png", display.contentWidth/4.5, display.contentHeight/7)
+	 	panel[i].x, panel[i].y = display.contentWidth*(0.9+0.25*i), display.contentHeight*0.3
 	 	panel[i].name = "panel"..i
 	 	panel[i].i = i --i번째 panel 이라는 뜻. 전체 저장 변수의 인덱스로 쓰기위함.
 	 	panel[i].item = expression_name[i]
 	 	objectGroup:insert(panel[i])
 
-	 	panel[3+i] = display.newImageRect("image/custom/glassPanel_tab.png", 100, 100)
-	 	panel[3+i].x, panel[3+i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.5
+	 	panel[3+i] = display.newImageRect("image/custom/glassPanel_tab.png", display.contentWidth/4.5, display.contentHeight/7)
+	 	panel[3+i].x, panel[3+i].y = display.contentWidth*(0.9+0.25*i), display.contentHeight*0.5
 	 	panel[3+i].name = "panel"..(3+i)
 	 	panel[3+i].i = 3+i
 	 	panel[3+i].item = color_name[i]
 	 	objectGroup:insert(panel[3+i])
 
-	 	panel[6+i] = display.newImageRect("image/custom/glassPanel_tab.png", 100, 100)
-	 	panel[6+i].x, panel[6+i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.7
+	 	panel[6+i] = display.newImageRect("image/custom/glassPanel_tab.png", display.contentWidth/4.5, display.contentHeight/7)
+	 	panel[6+i].x, panel[6+i].y = display.contentWidth*(0.9+0.25*i), display.contentHeight*0.7
 	 	panel[6+i].name = "panel"..(6+i)
 	 	panel[6+i].i = 6+i
 	 	panel[6+i].item = clothes_name[i]
 	 	objectGroup:insert(panel[6+i])
 
 	 	--옷을 담을 panel 구현
-	 	panel[9+i] = display.newImageRect("image/custom/glassPanel_tab.png", 100, 100)
-		panel[9+i].x, panel[9+i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.7
+	 	panel[9+i] = display.newImageRect("image/custom/glassPanel_tab.png", display.contentWidth/4.5, display.contentHeight/7)
+		panel[9+i].x, panel[9+i].y = display.contentWidth*(0.9+0.25*i), display.contentHeight*0.7
 		panel[9+i].name = "panel"..(9+i)
 		panel[9+i].i = 9+i
 		panel[9+i].item = clothes_name[3+i]
 		panel[9+i].alpha = 0
 		objectGroup:insert(panel[9+i])
 
-		panel[12+i] = display.newImageRect("image/custom/glassPanel_tab.png", 100, 100)
-		panel[12+i].x, panel[12+i].y = display.contentWidth*(0.5+0.1*i), display.contentHeight*0.7
+		panel[12+i] = display.newImageRect("image/custom/glassPanel_tab.png", display.contentWidth/4.5, display.contentHeight/7)
+		panel[12+i].x, panel[12+i].y = display.contentWidth*(0.9+0.25*i), display.contentHeight*0.7
 		panel[12+i].name = "panel"..(12+i)
 		panel[12+i].i = 12+i
 		panel[12+i].item = clothes_name[6+i]
@@ -110,40 +110,40 @@ function scene:create( event )
  	end	
 
  	local expression = {}
- 	expression[1] = display.newImageRect("image/custom/cat_twinkle.png", 80, 80)
- 	expression[1].x, expression[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.3
- 	expression[2] = display.newImageRect("image/custom/cat_tear.png", 80, 80)
- 	expression[2].x, expression[2].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.3
-	expression[3] = display.newImageRect("image/custom/cat_crank.png", 80, 80)
- 	expression[3].x, expression[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.3
+ 	expression[1] = display.newImageRect("image/custom/cat_twinkle.png", display.contentWidth/5.5, display.contentHeight/9)
+ 	expression[1].x, expression[1].y = display.contentWidth*(0.9+0.25*1), display.contentHeight*0.3
+ 	expression[2] = display.newImageRect("image/custom/cat_tear.png", display.contentWidth/5.5, display.contentHeight/9)
+ 	expression[2].x, expression[2].y = display.contentWidth*(0.9+0.25*2), display.contentHeight*0.3
+	expression[3] = display.newImageRect("image/custom/cat_crank.png", display.contentWidth/5.5, display.contentHeight/9)
+ 	expression[3].x, expression[3].y = display.contentWidth*(0.9+0.25*3), display.contentHeight*0.3
 
  	local paint = {}
- 	paint[1] = display.newImageRect("image/custom/graypaint.png", 80, 80)
- 	paint[1].x, paint[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.5
- 	paint[2] = display.newImageRect("image/custom/pinkpaint.png", 80, 80)
- 	paint[2].x, paint[2].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.5
-	paint[3] = display.newImageRect("image/custom/blackpaint.png", 80, 80)
- 	paint[3].x, paint[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.5
+ 	paint[1] = display.newImageRect("image/custom/graypaint.png", display.contentWidth/5, display.contentHeight/8)
+ 	paint[1].x, paint[1].y = display.contentWidth*(0.9+0.25*1), display.contentHeight*0.5
+ 	paint[2] = display.newImageRect("image/custom/pinkpaint.png", display.contentWidth/5, display.contentHeight/8)
+ 	paint[2].x, paint[2].y = display.contentWidth*(0.9+0.25*2), display.contentHeight*0.5
+	paint[3] = display.newImageRect("image/custom/blackpaint.png", display.contentWidth/5, display.contentHeight/8)
+ 	paint[3].x, paint[3].y = display.contentWidth*(0.9+0.25*3), display.contentHeight*0.5
 
  	local clothes = {}
- 	clothes[1] = display.newImageRect("image/custom/outer1.png", 80, 80)
- 	clothes[1].x, clothes[1].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
- 	clothes[2] = display.newImageRect("image/custom/outer2.png", 80, 80)
- 	clothes[2].x, clothes[2].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
-	clothes[3] = display.newImageRect("image/custom/outer3.png", 80, 80)
- 	clothes[3].x, clothes[3].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
- 	clothes[4] = display.newImageRect("image/custom/outer4.png", 80, 80) --봄옷
- 	clothes[4].x, clothes[4].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
- 	clothes[5] = display.newImageRect("image/custom/outer5.png", 80, 80) --여름옷1
- 	clothes[5].x, clothes[5].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
- 	clothes[6] = display.newImageRect("image/custom/outer6.png", 80, 80) --여름옷2
- 	clothes[6].x, clothes[6].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
- 	clothes[7] = display.newImageRect("image/custom/outer7.png", 80, 80) --가을옷
- 	clothes[7].x, clothes[7].y = display.contentWidth*(0.5+0.1*1), display.contentHeight*0.7
- 	clothes[8] = display.newImageRect("image/custom/outer8.png", 80, 80) --겨울옷1
- 	clothes[8].x, clothes[8].y = display.contentWidth*(0.5+0.1*2), display.contentHeight*0.7
- 	clothes[9] = display.newImageRect("image/custom/outer9.png", 80, 80) --겨울옷2
- 	clothes[9].x, clothes[9].y = display.contentWidth*(0.5+0.1*3), display.contentHeight*0.7
+ 	clothes[1] = display.newImageRect("image/custom/outer1.png", display.contentWidth/5, display.contentHeight/8)
+ 	clothes[1].x, clothes[1].y = display.contentWidth*(0.9+0.25*1), display.contentHeight*0.7
+ 	clothes[2] = display.newImageRect("image/custom/outer2.png", display.contentWidth/5, display.contentHeight/8)
+ 	clothes[2].x, clothes[2].y = display.contentWidth*(0.9+0.25*2), display.contentHeight*0.7
+	clothes[3] = display.newImageRect("image/custom/outer3.png", display.contentWidth/5, display.contentHeight/8)
+ 	clothes[3].x, clothes[3].y = display.contentWidth*(0.9+0.25*3), display.contentHeight*0.7
+ 	clothes[4] = display.newImageRect("image/custom/outer4.png", display.contentWidth/5, display.contentHeight/8) --봄옷
+ 	clothes[4].x, clothes[4].y = display.contentWidth*(0.9+0.25*1), display.contentHeight*0.7
+ 	clothes[5] = display.newImageRect("image/custom/outer5.png", display.contentWidth/5, display.contentHeight/8) --여름옷1
+ 	clothes[5].x, clothes[5].y = display.contentWidth*(0.9+0.25*2), display.contentHeight*0.7
+ 	clothes[6] = display.newImageRect("image/custom/outer6.png", display.contentWidth/5, display.contentHeight/8) --여름옷2
+ 	clothes[6].x, clothes[6].y = display.contentWidth*(0.9+0.25*3), display.contentHeight*0.7
+ 	clothes[7] = display.newImageRect("image/custom/outer7.png", display.contentWidth/5, display.contentHeight/8) --가을옷
+ 	clothes[7].x, clothes[7].y = display.contentWidth*(0.9+0.25*1), display.contentHeight*0.7
+ 	clothes[8] = display.newImageRect("image/custom/outer8.png", display.contentWidth/5, display.contentHeight/8) --겨울옷1
+ 	clothes[8].x, clothes[8].y = display.contentWidth*(0.9+0.25*2), display.contentHeight*0.7
+ 	clothes[9] = display.newImageRect("image/custom/outer9.png", display.contentWidth/5, display.contentHeight/8) --겨울옷2
+ 	clothes[9].x, clothes[9].y = display.contentWidth*(0.9+0.25*3), display.contentHeight*0.7
 
 
  	--투명도 설정
@@ -179,11 +179,11 @@ function scene:create( event )
 
  	setAlpha()
  	
- 	local reset = display.newImageRect("image/custom/cat_paw.png", 150, 150)
- 	reset.x, reset.y = display.contentWidth*0.1, display.contentHeight*0.1
+ 	local reset = display.newImageRect("image/custom/cat_paw.png", display.contentWidth/3.5, display.contentHeight/6)
+ 	reset.x, reset.y = display.contentCenterX-410, display.contentHeight*0.1
 
- 	local resetText = display.newText("RESET", reset.x, reset.y, "font/NanumSquare_acB.ttf")
- 	resetText.size = 40
+ 	local resetText = display.newText("RESET", reset.x+5, reset.y, "font/DOSGothic.ttf")
+ 	resetText.size = 24
  	resetText:setFillColor(1)
 
  	-----음악
@@ -194,8 +194,8 @@ function scene:create( event )
     }
 
     --샘플 볼륨 이미지
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+    local volumeButton = display.newImageRect("image/설정/설정.png", display.contentWidth/5, display.contentHeight/8)
+    volumeButton.x,volumeButton.y = display.contentWidth*1.8, display.contentHeight*0.12
 
 
     --샘플볼륨함수--
@@ -211,11 +211,11 @@ function scene:create( event )
     audio.play(custom)
 
     --버튼 이미지 바꿀 예정
- 	local right_button = display.newImageRect(objectGroup, "image/custom/공통 좌우상하버튼.png", 80, 80)
- 	right_button.x, right_button.y = display.contentWidth*0.9, display.contentHeight*0.7
- 	local left_button = display.newImageRect(objectGroup, "image/custom/공통 좌우상하버튼.png", 80, 80)
+ 	local right_button = display.newImageRect(objectGroup, "image/custom/공통 좌우상하버튼.png", display.contentWidth/7, display.contentHeight/11)
+ 	right_button.x, right_button.y = display.contentCenterX*3.7, display.contentHeight*0.7
+ 	local left_button = display.newImageRect(objectGroup, "image/custom/공통 좌우상하버튼.png", display.contentWidth/7, display.contentHeight/11)
  	left_button.xScale = -1
- 	left_button.x, left_button.y = display.contentWidth*0.5, display.contentHeight*0.7
+ 	left_button.x, left_button.y = display.contentCenterX*1.9, display.contentHeight*0.7
 
 	for i=1,6 do 
  		if(loadedSettings.get_clothes[i] == true) then
@@ -256,14 +256,14 @@ function scene:create( event )
 	 				end
 	 			end
 	 			--옷을 안 입었을 때는 투명 이미지로 설정
-				cat_cloth = display.newImageRect(loadedSettings.custom2, 300, 300) 
-				cat_cloth.x, cat_cloth.y = display.contentWidth*0.3, display.contentHeight*0.6
+				cat_cloth = display.newImageRect(loadedSettings.custom2, display.contentWidth/1.5, display.contentHeight/2.5)
+				cat_cloth.x, cat_cloth.y = display.contentWidth*0.17, display.contentHeight*0.6
 				cat_cloth.xScale = -1
 	 				
 	 			if(clothesFlag2 == 0) then --클릭한 게 옷이 아닐 때(고양이 몸색, 표정 클릭)
 				 	loadedSettings.custom1 = "image/custom/"..item_name..".png"
-				 	cat = display.newImageRect(loadedSettings.custom1, 300, 300)
-					cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
+				 	cat = display.newImageRect(loadedSettings.custom1, display.contentWidth/1.5, display.contentHeight/2.5)
+					cat.x, cat.y = display.contentWidth*0.15, display.contentHeight*0.6
 					cat.xScale = -1
 				end
 
@@ -271,11 +271,11 @@ function scene:create( event )
 				 
 				--팝업창
 				popup_text.text = "해제되었습니다."
-				popup_text.size = 20
+				popup_text.size = 15
 	 			popup_text:setFillColor(0)
 	 			btn_ok.x = display.contentWidth*0.5
 	 			btn_ok_text.text, btn_ok_text.x = "확인", btn_ok.x
-	 			btn_ok_text.size = 30;
+	 			btn_ok_text.size = 20;
 	 			btn_no.alpha, btn_no_text.alpha = 0, 0
 	 			
 	 			btn_ok:addEventListener("tap", function() 
@@ -324,26 +324,26 @@ function scene:create( event )
 
 		if(loadedSettings.closed[item.i] == true) then
 			if(item.i <= 9) then
-		 		local popup = display.newImageRect("image/custom/popup.png", 400, 400)
+		 		local popup = display.newImageRect("image/custom/popup.png", display.contentWidth, display.contentHeight*0.6)
 		 		popup.x, popup.y = display.contentWidth*0.5, display.contentHeight*0.5
 
-		 		btn_ok = display.newImageRect("image/custom/btn_ok.png", 155, 200)
-		 		btn_ok.x, btn_ok.y = display.contentWidth*0.44, display.contentHeight*0.55
+		 		btn_ok = display.newImageRect("image/custom/btn_ok.png", display.contentWidth*0.4, display.contentHeight/4)
+		 		btn_ok.x, btn_ok.y = display.contentCenterX*0.7, display.contentHeight*0.55
 		 		btn_ok.name = "btn_ok"
 
-		 		btn_no = display.newImageRect("image/custom/btn_ok.png", 155, 200)
-		 		btn_no.x, btn_no.y = display.contentWidth*0.56, display.contentHeight*0.55
+		 		btn_no = display.newImageRect("image/custom/btn_ok.png", display.contentWidth*0.4, display.contentHeight/4)
+		 		btn_no.x, btn_no.y = btn_ok.x+100, display.contentHeight*0.55
 		 		btn_no.name = "btn_no"
 
-		 		popup_text = display.newText("캔을 3개 사용하여 해제할까요?", popup.x, popup.y-50, "font/DOSGothic.ttf")
-		 		popup_text.size = 20
+		 		popup_text = display.newText("캔을 3개 사용해 해제할까요?", popup.x, popup.y-30, "font/DOSGothic.ttf")
+		 		popup_text.size = 15
 		 		popup_text:setFillColor(0)
 
-		 		btn_ok_text =display.newText("네", btn_ok.x, btn_ok.y, "font/DOSGothic.ttf")
-		 		btn_no_text =display.newText("아니오", btn_no.x, btn_no.y, "font/DOSGothic.ttf")
+		 		btn_ok_text =display.newText("네", btn_ok.x, btn_ok.y-5, "font/DOSGothic.ttf")
+		 		btn_no_text =display.newText("아니오", btn_no.x, btn_no.y-5, "font/DOSGothic.ttf")
 
-		 		btn_ok_text.size = 30;
-		 		btn_no_text.size = 30;
+		 		btn_ok_text.size = 20;
+		 		btn_no_text.size = 20;
 
 		 		popupGroup:insert(popup)
 		 		popupGroup:insert(popup_text)
@@ -372,14 +372,14 @@ function scene:create( event )
 	 			end
 	 		end
 
-	 		cat_cloth = display.newImageRect(loadedSettings.custom2, 300, 300)
-			cat_cloth.x, cat_cloth.y = display.contentWidth*0.3, display.contentHeight*0.6
+	 		cat_cloth = display.newImageRect(loadedSettings.custom2, display.contentWidth/1.5, display.contentHeight/2.5)
+			cat_cloth.x, cat_cloth.y = display.contentWidth*0.17, display.contentHeight*0.6
 			cat_cloth.xScale = -1
 			
 			if(clothesFlag2 == 0) then --고양이 표정, 몸 색 선택했을 때 바꾸도록!(옷 클릭 아닐 때)
 			 	loadedSettings.custom1 = "image/custom/"..item_name..".png"
-			 	cat = display.newImageRect(loadedSettings.custom1, 300, 300)
-				cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
+			 	cat = display.newImageRect(loadedSettings.custom1, display.contentWidth/1.5, display.contentHeight/2.5)
+				cat.x, cat.y = display.contentWidth*0.15, display.contentHeight*0.6
 				cat.xScale = -1
 			end
 			
@@ -408,12 +408,12 @@ function scene:create( event )
 		loadedSettings.custom1 = "image/custom/cat.png" --고양이는 기본 고양이 이미지
 		loadedSettings.custom2 = "image/custom/투명.png" --옷은 투명 이미지
 
-		local cat = display.newImageRect(loadedSettings.custom1, 300, 300)
- 		cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6
+		local cat = display.newImageRect(loadedSettings.custom1, display.contentWidth/1.5, display.contentHeight/2.5)
+ 		cat.x, cat.y = display.contentWidth*0.15, display.contentHeight*0.6
  		cat.xScale = -1
 
- 		local cat_cloth = display.newImageRect(loadedSettings.custom2, 300, 300)
- 		cat_cloth.x, cat_cloth.y = display.contentWidth*0.3, display.contentHeight*0.6
+ 		local cat_cloth = display.newImageRect(loadedSettings.custom2, display.contentWidth/1.5, display.contentHeight/2.5)
+ 		cat_cloth.x, cat_cloth.y = display.contentWidth*0.17, display.contentHeight*0.6
  		cat_cloth.xScale = -1
 
  		clothesFlag = 1  --> reset하고 옷을 선택했을 때 투명 이미지가 사라지도록 
