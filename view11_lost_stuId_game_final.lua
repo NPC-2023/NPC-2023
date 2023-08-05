@@ -24,7 +24,7 @@ function scene:create( event )
 
 	local bgMusic = audio.loadStream( "music/lost stu_id music.ogg" )
     audio.play(bgMusic, {loops=-1})
-    audio.setVolume( 0 )
+    -- audio.setVolume( 0 )
 
 	composer.setVariable("gameName", "view11_lost_stuId_game_final")
 

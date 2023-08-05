@@ -17,11 +17,12 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 
-	local background = display.newImage("image/climbing_the_tree/배경.png")
-	background.x, background.y=display.contentWidth/2, display.contentHeight/2
+	local background = display.newImageRect("image/climbing_the_tree/배경.png", display.contentWidth*3, display.contentHeight)
+	background.x = display.contentWidth/2
+    background.y = display.contentHeight/2
 	sceneGroup:insert(background)
 
-	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth*3, display.contentHeight)
 	
 	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
 	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
@@ -50,12 +51,12 @@ function scene:create( event )
 
 	--close 버튼
 	local clear_close = display.newImageRect("image/climbing_the_tree/확인,힌트 버튼.png", 768/5, 768/5)
-	clear_close.x, clear_close.y = display.contentWidth/2, display.contentHeight*0.755
+	clear_close.x, clear_close.y = display.contentWidth/2, display.contentHeight*0.805
 	clear_close.alpha = 0
 
 	local clear_closeScript = display.newText("돌아가기", 0, 0, "ttf/Galmuri7.ttf", 25)
 	clear_closeScript:setFillColor(1)
-	clear_closeScript.x, clear_closeScript.y=display.contentWidth/2, display.contentHeight*0.75
+	clear_closeScript.x, clear_closeScript.y=display.contentWidth/2, display.contentHeight*0.8
 	clear_closeScript.alpha = 0
 	
 
@@ -89,7 +90,7 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.2, 604/1.2) --성공할 경우
+	local backtomap = display.newImageRect("image/climbing_the_tree/미니게임 타이틀.png", 687/1.4, 604/1.4) --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
@@ -101,7 +102,7 @@ function scene:create( event )
 	sceneGroup:insert(backtomapScript)
 	
 
-	local backgame =display.newImageRect("image/climbing_the_tree/우는고ㅇ앵.png", 512/2, 512/2) --실패할 경우
+	local backgame =display.newImageRect("image/lost_stuId/우는고ㅇ앵.png", 512/3, 512/3) --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
 	sceneGroup:insert(backgame)
