@@ -79,13 +79,13 @@ function scene:create( event )
 	local buildingFileNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
 	local buildingNames = { "인문관", "음악관", "예지관", "대학원", "본관", "정문", "백주년", "학생관", "커스텀"}
 	
-	-- local building_x = {0.42, 0.75, 0.84, 0.25, 0.35, 0.3, 0.09, 0.53, 0.85}
-	-- local building_y = {0.22, 0.22, 0.44, 0.35, 0.52, 0.85, 0.87, 0.54, 0.1}
-	-- local building_size = {2.3, 2.5, 2.5, 2.5, 2.3, 3, 3, 2.5 , 3.5}
+	local building_x = {0.2, 1, 1.5, -0.45, 0.15, -0.1, -0.68, 0.65, 1.47}
+	local building_y = {0.15, 0.2, 0.44, 0.35, 0.52, 0.82, 0.83, 0.52, 0.12}
+	local building_size = {3, 3, 3, 3, 3, 3.2, 3.2, 3.2, 4.5}
 
-	local building_x = {90, -170, -270, 290, 160, 150, 370, -10, -320}
-	local building_y = {0.25, 0.28, 0.8, 0.5, 0.95, 1.52, 1.6, 1.1, 0.25}
-	local building_size = {3.2, 3.5, 3.2, 3, 3, 3.3, 3.3, 3.2 , 4}
+	-- local building_x = {90, -170, -270, 290, 160, 150, 370, -10, -320}
+	-- local building_y = {0.25, 0.28, 0.8, 0.5, 0.95, 1.52, 1.6, 1.1, 0.25}
+	-- local building_size = {3.2, 3.5, 3.2, 3, 3, 3.3, 3.3, 3.2 , 4}
 
 	local buildingGroup = display.newGroup()
 	local building = {}
@@ -127,7 +127,7 @@ function scene:create( event )
 		if(loadedSettings.get_clothes[1] ~= true) then
 			loadedSettings.clothes[1] = true
 		end
-		background = display.newImageRect("image/map/봄맵.png", 960, 640)
+		background = display.newImageRect("image/map/봄맵.png", display.contentWidth*3, display.contentHeight)
 
 		for i = 1, 8 do 
 			local size = building_size[i]
@@ -149,7 +149,7 @@ function scene:create( event )
 				loadedSettings.clothes[3] = true
 			end
 			-- 백그라운드 변경
-			background = display.newImageRect("image/map/여름맵.png", 960, 640)
+			background = display.newImageRect("image/map/여름맵.png", display.contentWidth*3, display.contentHeight)
 
 			for i = 1, 8 do 
 				local size = building_size[i]
@@ -171,7 +171,7 @@ function scene:create( event )
 			if(loadedSettings.get_clothes[5] ~= true) then
 				loadedSettings.clothes[5] = true
 			end
-			background = display.newImageRect("image/map/가을맵.png", 960, 640)
+			background = display.newImageRect("image/map/가을맵.png", display.contentWidth*3, display.contentHeight)
 
 			for i = 1, 8 do 
 				local size = building_size[i]
@@ -188,7 +188,7 @@ function scene:create( event )
 			if(loadedSettings.get_clothes[6] ~= true) then
 				loadedSettings.clothes[6] = true
 			end
-			background = display.newImageRect("image/map/겨울맵.png", 960, 640)
+			background = display.newImageRect("image/map/겨울맵.png", display.contentWidth*3, display.contentHeight)
 
 			for i = 1, 8 do 
 				local size = building_size[i]
@@ -197,18 +197,20 @@ function scene:create( event )
 		end
 	end
 	
-	background.x = display.contentCenterX
-    background.y = display.contentCenterY
+	background.x = display.contentWidth/2
+    background.y = display.contentHeight/2
 
 
 	for i = 1, 8 do 
-		building[i].x, building[i].y = display.contentCenterX-building_x[i], display.contentCenterY*building_y[i]
+		building[i].x, building[i].y = display.contentWidth*building_x[i], display.contentHeight*building_y[i]
 		building[i].name = buildingNames[i]
 	end
 
+
+
 	local size = building_size[9]
 	building[9] = display.newImageRect(buildingGroup, "image/map/".. buildingFileNames[9] ..".png", 512/size, 512/size)
-	building[9].x, building[9].y = display.contentCenterX-building_x[9], display.contentCenterY*building_y[9]
+	building[9].x, building[9].y = display.contentWidth*building_x[9], display.contentHeight*building_y[9]
 	building[9].name = buildingNames[9]
 
 
@@ -306,11 +308,11 @@ function scene:create( event )
 
 
 	building[10] = display.newImageRect(buildingGroup, "image/map/맵아이콘.png", 384/3.5, 384/3.5)
-	building[10].x, building[10].y=display.contentCenterX+420, display.contentCenterY*1.7
+	building[10].x, building[10].y=display.contentWidth*1.8, display.contentHeight*0.86
 	building[10].name="퀘스트아이콘"
 
 	building[11] = display.newImageRect(buildingGroup, "image/map/우체통.png", 150/1.2, 150/1.2)
-	building[11].x, building[11].y = display.contentCenterX+330, display.contentCenterY*1.7
+	building[11].x, building[11].y = display.contentWidth*1.47, display.contentHeight*0.85
 	building[11].name = "우체통"
 
 
@@ -430,7 +432,7 @@ function scene:create( event )
 
     --샘플 볼륨 이미지
     local volumeButton = display.newImageRect("image/설정/설정.png", 100/1.2, 100/1.2)
-    volumeButton.x,volumeButton.y = display.contentCenterX+420, display.contentCenterY * 0.25
+    volumeButton.x,volumeButton.y = display.contentWidth*1.8, display.contentHeight * 0.12
     
     sceneGroup:insert(volumeButton)
 
