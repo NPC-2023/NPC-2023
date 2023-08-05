@@ -14,7 +14,7 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	
-	local background = display.newImageRect("image/pick/background.png", 960, 480)
+	local background = display.newImageRect("image/pick/background.png", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
@@ -40,7 +40,7 @@ function scene:create( event )
 		composer.gotoScene("view02_pick_game")
 	end
 	--close 버튼
-	local close = display.newImageRect("image/pick/닫기.png", 50, 50)
+	local close = display.newImageRect("image/pick/닫기.png", display.contentWidth/7, display.contentHeight/11)
 	-- close.x, close.y = 1200, 80 -> 맵보기 아이콘이랑 겹쳐있어 닫기 버튼을 누르면 맵보기 아이콘도 같이 눌러짐
 	close.x, close.y = display.contentCenterX*3.7, display.contentCenterY*0.2
 	close.alpha = 0
@@ -60,17 +60,17 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map") 
 	end
 
-	local backgame1 =display.newImageRect("image/pick/클리어창.png", 300, 300) --성공할 경우
+	local backgame1 =display.newImageRect("image/pick/클리어창.png", display.contentWidth/1.1, display.contentHeight/1.6) --성공할 경우
 	backgame1.x, backgame1.y = display.contentCenterX, display.contentCenterY
 	backgame1.alpha = 0
 	sceneGroup:insert(backgame1)
 
-	local backgame2 =display.newImageRect("image/pick/실패창.png", 300, 300) --실패할 경우
+	local backgame2 =display.newImageRect("image/pick/실패창.png", display.contentWidth/1.1, display.contentHeight/1.6) --실패할 경우
 	backgame2.x, backgame2.y = display.contentCenterX, display.contentCenterY
 	backgame2.alpha = 0
 	sceneGroup:insert(backgame2)
 
-	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", display.contentCenterX, display.contentCenterY*0.2)
+	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", display.contentCenterX, display.contentCenterY*0.25)
 	lastText.size = 30
 	lastText.alpha = 0
 

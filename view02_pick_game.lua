@@ -18,7 +18,7 @@ function scene:create( event )
 
 	composer.setVariable("gameName", "view02_pick_game")
 
-	local background = display.newImageRect("image/pick/background.png", 960, 480)
+	local background = display.newImageRect("image/pick/background.png", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	background.alpha = 0.5
@@ -35,18 +35,18 @@ function scene:create( event )
 	sceneGroup:insert(script)
 
 	local score = 0 
-	local scoreImage = display.newImageRect("image/pick/스코어.png", 100, 120)
-	scoreImage.x,scoreImage.y = display.contentCenterX-400, display.contentCenterY*0.25
+	local scoreImage = display.newImageRect("image/pick/스코어.png", display.contentWidth/3.5, display.contentHeight/4.5)
+	scoreImage.x,scoreImage.y = display.contentCenterX-410, display.contentCenterY*0.25
 	scoreImage.alpha = 0
 	sceneGroup:insert(scoreImage)
 
- 	local showScore = display.newText(score, scoreImage.x, scoreImage.y-5) 
+ 	local showScore = display.newText(score, scoreImage.x+1, scoreImage.y-5) 
 	showScore:setFillColor(1,0,0) 
 	showScore.size = 30
 	showScore.alpha = 0
 	sceneGroup:insert(showScore)
 
-	local alarm = display.newImageRect("image/pick/타이머.png", 110, 120)
+	local alarm = display.newImageRect("image/pick/타이머.png", display.contentWidth/3, display.contentHeight/4)
 	alarm.x, alarm.y = display.contentCenterX*3.6, display.contentCenterY*0.25
 	alarm.alpha = 0
 	sceneGroup:insert(alarm)
@@ -114,7 +114,7 @@ function scene:create( event )
 	local function generate()
 		local objIdx = math.random(#objects)
 		local objName = objects[objIdx]
-		object[i] = display.newImageRect(objectGroup, "image/pick/obj".. objName..".png", 110, 110)
+		object[i] = display.newImageRect(objectGroup, "image/pick/obj".. objName..".png", display.contentWidth/3.5, display.contentHeight/5.5)
 		object[i].x, object[i].y = math.random(-130, 450), math.random(100, 400) 
 		local obj = object[i] 
 		local function remove(event)
@@ -143,7 +143,7 @@ function scene:create( event )
     -- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
     local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
 
-    local volumeButton = display.newImageRect("image/설정/설정.png", 60, 60)
+    local volumeButton = display.newImageRect("image/설정/설정.png", display.contentWidth/5, display.contentHeight/8)
     volumeButton.x,volumeButton.y = alarm.x, alarm.y*2.5
     volumeButton.alpha = 0
 	sceneGroup:insert(volumeButton)

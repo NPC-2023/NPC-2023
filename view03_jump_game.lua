@@ -18,7 +18,7 @@ function scene:create( event )
 	physics.start()
 	--physics.setDrawMode( "hybrid" )
 
-	local background = display.newImageRect("image/jump/background_water.png", 960, 480)
+	local background = display.newImageRect("image/jump/background_water.png", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	background.alpha = 0.5
@@ -41,69 +41,69 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 	local leaf1 = {}
-	leaf1[1] = display.newImageRect(objectGroup, "image/jump/leaf1.png", 200, 80)
+	leaf1[1] = display.newImageRect(objectGroup, "image/jump/leaf1.png", display.contentWidth/1.5, display.contentHeight/4.5)
 	leaf1[1].x, leaf1[1].y = display.contentCenterX-380, display.contentCenterY*0.3
-	leaf1[2] = display.newImageRect(objectGroup, "image/jump/leaf1.png", 180, 100)
+	leaf1[2] = display.newImageRect(objectGroup, "image/jump/leaf1.png", display.contentWidth/1.7, display.contentHeight/4.8)
 	leaf1[2].x, leaf1[2].y = display.contentCenterX-50, display.contentCenterY*1.8
 
 	local leaf2 = {}
-	leaf2[1] = display.newImageRect(objectGroup, "image/jump/leaf2.png", 170, 80)
+	leaf2[1] = display.newImageRect(objectGroup, "image/jump/leaf2.png", display.contentWidth/1.7, display.contentHeight/5)
 	leaf2[1].x, leaf2[1].y = display.contentCenterX*3.4, display.contentCenterY-100
 
 	local plant1 = {}
-	plant1[1] = display.newImageRect(objectGroup, "image/jump/plant1.png", 80, 60)
+	plant1[1] = display.newImageRect(objectGroup, "image/jump/plant1.png", display.contentWidth/3.5, display.contentHeight/8.5)
 	plant1[1].x, plant1[1].y = display.contentCenterX-400, display.contentCenterY*1.8
-	plant1[2] = display.newImageRect(objectGroup, "image/jump/plant1.png", 70, 40)
+	plant1[2] = display.newImageRect(objectGroup, "image/jump/plant1.png", display.contentWidth/5, display.contentHeight/10)
 	plant1[2].x, plant1[2].y = display.contentCenterX*2, display.contentCenterY-20
 
 	local plant2 = {}
-	plant2[1] = display.newImageRect(objectGroup, "image/jump/plant2.png", 100, 50)
+	plant2[1] = display.newImageRect(objectGroup, "image/jump/plant2.png", display.contentWidth/3.5, display.contentHeight/12)
 	plant2[1].x, plant2[1].y = display.contentCenterX*3, display.contentCenterY*1.55
-	plant2[2] = display.newImageRect(objectGroup, "image/jump/plant2.png", 70, 40)
+	plant2[2] = display.newImageRect(objectGroup, "image/jump/plant2.png", display.contentWidth/5, display.contentHeight/11)
 	plant2[2].x, plant2[2].y = display.contentCenterX-310, display.contentCenterY+35
 	
 	local bRock = {}
-	bRock[1] = display.newImageRect(objectGroup, "image/jump/bigRock.png", 130, 96)
+	bRock[1] = display.newImageRect(objectGroup, "image/jump/bigRock.png", display.contentWidth/2.3, display.contentHeight/6)
 	bRock[1].x, bRock[1].y = display.contentCenterX, display.contentCenterY
 
 	local sRock = {}
-	sRock[1] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 90, 80)
+	sRock[1] = display.newImageRect(objectGroup, "image/jump/smallRock.png", display.contentWidth/3.5, display.contentHeight/6)
 	sRock[1].x, sRock[1].y = display.contentCenterX-320, display.contentCenterY*1.6
-	sRock[2] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 90, 80)
+	sRock[2] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", display.contentWidth/3.5, display.contentHeight/6)
 	sRock[2].x, sRock[2].y = sRock[1].x+150, sRock[1].y+10
-	sRock[3] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 100, 90)
+	sRock[3] = display.newImageRect(objectGroup, "image/jump/smallRock.png", display.contentWidth/3.3, display.contentHeight/5.5)
 	sRock[3].x, sRock[3].y = display.contentCenterX*1.5, display.contentCenterY*1.8
-	sRock[4] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 90, 80)
+	sRock[4] = display.newImageRect(objectGroup, "image/jump/smallRock.png", display.contentWidth/3.5, display.contentHeight/6)
 	sRock[4].x, sRock[4].y = sRock[3].x+70, display.contentCenterY*1.65
-	sRock[5] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 100, 90)
+	sRock[5] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", display.contentWidth/3.3, display.contentHeight/5.5)
 	sRock[5].x, sRock[5].y = sRock[3].x+150, display.contentCenterY*1.8
-	sRock[6] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 90, 80)
+	sRock[6] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", display.contentWidth/3.5, display.contentHeight/6)
 	sRock[6].x, sRock[6].y = display.contentCenterX*3.1, display.contentCenterY+50
-	sRock[7] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 90, 80)
+	sRock[7] = display.newImageRect(objectGroup, "image/jump/smallRock.png", display.contentWidth/3.5, display.contentHeight/6)
 	sRock[7].x, sRock[7].y = display.contentCenterX*2.6, display.contentCenterY-55
-	sRock[8] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 100, 90)
-	sRock[8].x, sRock[8].y = display.contentCenterX-130, display.contentCenterY-30
-	sRock[9] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 80, 80)
-	sRock[9].x, sRock[9].y = display.contentCenterX-220, display.contentCenterY
-	sRock[10] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 80, 70)
+	sRock[8] = display.newImageRect(objectGroup, "image/jump/smallRock.png", display.contentWidth/3.3, display.contentHeight/5.5)
+	sRock[8].x, sRock[8].y = display.contentCenterX-130, display.contentCenterY-20
+	sRock[9] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", display.contentWidth/3.8, display.contentHeight/6.3)
+	sRock[9].x, sRock[9].y = display.contentCenterX-220, display.contentCenterY+5
+	sRock[10] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", display.contentWidth/3.8, display.contentHeight/6.3)
 	sRock[10].x, sRock[10].y = display.contentCenterX-390, display.contentCenterY+5
-	sRock[11] = display.newImageRect(objectGroup, "image/jump/smallRock.png", 80, 80)
+	sRock[11] = display.newImageRect(objectGroup, "image/jump/smallRock.png", display.contentWidth/3.8, display.contentHeight/6.3)
 	sRock[11].x, sRock[11].y = display.contentCenterX-440, display.contentCenterY-40
-	sRock[12] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", 80, 80)
+	sRock[12] = display.newImageRect(objectGroup, "image/jump/smallRock2.png", display.contentWidth/3.8, display.contentHeight/6.3)
 	sRock[12].x, sRock[12].y = display.contentCenterX-250, display.contentCenterY-110
 
 	local rock = {}
-	rock[1] = display.newImageRect(objectGroup, "image/jump/rock2.png", 70, 60)
+	rock[1] = display.newImageRect(objectGroup, "image/jump/rock2.png", display.contentWidth/4.5, display.contentHeight/8.5)
 	rock[1].x, rock[1].y = display.contentCenterX-250, display.contentCenterY*1.75
-	rock[2] = display.newImageRect(objectGroup, "image/jump/rock.png", 80, 60)
+	rock[2] = display.newImageRect(objectGroup, "image/jump/rock.png", display.contentWidth/4, display.contentHeight/9)
 	rock[2].x, rock[2].y = display.contentCenterX*3.7, display.contentCenterY*1.4
-	rock[3] = display.newImageRect(objectGroup, "image/jump/rock2.png", 80, 40)
+	rock[3] = display.newImageRect(objectGroup, "image/jump/rock2.png", display.contentWidth/4, display.contentHeight/12)
 	rock[3].x, rock[3].y = display.contentCenterX*2.5, display.contentCenterY*1.1
-	rock[4] = display.newImageRect(objectGroup, "image/jump/rock2.png", 70, 40)
+	rock[4] = display.newImageRect(objectGroup, "image/jump/rock2.png", display.contentWidth/5, display.contentHeight/12)
 	rock[4].x, rock[4].y = display.contentCenterX-150, display.contentCenterY-130
-	rock[5] = display.newImageRect(objectGroup, "image/jump/rock.png", 140, 60)
+	rock[5] = display.newImageRect(objectGroup, "image/jump/rock.png", display.contentWidth/2.5, display.contentHeight/10)
 	rock[5].x, rock[5].y =  display.contentCenterX, display.contentCenterY-130
-	rock[6] = display.newImageRect(objectGroup, "image/jump/rock.png", 70, 40)
+	rock[6] = display.newImageRect(objectGroup, "image/jump/rock.png", display.contentWidth/5, display.contentHeight/12)
 	rock[6].x, rock[6].y = display.contentCenterX-340, display.contentCenterY-80
 
 	
@@ -111,10 +111,10 @@ function scene:create( event )
 
 	local wall = {}
 	local wallGroup = display.newGroup()
-	wall[1] = display.newRect(wallGroup, background.x-480, background.y, 15, background.height) --왼
-	wall[2] = display.newRect(wallGroup, background.x*4, background.y, 15, background.height) --오
-	wall[3] = display.newRect(wallGroup, background.x, 0, background.width, 3) --위
-	wall[4] = display.newRect(wallGroup, background.x, background.y*2, background.width, 15)--아래
+	wall[1] = display.newRect(wallGroup, background.x-480, background.y, display.contentWidth/30, background.height) --왼
+	wall[2] = display.newRect(wallGroup, background.x*4, background.y, display.contentWidth/30, background.height) --오
+	wall[3] = display.newRect(wallGroup, background.x, 0, background.width, display.contentWidth/40) --위
+	wall[4] = display.newRect(wallGroup, background.x, background.y*2, background.width, display.contentWidth/30)--아래
 
 	wallGroup.alpha = 0
 
@@ -154,21 +154,21 @@ function scene:create( event )
 
 	local arrow = {}
 	local arrowGroup = display.newGroup()
-	arrow[1] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 50, 50)
-	arrow[1].x, arrow[1].y = display.contentCenterX*2.8, display.contentCenterY*1.8
+	arrow[1] = display.newImageRect(arrowGroup, "image/jump/arrow.png", display.contentWidth/6.3, display.contentHeight/10)
+	arrow[1].x, arrow[1].y = display.contentCenterX*2.9, display.contentCenterY*1.8
 	arrow[1].xScale = -1
 	arrow[1].name = "left"
-	arrow[2] = display.newImageRect(arrowGroup, "image/jump/jump.png", 50, 50)
+	arrow[2] = display.newImageRect(arrowGroup, "image/jump/jump.png", display.contentWidth/6.3, display.contentHeight/10)
 	arrow[2].x, arrow[2].y = arrow[1].x+65, arrow[1].y
 	arrow[2].name = "center"
-	arrow[3] = display.newImageRect(arrowGroup, "image/jump/arrow.png", 50, 50)
+	arrow[3] = display.newImageRect(arrowGroup, "image/jump/arrow.png", display.contentWidth/6.3, display.contentHeight/10)
 	arrow[3].x, arrow[3].y = arrow[2].x+65, arrow[1].y
 	arrow[3].name = "right"
 	arrow[4] = "right"
 
 	arrowGroup.alpha = 0
 
-	local cat = display.newImageRect("image/jump/cat.png", 50, 40)
+	local cat = display.newImageRect("image/jump/cat.png", display.contentWidth/6.5, display.contentHeight/10.5)
 	local cat_outline_none = graphics.newOutline(1, "image/jump/cat.png")
 	local cat_outline_flip = graphics.newOutline(1, "image/jump/cat_flip.png")
 	cat.x, cat.y = plant1[1].x, plant1[1].y-50
@@ -191,7 +191,7 @@ function scene:create( event )
     audio.setVolume( loadedEndings.logValue )--loadedEndings.logValue
     audio.play(home, musicOption)
 
-    local volumeButton = display.newImageRect("image/설정/설정.png", 60, 60)
+    local volumeButton = display.newImageRect("image/설정/설정.png", display.contentWidth/5, display.contentHeight/8)
     volumeButton.x,volumeButton.y = display.contentCenterX*3.6, display.contentCenterY*0.25
 
 	local isJumping = false

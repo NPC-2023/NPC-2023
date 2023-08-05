@@ -13,7 +13,7 @@ function scene:create( event )
 	local loadedSettings = loadsave.loadTable( "settings.json" )
 
 	
-	local background = display.newImageRect("image/jump/background_water.png", 960, 640)
+	local background = display.newImageRect("image/jump/background_water.png", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
@@ -29,7 +29,7 @@ function scene:create( event )
 	sceneGroup:insert(board)]]
 
 	local score1 = composer.getVariable("score1")
-
+	score1 = -1
 	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추
 	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
 	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
@@ -39,8 +39,8 @@ function scene:create( event )
 		composer.gotoScene("view03_jump_game")
 	end
 	--close 버튼
-	local close = display.newImageRect("image/jump/닫기.png", 50, 50)
-	close.x, close.y = display.contentCenterX*3.5, display.contentCenterY*0.2
+	local close = display.newImageRect("image/jump/닫기.png", display.contentWidth/7, display.contentHeight/11)
+	close.x, close.y = display.contentCenterX*3.7, display.contentCenterY*0.2
 	close.alpha = 0
 
 	local function gomap1(event) -- 게임 pass 후 넘어감
@@ -61,17 +61,17 @@ function scene:create( event )
 		composer.gotoScene("view05_main_map") --npc로
 	end
 
-	local backgame1 =display.newImageRect("image/jump/클리어창.png", 300, 300) --성공할 경우
+	local backgame1 =display.newImageRect("image/jump/클리어창.png", display.contentWidth/1.1, display.contentHeight/1.6) --성공할 경우
 	backgame1.x, backgame1.y = display.contentCenterX, display.contentCenterY
 	backgame1.alpha = 0
 	sceneGroup:insert(backgame1)
 
-	local backgame2 =display.newImageRect("image/jump/실패창.png", 300, 300) --실패할 경우
+	local backgame2 =display.newImageRect("image/jump/실패창.png", display.contentWidth/1.1, display.contentHeight/1.6) --실패할 경우
 	backgame2.x, backgame2.y = display.contentCenterX, display.contentCenterY
 	backgame2.alpha = 0
 	sceneGroup:insert(backgame2)
 
-	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", display.contentCenterX, display.contentCenterY*0.2)
+	local lastText = display.newText("게임을 다시 시작하려면 고양이를 클릭하세요!", display.contentCenterX, display.contentCenterY*0.25)
 	lastText.size = 30
 	lastText.alpha = 0
 
