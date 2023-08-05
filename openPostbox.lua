@@ -23,7 +23,7 @@ function scene:create( event )
     loadsave.saveTable(loadedSettings,"settings.json")
 
     -- 배경 어둡게
-    local black = display.newRect(display.contentWidth/2,display.contentHeight/2,display.contentWidth,display.contentHeight)
+    local black = display.newRect(display.contentCenterX,display.contentCenterY,display.contentWidth*3, display.contentHeight)
     black.alpha = 0.5
     black:setFillColor(0)
     sceneGroup:insert(black)
