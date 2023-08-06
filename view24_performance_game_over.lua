@@ -6,7 +6,6 @@
 
 local composer = require( "composer" )
 local scene = composer.newScene()
-local loadsave = require( "loadsave" )
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -21,11 +20,6 @@ function scene:create( event )
 	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
 	sceneGroup:insert(background1)
-
-	-- 2023.07.04 edit by jiruen // 게임 성공 & 실패 bgm 추가
-	local clearBgm = audio.loadStream("soundEffect/242855_게임 성공 시 효과음.ogg")
-	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
-
 
 	--[[local board =display.newImageRect("이미지/미니게임/미니게임_게임완료창.png",display.contentWidth/3.6294896, display.contentHeight/2.83122739)
 	board.x , board.y = display.contentWidth/2, display.contentHeight/2
@@ -51,16 +45,12 @@ function scene:create( event )
 	local fail_close = display.newImageRect("image/performance/retry.png", 150, 150)
 	fail_close.x, fail_close.y = 950, 400
 	fail_close.alpha = 0
-
-	local loadedSettings = loadsave.loadTable( "settings.json" )
 	
 	
 	local function gomap(event) -- 게임 pass 후 넘어감
 		if event.phase == "began" then
-				loadedSettings.money = loadedSettings.money + 3
-				composer.setVariable("hiddengame_status", "success")
 				composer.removeScene("view24_performance_game_over")
-				composer.gotoScene( "view05_main_map" )--view1은 exit버튼 누르면 나오는 메인화면 
+				composer.gotoScene( "view24_npc_performance_game" )--view1은 exit버튼 누르면 나오는 메인화면 
 		end
 	end
 
@@ -78,14 +68,10 @@ function scene:create( event )
 	if score3 < 0 then 
 		backgame.alpha = 1
 		fail_close.alpha = 1
-		-- 2023.07.04 edit by jiruen // 게임 실패 bgm 추가
-		audio.play(failBgm) 
 		fail_close:addEventListener("touch",backtogame)-- 실패할 경우
 	else
 		backtomap.alpha = 1
 		clear_close.alpha = 1
-		-- 2023.07.04 edit by jiruen // 게임 성공 bgm 추가
-		audio.play(clearBgm)
 		clear_close:addEventListener("touch",gomap)-- 성공할 경우
 	end
 	sceneGroup:insert(fail_close)

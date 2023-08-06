@@ -10,7 +10,6 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
-	composer.setVariable("gameName", "view24_performance_game")
 	local background = display.newImageRect("image/performance/background.png", 960, 640)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
@@ -36,7 +35,7 @@ function scene:create( event )
 	-- 건물 배치 코드
 	--local buildingFileNames = { "피아노", "바이올린", "플루트", "하프", "팀파니" }--"piano", "violin", "flute", "harp", "timpani" 
 	local buildingNames = { "piano", "violin", "flute", "harp", "timpani"}
-	local building_x = {0.1, 0.87, 0.3, 0.7, 0.5}
+	local building_x = {(-0.6), 1.7, 0, 1.23, 0.65}
 	local building_y = {0.6, 0.6, 0.6, 0.6, 0.6}
 	local building_size = {2.3, 2.5, 2.5, 2.5, 2.3}
 
@@ -247,28 +246,6 @@ local soundTable = {
 		--building[i]:addEventListener("tap", gotoCheckMsg)
 		end
 	end	
-	   local options = {
-        isModal = true
-    }
-
-    -- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
-    local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
-
-    local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
-	
-   	
-    --샘플볼륨함수--
-    local function setVolume(event)
-    	--audio.pause(bgm_play)
-    	-- mainGroup = display.newGroup()
-    	-- asteroidsTable = {}
-    	--timer.cancel(gameLoopTimer)
-    	--physics.pause()
-    	audio.play(volumeBgm)
-        composer.showOverlay( "StopGame", options )
-    end
-    volumeButton:addEventListener("tap", setVolume)
 	section:addEventListener("tap", scriptremove)
 
 	--깔리는 것부터 차례대로
@@ -279,7 +256,6 @@ local soundTable = {
 	sceneGroup:insert(cat)
 	sceneGroup:insert(section)
 	sceneGroup:insert(script)
-	sceneGroup:insert(volumeButton)
 end
 
 function scene:show( event )
@@ -307,7 +283,11 @@ function scene:hide( event )
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
-
+		audio.dispose( soundTable["timpani"] )
+		audio.dispose( soundTable["harp"] )
+		audio.dispose( soundTable["flute"] )
+		audio.dispose( soundTable["violin"] )
+		audio.dispose( soundTable["piano"] )
 	end
 end
 
