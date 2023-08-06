@@ -10,11 +10,12 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 
+	composer.setVariable("gameName", "view24_performance_game")
 	local background = display.newImageRect("image/performance/background.png", 960, 640)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, 960, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0.8
 	
@@ -51,12 +52,12 @@ function scene:create( event )
 
 	local target
 
-	local cat = display.newImageRect("image/performance/cat1.png", 300, 300)
+	local cat = display.newImageRect("image/performance/cat1.png", 250, 250)
  	cat.x, cat.y = display.contentWidth/2, display.contentHeight*0.8
 
  	--점수 
- 	local score1 = display.newText(0, display.contentWidth*0.1, display.contentHeight*0.15)
- 	score1.size = 100
+ 	local score1 = display.newText(0, display.contentWidth*(-0.8), display.contentHeight*0.1)
+ 	score1.size = 80
 
  	score1:setFillColor(0)
  	score1.alpha = 0.5
@@ -246,6 +247,28 @@ local soundTable = {
 		--building[i]:addEventListener("tap", gotoCheckMsg)
 		end
 	end	
+	   local options = {
+        isModal = true
+    }
+
+    -- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
+    local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
+
+    local volumeButton = display.newImageRect("image/설정/설정.png", 80, 80)
+    volumeButton.x,volumeButton.y = display.contentCenterX * 3.56, display.contentCenterY * 0.2
+	
+   	
+    --샘플볼륨함수--
+    local function setVolume(event)
+    	--audio.pause(bgm_play)
+    	-- mainGroup = display.newGroup()
+    	-- asteroidsTable = {}
+    	--timer.cancel(gameLoopTimer)
+    	--physics.pause()
+    	audio.play(volumeBgm)
+        composer.showOverlay( "StopGame", options )
+    end
+    volumeButton:addEventListener("tap", setVolume)
 	section:addEventListener("tap", scriptremove)
 
 	--깔리는 것부터 차례대로
@@ -256,6 +279,7 @@ local soundTable = {
 	sceneGroup:insert(cat)
 	sceneGroup:insert(section)
 	sceneGroup:insert(script)
+	sceneGroup:insert(volumeButton)
 end
 
 function scene:show( event )
@@ -283,11 +307,7 @@ function scene:hide( event )
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
-		audio.dispose( soundTable["timpani"] )
-		audio.dispose( soundTable["harp"] )
-		audio.dispose( soundTable["flute"] )
-		audio.dispose( soundTable["violin"] )
-		audio.dispose( soundTable["piano"] )
+
 	end
 end
 
