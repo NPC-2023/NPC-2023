@@ -21,13 +21,15 @@ function scene:create( event )
 	local failBgm = audio.loadStream("soundEffect/253886_게임 실패 시 나오는 효과음.wav")
 
 
-	local background = display.newImageRect("image/schoolfood/cafeteria.png", 960, 640)
+	local background = display.newImageRect("image/schoolfood/cafeteria.png", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
-	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
-	
+	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth*3, display.contentHeight)
+	background1.x = display.contentCenterX
+    background1.y = display.contentCenterY
+
 	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
 	sceneGroup:insert(background1)
@@ -48,13 +50,13 @@ function scene:create( event )
 	end
 
 	--close 버튼
-	local clear_close = display.newImageRect("image/schoolfood/exit.png", 150, 150)
-	clear_close.x, clear_close.y = 950, 400
+	local clear_close = display.newImageRect("image/schoolfood/exit.png", display.contentWidth/3, display.contentHeight/4.5)--150 150
+	clear_close.x, clear_close.y = display.contentCenterX*2.6, display.contentCenterY*1.6
 	clear_close.alpha = 0
 	
 
-	local fail_close = display.newImageRect("image/schoolfood/retry.png", 150, 150)
-	fail_close.x, fail_close.y = 950, 400
+	local fail_close = display.newImageRect("image/schoolfood/retry.png", display.contentWidth/3, display.contentHeight/4.5)
+	fail_close.x, fail_close.y = display.contentCenterX*2.6, display.contentCenterY*1.6--950,400
 	fail_close.alpha = 0
 	
 	

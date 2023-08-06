@@ -18,13 +18,13 @@ function scene:create( event )
 	-- background:setStrokeColor( 0.4, 0.2, 0.2 )
  -- 	background:setFillColor(0.6, 0.5, 0.5)
 
- 	local background = display.newImageRect("image/schoolfood/memo.png", 720, 720)--배경이미지 
+ 	local background = display.newImageRect("image/schoolfood/memo.png", display.contentWidth*1.5, display.contentHeight)--배경이미지  520 520
 	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
  	-- local cancelButton = display.newText("hint", display.contentWidth/2, display.contentHeight*0.3)
  	-- title.size = 70
-    local cancelButton = display.newImageRect("image/schoolfood/cancelButton.png", 50, 50) 
- 	cancelButton.x, cancelButton.y = display.contentWidth*0.71, display.contentHeight*0.073
+    local cancelButton = display.newImageRect("image/schoolfood/cancelButton.png", display.contentWidth/8, display.contentHeight/11.5) --40 40
+ 	cancelButton.x, cancelButton.y = background.x*2.11, background.y*0.18--display.contentWidth*1.1, display.contentHeight*0.06
 
  	function cancelButton:tap( event )
  		composer.hideOverlay('view08_schoolfood_setting')
