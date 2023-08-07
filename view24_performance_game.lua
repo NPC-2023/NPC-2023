@@ -11,11 +11,11 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	composer.setVariable("gameName", "view24_performance_game")
-	local background = display.newImageRect("image/performance/background.png", 960, 640)
+	local background = display.newImageRect("image/performance/background.png", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, 960, display.contentHeight*0.3)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth*3, display.contentHeight)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0.8
 	
@@ -254,8 +254,8 @@ local soundTable = {
     -- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
     local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
 
-    local volumeButton = display.newImageRect("image/설정/설정.png", 80, 80)
-    volumeButton.x,volumeButton.y = display.contentCenterX * 3.56, display.contentCenterY * 0.2
+    local volumeButton = display.newImageRect("image/설정/설정.png", display.contentWidth/6.5, display.contentHeight/9.5)
+    volumeButton.x,volumeButton.y = display.contentCenterX * 3.6, display.contentCenterY * 0.15
 	
    	
     --샘플볼륨함수--
