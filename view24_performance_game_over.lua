@@ -16,7 +16,7 @@ function scene:create( event )
     background.y = display.contentCenterY
 	sceneGroup:insert(background)
 
-	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentHeight/2, display.contentWidth*3, display.contentHeight)
+	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth*3, display.contentHeight)
 	
 	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000}) -- 배경 어둡게
