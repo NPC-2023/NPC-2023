@@ -15,7 +15,7 @@ function scene:create( event )
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth*3, display.contentHeight)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth*3, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha=0.8
 	
