@@ -13,24 +13,24 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/store_entry.png", 960, 640)
+	local background = display.newImageRect("image/npc/store_entry.png", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
- 	local npc = display.newImageRect("image/npc/npc1.png", 200, 180)
+ 	local npc = display.newImageRect("image/npc/npc1.png", display.contentWidth/1.5, display.contentHeight/3)
 	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.78
 	npc.xScale = -1
 	objectGroup:insert(npc)
 
-	local cat = display.newImageRect("image/npc/cat_back.png", 180, 180)
+	local cat = display.newImageRect("image/npc/cat_back.png", display.contentWidth/2, display.contentHeight/2.5)
 	cat.x, cat.y = display.contentWidth*0.1, display.contentHeight*0.88
 	objectGroup:insert(cat)
 
-	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.88*2, display.contentHeight*0.15
+	local map = display.newImageRect("image/npc/map_goback.png", display.contentWidth/2.5, display.contentHeight/4)
+	map.x, map.y =  display.contentWidth*1.6, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
-	map_text.size = 40
+	map_text.size = 30
 
 	local gossip_script = 'a'
 	local game_script = 'a'
@@ -41,20 +41,19 @@ function scene:create( event )
 
 
 	 --대화창
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*4, display.contentWidth*0.9)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	objectGroup:insert(section)
 
 	--대사
 	local t = {}
-	t[1] = display.newText("뭘 먹을지 고민돼.. \n 간메추 해주라.", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText("통조림캔 어떠냥?", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText("사람은 이거 못먹어!", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("그럼 고등어는 먹을 수 있냥?", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("이대론 못 먹어...", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
-	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	
-	local next_text = display.newText("다음 ▶", display.contentWidth*0.8*2, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
+	t[1] = display.newText("뭘 먹을지 고민돼.. \n 간메추 해주라.", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	t[2] = display.newText("통조림캔 어떠냥?", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	t[3] = display.newText("사람은 이거 못먹어!", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	t[4] = display.newText("그럼 고등어는 먹을 수 있냥?", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	t[5] = display.newText("이대론 못 먹어...", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)	
+	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.1, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	local next_text = display.newText("다음 ▶", display.contentWidth*0.8*2, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 25)
 	
 	local i, j = 1, 1
 	for i = 2, 6 do
