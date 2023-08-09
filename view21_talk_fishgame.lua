@@ -13,25 +13,25 @@ function scene:create( event )
 
 	local objectGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/place3.jpg", 1080, 720)
+	local background = display.newImageRect("image/npc/place3.jpg", display.contentWidth*3, display.contentHeight)
 	background.x = display.contentCenterX
     background.y = display.contentCenterY
 
- 	local npc = display.newImageRect("image/npc/npc3.png", 200, 200)
+ 	local npc = display.newImageRect("image/npc/npc3.png", display.contentWidth/1.5, display.contentHeight/3)
 	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
 	npc.xScale = -1
 	objectGroup:insert(npc)
 
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
+	local cat = display.newImageRect("image/npc/cat_back.png", display.contentWidth/2, display.contentHeight/2.5)
 	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
 	cat.xScale = -1
 	objectGroup:insert(cat)
 
-	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
+	local map = display.newImageRect("image/npc/map_goback.png", display.contentWidth/2.5, display.contentHeight/4)
 	map.x, map.y = display.contentWidth*0.88*2, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
-	map_text.size = 40
+	map_text.size = 30
 
 	local gossip_script = 'a'
 	local game_script = 'a'
@@ -47,12 +47,12 @@ function scene:create( event )
 
 	--대사
 	local t = {}
-	t[1] = display.newText("못 보던 고양이 잖아! 이름이 뭐야?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[2] = display.newText(mainName .. "(이)다냥", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[3] = display.newText(mainName .. "? 별명으로 부르고 싶은데..\n".. string.sub(mainName, 1, 3).."어때? ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[4] = display.newText("(흐음..) 좋다냥~", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
-	t[5] = display.newText("앞으로 만나면 " ..string.sub(mainName, 1, 3).."라고 부를게! 헤헤. ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)	
-	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 30)
+	t[1] = display.newText("못 보던 고양이 잖아! 이름이 뭐야?", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	t[2] = display.newText(mainName .. "(이)다냥", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	t[3] = display.newText(mainName .. "? 별명으로 부르고 싶은데..\n".. string.sub(mainName, 1, 3).."어때? ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	t[4] = display.newText("(흐음..) 좋다냥~", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
+	t[5] = display.newText("앞으로 만나면 " ..string.sub(mainName, 1, 3).."라고 부를게! 헤헤. ", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)	
+	t[6] = display.newText("호감도가 1 상승 했습니다.", display.contentWidth*0.3, display.contentHeight*0.73, "font/NanumSquareRoundR.ttf", 25)
 
 	local next_text = display.newText("다음 ▶", display.contentWidth*0.8*2, display.contentHeight*0.9, "font/NanumSquareRoundR.ttf", 30)
 	
