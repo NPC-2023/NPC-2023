@@ -18,34 +18,34 @@ function scene:create( event )
 
 
 	-- Load the background
-	local background = display.newImageRect("image/npc/place1.jpg", 960, 640 )--배경이미지 
+	local background = display.newImageRect("image/npc/place1.jpg", display.contentWidth*3, display.contentHeight)--배경이미지 
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 
-	local npc = display.newImageRect("image/npc/npc1.png", 200, 200)
+	local npc = display.newImageRect("image/npc/npc1.png", display.contentWidth/1.5, display.contentHeight/3)
 	npc.x, npc.y = display.contentWidth*0.5, display.contentHeight*0.55
 	npc.xScale = -1
 
-	local cat = display.newImageRect("image/npc/cat_back.png", 200, 200)
+	local cat = display.newImageRect("image/npc/cat_back.png", display.contentWidth/2, display.contentHeight/2.5)
 	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.9
 	cat.xScale = -1
 	objectGroup:insert(cat)
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 270, 150)
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", display.contentWidth, display.contentHeight/3.5)
 	speechbubble.x, speechbubble.y = npc.x, npc.y-140
 	speechbubble.alpha = 0
 
-	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", 150, 150)
+	local speechbubble_exmark = display.newImageRect("image/npc/speechbubble_exmark.png", display.contentWidth/2.5, display.contentHeight/3.5)
 	speechbubble_exmark.x, speechbubble_exmark.y = npc.x, npc.y-140
 
 	local speech = display.newText("", speechbubble.x, speechbubble.y-20, "font/DOSGothic.ttf")
 	local accept = display.newText("", speechbubble.x, speechbubble.y - 100, "font/DOSGothic.ttf")
 
-	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
-	map.x, map.y = display.contentWidth*0.88*2, display.contentHeight*0.15
+	local map = display.newImageRect("image/npc/map_goback.png", display.contentWidth/2.5, display.contentHeight/4)
+	map.x, map.y = display.contentWidth*1.6, display.contentHeight*0.15
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
-	map_text.size = 40
+	map_text.size = 30
 
 	--스크립트
 	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
@@ -107,10 +107,10 @@ function scene:create( event )
 		script.alpha = 1			
 
 		--수락(말풍선)누르면 고양이가 말함
-		local speechbubble = display.newImageRect("image/npc/speechbubble.png", 200, 75)
+		local speechbubble = display.newImageRect("image/npc/speechbubble.png", display.contentWidth/2.5, display.contentHeight/7)
 		speechbubble.x, speechbubble.y = cat.x, cat.y-100
 		local speech = display.newText("찾아줄게냥!\n", speechbubble.x, speechbubble.y, "font/DOSGothic.ttf")
-		speech.size = 20
+		speech.size = 15
 		speech:setFillColor(0)
 
 		objectGroup:insert(script)
@@ -131,7 +131,7 @@ function scene:create( event )
 		timer.performWithDelay( 1500, function() 
 			scriptGroup.alpha = 1
 			--스크립트
-			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
 			section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
 			local script = display.newText("어떤 것을 할까?", display.contentWidth*0.2, display.contentHeight*0.7, "font/DOSGothic.ttf", 80)
@@ -169,7 +169,7 @@ function scene:create( event )
 	--npc 말풍선 및 수락 텍스트
 	local function talkWithNPC( event )
 		if(composer.getVariable("stuId_status") == "success" and composer.getVariable("talk8_status") == "fin") then
-			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+			local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*3, display.contentWidth*0.9)
 				section:setFillColor(0.35, 0.35, 0.35, 0.35)
 
 			local script = display.newText("퀘스트를 완료하였습니다. ", display.contentWidth/2, display.contentHeight*0.789, "font/DOSGothic.ttf", 80)
