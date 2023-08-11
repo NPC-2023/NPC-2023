@@ -36,8 +36,8 @@ function scene:create( event )
 		title:setFillColor(0)
 
 		local titleBackground = display.newImageRect("image/hidden/view03_background.jpg", 960, 640)
-	background.x = display.contentCenterX
-    background.y = display.contentCenterY
+		titleBackground.x = display.contentCenterX
+    	titleBackground.y = display.contentCenterY
 
 		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.7)
 		section:setFillColor(0.5, 0.5, 0.5, 0.5)
