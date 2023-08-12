@@ -115,20 +115,20 @@ function scene:create( event )
 	--게임 시작---------------------------------------------------------------------------------------------------------------------------------------------------
 	function gamescene()
 		local background = display.newImage("image/boong/view02_background.png", display.contentWidth/2, display.contentHeight/2)
-		local kettlebg = display.newImage("image/boong/재료배경.png", display.contentWidth*0.9, display.contentHeight*0.75)
-	 	local kettle = display.newImage("image/boong/kettle.png", display.contentWidth*0.9, display.contentHeight*0.75)
-	 	local beansbg = display.newImage("image/boong/재료배경.png", display.contentWidth*0.9, display.contentHeight*0.45)
-	 	local beans = display.newImage("image/boong/beans.png", display.contentWidth*0.9, display.contentHeight*0.45)
+		local kettlebg = display.newImage("image/boong/재료배경.png", display.contentWidth*1.5, display.contentHeight*0.75)
+	 	local kettle = display.newImage("image/boong/kettle.png", display.contentWidth*1.5, display.contentHeight*0.75)
+	 	local beansbg = display.newImage("image/boong/재료배경.png", display.contentWidth*1.5, display.contentHeight*0.45)
+	 	local beans = display.newImage("image/boong/beans.png", display.contentWidth*1.5, display.contentHeight*0.45)
 	 	local timerImage = display.newImage("image/boong/타이머.png", display.contentWidth*0.9-50, display.contentHeight*0.15-20)
 	 	local scorebg = display.newImage("image/boong/스코어.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
 
 	 	local object = {}
 		--틀
 		for i = 1,19,9 do
-		 	object[i] = display.newImage("image/boong/object01.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i] = display.newImage("image/boong/object01.png", display.contentWidth*0.05 + i*30, display.contentHeight*0.55)
 
 		 	--반죽1
-		 	object[i+1] = display.newImage("image/boong/object02.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i+1] = display.newImage("image/boong/object02.png", display.contentWidth*0.1 + i*30, display.contentHeight*0.55)
 
 		 	--팥
 		 	object[i+2] = display.newImage("image/boong/object03.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
