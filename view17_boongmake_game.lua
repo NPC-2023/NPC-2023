@@ -65,18 +65,18 @@ function scene:create( event )
 --게임 인트로&게임 방법----------------------------------------------------------------------------------------------------------------------------------------
 
 	function startscene()
-		local gametitle = display.newImage("image/boong/title.png")
+		local gametitle = display.newImageRect("image/lost_stuId/미니게임 타이틀.png", 687/1.4, 604/1.4)
 		gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
-		local title = display.newText("붕어빵 만들기", gametitle.x, gametitle.y+130, native.systemFontBold)
-		title.size = 50
+		local title = display.newText("붕어빵 만들기", 0, 0, "ttf/Galmuri7.ttf", 45)
+		title.x, title.y=display.contentWidth/2, display.contentHeight*0.65
 		title:setFillColor(0)
 
-		local titleBackground = display.newImage("image/boong/view02_background.png", 960, 640)
+		local titleBackground = display.newImageRect("image/boong/view02_background.png", display.contentWidth*3, display.contentHeight)
 		titleBackground.x = display.contentCenterX
     	titleBackground.y = display.contentCenterY
 
-		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.3)
+		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth*3, display.contentHeight*0.4)
 		section:setFillColor(0.35, 0.35, 0.35, 0.35)
 		section.alpha=0
 
@@ -114,42 +114,45 @@ function scene:create( event )
 
 	--게임 시작---------------------------------------------------------------------------------------------------------------------------------------------------
 	function gamescene()
-		local background = display.newImage("image/boong/view02_background.png", display.contentWidth/2, display.contentHeight/2)
-		local kettlebg = display.newImage("image/boong/재료배경.png", display.contentWidth*1.5, display.contentHeight*0.75)
-	 	local kettle = display.newImage("image/boong/kettle.png", display.contentWidth*1.5, display.contentHeight*0.75)
-	 	local beansbg = display.newImage("image/boong/재료배경.png", display.contentWidth*1.5, display.contentHeight*0.45)
-	 	local beans = display.newImage("image/boong/beans.png", display.contentWidth*1.5, display.contentHeight*0.45)
-	 	local timerImage = display.newImage("image/boong/타이머.png", display.contentWidth*0.9-50, display.contentHeight*0.15-20)
-	 	local scorebg = display.newImage("image/boong/스코어.png", display.contentWidth*0.1+10, display.contentHeight*0.15-20)
+		local background = display.newImageRect("image/boong/view02_background.png", display.contentWidth*3, display.contentHeight)
+		background.x = display.contentCenterX
+		background.y = display.contentCenterY
+
+		local kettlebg = display.newImage("image/boong/재료배경.png", display.contentWidth*1.75, display.contentHeight*0.75)
+	 	local kettle = display.newImage("image/boong/kettle.png", display.contentWidth*1.75, display.contentHeight*0.75)
+	 	local beansbg = display.newImage("image/boong/재료배경.png", display.contentWidth*1.75, display.contentHeight*0.4)
+	 	local beans = display.newImage("image/boong/beans.png", display.contentWidth*1.75, display.contentHeight*0.4)
+	 	local timerImage = display.newImage("image/boong/타이머.png", display.contentWidth*-0.4 , display.contentHeight*0.15 -7)
+	 	local scorebg = display.newImage("image/boong/스코어.png", display.contentWidth*-0.8, display.contentHeight*0.15)
 
 	 	local object = {}
 		--틀
 		for i = 1,19,9 do
-		 	object[i] = display.newImage("image/boong/object01.png", display.contentWidth*0.05 + i*30, display.contentHeight*0.55)
+		 	object[i] = display.newImage("image/boong/object01.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 
 		 	--반죽1
-		 	object[i+1] = display.newImage("image/boong/object02.png", display.contentWidth*0.1 + i*30, display.contentHeight*0.55)
+		 	object[i+1] = display.newImage("image/boong/object02.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 
 		 	--팥
-		 	object[i+2] = display.newImage("image/boong/object03.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i+2] = display.newImage("image/boong/object03.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 
 		 	--반죽2
-		 	object[i+3] = display.newImage("image/boong/object04.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i+3] = display.newImage("image/boong/object04.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 
 		 	--틀
-		 	object[i+4] = display.newImage("image/boong/object05.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i+4] = display.newImage("image/boong/object05.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 
 		 	--연기
-		 	object[i+5] = display.newImage("image/boong/object06.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i+5] = display.newImage("image/boong/object06.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 
 		 	--완성된 붕어빵
-		 	object[i+6] = display.newImage("image/boong/object07.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i+6] = display.newImage("image/boong/object07.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 
 		 	--탄 연기
-		 	object[i+7] = display.newImage("image/boong/object08.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i+7] = display.newImage("image/boong/object08.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 
 		 	--탄 붕어빵
-		 	object[i+8] = display.newImage("image/boong/object09.png", display.contentWidth*0.2 + i*30 - 10, display.contentHeight*0.55)
+		 	object[i+8] = display.newImage("image/boong/object09.png", display.contentWidth*-0.45 + i*23, display.contentHeight*0.55)
 		end
 
 		sceneGroup:insert(background)
@@ -157,8 +160,8 @@ function scene:create( event )
 			sceneGroup:insert(object[i])
 		end
 
-		local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    	volumeButton.x,volumeButton.y = display.contentWidth * 0.95, display.contentHeight * 0.12
+		local volumeButton = display.newImageRect("image/설정/설정.png", display.contentWidth/5, display.contentHeight/8)
+    	volumeButton.x,volumeButton.y = display.contentWidth * 1.8, display.contentHeight * 0.12
 		
 		-- 2023.07.04 edit by jiruen // 샘플 볼륨 bgm
     	local volumeBgm = audio.loadStream("soundEffect/263126_설정 클릭시 나오는 효과음(2).wav")
@@ -183,15 +186,15 @@ function scene:create( event )
 		sceneGroup:insert(scorebg)
 		sceneGroup:insert(volumeButton)
 	 	for i = 1,27,1 do
-	 		object[i]:scale(0.6,0.6)
+	 		object[i]:scale(0.4,0.4)
 	 	end
 
-	 	kettle:scale(0.3,0.3)
-	 	beans:scale(0.35,0.35)
-	 	kettlebg:scale(0.9,0.9)
-	 	beansbg:scale(0.9,0.9)
-	 	timerImage:scale(0.8,0.8)
-	 	scorebg:scale(0.8,0.8)
+	 	kettle:scale(0.2,0.2)
+	 	beans:scale(0.25,0.25)
+	 	kettlebg:scale(0.7,0.7)
+	 	beansbg:scale(0.7,0.7)
+	 	timerImage:scale(0.6,0.6)
+	 	scorebg:scale(0.6,0.6)
 
 		for i = 1, 27, 1 do
 			object[i].alpha = 0
@@ -209,12 +212,15 @@ function scene:create( event )
 	 		object[i+5]:toFront()
 	 	end
 
-		local score = display.newText(0, display.contentWidth*0.1+10, display.contentHeight*0.15-20)
-	 	score.size = 50
+	 	--	 	local timerImage = display.newImage("image/boong/타이머.png", display.contentWidth*-0.4 , display.contentHeight*0.15 -7)
+	 	--local scorebg = display.newImage("image/boong/스코어.png", display.contentWidth*-0.8, display.contentHeight*0.15)
+
+		local score = display.newText(0, display.contentWidth*-0.8, display.contentHeight*0.15-7)
+	 	score.size = 30
 	 	score:setFillColor(0)
 	 	sceneGroup:insert(score)
-	 	local time= display.newText(50, display.contentWidth*0.9-50, display.contentHeight*0.15-10)
-	 	time.size = 40
+	 	local time= display.newText(50, display.contentWidth*-0.4, display.contentHeight*0.15)
+	 	time.size = 30
 	 	time:setFillColor(0)
 	 	sceneGroup:insert(time)
 
@@ -352,6 +358,7 @@ function scene:create( event )
 							 composer.removeScene("view17_boongmake_game")
 							composer.gotoScene("view17_boongmake_game_over")
 				 		end
+				 		transition.cancel(object[j+7])
 				 	end
 	 			end
 	 		end
