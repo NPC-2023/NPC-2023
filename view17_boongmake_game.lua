@@ -256,8 +256,8 @@ function scene:create( event )
 
 	 			if ( event.target.isFocus ) then
 	 				-- 드래그 중일 때
-	 				event.target.x = event.xStart + event.xDelta
-	 				event.target.y = event.yStart + event.yDelta
+	 				event.target.x = event.x
+	 				event.target.y = event.y
 	 			end
 
 	 		elseif ( event.phase == "ended" or event.phase == "cancelled") then

@@ -110,14 +110,16 @@ function scene:create( event )
 	 	local student = display.newImage("image/hidden/student.png")
 	 	student.x, student.y = display.contentWidth*1.1, display.contentHeight*0.6
 
-	 	local paper = display.newImage("image/hidden/paper.png")
-	 	paper.x, paper.y = display.contentWidth*1.1, display.contentHeight*0.9
+	 	local score_bg = display.newImage("image/hidden/계단수.png", display.contentWidth/2, display.contentHeight*0.15)
 
-	 	local scissors = display.newImage("image/hidden/scissors.png")
-	 	scissors.x, scissors.y = display.contentWidth*0.5, display.contentHeight*0.9
+	 	local paper = display.newImage("image/hidden/보.png")
+	 	paper.x, paper.y = display.contentWidth*1.1, display.contentHeight*0.85
 
-	 	local rock = display.newImage("image/hidden/rock.png")
-	 	rock.x, rock.y = display.contentWidth*-0.1, display.contentHeight*0.9
+	 	local scissors = display.newImage("image/hidden/가위.png")
+	 	scissors.x, scissors.y = display.contentWidth*0.5, display.contentHeight*0.85
+
+	 	local rock = display.newImage("image/hidden/주먹.png")
+	 	rock.x, rock.y = display.contentWidth*-0.1, display.contentHeight*0.85
 
 	 	local Student_paper = display.newImage("image/hidden/Student_paper.png")
 	 	Student_paper.x, Student_paper.y = display.contentWidth*1.1, display.contentHeight*0.45
@@ -130,12 +132,13 @@ function scene:create( event )
 
 	 	cat:scale(0.15,0.15)
 	 	student:scale(0.7,0.7)
-	 	rock:scale(0.25,0.25)
-	 	scissors:scale(0.25,0.25)
-	 	paper:scale(0.25,0.25)
+	 	rock:scale(0.22,0.22)
+	 	scissors:scale(0.22,0.22)
+	 	paper:scale(0.22,0.22)
 	 	Student_rock:scale(0.3,0.3)
 	 	Student_scissors:scale(0.3,0.3)
 	 	Student_paper:scale(0.3,0.3)
+	 	score_bg:scale(0.5,0.5)
 
 	 	sceneGroup:insert(background)
 	 	sceneGroup:insert(cat)
@@ -147,6 +150,7 @@ function scene:create( event )
 	 	sceneGroup:insert(Student_scissors)
 	 	sceneGroup:insert(Student_rock)
 	 	sceneGroup:insert(volumeButton)
+	 	sceneGroup:insert(score_bg)
 
 	 	local winText = display.newText('바위 가위 보 중 하나를 선택해주세요', display.contentCenterX, display.contentCenterY-300)
 	 	winText.size = 50
@@ -156,8 +160,6 @@ function scene:create( event )
 	 	sceneGroup:insert(winText)
 	 	--winText:toFront()
 
-	 	local PlayerScore = 0
-		local Student_Score= 0
 		local Student_DO = 0
 
 		local student_yStart = student.y
@@ -167,6 +169,20 @@ function scene:create( event )
 		Student_rock.alpha = 0
 	 	Student_scissors.alpha = 0
 	 	Student_paper.alpha = 0
+
+	 	--남은 계단 수
+	 	local Player_Score = 14
+		local Student_Score= 14
+
+		local Show_Player_score = display.newText(14, display.contentCenterX *0.18, display.contentCenterY *0.3)
+	 	Show_Player_score.size = 40
+	 	Show_Player_score:setFillColor(0)
+	 	sceneGroup:insert(Show_Player_score)
+
+	 	local Show_Student_Score = display.newText(14, display.contentCenterX *1.82, display.contentCenterY *0.3)
+	 	Show_Student_Score.size = 40
+	 	Show_Student_Score:setFillColor(0)
+	 	sceneGroup:insert(Show_Student_Score)
 
 		local function tap( event )
 			--Student_가위바위보
@@ -266,6 +282,7 @@ function scene:create( event )
 		 			cat.y = cat.y-10
 		 			winText.text = '이겼습니다. 고양이가 1칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 1칸 올라갑니다.")
+		 			Show_Player_score.text = Show_Player_score.text - 1
 		 		else
 		 			student.y = student.y-50
 		 			Student_scissors.y = Student_scissors.y-50
@@ -273,6 +290,7 @@ function scene:create( event )
 		 			Student_rock.y = Student_rock.y-50
 		 			winText.text = '졌습니다. 학생이 5칸 올라갑니다.'
 		 			print("졌습니다. 학생이 5칸 올라갑니다.")
+		 			Show_Student_Score.text = Show_Student_Score.text - 5
 		 		end
 
 		  	elseif (event.target == scissors) then
@@ -283,6 +301,7 @@ function scene:create( event )
 		 			cat.y = cat.y-20
 		 			winText.text = '이겼습니다. 고양이가 2칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 2칸 올라갑니다.")
+		 			Show_Player_score.text = Show_Player_score.text - 2
 		 		else
 		 			student.y = student.y-10
 		 			Student_scissors.y = Student_scissors.y-10
@@ -290,6 +309,7 @@ function scene:create( event )
 		 			Student_rock.y = Student_rock.y-10
 		 			winText.text = '졌습니다. 학생이 1칸 올라갑니다.'
 		 			print("졌습니다. 학생이 1칸 올라갑니다.")
+		 			Show_Student_Score.text = Show_Student_Score.text - 1
 		 		end
 
 		 	elseif (event.target == paper) then
@@ -300,6 +320,7 @@ function scene:create( event )
 		 			cat.y = cat.y-50
 		 			winText.text = '이겼습니다. 고양이가 5칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 5칸 올라갑니다.")
+		 			Show_Player_score.text = Show_Player_score.text - 5
 		 		else
 		 			student.y = student.y-20
 		 			Student_scissors.y = Student_scissors.y-20
@@ -307,6 +328,7 @@ function scene:create( event )
 		 			Student_rock.y = Student_rock.y-20
 		 			winText.text = '졌습니다. 학생이 2칸 올라갑니다.'
 		 			print("졌습니다. 학생이 2칸 올라갑니다.")
+		 			Show_Student_Score.text = Show_Student_Score.text - 2
 		 		end
 		 	end
 		 	who_win()
