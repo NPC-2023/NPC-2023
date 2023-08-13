@@ -122,22 +122,22 @@ function scene:create( event )
 	 	rock.x, rock.y = display.contentWidth*-0.1, display.contentHeight*0.85
 
 	 	local Student_paper = display.newImage("image/hidden/Student_paper.png")
-	 	Student_paper.x, Student_paper.y = display.contentWidth*1.1, display.contentHeight*0.45
+	 	Student_paper.x, Student_paper.y = display.contentWidth*1.1, display.contentHeight*0.4
 
 	 	local Student_scissors = display.newImage("image/hidden/Student_scissors.png")
-	 	Student_scissors.x, Student_scissors.y = display.contentWidth*1.1, display.contentHeight*0.45
+	 	Student_scissors.x, Student_scissors.y = display.contentWidth*1.1, display.contentHeight*0.4
 
 	 	local Student_rock = display.newImage("image/hidden/Student_rock.png")
-	 	Student_rock.x, Student_rock.y = display.contentWidth*1.1, display.contentHeight*0.45
+	 	Student_rock.x, Student_rock.y = display.contentWidth*1.1, display.contentHeight*0.4
 
 	 	cat:scale(0.15,0.15)
 	 	student:scale(0.7,0.7)
 	 	rock:scale(0.22,0.22)
 	 	scissors:scale(0.22,0.22)
 	 	paper:scale(0.22,0.22)
-	 	Student_rock:scale(0.3,0.3)
-	 	Student_scissors:scale(0.3,0.3)
-	 	Student_paper:scale(0.3,0.3)
+	 	Student_rock:scale(0.2,0.2)
+	 	Student_scissors:scale(0.2,0.2)
+	 	Student_paper:scale(0.2,0.2)
 	 	score_bg:scale(0.5,0.5)
 
 	 	sceneGroup:insert(background)
@@ -152,10 +152,10 @@ function scene:create( event )
 	 	sceneGroup:insert(volumeButton)
 	 	sceneGroup:insert(score_bg)
 
-	 	local winText = display.newText('바위 가위 보 중 하나를 선택해주세요', display.contentCenterX, display.contentCenterY-300)
+	 	local winText = display.newText('바위 가위 보 중 하나를 선택해주세요', display.contentCenterX, display.contentHeight*0.35)
 	 	winText.size = 50
 	 	winText:setFillColor(0)
-	 	winText.alpha = 0.8
+	 	winText.alpha = 0
 
 	 	sceneGroup:insert(winText)
 	 	--winText:toFront()
