@@ -12,8 +12,8 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	local loadedSettings = loadsave.loadTable( "settings.json" )
-	local volumeButton = display.newImageRect("image/설정/설정.png", 100, 100)
-    	volumeButton.x,volumeButton.y = display.contentWidth * 0.91, display.contentHeight * 0.1
+	local volumeButton = display.newImageRect("image/설정/설정.png", display.contentWidth/5, display.contentHeight/8)
+    volumeButton.x,volumeButton.y = display.contentWidth * 1.8, display.contentHeight * 0.12
 
     local function pagemove()
 		display.remove(sceneGroup)
@@ -28,22 +28,22 @@ function scene:create( event )
 
 		composer.setVariable("gameName", "view23_hidden_game")
 
-		local gametitle = display.newImage("image/hidden/title.png")
+		local gametitle = display.newImageRect("image/hidden/title.png", 687/1.4, 604/1.4)
 		gametitle.x, gametitle.y = display.contentWidth/2, display.contentHeight/2
 
-		local title = display.newText("바위가위보로 \n계단 올라가기", gametitle.x, gametitle.y+130, native.systemFontBold)
-		title.size = 50
+		local title = display.newText("바위가위보로 \n계단 올라가기", 0, 0, "ttf/Galmuri7.ttf", 45)
+		title.x, title.y=display.contentWidth/2, display.contentHeight*0.65
 		title:setFillColor(0)
 
-		local titleBackground = display.newImageRect("image/hidden/view03_background.jpg", 960, 640)
-		titleBackground.x = display.contentCenterX
-    	titleBackground.y = display.contentCenterY
+		local titlebackground = display.newImageRect("image/hidden/view03_background.jpg", display.contentWidth*3, display.contentHeight)
+		titlebackground.x = display.contentCenterX
+    	titlebackground.y = display.contentCenterY
 
-		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth, display.contentHeight*0.7)
-		section:setFillColor(0.5, 0.5, 0.5, 0.5)
+		local section = display.newRect(display.contentWidth/2, display.contentHeight*0.85, display.contentWidth*3, display.contentHeight*0.9)
+		section:setFillColor(0.35, 0.35, 0.35, 0.35)
 		section.alpha=0
 
-		local script = display.newText("게임방법\n\n학생과 바위가위보게임을 하며 계단을 올라가보세요! 14칸을 먼저 올라가는 사람이 이깁니다.\n\n 점수\n 바위 : 1칸\n 가위 : 2칸\n 보 : 5칸", section.x+30, section.y-100, native.systemFontBold)
+		local script = display.newText("게임방법\n\n학생과 바위가위보게임을 하며 계단을 올라가보세요! \n 14칸을 먼저 올라가는 사람이 이깁니다.\n\n 점수\n 바위 : 1칸   가위 : 2칸   보 : 5칸", section.x+30, section.y-100, native.systemFontBold)
 		script.size = 30
 		script:setFillColor(1)
 		script.x, script.y = display.contentWidth/2, display.contentHeight*0.7
@@ -75,7 +75,7 @@ function scene:create( event )
 		
 		sceneGroup:insert(gametitle)
 		sceneGroup:insert(title)
-		sceneGroup:insert(titleBackground)
+		sceneGroup:insert(titlebackground)
 		sceneGroup:insert(section)
 		sceneGroup:insert(script)
 		
@@ -83,6 +83,7 @@ function scene:create( event )
 			timer1=timer.performWithDelay(500, spawn, 0)
 			section.alpha=0
 			script.alpha=0
+			gamescene()
 		end
 
 		local function titleremove(event)
@@ -91,51 +92,50 @@ function scene:create( event )
 			section.alpha=1
 			script.alpha=1
 			section:addEventListener("tap", scriptremove)
-			gamescene()
 		end
 		gametitle:addEventListener("tap", titleremove)
-		--gametitle:toFront()
-		--title:toFront()
+		gametitle:toFront()
+		title:toFront()
 	end
 
 	--게임 시작------------------------------------------------------------------------------------------------------------------------------------
 	function gamescene()
 		--이미지 설정
-		local background = display.newImageRect("image/hidden/view03_background.jpg", display.contentWidth, display.contentHeight)
-		background.x, background.y = display.contentWidth/2, display.contentHeight/2
+		local background = display.newImageRect("image/hidden/view03_background.jpg", display.contentWidth*3, display.contentHeight)
+		background.x, background.y = display.contentCenterX,  display.contentCenterY
 
 		local cat = display.newImage("image/hidden/cat.png")
-	 	cat.x, cat.y = display.contentWidth*0.3, display.contentHeight*0.6+20
+	 	cat.x, cat.y = display.contentWidth*-0.1, display.contentHeight*0.6+20
 
 	 	local student = display.newImage("image/hidden/student.png")
-	 	student.x, student.y = display.contentWidth*0.7, display.contentHeight*0.6
+	 	student.x, student.y = display.contentWidth*1.1, display.contentHeight*0.6
 
 	 	local paper = display.newImage("image/hidden/paper.png")
-	 	paper.x, paper.y = display.contentWidth*0.7, display.contentHeight*0.9
+	 	paper.x, paper.y = display.contentWidth*1.1, display.contentHeight*0.9
 
 	 	local scissors = display.newImage("image/hidden/scissors.png")
 	 	scissors.x, scissors.y = display.contentWidth*0.5, display.contentHeight*0.9
 
 	 	local rock = display.newImage("image/hidden/rock.png")
-	 	rock.x, rock.y = display.contentWidth*0.3, display.contentHeight*0.9
+	 	rock.x, rock.y = display.contentWidth*-0.1, display.contentHeight*0.9
 
-	 	local AIpaper = display.newImage("image/hidden/AIpaper.png")
-	 	AIpaper.x, AIpaper.y = display.contentWidth*0.7, display.contentHeight*0.45
+	 	local Student_paper = display.newImage("image/hidden/Student_paper.png")
+	 	Student_paper.x, Student_paper.y = display.contentWidth*1.1, display.contentHeight*0.45
 
-	 	local AIscissors = display.newImage("image/hidden/AIscissors.png")
-	 	AIscissors.x, AIscissors.y = display.contentWidth*0.7, display.contentHeight*0.45
+	 	local Student_scissors = display.newImage("image/hidden/Student_scissors.png")
+	 	Student_scissors.x, Student_scissors.y = display.contentWidth*1.1, display.contentHeight*0.45
 
-	 	local AIrock = display.newImage("image/hidden/AIrock.png")
-	 	AIrock.x, AIrock.y = display.contentWidth*0.7, display.contentHeight*0.45
+	 	local Student_rock = display.newImage("image/hidden/Student_rock.png")
+	 	Student_rock.x, Student_rock.y = display.contentWidth*1.1, display.contentHeight*0.45
 
 	 	cat:scale(0.15,0.15)
 	 	student:scale(0.7,0.7)
-	 	rock:scale(0.3,0.3)
-	 	scissors:scale(0.3,0.3)
-	 	paper:scale(0.3,0.3)
-	 	AIrock:scale(0.3,0.3)
-	 	AIscissors:scale(0.3,0.3)
-	 	AIpaper:scale(0.3,0.3)
+	 	rock:scale(0.25,0.25)
+	 	scissors:scale(0.25,0.25)
+	 	paper:scale(0.25,0.25)
+	 	Student_rock:scale(0.3,0.3)
+	 	Student_scissors:scale(0.3,0.3)
+	 	Student_paper:scale(0.3,0.3)
 
 	 	sceneGroup:insert(background)
 	 	sceneGroup:insert(cat)
@@ -143,9 +143,9 @@ function scene:create( event )
 	 	sceneGroup:insert(paper)
 	 	sceneGroup:insert(scissors)
 	 	sceneGroup:insert(rock)
-	 	sceneGroup:insert(AIpaper)
-	 	sceneGroup:insert(AIscissors)
-	 	sceneGroup:insert(AIrock)
+	 	sceneGroup:insert(Student_paper)
+	 	sceneGroup:insert(Student_scissors)
+	 	sceneGroup:insert(Student_rock)
 	 	sceneGroup:insert(volumeButton)
 
 	 	local winText = display.newText('바위 가위 보 중 하나를 선택해주세요', display.contentCenterX, display.contentCenterY-300)
@@ -157,58 +157,58 @@ function scene:create( event )
 	 	--winText:toFront()
 
 	 	local PlayerScore = 0
-		local AIScore= 0
-		local AIDO = 0
+		local Student_Score= 0
+		local Student_DO = 0
 
 		local student_yStart = student.y
 		local cat_yStart = cat.y
 
 		--클릭
-		AIrock.alpha = 0
-	 	AIscissors.alpha = 0
-	 	AIpaper.alpha = 0
+		Student_rock.alpha = 0
+	 	Student_scissors.alpha = 0
+	 	Student_paper.alpha = 0
 
 		local function tap( event )
-			--AI가위바위보
+			--Student_가위바위보
 			math.randomseed(os.time())        
-	 		-- AIDO = math.random(3)
-	 		--ai가 내는 패가 오늘의 날짜를 반영하도록 하여 게임 난이도를 하향조정
+	 		-- Student_DO = math.random(3)
+	 		--Student_가 내는 패가 오늘의 날짜를 반영하도록 하여 게임 난이도를 하향조정
 	 		local today = os.date("*t")  -- Get today's date and time
 			local remainder = today.day % 3  -- Calculate remainder of today's date divided by 3
 
-			local AIDO
+			local Student_DO
 			local randN = math.random(6)
 			if remainder == 0 then
 				if randN <= 3 then
-			  		AIDO = 3
+			  		Student_DO = 3
 			  	elseif randN <= 5 then
-			  		AIDO = 1
+			  		Student_DO = 1
 			  	else
-			  		AIDO = 2
+			  		Student_DO = 2
 			  	end
 			elseif remainder == 1 then
 				if randN <= 3 then
-			  		AIDO = 1
+			  		Student_DO = 1
 			  	elseif randN <= 5 then
-			  		AIDO = 2
+			  		Student_DO = 2
 			  	else
-			  		AIDO = 3
+			  		Student_DO = 3
 			  	end
 			else
 				if randN <= 3 then
-			  		AIDO = 2
+			  		Student_DO = 2
 			  	elseif randN <= 5 then
-			  		AIDO = 3
+			  		Student_DO = 3
 			  	else
-			  		AIDO = 1
+			  		Student_DO = 1
 			  	end
 			end
 			
-	 		print("AIDO:"..AIDO)
+	 		print("Student_DO:"..Student_DO)
 
-	 		AIrock.alpha = 0
-	 		AIscissors.alpha = 0
-	 		AIpaper.alpha = 0
+	 		Student_rock.alpha = 0
+	 		Student_scissors.alpha = 0
+	 		Student_paper.alpha = 0
 
 	 		--게임 성공 판별 기준 student_yStart - 140을 넘어가면 ending으로 이동------------------------------------------------------------------------
 	 		local function who_win()
@@ -227,9 +227,9 @@ function scene:create( event )
 			 	elseif cat.y <= cat_yStart - 140 then
 			 		winText.text = '게임에 이겼습니다.'
 			 		print("게임에 이겼습니다.")
-			 		AIrock.alpha = 0
-	 				AIscissors.alpha = 0
-	 				AIpaper.alpha = 0
+			 		Student_rock.alpha = 0
+	 				Student_scissors.alpha = 0
+	 				Student_paper.alpha = 0
 	 				pagemove()
 	 				composer.setVariable("hidden_game_status", "success")
 	 				
@@ -242,69 +242,69 @@ function scene:create( event )
 			 	end
 		 	end
 
-	 		--AI가 낸 거 보여주기
-	 		if AIDO == 1 then
-	 			AIrock.alpha = 1
-	 		 	AIscissors.alpha = 0
-	 			AIpaper.alpha = 0
-	 		elseif AIDO == 2 then
-	 			AIrock.alpha = 0
-	 		 	AIscissors.alpha = 1
-	 			AIpaper.alpha = 0
+	 		--Student_가 낸 거 보여주기
+	 		if Student_DO == 1 then
+	 			Student_rock.alpha = 1
+	 		 	Student_scissors.alpha = 0
+	 			Student_paper.alpha = 0
+	 		elseif Student_DO == 2 then
+	 			Student_rock.alpha = 0
+	 		 	Student_scissors.alpha = 1
+	 			Student_paper.alpha = 0
 	 		else
-	 			AIrock.alpha = 0
-	 		 	AIscissors.alpha = 0
-	 			AIpaper.alpha = 1
+	 			Student_rock.alpha = 0
+	 		 	Student_scissors.alpha = 0
+	 			Student_paper.alpha = 1
 	 		end
 
 	 		--가위바위보시작
 		 	if (event.target == rock) then
-		 		if AIDO == 1 then
+		 		if Student_DO == 1 then
 		 			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
-		 		elseif AIDO == 2 then
+		 		elseif Student_DO == 2 then
 		 			cat.y = cat.y-10
 		 			winText.text = '이겼습니다. 고양이가 1칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 1칸 올라갑니다.")
 		 		else
 		 			student.y = student.y-50
-		 			AIscissors.y = AIscissors.y-50
-		 			AIpaper.y = AIpaper.y-50
-		 			AIrock.y = AIrock.y-50
+		 			Student_scissors.y = Student_scissors.y-50
+		 			Student_paper.y = Student_paper.y-50
+		 			Student_rock.y = Student_rock.y-50
 		 			winText.text = '졌습니다. 학생이 5칸 올라갑니다.'
 		 			print("졌습니다. 학생이 5칸 올라갑니다.")
 		 		end
 
 		  	elseif (event.target == scissors) then
-		  		if AIDO == 2 then
+		  		if Student_DO == 2 then
 		  			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
-		 		elseif AIDO == 3 then
+		 		elseif Student_DO == 3 then
 		 			cat.y = cat.y-20
 		 			winText.text = '이겼습니다. 고양이가 2칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 2칸 올라갑니다.")
 		 		else
 		 			student.y = student.y-10
-		 			AIscissors.y = AIscissors.y-10
-		 			AIpaper.y = AIpaper.y-10
-		 			AIrock.y = AIrock.y-10
+		 			Student_scissors.y = Student_scissors.y-10
+		 			Student_paper.y = Student_paper.y-10
+		 			Student_rock.y = Student_rock.y-10
 		 			winText.text = '졌습니다. 학생이 1칸 올라갑니다.'
 		 			print("졌습니다. 학생이 1칸 올라갑니다.")
 		 		end
 
 		 	elseif (event.target == paper) then
-		 		if AIDO == 3 then
+		 		if Student_O == 3 then
 		 			winText.text = '무승부입니다'
 		 			print("무승부입니다.")
-		 		elseif AIDO == 1 then
+		 		elseif Student_DO == 1 then
 		 			cat.y = cat.y-50
 		 			winText.text = '이겼습니다. 고양이가 5칸 올라갑니다.'
 		 			print("이겼습니다. 고양이가 5칸 올라갑니다.")
 		 		else
 		 			student.y = student.y-20
-		 			AIscissors.y = AIscissors.y-20
-		 			AIpaper.y = AIpaper.y-20
-		 			AIrock.y = AIrock.y-20
+		 			Student_scissors.y = Student_scissors.y-20
+		 			Student_paper.y = Student_paper.y-20
+		 			Student_rock.y = Student_rock.y-20
 		 			winText.text = '졌습니다. 학생이 2칸 올라갑니다.'
 		 			print("졌습니다. 학생이 2칸 올라갑니다.")
 		 		end

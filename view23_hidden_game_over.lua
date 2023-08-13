@@ -21,7 +21,7 @@ function scene:create( event )
 
 	-- 배경 어둡게
 	
-	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+	local background1 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth*3, display.contentHeight)
 	
 	background1:setFillColor(0)
 	transition.to(background1,{alpha=0.5,time=1000})
@@ -71,7 +71,7 @@ function scene:create( event )
 		end
 	end
 
-	local backtomap =display.newImage("image/custom/cat_twinkle.png") --성공할 경우
+	local backtomap =display.newImageRect("image/custom/cat_twinkle.png", 512/3, 512/3) --성공할 경우
 	backtomap.x, backtomap.y = display.contentWidth/2, display.contentHeight/2
 	backtomap.alpha = 0
 	sceneGroup:insert(backtomap)
@@ -81,7 +81,7 @@ function scene:create( event )
 	backtomap_text.size = 60
 	sceneGroup:insert(backtomap_text)
 
-	local backgame =display.newImage("image/fall/fail.png") --실패할 경우
+	local backgame =display.newImageRect("image/fall/fail.png", 512/3, 512/3) --실패할 경우
 	backgame.x, backgame.y = display.contentWidth/2, display.contentHeight/2
 	backgame.alpha = 0
 	sceneGroup:insert(backgame)
