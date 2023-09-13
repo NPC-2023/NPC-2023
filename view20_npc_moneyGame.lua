@@ -14,20 +14,20 @@ function scene:create( event )
 	local objectGroup = display.newGroup()
 	local scriptGroup = display.newGroup()
 
-	local background = display.newImageRect("image/npc/store_entry.png", display.contentWidth*3, display.contentHeight)
-	background.x = display.contentCenterX
-    background.y = display.contentCenterY
+	local background = display.newImageRect("image/npc/store_entry.png", 960, 640)
+ 	background.x = display.contentCenterX
+	background.y = display.contentCenterY
 
- 	local npc = display.newImageRect("image/npc/npc1.png", display.contentWidth/1.5, display.contentHeight/3)
-	npc.x, npc.y = display.contentWidth*0.6, display.contentHeight*0.78
+ 	local npc = display.newImageRect("image/npc/npc1.png", 200, 180)
+	npc.x, npc.y = display.contentWidth*0.7, display.contentHeight*0.8
 	npc.xScale = -1
 	objectGroup:insert(npc)
 
-	local cat = display.newImageRect("image/npc/cat_back.png", display.contentWidth/2, display.contentHeight/2.5)
-	cat.x, cat.y = display.contentWidth*0.1, display.contentHeight*0.88
+	local cat = display.newImageRect("image/npc/cat_back.png", 130, 130)
+	cat.x, cat.y = display.contentWidth*0.2, display.contentHeight*0.88
 	objectGroup:insert(cat)
 
-	local speechbubble = display.newImageRect("image/npc/speechbubble.png", display.contentWidth/1.3, display.contentHeight/3.5)
+	local speechbubble = display.newImageRect("image/npc/speechbubble.png", 200, 120)
 	speechbubble.x, speechbubble.y = npc.x, npc.y-130
 	speechbubble.alpha = 0
 
@@ -38,8 +38,9 @@ function scene:create( event )
 	local accept = display.newText("", speechbubble.x-200, speechbubble.y-50, "font/DOSGothic.ttf")
 	local money = math.random(1, 10) * 1000 --고양이가 받을 심부름 돈
 
-	local map = display.newImageRect("image/npc/map_goback.png", display.contentWidth/2.5, display.contentHeight/4)
-	map.x, map.y = display.contentWidth*1.6, display.contentHeight*0.15
+
+	local map = display.newImageRect("image/npc/map_goback.png", 150, 150)
+	map.x, map.y = display.contentWidth*1.5, display.contentHeight*0.1
 
 	local map_text = display.newText("맵 보기", map.x, map.y, "font/DOSGothic.ttf")
 	map_text.size = 30
@@ -48,7 +49,7 @@ function scene:create( event )
 	coin.alpha = 0
 
 	--스크립트
-	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.9, display.contentWidth*4, display.contentWidth*0.9)
+	local section = display.newRect(display.contentWidth/2, display.contentHeight*0.8, display.contentWidth*3, display.contentHeight*0.3)
 	section:setFillColor(0.35, 0.35, 0.35, 0.35)
 	section.alpha = 0
 
@@ -61,12 +62,12 @@ function scene:create( event )
 	objectGroup:insert(script) 
 
 	--스크립트 속 선택지
-	local gossip_click = display.newText("▶대화", display.contentWidth*0.6*2, display.contentHeight*0.9, "font/DOSGothic.ttf", 80)
+	local gossip_click = display.newText("▼대화", display.contentWidth*0.015, display.contentHeight*0.8, "font/DOSGothic.ttf", 80)
 	gossip_click.size = 30
 	gossip_click:setFillColor(1)
 	gossip_click.alpha = 0
 
-	local game_click = display.newText("▶게임", display.contentWidth*0.8*2, display.contentHeight*0.9, "font/DOSGothic.ttf", 80)
+	local game_click = display.newText("▼게임", display.contentCenterX*0.5, display.contentHeight*0.8, "font/DOSGothic.ttf", 80)
 	game_click.size = 30
 	game_click:setFillColor(1)
 	game_click.alpha = 0
